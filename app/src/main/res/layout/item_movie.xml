@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movie_card"
+    android:minHeight="@dimen/movie_card_height"
+    android:layout_height="wrap_content"
+    android:layout_width="@dimen/movie_card_width"
+    android:layout_margin="@dimen/movie_card_margin"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    cardview:cardBackgroundColor="@color/colorCardBackground"
+    cardview:cardPreventCornerOverlap="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Movie Poster -->
+        <FrameLayout android:id="@+id/movie_poster_holder"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/movie_image_height"
+            android:layout_alignParentTop="true">
+
+            <!-- Default image to display if poster is not found -->
+            <ImageView android:id="@+id/movie_poster_default"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/default_thumbnail"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+
+            <!-- Poster image -->
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/movie_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"/>
+
+        </FrameLayout>
+
+        <!-- Text and Menu Button-->
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_below="@+id/movie_poster_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/movie_info_height"
+            android:padding="@dimen/movie_info_padding">
+
+            <!-- Movie Title and Year -->
+            <LinearLayout android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginRight="@dimen/movie_title_marginEnd"
+                android:layout_marginEnd="@dimen/movie_title_marginEnd"
+                android:layout_marginLeft="@dimen/movie_title_marginStart"
+                android:layout_marginStart="@dimen/movie_title_marginStart">
+
+                <!-- Movie Title -->
+                <TextView android:id="@+id/movie_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextLight"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/movie_title_fontSize"
+                    android:maxLines="@integer/movie_title_maxLines"
+                    android:ellipsize="end"/>
+
+                <!-- Movie Year -->
+                <TextView android:id="@+id/movie_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextChrome"
+                    android:textSize="@dimen/movie_year_fontSize"
+                    android:maxLines="@integer/movie_year_maxLines"
+                    android:ellipsize="end"/>
+
+            </LinearLayout>
+
+            <!-- Menu Button -->
+            <ImageButton android:id="@+id/movie_menu"
+                android:src="@drawable/ic_button_edit"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:layout_width="@dimen/movie_menu_width"
+                android:layout_height="@dimen/movie_menu_height"
+                android:layout_marginLeft="@dimen/movie_menu_marginStart"
+                android:layout_marginStart="@dimen/movie_menu_marginStart"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                tools:ignore="ContentDescription"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

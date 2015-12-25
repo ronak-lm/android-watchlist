@@ -1,0 +1,33 @@
+<resources>
+    <!-- App Title -->
+    <string name="app_name">Watchlist</string>
+
+    <!-- Toolbar actions -->
+    <string name="action_search">Search</string>
+    <string name="action_about">About</string>
+    <string name="action_share">Share</string>
+    <string name="action_share_text">Check out</string>
+    <string name="action_share_using">Share using&#8230;</string>
+
+    <!-- Tab titles for main activity -->
+    <string name="main_tab_popular">Most Popular</string>
+    <string name="main_tab_rated">Top Rated</string>
+    <string name="main_tab_upcoming">Upcoming</string>
+    <string name="main_tab_playing">Now Playing</string>
+
+    <!-- SharedPreference Keys -->
+    <string name="settings_last_page">tab_last_page</string>
+    <string name="settings_thumbnail_image_width">thumbnail_image_width</string>
+
+    <!-- Loading and Error Message -->
+    <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
+    <string name="try_again">Try again?</string>
+    <string name="loading">Loading&#8230;</string>
+
+    <!-- Movies Context Menu -->
+    <string name="movie_menu_add_myMovies">Add to my movies</string>
+    <string name="movie_menu_add_watchlist">Add to watchlist</string>
+    <string name="movie_menu_remove_myMovies">Remove from my movies</string>
+    <string name="movie_menu_remove_watchlist">Remove from watchlist</string>
+
+</resources>

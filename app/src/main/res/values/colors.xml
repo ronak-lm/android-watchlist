@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Theme Colors -->
+    <color name="colorPrimary">#ED1C24</color>
+    <color name="colorPrimaryDark">#D21822</color>
+    <color name="colorAccent">#4CAF50</color>
+
+    <!-- Text Colors -->
+    <color name="colorTextDark">#000000</color>
+    <color name="colorTextLight">#FFFFFF</color>
+    <color name="colorTextChrome">#CBCBCB</color>
+
+    <!-- Other Colors -->
+    <color name="colorCardBackground">#424242</color>
+    <color name="colorImageTint">#32000000</color>
+
+</resources>

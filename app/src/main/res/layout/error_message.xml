@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <!-- Error Icon -->
+    <ImageView android:src="@drawable/server_unreachable"
+        android:layout_width="@dimen/error_icon_width"
+        android:layout_height="@dimen/error_icon_height"
+        tools:ignore="ContentDescription"/>
+
+    <!-- Unable to connect -->
+    <TextView android:text="@string/server_unreachable"
+        android:textSize="@dimen/error_message_fontSize"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/error_message_marginTop"/>
+
+    <!-- Try again -->
+    <TextView android:id="@+id/try_again"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="@dimen/error_try_again_padding"
+        android:text="@string/try_again"
+        android:textSize="@dimen/error_try_again_fontSize"
+        android:textColor="@color/colorAccent"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"/>
+
+</LinearLayout>
