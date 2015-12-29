@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.model.MovieThumb;
+import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.APIHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
@@ -26,7 +26,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private Context context;                                    // Context of calling activity
     private SharedPreferences sharedPref;                       // Application's SharedPreferences
-    public ArrayList<MovieThumb> movieList;                     // List of movies to be displayed
+    public ArrayList<Movie> movieList;                     // List of movies to be displayed
     private final OnItemClickListener onItemClickListener;      // Click Listener
     private int imageWidth;                                     // Width of the CardView (in pixels)
 
@@ -82,7 +82,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         // Get MovieThumb object
-        MovieThumb movie = movieList.get(position);
+        Movie movie = movieList.get(position);
         // Set attributes to ViewHolder objects
         MovieViewHolder movieViewHolder = (MovieViewHolder) viewHolder;
         movieViewHolder.movieName.setText(movie.name);

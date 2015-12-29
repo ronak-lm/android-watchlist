@@ -20,7 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Credit;
-import com.ronakmanglani.watchlist.model.Movie;
+import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.model.Video;
 import com.ronakmanglani.watchlist.util.APIHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -36,7 +36,7 @@ public class MovieActivity extends AppCompatActivity {
     public static final String MOVIE_ID = "movie_id";
 
     // Movie associated with the activity
-    private Movie movie;
+    private MovieDetail movie;
 
     // AppBar Views
     private AppBarLayout appBarLayout;
@@ -184,7 +184,7 @@ public class MovieActivity extends AppCompatActivity {
                                 crew.add(new Credit(person_id, name, role, profileImage));
                             }
                             // Create movie object
-                            movie = new Movie(id, title, releaseDate, runtime, overview, voteAverage,
+                            movie = new MovieDetail(id, title, releaseDate, runtime, overview, voteAverage,
                                     voteCount, genre, backdropImage, posterImage, videos, cast, crew);
                             // Update the UI
                             progressCircle.setVisibility(View.GONE);

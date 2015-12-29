@@ -26,7 +26,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.adapter.MainRecyclerAdapter;
-import com.ronakmanglani.watchlist.model.MovieThumb;
+import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import org.json.JSONArray;
@@ -175,7 +175,7 @@ public abstract class MainBaseFragment extends Fragment {
                                     imageURL = movie.getString("poster_path");
                                 }
                                 // Create MovieThumb object and add to list
-                                MovieThumb thumb = new MovieThumb(id, name, year, rating, imageURL);
+                                Movie thumb = new Movie(id, name, year, rating, imageURL);
                                 adapter.movieList.add(thumb);
                             }
 
