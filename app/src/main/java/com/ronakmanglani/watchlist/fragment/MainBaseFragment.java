@@ -34,10 +34,11 @@ import org.json.JSONObject;
 
 public abstract class MainBaseFragment extends Fragment {
 
-    private Context context;                // Activity context
-    private int pageToDownload = 1;         // Page number to download
-    private int totalPages = 999;           // Total pages that can be downloaded
-    private boolean isLoading;              // Flag for loading
+    private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
+
+    private Context context;                        // Activity context
+    private int pageToDownload;                     // Page number to download
+    private boolean isLoading;                      // Flag for loading
 
     // Views for reference
     private View errorMessage;
@@ -55,6 +56,9 @@ public abstract class MainBaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main,container,false);
         context = getContext();
+
+        // Initialize count
+        pageToDownload = 1;
 
         // Find and initialize views
         errorMessage = v.findViewById(R.id.error_message);
@@ -78,7 +82,7 @@ public abstract class MainBaseFragment extends Fragment {
                     // Set flag
                     isLoading = true;
                     // Check if page to download is less than total number of pages
-                    if (pageToDownload < totalPages) {
+                    if (pageToDownload < TOTAL_PAGES) {
                         // Show loading circle
                         swipeRefreshLayout.setRefreshing(true);
                         swipeRefreshLayout.setEnabled(false);
