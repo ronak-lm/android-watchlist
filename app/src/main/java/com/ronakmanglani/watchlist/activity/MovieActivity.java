@@ -129,6 +129,13 @@ public class MovieActivity extends AppCompatActivity {
         }
     }
 
+    // Cancel any pending network requests when activity stops
+    @Override
+    public void onStop () {
+        super.onStop();
+        VolleySingleton.getInstance(this).requestQueue.cancelAll(this.getClass().getName());
+    }
+
     // Download Movie Detail from TMDB
     private void downloadMovieDetails(String id) {
         String urlToDownload = APIHelper.getMovieDetailLink(this, id);
