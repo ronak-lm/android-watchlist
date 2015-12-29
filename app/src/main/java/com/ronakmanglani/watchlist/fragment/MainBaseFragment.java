@@ -122,22 +122,27 @@ public abstract class MainBaseFragment extends Fragment {
             }
         });
 
-        // Download data from TMDB
+        // Get the movies list
         if (savedInstanceState == null) {
             downloadMoviesList();
         } else {
-            // Restore data
-            adapter.movieList = savedInstanceState.getParcelableArrayList("movieList");
-            adapter.notifyDataSetChanged();
-            pageToDownload = savedInstanceState.getInt("pageToDownload");
-            layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layoutManagerState"));
-            // Update UI
-            errorMessage.setVisibility(View.GONE);
-            progressCircle.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setVisibility(View.VISIBLE);
-            swipeRefreshLayout.setRefreshing(false);
-            swipeRefreshLayout.setEnabled(true);
+            if (savedInstanceState.containsKey("movieList") && savedInstanceState.containsKey("layoutManagerState")) {
+                // Restore data from bundle
+                adapter.movieList = savedInstanceState.getParcelableArrayList("movieList");
+                adapter.notifyDataSetChanged();
+                pageToDownload = savedInstanceState.getInt("pageToDownload");
+                layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layoutManagerState"));
+                // Update UI
+                errorMessage.setVisibility(View.GONE);
+                progressCircle.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setEnabled(true);
+            } else {
+                // Data not found
+                downloadMoviesList();
+            }
         }
 
         return v;
@@ -155,9 +160,11 @@ public abstract class MainBaseFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("pageToDownload", pageToDownload);
-        outState.putParcelable("layoutManagerState", layoutManager.onSaveInstanceState());
-        outState.putParcelableArrayList("movieList", adapter.movieList);
+        if (layoutManager != null && adapter != null) {
+            outState.putInt("pageToDownload", pageToDownload);
+            outState.putParcelable("layoutManagerState", layoutManager.onSaveInstanceState());
+            outState.putParcelableArrayList("movieList", adapter.movieList);
+        }
     }
 
     // Cancel any pending network requests when fragment stops
