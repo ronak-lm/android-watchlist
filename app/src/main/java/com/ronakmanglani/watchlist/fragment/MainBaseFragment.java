@@ -59,10 +59,12 @@ public abstract class MainBaseFragment extends Fragment {
         // Find and initialize views
         errorMessage = v.findViewById(R.id.error_message);
         progressCircle = v.findViewById(R.id.progress_circle);
-        recyclerView = (RecyclerView) v.findViewById(R.id.movie_grid);
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
+        adapter = new MainRecyclerAdapter(context, onClickListener);
+        recyclerView = (RecyclerView) v.findViewById(R.id.movie_grid);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
@@ -117,7 +119,22 @@ public abstract class MainBaseFragment extends Fragment {
         });
 
         // Download data from TMDB
-        downloadMoviesList();
+        if (savedInstanceState == null) {
+            downloadMoviesList();
+        } else {
+            // Restore data
+            adapter.movieList = savedInstanceState.getParcelableArrayList("movieList");
+            adapter.notifyDataSetChanged();
+            pageToDownload = savedInstanceState.getInt("pageToDownload");
+            layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layoutManagerState"));
+            // Update UI
+            errorMessage.setVisibility(View.GONE);
+            progressCircle.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setEnabled(true);
+        }
 
         return v;
     }
@@ -130,9 +147,18 @@ public abstract class MainBaseFragment extends Fragment {
         return columns > 2 ? columns : 2;
     }
 
+    // Persist changes when fragment is destroyed
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("pageToDownload", pageToDownload);
+        outState.putParcelable("layoutManagerState", layoutManager.onSaveInstanceState());
+        outState.putParcelableArrayList("movieList", adapter.movieList);
+    }
+
     // Cancel any pending network requests when fragment stops
     @Override
-    public void onStop () {
+    public void onStop() {
         super.onStop();
         VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
     }
@@ -143,9 +169,9 @@ public abstract class MainBaseFragment extends Fragment {
         String urlToDownload = getUrlToDownload(pageToDownload);
 
         // Create new adapter if first time
-        if (pageToDownload == 1) {
+        if (adapter == null) {
             adapter = new MainRecyclerAdapter(context, onClickListener);
-            recyclerView.swapAdapter(adapter, true);
+            recyclerView.setAdapter(adapter);
         }
 
         // Make JSON Request
@@ -219,7 +245,7 @@ public abstract class MainBaseFragment extends Fragment {
         // Add download request to queue
         VolleySingleton.getInstance(context).requestQueue.add(request);
     }
-    // To show error message when download failed
+    // Show error message when download failed
     private void showErrorMessage() {
         adapter.movieList.clear();
         progressCircle.setVisibility(View.GONE);
@@ -229,7 +255,7 @@ public abstract class MainBaseFragment extends Fragment {
         errorMessage.setVisibility(View.VISIBLE);
     }
 
-    // To respond to clicks of items in RecyclerView
+    // Respond to clicks of items in RecyclerView
     MainRecyclerAdapter.OnItemClickListener onClickListener = new MainRecyclerAdapter.OnItemClickListener() {
         // Open Movie
         @Override
