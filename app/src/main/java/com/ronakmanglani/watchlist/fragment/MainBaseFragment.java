@@ -43,8 +43,9 @@ public abstract class MainBaseFragment extends Fragment {
     private MainRecyclerAdapter adapter;
     private GridLayoutManager layoutManager;
 
-    // Abstract method
+    // Abstract methods
     public abstract String getUrlToDownload(int page);
+    public abstract boolean isDetailedViewEnabled();
 
     // Fragment Initialization
     @Override
@@ -59,7 +60,7 @@ public abstract class MainBaseFragment extends Fragment {
         errorMessage = v.findViewById(R.id.error_message);
         progressCircle = v.findViewById(R.id.progress_circle);
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
-        adapter = new MainRecyclerAdapter(context, onClickListener);
+        adapter = new MainRecyclerAdapter(context, onClickListener, isDetailedViewEnabled());
         recyclerView = (RecyclerView) v.findViewById(R.id.movie_grid);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -67,17 +68,21 @@ public abstract class MainBaseFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setColorSchemeResources(R.color.accent);
 
-        // Set listeners
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if ((position + 1) % 7 == 0) {
-                    return 2;
-                } else {
-                    return 1;
+        // Set spanning for RecyclerView items if detailed view is enabled
+        if (isDetailedViewEnabled()) {
+            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if ((position + 1) % 7 == 0) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
                 }
-            }
-        });
+            });
+        }
+
+        // Set listeners
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -153,7 +158,7 @@ public abstract class MainBaseFragment extends Fragment {
         return v;
     }
     // Returns the number of columns to display in the RecyclerView
-    private int getNumberOfColumns() {
+    public int getNumberOfColumns() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float widthPx = displayMetrics.widthPixels;
         float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
@@ -186,7 +191,7 @@ public abstract class MainBaseFragment extends Fragment {
 
         // Create new adapter if first time
         if (adapter == null) {
-            adapter = new MainRecyclerAdapter(context, onClickListener);
+            adapter = new MainRecyclerAdapter(context, onClickListener, isDetailedViewEnabled());
             recyclerView.setAdapter(adapter);
         }
 

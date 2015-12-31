@@ -7,4 +7,12 @@ public class MainPopularFragment extends MainBaseFragment {
     public String getUrlToDownload(int page) {
         return APIHelper.getMostPopularMoviesLink(getActivity(), page);
     }
+
+    public boolean isDetailedViewEnabled() {
+        if (getNumberOfColumns() == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
