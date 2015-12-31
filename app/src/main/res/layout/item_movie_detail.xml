@@ -95,7 +95,8 @@
                 android:textSize="@dimen/movie_detail_year_textSize"
                 tools:text="2015"/>
 
-            <TextView android:id="@+id/movie_overview"
+            <com.ronakmanglani.watchlist.widget.AutoResizeTextView
+                android:id="@+id/movie_overview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/small_margin"

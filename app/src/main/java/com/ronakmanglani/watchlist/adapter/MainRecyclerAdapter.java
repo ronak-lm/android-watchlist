@@ -18,6 +18,7 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.APIHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
+import com.ronakmanglani.watchlist.widget.AutoResizeTextView;
 
 import java.util.ArrayList;
 
@@ -171,7 +172,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final TextView movieName;
         final TextView movieRating;
         final TextView releaseYear;
-        final TextView overview;
+        final AutoResizeTextView overview;
 
         public MovieDetailViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
         {
@@ -182,7 +183,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             movieName = (TextView) itemView.findViewById(R.id.movie_title);
             movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
             releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
-            overview = (TextView) itemView.findViewById(R.id.movie_overview);
+            overview = (AutoResizeTextView) itemView.findViewById(R.id.movie_overview);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
