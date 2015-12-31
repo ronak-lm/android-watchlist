@@ -1,3 +1,7 @@
+/*
+Source: http://adilatwork.blogspot.in/2014/08/android-textview-which-resizes-its-text.html
+ */
+
 package com.ronakmanglani.watchlist.widget;
 
 import android.content.Context;
