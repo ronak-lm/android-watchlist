@@ -15,4 +15,8 @@ public class MainPopularFragment extends MainBaseFragment {
             return false;
         }
     }
+
+    public int getSpanLocation() {
+        return 0;
+    }
 }

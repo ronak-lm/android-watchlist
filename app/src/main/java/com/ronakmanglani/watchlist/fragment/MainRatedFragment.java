@@ -15,4 +15,8 @@ public class MainRatedFragment extends MainBaseFragment {
             return false;
         }
     }
+
+    public int getSpanLocation() {
+        return 1;
+    }
 }

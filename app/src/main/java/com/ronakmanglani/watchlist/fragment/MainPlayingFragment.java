@@ -11,4 +11,8 @@ public class MainPlayingFragment extends MainBaseFragment {
     public boolean isDetailedViewEnabled() {
         return false;
     }
+
+    public int getSpanLocation() {
+        return -1;
+    }
 }

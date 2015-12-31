@@ -46,6 +46,7 @@ public abstract class MainBaseFragment extends Fragment {
     // Abstract methods
     public abstract String getUrlToDownload(int page);
     public abstract boolean isDetailedViewEnabled();
+    public abstract int getSpanLocation();
 
     // Fragment Initialization
     @Override
@@ -60,7 +61,7 @@ public abstract class MainBaseFragment extends Fragment {
         errorMessage = v.findViewById(R.id.error_message);
         progressCircle = v.findViewById(R.id.progress_circle);
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
-        adapter = new MainRecyclerAdapter(context, onClickListener, isDetailedViewEnabled());
+        adapter = new MainRecyclerAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
         recyclerView = (RecyclerView) v.findViewById(R.id.movie_grid);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -73,7 +74,7 @@ public abstract class MainBaseFragment extends Fragment {
             layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    if ((position + 1) % 7 == 0) {
+                    if ((position + 1) % 7 == getSpanLocation()) {
                         return 2;
                     } else {
                         return 1;
@@ -191,7 +192,7 @@ public abstract class MainBaseFragment extends Fragment {
 
         // Create new adapter if first time
         if (adapter == null) {
-            adapter = new MainRecyclerAdapter(context, onClickListener, isDetailedViewEnabled());
+            adapter = new MainRecyclerAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
             recyclerView.setAdapter(adapter);
         }
 

@@ -11,4 +11,12 @@ public class MainUpcomingFragment extends MainBaseFragment {
     public boolean isDetailedViewEnabled() {
         return false;
     }
+
+    public int getTabNumber() {
+        return 3;
+    }
+
+    public int getSpanLocation() {
+        return -1;
+    }
 }

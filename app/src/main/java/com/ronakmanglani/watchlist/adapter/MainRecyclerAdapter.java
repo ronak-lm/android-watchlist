@@ -29,15 +29,18 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public ArrayList<Movie> movieList;                          // List of movies to be displayed
     private final OnItemClickListener onItemClickListener;      // Click Listener
     private int imageWidth;                                     // Width of the CardView (in pixels)
+    private int spanLocation;                                   // Flag to decide which view's to be detailed
     private boolean isDetailedViewEnabled;                      // Flag to enable/disable detailed layout
 
     // Constructor
-    public MainRecyclerAdapter(Context context, OnItemClickListener onItemClickListener, boolean isDetailedViewEnabled) {
+    public MainRecyclerAdapter(Context context, OnItemClickListener onItemClickListener,
+                               boolean isDetailedViewEnabled, int spanLocation) {
         // Initialize members
         this.context = context;
         this.movieList = new ArrayList<>();
         this.onItemClickListener = onItemClickListener;
         this.isDetailedViewEnabled = isDetailedViewEnabled;
+        this.spanLocation = spanLocation;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         // Load CardView image width
         imageWidth = sharedPref.getInt(context.getString(R.string.settings_thumbnail_image_width), 0);
@@ -52,7 +55,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // Return type of item (Detail or basic)
     @Override
     public int getItemViewType(int position) {
-        if ((position + 1) % 7 == 0 && isDetailedViewEnabled) {
+        if ((position + 1) % 7 == spanLocation && isDetailedViewEnabled) {
             return 1;       // Detail item
         } else {
             return 0;       // Basic item
