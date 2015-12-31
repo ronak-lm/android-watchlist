@@ -4,6 +4,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="large_margin">16dp</dimen>
+    <dimen name="medium_margin">8dp</dimen>
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="very_small_margin">2dp</dimen>
 
     <!-- Loading Circle -->
     <dimen name="progress_circle_width">80dp</dimen>
@@ -22,7 +25,7 @@
     <dimen name="recycler_view_padding">5dp</dimen>
     <dimen name="recycler_view_twopane_width">300dp</dimen>
 
-    <!-- Movie Item in RecyclerView -->
+    <!-- Movie Simple Item in RecyclerView -->
     <dimen name="movie_card_margin">4dp</dimen>
     <dimen name="movie_card_width">180dp</dimen>
     <dimen name="movie_card_height">200dp</dimen>
@@ -36,6 +39,14 @@
     <dimen name="movie_menu_marginStart">4dp</dimen>
     <integer name="movie_title_maxLines">2</integer>
     <integer name="movie_year_maxLines">1</integer>
+
+    <!-- Movie Detail Item in RecyclerView -->
+    <dimen name="movie_detail_card_height">150dp</dimen>
+    <dimen name="movie_detail_poster_width">100dp</dimen>
+    <dimen name="movie_detail_title_textSize">18sp</dimen>
+    <integer name="movie_detail_title_maxlines">2</integer>
+    <dimen name="movie_detail_year_textSize">12sp</dimen>
+    <dimen name="movie_detail_overview_textSize">14sp</dimen>
 
     <!-- Movie Detail Activity -->
     <dimen name="movie_header_width">444dp</dimen>
