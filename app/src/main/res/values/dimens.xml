@@ -46,7 +46,7 @@
     <dimen name="movie_detail_title_textSize">18sp</dimen>
     <integer name="movie_detail_title_maxlines">2</integer>
     <dimen name="movie_detail_year_textSize">14sp</dimen>
-    <dimen name="movie_detail_overview_textSize">14sp</dimen>
+    <dimen name="movie_detail_overview_textSize">15sp</dimen>
 
     <!-- Movie Detail Activity -->
     <dimen name="movie_header_width">444dp</dimen>
