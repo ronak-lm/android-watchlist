@@ -80,6 +80,7 @@
 
         </RelativeLayout>
 
+        <!-- Movie release year and overview -->
         <LinearLayout android:id="@+id/movie_detail_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
