@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_card"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_margin="@dimen/movie_card_margin"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    cardview:cardBackgroundColor="@color/colorCardBackground"
+    cardview:cardPreventCornerOverlap="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Movie poster -->
+        <FrameLayout android:id="@+id/movie_poster_holder"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <!-- Default image to display if poster is not found -->
+            <ImageView android:id="@+id/movie_poster_default"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/default_poster"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription" />
+
+            <!-- Poster image -->
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/movie_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+        </FrameLayout>
+
+        <!-- Movie title and rating -->
+        <RelativeLayout android:id="@+id/movie_title_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@+id/movie_poster_holder"
+            android:layout_toEndOf="@+id/movie_poster_holder">
+
+            <TextView android:id="@+id/movie_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/movie_rating"
+                android:layout_toStartOf="@+id/movie_rating"
+                android:layout_marginRight="4dp"
+                android:layout_marginEnd="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:textColor="@color/colorTextLight"
+                tools:text="My Awesome Movie Title"/>
+
+            <TextView android:id="@+id/movie_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                android:textColor="@color/colorTextLight"
+                android:background="@color/colorAccent"
+                tools:text="8.76"/>
+
+        </RelativeLayout>
+
+        <LinearLayout android:id="@+id/movie_detail_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/movie_title_holder"
+            android:layout_toRightOf="@+id/movie_poster_holder"
+            android:layout_toEndOf="@+id/movie_poster_holder"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <TextView android:id="@id/movie_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="2015"/>
+
+            <TextView android:id="@+id/movie_overview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:ellipsize="end"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus turpis ac sem varius pretium. Nam vitae mauris augue."/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
