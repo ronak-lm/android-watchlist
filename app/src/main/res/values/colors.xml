@@ -2,17 +2,21 @@
 <resources>
 
     <!-- Theme Colors -->
-    <color name="colorPrimary">#ED1C24</color>
-    <color name="colorPrimaryDark">#D21822</color>
-    <color name="colorAccent">#4CAF50</color>
+    <color name="primary">#ED1C24</color>
+    <color name="primary_dark">#D21822</color>
+    <color name="accent">#4CAF50</color>
+    <color name="background">#eeeeee</color>
+    <color name="foreground">#616161</color>
 
     <!-- Text Colors -->
-    <color name="colorTextDark">#000000</color>
-    <color name="colorTextLight">#FFFFFF</color>
-    <color name="colorTextChrome">#CBCBCB</color>
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#FFFFFF</color>
+    <color name="text_chrome">@color/foreground</color>
 
     <!-- Other Colors -->
-    <color name="colorCardBackground">#424242</color>
-    <color name="colorImageTint">#32000000</color>
+    <color name="divider">#9e9e9e</color>
+    <color name="card_background">#fafafa</color>
+    <color name="image_tint">#32000000</color>
+    <color name="default_image_background">#d8d8d8</color>
 
 </resources>

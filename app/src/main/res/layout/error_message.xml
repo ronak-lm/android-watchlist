@@ -29,7 +29,7 @@
         android:padding="@dimen/error_try_again_padding"
         android:text="@string/try_again"
         android:textSize="@dimen/error_try_again_fontSize"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/accent"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"/>
 

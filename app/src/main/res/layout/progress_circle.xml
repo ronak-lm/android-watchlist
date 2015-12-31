@@ -7,7 +7,7 @@
     app:mlpb_progress_stoke_width="@dimen/progress_circle_stroke"
     app:mlpb_show_arrow="false"
     app:mlpb_enable_circle_background="false"
-    app:mlpb_progress_color="@color/colorAccent"
+    app:mlpb_progress_color="@color/accent"
     app:mlpb_progress_text_visibility="invisible" />
 
 

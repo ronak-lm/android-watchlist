@@ -3,10 +3,12 @@
     <!-- General - For all activities -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="very_large_margin">16dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
     <dimen name="very_small_margin">2dp</dimen>
+    <dimen name="tab_indicator_height">3dp</dimen>
 
     <!-- Loading Circle -->
     <dimen name="progress_circle_width">80dp</dimen>
@@ -44,13 +46,13 @@
     <dimen name="movie_detail_card_height">200dp</dimen>
     <dimen name="movie_detail_poster_width">120dp</dimen>
     <dimen name="movie_detail_title_textSize">18sp</dimen>
-    <integer name="movie_detail_title_maxlines">2</integer>
     <dimen name="movie_detail_year_textSize">14sp</dimen>
     <dimen name="movie_detail_overview_textSize">15sp</dimen>
 
     <!-- Movie Detail Activity -->
     <dimen name="movie_header_width">444dp</dimen>
     <dimen name="movie_header_height">250dp</dimen>
+    <dimen name="movie_activity_paddingBottom">32dp</dimen>
     <dimen name="movie_poster_width">100dp</dimen>
     <dimen name="movie_poster_height">150dp</dimen>
     <dimen name="movie_title_textSize">20sp</dimen>

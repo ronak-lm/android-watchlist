@@ -9,7 +9,7 @@
     android:layout_margin="@dimen/movie_card_margin"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
-    cardview:cardBackgroundColor="@color/colorCardBackground"
+    cardview:cardBackgroundColor="@color/card_background"
     cardview:cardPreventCornerOverlap="false">
 
     <RelativeLayout
@@ -53,8 +53,7 @@
             <TextView android:id="@+id/movie_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTextLight"
-                android:textStyle="bold"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/movie_title_fontSize"
                 android:maxLines="@integer/movie_title_maxLines"
                 android:ellipsize="end"
@@ -64,7 +63,7 @@
             <TextView android:id="@+id/movie_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorTextChrome"
+                android:textColor="@color/text_chrome"
                 android:textSize="@dimen/movie_year_fontSize"
                 android:maxLines="@integer/movie_year_maxLines"
                 android:ellipsize="end"

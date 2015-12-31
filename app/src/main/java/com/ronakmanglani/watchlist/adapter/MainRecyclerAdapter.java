@@ -110,6 +110,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 int imageSize = (int)context.getResources().getDimension(R.dimen.movie_detail_poster_width);
                 String imageUrl = APIHelper.getImageURL(movie.posterImage, imageSize);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+                movieViewHolder.imageView.setVisibility(View.VISIBLE);
+                movieViewHolder.defaultImageView.setVisibility(View.GONE);
             }
             movieViewHolder.movieName.setText(movie.title);
             movieViewHolder.movieRating.setText(movie.rating);
@@ -121,9 +123,13 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
                 String imageUrl = APIHelper.getImageURL(movie.backdropImage, imageWidth);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+                movieViewHolder.imageView.setVisibility(View.VISIBLE);
+                movieViewHolder.defaultImageView.setVisibility(View.GONE);
             } else if (movie.posterImage != null && !movie.posterImage.equals("null")) {
                 String imageUrl = APIHelper.getImageURL(movie.posterImage, imageWidth);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+                movieViewHolder.imageView.setVisibility(View.VISIBLE);
+                movieViewHolder.defaultImageView.setVisibility(View.GONE);
             } else {
                 movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
                 movieViewHolder.imageView.setVisibility(View.GONE);

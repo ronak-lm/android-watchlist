@@ -73,7 +73,7 @@ public class MovieActivity extends AppCompatActivity {
         toolbarLayout = (CollapsingToolbarLayout) appBarLayout.findViewById(R.id.collapsing_toolbar);
         defaultHeaderImage = (ImageView) toolbarLayout.findViewById(R.id.header_image_default);
         movieHeaderImage = (NetworkImageView) toolbarLayout.findViewById(R.id.header_image);
-        movieHeaderImage.setColorFilter(ContextCompat.getColor(this, R.color.colorImageTint));
+        movieHeaderImage.setColorFilter(ContextCompat.getColor(this, R.color.image_tint));
 
         // Find movie views
         movieContainer = findViewById(R.id.movie_container);
