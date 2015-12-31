@@ -211,7 +211,7 @@ public class MovieActivity extends AppCompatActivity {
                                 defaultPosterImage.setVisibility(View.VISIBLE);
                                 moviePosterImage.setVisibility(View.GONE);
                             } else {
-                                int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_poster_width);
+                                int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_detail_poster_width);
                                 moviePosterImage.setImageUrl(APIHelper.getImageURL(movie.posterImage, posterImageWidth),
                                                             VolleySingleton.getInstance(getApplicationContext()).imageLoader);
                             }
