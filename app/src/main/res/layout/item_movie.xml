@@ -41,60 +41,36 @@
 
         </FrameLayout>
 
-        <!-- Text and Menu Button-->
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_below="@+id/movie_poster_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <!-- Movie Title and Year -->
+        <LinearLayout android:orientation="vertical"
             android:minHeight="@dimen/movie_info_height"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/movie_poster_holder"
             android:padding="@dimen/movie_info_padding">
 
-            <!-- Movie Title and Year -->
-            <LinearLayout android:orientation="vertical"
-                android:layout_height="wrap_content"
+            <!-- Movie Title -->
+            <TextView android:id="@+id/movie_title"
                 android:layout_width="match_parent"
-                android:layout_marginRight="@dimen/movie_title_marginEnd"
-                android:layout_marginEnd="@dimen/movie_title_marginEnd"
-                android:layout_marginLeft="@dimen/movie_title_marginStart"
-                android:layout_marginStart="@dimen/movie_title_marginStart">
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextLight"
+                android:textStyle="bold"
+                android:textSize="@dimen/movie_title_fontSize"
+                android:maxLines="@integer/movie_title_maxLines"
+                android:ellipsize="end"
+                tools:text="My Awesome Movie Title"/>
 
-                <!-- Movie Title -->
-                <TextView android:id="@+id/movie_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextLight"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/movie_title_fontSize"
-                    android:maxLines="@integer/movie_title_maxLines"
-                    android:ellipsize="end"/>
+            <!-- Movie Year -->
+            <TextView android:id="@+id/movie_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextChrome"
+                android:textSize="@dimen/movie_year_fontSize"
+                android:maxLines="@integer/movie_year_maxLines"
+                android:ellipsize="end"
+                tools:text="2015"/>
 
-                <!-- Movie Year -->
-                <TextView android:id="@+id/movie_year"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorTextChrome"
-                    android:textSize="@dimen/movie_year_fontSize"
-                    android:maxLines="@integer/movie_year_maxLines"
-                    android:ellipsize="end"/>
-
-            </LinearLayout>
-
-            <!-- Menu Button -->
-            <ImageButton android:id="@+id/movie_menu"
-                android:src="@drawable/ic_button_edit"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:layout_width="@dimen/movie_menu_width"
-                android:layout_height="@dimen/movie_menu_height"
-                android:layout_marginLeft="@dimen/movie_menu_marginStart"
-                android:layout_marginStart="@dimen/movie_menu_marginStart"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                tools:ignore="ContentDescription"/>
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 

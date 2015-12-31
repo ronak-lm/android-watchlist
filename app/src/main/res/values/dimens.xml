@@ -28,9 +28,7 @@
     <dimen name="movie_card_height">200dp</dimen>
     <dimen name="movie_image_height">135dp</dimen>
     <dimen name="movie_info_height">65dp</dimen>
-    <dimen name="movie_info_padding">4dp</dimen>
-    <dimen name="movie_title_marginStart">2dp</dimen>
-    <dimen name="movie_title_marginEnd">30dp</dimen>
+    <dimen name="movie_info_padding">5dp</dimen>
     <dimen name="movie_title_fontSize">16sp</dimen>
     <dimen name="movie_year_fontSize">14sp</dimen>
     <dimen name="movie_menu_width">25dp</dimen>

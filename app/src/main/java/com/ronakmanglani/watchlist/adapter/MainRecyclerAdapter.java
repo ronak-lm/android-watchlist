@@ -85,7 +85,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         Movie movie = movieList.get(position);
         // Set attributes to ViewHolder objects
         MovieViewHolder movieViewHolder = (MovieViewHolder) viewHolder;
-        movieViewHolder.movieName.setText(movie.name);
+        movieViewHolder.movieName.setText(movie.title);
         movieViewHolder.releaseYear.setText(movie.year);
         // Set movie poster
         String imageURL = APIHelper.getImageURL(movie.backdropImage, imageWidth);
@@ -102,7 +102,6 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // Interface to respond to clicks
     public interface OnItemClickListener {
         void onCardClicked(final int position);
-        void onMenuClicked(final int position, ImageButton editButton);
     }
 
     // ViewHolder for the layout
@@ -112,7 +111,6 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final NetworkImageView imageView;
         final TextView movieName;
         final TextView releaseYear;
-        final ImageButton menuButton;
 
         public MovieViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
         {
@@ -122,19 +120,11 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
             movieName = (TextView) itemView.findViewById(R.id.movie_title);
             releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
-            menuButton = (ImageButton) itemView.findViewById(R.id.movie_menu);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onItemClickListener.onCardClicked(getAdapterPosition());
-                }
-            });
-
-            menuButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onMenuClicked(getAdapterPosition(), menuButton);
                 }
             });
         }

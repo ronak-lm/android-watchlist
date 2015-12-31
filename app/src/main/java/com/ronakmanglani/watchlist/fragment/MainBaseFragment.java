@@ -267,43 +267,11 @@ public abstract class MainBaseFragment extends Fragment {
 
     // Respond to clicks of items in RecyclerView
     MainRecyclerAdapter.OnItemClickListener onClickListener = new MainRecyclerAdapter.OnItemClickListener() {
-        // Open Movie
         @Override
         public void onCardClicked(int position) {
             Intent intent = new Intent(context, MovieActivity.class);
             intent.putExtra(MovieActivity.MOVIE_ID, adapter.movieList.get(position).id);
             startActivity(intent);
-        }
-        // Open Menu
-        @Override
-        public void onMenuClicked(final int position, ImageButton menuButton) {
-            PopupMenu popupMenu = new PopupMenu(context, menuButton);
-            popupMenu.inflate(R.menu.menu_movie_popup);
-            /*
-            TODO: Change text of menu items dynamically
-            EXAMPLE: popupMenu.getMenu().getItem(0).setTitle("a");
-            */
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    switch (item.getItemId()) {
-
-                        case R.id.menu_myMovies:
-                            //TODO: Logic to add/remove to/from my movies
-                            Toast.makeText(context, "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                            return true;
-
-                        case R.id.menu_watchlist:
-                            //TODO: Logic to add/remove to/from watchlist
-                            Toast.makeText(context, "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                            return true;
-
-                        default:
-                            return false;
-                    }
-                }
-            });
-            popupMenu.show();
         }
     };
 }
