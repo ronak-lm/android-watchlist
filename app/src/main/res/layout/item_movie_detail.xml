@@ -29,6 +29,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/default_poster"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
                 tools:ignore="ContentDescription" />
 
             <!-- Poster image -->
