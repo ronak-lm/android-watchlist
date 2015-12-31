@@ -88,7 +88,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         movieViewHolder.movieName.setText(movie.name);
         movieViewHolder.releaseYear.setText(movie.year);
         // Set movie poster
-        String imageURL = APIHelper.getImageURL(movie.imageBaseURL, imageWidth);
+        String imageURL = APIHelper.getImageURL(movie.backdropImage, imageWidth);
         if (imageURL.endsWith("null")) {
             movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
             movieViewHolder.imageView.setVisibility(View.GONE);

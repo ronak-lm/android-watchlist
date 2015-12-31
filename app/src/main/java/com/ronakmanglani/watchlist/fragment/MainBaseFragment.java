@@ -200,19 +200,18 @@ public abstract class MainBaseFragment extends Fragment {
                                 // Get movie object
                                 JSONObject movie = (JSONObject) result.get(i);
                                 // Get info from object
-                                String id = movie.getString("id");
-                                String name = movie.getString("title");
+                                String poster = movie.getString("poster_path");
+                                String overview = movie.getString("overview");
                                 String year = movie.getString("release_date");
-                                String rating = movie.getString("vote_average");
-                                if (year.length() != 0) {
+                                if (year != null && !year.equals("null")) {
                                     year = year.substring(0, 4);
                                 }
-                                String imageURL = movie.getString("backdrop_path");
-                                if (imageURL == null || imageURL.equals("null")) {
-                                    imageURL = movie.getString("poster_path");
-                                }
+                                String id = movie.getString("id");
+                                String title = movie.getString("title");
+                                String backdrop = movie.getString("backdrop_path");
+                                String rating = movie.getString("vote_average");
                                 // Create MovieThumb object and add to list
-                                Movie thumb = new Movie(id, name, year, rating, imageURL);
+                                Movie thumb = new Movie(id, title, year, overview, rating, poster, backdrop);
                                 adapter.movieList.add(thumb);
                             }
 

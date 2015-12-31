@@ -7,18 +7,22 @@ public class Movie implements Parcelable {
 
     // Attributes
     public String id;
-    public String name;
+    public String title;
     public String year;
+    public String overview;
     public String rating;
-    public String imageBaseURL;
+    public String posterImage;
+    public String backdropImage;
 
     // Constructors
-    public Movie(String id, String name, String year, String rating, String imageBaseURL) {
+    public Movie(String id, String title, String year, String overview, String rating, String posterImage, String backdropImage) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.year = year;
+        this.overview = overview;
         this.rating = rating;
-        this.imageBaseURL = imageBaseURL;
+        this.posterImage = posterImage;
+        this.backdropImage = backdropImage;
     }
 
     // Parcelling methods
@@ -32,18 +36,18 @@ public class Movie implements Parcelable {
     };
     public Movie(Parcel in) {
         this.id = in.readString();
-        this.name = in.readString();
+        this.title = in.readString();
         this.year = in.readString();
         this.rating = in.readString();
-        this.imageBaseURL = in.readString();
+        this.backdropImage = in.readString();
     }
     @Override
     public void writeToParcel(Parcel out, int i) {
         out.writeString(id);
-        out.writeString(name);
+        out.writeString(title);
         out.writeString(year);
         out.writeString(rating);
-        out.writeString(imageBaseURL);
+        out.writeString(backdropImage);
     }
     @Override
     public int describeContents() {
