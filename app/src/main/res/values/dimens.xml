@@ -39,6 +39,7 @@
     <dimen name="movie_menu_width">25dp</dimen>
     <dimen name="movie_menu_height">55dp</dimen>
     <dimen name="movie_menu_marginStart">4dp</dimen>
+    <dimen name="movie_rating_icon_size">16dp</dimen>
     <integer name="movie_title_maxLines">2</integer>
     <integer name="movie_year_maxLines">1</integer>
 

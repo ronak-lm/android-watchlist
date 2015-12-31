@@ -62,15 +62,48 @@
 
             <!-- Movie Year -->
             <TextView android:id="@+id/movie_year"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_chrome"
                 android:textSize="@dimen/movie_year_fontSize"
                 android:maxLines="@integer/movie_year_maxLines"
-                android:ellipsize="end"
                 tools:text="2015"/>
 
         </LinearLayout>
+
+        <!-- Movie Rating -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true">
+
+            <TextView android:id="@+id/movie_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/rating_icon"
+                android:layout_toStartOf="@+id/rating_icon"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/movie_year_fontSize"
+                android:maxLines="@integer/movie_year_maxLines"
+                tools:text="8.76"/>
+
+            <ImageView android:id="@+id/rating_icon"
+                android:layout_width="@dimen/movie_rating_icon_size"
+                android:layout_height="@dimen/movie_rating_icon_size"
+                android:layout_marginEnd="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/rating_icon"
+                android:scaleType="fitCenter"
+                tools:ignore="contentDescription"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

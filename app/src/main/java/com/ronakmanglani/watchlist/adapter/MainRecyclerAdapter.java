@@ -141,6 +141,14 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             movieViewHolder.movieName.setText(movie.title);
             movieViewHolder.releaseYear.setText(movie.year);
+            if (movie.rating == null || movie.rating.equals("0")) {
+                movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
+                movieViewHolder.movieRating.setVisibility(View.GONE);
+            } else {
+                movieViewHolder.movieRatingIcon.setVisibility(View.VISIBLE);
+                movieViewHolder.movieRating.setVisibility(View.VISIBLE);
+                movieViewHolder.movieRating.setText(movie.rating);
+            }
         }
     }
 
@@ -155,6 +163,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final ImageView defaultImageView;
         final NetworkImageView imageView;
         final TextView movieName;
+        final TextView movieRating;
+        final ImageView movieRatingIcon;
         final TextView releaseYear;
 
         public MovieBasicViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
@@ -164,6 +174,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             defaultImageView = (ImageView) itemView.findViewById(R.id.movie_poster_default);
             imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
             movieName = (TextView) itemView.findViewById(R.id.movie_title);
+            movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
+            movieRatingIcon = (ImageView) itemView.findViewById(R.id.rating_icon);
             releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
 
             cardView.setOnClickListener(new View.OnClickListener() {
