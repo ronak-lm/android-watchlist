@@ -97,7 +97,7 @@
                         android:id="@+id/poster_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/card_background"
+                        android:background="@color/default_image_background"
                         android:scaleType="centerCrop"/>
 
                 </FrameLayout>
