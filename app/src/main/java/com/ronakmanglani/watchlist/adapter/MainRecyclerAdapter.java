@@ -71,7 +71,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return new MovieDetailViewHolder(v, onItemClickListener);
         } else {
             // Inflate basic layout
-            final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
+            final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_basic, parent, false);
             // To measure and save width of ImageView (if API >= 11)
             ViewTreeObserver viewTreeObserver = v.getViewTreeObserver();
             if (viewTreeObserver.isAlive()) {
