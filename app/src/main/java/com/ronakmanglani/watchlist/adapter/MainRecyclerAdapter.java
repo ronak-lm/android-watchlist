@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +25,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private Context context;                                    // Context of calling activity
     private SharedPreferences sharedPref;                       // Application's SharedPreferences
-    public ArrayList<Movie> movieList;                     // List of movies to be displayed
+    public ArrayList<Movie> movieList;                          // List of movies to be displayed
     private final OnItemClickListener onItemClickListener;      // Click Listener
     private int imageWidth;                                     // Width of the CardView (in pixels)
 
@@ -47,55 +46,89 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return movieList.size();
     }
 
+    // Return type of item (Detail or basic)
+    @Override
+    public int getItemViewType(int position) {
+        if ((position + 1) % 7 == 0) {
+            return 1;       // Detail item
+        } else {
+            return 0;       // Basic item
+        }
+    }
+
     // Inflate Layout
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // Inflate layout
-        final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
-        // To measure and save width of ImageView (if API >= 11)
-        ViewTreeObserver viewTreeObserver = v.getViewTreeObserver();
-        if (viewTreeObserver.isAlive()) {
-            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    // Update width integer and save to storage for next use
-                    int width = v.findViewById(R.id.movie_poster).getWidth();
-                    if (width > imageWidth) {
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putInt(context.getString(R.string.settings_thumbnail_image_width), width);
-                        editor.apply();
+        if (viewType == 1) {
+            // Inflate detailed layout
+            ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_detail, parent, false);
+            return new MovieDetailViewHolder(v, onItemClickListener);
+        } else {
+            // Inflate basic layout
+            final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
+            // To measure and save width of ImageView (if API >= 11)
+            ViewTreeObserver viewTreeObserver = v.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        // Update width integer and save to storage for next use
+                        int width = v.findViewById(R.id.movie_poster).getWidth();
+                        if (width > imageWidth) {
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putInt(context.getString(R.string.settings_thumbnail_image_width), width);
+                            editor.apply();
+                        }
+                        // Unregister LayoutListener
+                        if (Build.VERSION.SDK_INT >= 16) {
+                            v.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        } else {
+                            v.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        }
                     }
-                    // Unregister LayoutListener
-                    if (Build.VERSION.SDK_INT >= 16) {
-                        v.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    } else {
-                        v.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    }
-                }
-            });
+                });
+            }
+            // Return ViewHolder
+            return new MovieBasicViewHolder(v, onItemClickListener);
         }
-        // Return ViewHolder
-        return new MovieViewHolder(v, onItemClickListener);
     }
 
     // Insert data into the layout
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        // Get MovieThumb object
+        // Get Movie object
         Movie movie = movieList.get(position);
         // Set attributes to ViewHolder objects
-        MovieViewHolder movieViewHolder = (MovieViewHolder) viewHolder;
-        movieViewHolder.movieName.setText(movie.title);
-        movieViewHolder.releaseYear.setText(movie.year);
-        // Set movie poster
-        String imageURL = APIHelper.getImageURL(movie.backdropImage, imageWidth);
-        if (imageURL.endsWith("null")) {
-            movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
-            movieViewHolder.imageView.setVisibility(View.GONE);
+        if (getItemViewType(position) == 1) {
+            // Detailed view
+            MovieDetailViewHolder movieViewHolder = (MovieDetailViewHolder) viewHolder;
+            if (movie.posterImage == null || movie.posterImage.equals("null")) {
+                movieViewHolder.imageView.setVisibility(View.GONE);
+                movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
+            } else {
+                int imageSize = (int)context.getResources().getDimension(R.dimen.movie_detail_poster_width);
+                String imageUrl = APIHelper.getImageURL(movie.posterImage, imageSize);
+                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+            }
+            movieViewHolder.movieName.setText(movie.title);
+            movieViewHolder.movieRating.setText(movie.rating);
+            movieViewHolder.releaseYear.setText(movie.year);
+            movieViewHolder.overview.setText(movie.overview);
         } else {
-            movieViewHolder.imageView.setVisibility(View.VISIBLE);
-            movieViewHolder.defaultImageView.setVisibility(View.GONE);
-            movieViewHolder.imageView.setImageUrl(imageURL, VolleySingleton.getInstance(context).imageLoader);
+            // Basic view
+            MovieBasicViewHolder movieViewHolder = (MovieBasicViewHolder) viewHolder;
+            if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
+                String imageUrl = APIHelper.getImageURL(movie.backdropImage, imageWidth);
+                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+            } else if (movie.posterImage != null && !movie.posterImage.equals("null")) {
+                String imageUrl = APIHelper.getImageURL(movie.posterImage, imageWidth);
+                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+            } else {
+                movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
+                movieViewHolder.imageView.setVisibility(View.GONE);
+            }
+            movieViewHolder.movieName.setText(movie.title);
+            movieViewHolder.releaseYear.setText(movie.year);
         }
     }
 
@@ -105,14 +138,14 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     // ViewHolder for the layout
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
+    public class MovieBasicViewHolder extends RecyclerView.ViewHolder {
         final CardView cardView;
         final ImageView defaultImageView;
         final NetworkImageView imageView;
         final TextView movieName;
         final TextView releaseYear;
 
-        public MovieViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
+        public MovieBasicViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
         {
             super(itemView);
             cardView = (CardView) itemView.findViewById(R.id.movie_card);
@@ -120,6 +153,36 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
             movieName = (TextView) itemView.findViewById(R.id.movie_title);
             releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onCardClicked(getAdapterPosition());
+                }
+            });
+        }
+    }
+
+    // ViewHolder for the layout
+    public class MovieDetailViewHolder extends RecyclerView.ViewHolder {
+        final CardView cardView;
+        final ImageView defaultImageView;
+        final NetworkImageView imageView;
+        final TextView movieName;
+        final TextView movieRating;
+        final TextView releaseYear;
+        final TextView overview;
+
+        public MovieDetailViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
+        {
+            super(itemView);
+            cardView = (CardView) itemView.findViewById(R.id.movie_card);
+            defaultImageView = (ImageView) itemView.findViewById(R.id.movie_poster_default);
+            imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
+            movieName = (TextView) itemView.findViewById(R.id.movie_title);
+            movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
+            releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
+            overview = (TextView) itemView.findViewById(R.id.movie_overview);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

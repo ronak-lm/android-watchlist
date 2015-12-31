@@ -46,7 +46,7 @@ public abstract class MainBaseFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private MainRecyclerAdapter adapter;
-    private LinearLayoutManager layoutManager;
+    private GridLayoutManager layoutManager;
 
     // Abstract method
     public abstract String getUrlToDownload(int page);
@@ -73,6 +73,16 @@ public abstract class MainBaseFragment extends Fragment {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
 
         // Set listeners
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if ((position + 1) % 7 == 0) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

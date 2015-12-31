@@ -41,8 +41,8 @@
     <integer name="movie_year_maxLines">1</integer>
 
     <!-- Movie Detail Item in RecyclerView -->
-    <dimen name="movie_detail_card_height">150dp</dimen>
-    <dimen name="movie_detail_poster_width">100dp</dimen>
+    <dimen name="movie_detail_card_height">200dp</dimen>
+    <dimen name="movie_detail_poster_width">120dp</dimen>
     <dimen name="movie_detail_title_textSize">18sp</dimen>
     <integer name="movie_detail_title_maxlines">2</integer>
     <dimen name="movie_detail_year_textSize">12sp</dimen>
