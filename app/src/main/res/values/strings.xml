@@ -24,10 +24,4 @@
     <string name="try_again">Try again?</string>
     <string name="loading">Loading&#8230;</string>
 
-    <!-- Movies Context Menu -->
-    <string name="movie_menu_add_myMovies">Add to my movies</string>
-    <string name="movie_menu_add_watchlist">Add to watchlist</string>
-    <string name="movie_menu_remove_myMovies">Remove from my movies</string>
-    <string name="movie_menu_remove_watchlist">Remove from watchlist</string>
-
 </resources>

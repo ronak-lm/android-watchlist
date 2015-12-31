@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General - For all activities -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="very_large_margin">16dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
@@ -25,7 +22,6 @@
 
     <!-- RecyclerView Dimensions -->
     <dimen name="recycler_view_padding">5dp</dimen>
-    <dimen name="recycler_view_twopane_width">300dp</dimen>
 
     <!-- Movie Simple Item in RecyclerView -->
     <dimen name="movie_card_margin">4dp</dimen>
@@ -36,9 +32,6 @@
     <dimen name="movie_info_padding">5dp</dimen>
     <dimen name="movie_title_fontSize">16sp</dimen>
     <dimen name="movie_year_fontSize">14sp</dimen>
-    <dimen name="movie_menu_width">25dp</dimen>
-    <dimen name="movie_menu_height">55dp</dimen>
-    <dimen name="movie_menu_marginStart">4dp</dimen>
     <dimen name="movie_rating_icon_size">16dp</dimen>
     <integer name="movie_title_maxLines">2</integer>
     <integer name="movie_year_maxLines">1</integer>
@@ -46,7 +39,6 @@
     <!-- Movie Detail Item in RecyclerView -->
     <dimen name="movie_detail_card_height">200dp</dimen>
     <dimen name="movie_detail_poster_width">120dp</dimen>
-    <dimen name="movie_detail_title_textSize">18sp</dimen>
     <dimen name="movie_detail_year_textSize">14sp</dimen>
     <dimen name="movie_detail_overview_textSize">15sp</dimen>
 
@@ -57,7 +49,6 @@
     <dimen name="movie_poster_width">100dp</dimen>
     <dimen name="movie_poster_height">150dp</dimen>
     <dimen name="movie_title_textSize">20sp</dimen>
-    <dimen name="movie_rating_marginTop">1dp</dimen>
     <dimen name="movie_rating_marginSide">4dp</dimen>
     <dimen name="movie_divider_height">1dp</dimen>
     <dimen name="movie_plot_textSize">16sp</dimen>
