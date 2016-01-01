@@ -43,55 +43,31 @@
         </FrameLayout>
 
         <!-- Movie title and rating -->
-        <RelativeLayout android:id="@+id/movie_title_holder"
+        <TextView android:id="@+id/movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginLeft="@dimen/medium_margin"
             android:layout_marginRight="@dimen/medium_margin"
             android:layout_toRightOf="@+id/movie_poster_holder"
-            android:layout_toEndOf="@+id/movie_poster_holder">
-
-            <TextView android:id="@+id/movie_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/movie_rating"
-                android:layout_toStartOf="@+id/movie_rating"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_marginEnd="@dimen/small_margin"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="@dimen/movie_title_textSize"
-                android:textColor="@color/text_primary"
-                tools:text="My Awesome Movie Title"/>
-
-            <TextView android:id="@+id/movie_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/small_margin"
-                android:paddingRight="@dimen/small_margin"
-                android:paddingTop="@dimen/very_small_margin"
-                android:paddingBottom="@dimen/very_small_margin"
-                android:textColor="@color/text_secondary"
-                android:textStyle="bold"
-                android:background="@color/accent"
-                tools:text="8.76"/>
-
-        </RelativeLayout>
+            android:layout_toEndOf="@+id/movie_poster_holder"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="@dimen/movie_title_textSize"
+            android:textColor="@color/text_primary"
+            tools:text="My Awesome Movie Title"/>
 
         <!-- Movie release year and overview -->
         <LinearLayout android:id="@+id/movie_detail_holder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/movie_title_holder"
+            android:layout_above="@+id/movie_rating_holder"
+            android:layout_below="@+id/movie_title"
             android:layout_toRightOf="@+id/movie_poster_holder"
             android:layout_toEndOf="@+id/movie_poster_holder"
             android:layout_marginRight="@dimen/medium_margin"
             android:layout_marginLeft="@dimen/medium_margin"
-            android:layout_marginBottom="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:orientation="vertical">
 
             <TextView android:id="@id/movie_year"
@@ -110,6 +86,42 @@
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus turpis ac sem varius pretium. Nam vitae mauris augue."/>
 
         </LinearLayout>
+
+        <!-- Movie Rating -->
+        <RelativeLayout android:id="@+id/movie_rating_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/movie_poster_holder"
+            android:layout_toEndOf="@+id/movie_poster_holder"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/medium_margin">
+
+            <TextView android:id="@+id/movie_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/rating_icon"
+                android:layout_toStartOf="@+id/rating_icon"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/movie_year_fontSize"
+                android:maxLines="@integer/movie_year_maxLines"
+                tools:text="8.76"/>
+
+            <ImageView android:id="@+id/rating_icon"
+                android:layout_width="@dimen/movie_rating_icon_size"
+                android:layout_height="@dimen/movie_rating_icon_size"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/rating_icon"
+                android:scaleType="fitCenter"
+                tools:ignore="contentDescription"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

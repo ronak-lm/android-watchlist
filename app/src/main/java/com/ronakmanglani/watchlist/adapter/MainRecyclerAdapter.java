@@ -112,16 +112,23 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 movieViewHolder.imageView.setVisibility(View.GONE);
                 movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
             } else {
-                int imageSize = (int)context.getResources().getDimension(R.dimen.movie_detail_poster_width);
+                int imageSize = (int) context.getResources().getDimension(R.dimen.movie_detail_poster_width);
                 String imageUrl = APIHelper.getImageURL(movie.posterImage, imageSize);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
             }
             movieViewHolder.movieName.setText(movie.title);
-            movieViewHolder.movieRating.setText(movie.rating);
             movieViewHolder.releaseYear.setText(movie.year);
             movieViewHolder.overview.setText(movie.overview);
+            if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
+                movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
+                movieViewHolder.movieRating.setVisibility(View.GONE);
+            } else {
+                movieViewHolder.movieRatingIcon.setVisibility(View.VISIBLE);
+                movieViewHolder.movieRating.setVisibility(View.VISIBLE);
+                movieViewHolder.movieRating.setText(movie.rating);
+            }
         } else {
             // Basic view
             MovieBasicViewHolder movieViewHolder = (MovieBasicViewHolder) viewHolder;
@@ -141,7 +148,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             movieViewHolder.movieName.setText(movie.title);
             movieViewHolder.releaseYear.setText(movie.year);
-            if (movie.rating == null || movie.rating.equals("0")) {
+            if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
                 movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
                 movieViewHolder.movieRating.setVisibility(View.GONE);
             } else {
@@ -174,9 +181,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             defaultImageView = (ImageView) itemView.findViewById(R.id.movie_poster_default);
             imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
             movieName = (TextView) itemView.findViewById(R.id.movie_title);
+            releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
             movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
             movieRatingIcon = (ImageView) itemView.findViewById(R.id.rating_icon);
-            releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -193,9 +200,10 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final ImageView defaultImageView;
         final NetworkImageView imageView;
         final TextView movieName;
-        final TextView movieRating;
         final TextView releaseYear;
         final AutoResizeTextView overview;
+        final TextView movieRating;
+        final ImageView movieRatingIcon;
 
         public MovieDetailViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
         {
@@ -204,9 +212,10 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             defaultImageView = (ImageView) itemView.findViewById(R.id.movie_poster_default);
             imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
             movieName = (TextView) itemView.findViewById(R.id.movie_title);
-            movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
             releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
             overview = (AutoResizeTextView) itemView.findViewById(R.id.movie_overview);
+            movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
+            movieRatingIcon = (ImageView) itemView.findViewById(R.id.rating_icon);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
