@@ -163,12 +163,12 @@ public class MovieActivity extends AppCompatActivity {
                             String title = jsonObject.getString("title");
                             String voteAverage = jsonObject.getString("vote_average");
                             String voteCount = jsonObject.getString("vote_count");
-                            ArrayList<Video> videos = new ArrayList<>();
+                            ArrayList<String> videos = new ArrayList<>();
                             JSONArray videoArray = jsonObject.getJSONObject("trailers").getJSONArray("youtube");
                             for (int i = 0; i < videoArray.length(); i++) {
                                 JSONObject object = (JSONObject) videoArray.get(i);
                                 String videoID = object.getString("source");
-                                videos.add(new Video(videoID));
+                                videos.add(videoID);
                             }
                             ArrayList<Credit> cast = new ArrayList<>();
                             JSONArray castArray = jsonObject.getJSONObject("credits").getJSONArray("cast");

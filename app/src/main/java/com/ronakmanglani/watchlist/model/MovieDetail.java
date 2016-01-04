@@ -16,13 +16,13 @@ public class MovieDetail {
     public String backdropImage;
     public String posterImage;
     public ArrayList<String> genre;
-    public ArrayList<Video> videos;
+    public ArrayList<String > videos;
     public ArrayList<Credit> cast;
     public ArrayList<Credit> crew;
 
     public MovieDetail(String id, String title, String releaseDate, String runtime, String overview,
                        String voteAverage, String voteCount, ArrayList<String> genre,
-                       String backdropImage, String posterImage, ArrayList<Video> videos,
+                       String backdropImage, String posterImage, ArrayList<String> videos,
                        ArrayList<Credit> cast, ArrayList<Credit> crew) {
         this.id = id;
         this.title = title;
