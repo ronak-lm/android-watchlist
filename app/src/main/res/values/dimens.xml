@@ -52,5 +52,8 @@
     <dimen name="movie_plot_textSize">16sp</dimen>
     <dimen name="movie_rating1_textSize">30sp</dimen>
     <dimen name="movie_rating2_textSize">12sp</dimen>
+    <dimen name="movie_video_card_size">150dp</dimen>
+    <dimen name="movie_video_bar_height">30dp</dimen>
+    <dimen name="movie_video_text_margin">6dp</dimen>
 
 </resources>
