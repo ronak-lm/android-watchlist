@@ -216,7 +216,11 @@ public class MovieActivity extends AppCompatActivity {
                             }
                             movieTitle.setText(movie.title);
                             movieSubtitle.setText(movie.getSubtitle());
-                            movieRating.setText(movie.voteAverage);
+                            if (movie.voteAverage == null || movie.voteAverage.equals("null") || movie.voteAverage.equals("0.0")) {
+                                findViewById(R.id.movie_rating_holder).setVisibility(View.GONE);
+                            } else {
+                                movieRating.setText(movie.voteAverage);
+                            }
                             moviePlot.setText(movie.overview);
                         } catch (Exception ex) {
                             // Show error message on parsing errors
