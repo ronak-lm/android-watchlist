@@ -4,7 +4,6 @@
     <dimen name="large_margin">16dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
-    <dimen name="very_small_margin">2dp</dimen>
     <dimen name="tab_indicator_height">3dp</dimen>
 
     <!-- Loading Circle -->
