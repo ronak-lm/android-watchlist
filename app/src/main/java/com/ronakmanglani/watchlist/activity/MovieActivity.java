@@ -6,6 +6,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.adapter.MovieVideoAdapter;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.model.Video;
@@ -39,8 +42,6 @@ public class MovieActivity extends AppCompatActivity {
 
     // Movie associated with the activity
     private MovieDetail movie;
-    // Trailers/videos associated with the movie
-    private ArrayList<Video> videos;
 
     // AppBar Views
     private AppBarLayout appBarLayout;
@@ -57,6 +58,7 @@ public class MovieActivity extends AppCompatActivity {
     private TextView movieRating;
     private TextView moviePlot;
     private RecyclerView movieVideos;
+    private MovieVideoAdapter videoAdapter;
 
     // Error message and loading circle
     private View errorMessage;
@@ -89,7 +91,15 @@ public class MovieActivity extends AppCompatActivity {
         movieSubtitle = (TextView) movieContainer.findViewById(R.id.movie_subtitle);
         movieRating = (TextView) movieContainer.findViewById(R.id.movie_rating);
         moviePlot = (TextView) movieContainer.findViewById(R.id.movie_plot);
+
+        // Trailer Views
+        ArrayList<Video> videos = new ArrayList<>();
         movieVideos = (RecyclerView) movieContainer.findViewById(R.id.movie_videos);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        videoAdapter = new MovieVideoAdapter(this, videos, onItemClickListener);
+        movieVideos.setHasFixedSize(true);
+        movieVideos.setLayoutManager(layoutManager);
+        movieVideos.setAdapter(videoAdapter);
 
         // Find error and loading circle
         errorMessage = findViewById(R.id.error_message);
@@ -199,6 +209,8 @@ public class MovieActivity extends AppCompatActivity {
                             // Create movie object
                             movie = new MovieDetail(id, title, releaseDate, runtime, overview, voteAverage,
                                     voteCount, genre, backdropImage, posterImage, videos, cast, crew);
+                            // Download trailers
+                            downloadVideoDetails();
                             // Update the UI
                             progressCircle.setVisibility(View.GONE);
                             errorMessage.setVisibility(View.GONE);
@@ -260,8 +272,8 @@ public class MovieActivity extends AppCompatActivity {
             findViewById(R.id.movie_video_holder).setVisibility(View.GONE);
         } else {
             // Initialize ArrayList
-            if (videos == null) {
-                videos = new ArrayList<>();
+            if (videoAdapter.videos == null) {
+                videoAdapter.videos = new ArrayList<>();
             }
             // Loop through all videos
             for (int i = 0; i < movie.videos.size(); i++) {
@@ -280,18 +292,21 @@ public class MovieActivity extends AppCompatActivity {
                                     String imageURL = YoutubeHelper.getThumbnailURL(youtubeID);
                                     String videoURL = YoutubeHelper.getVideoURL(youtubeID);
                                     Video video = new Video(title, youtubeID, imageURL, videoURL);
-                                    videos.add(video);
-                                    // If last video added
-                                    if ((currentPosition + 1) == movie.videos.size()) {
-                                        // TODO: Setup RecyclerView
-                                    }
+                                    videoAdapter.videos.add(video);
+                                    videoAdapter.notifyDataSetChanged();
                                 } catch (Exception ex) {
                                     // Parsing errors - Do nothing
                                 }
                             }
                         },
-                        // ErrorListener
+                        // Error Listener
                         null);
+
+                // Set thread tags for reference
+                request.setTag(this.getClass().getName());
+
+                // Add download request to queue
+                VolleySingleton.getInstance(this).requestQueue.add(request);
             }
         }
     }
@@ -302,4 +317,12 @@ public class MovieActivity extends AppCompatActivity {
         movieContainer.setVisibility(View.GONE);
         appBarLayout.setVisibility(View.GONE);
     }
+
+    // Click listner for videos
+    MovieVideoAdapter.OnItemClickListener onItemClickListener = new MovieVideoAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClicked(int position) {
+            // TODO: Respond to click
+        }
+    };
 }
