@@ -49,8 +49,9 @@
     <dimen name="movie_poster_width">100dp</dimen>
     <dimen name="movie_poster_height">150dp</dimen>
     <dimen name="movie_title_textSize">20sp</dimen>
-    <dimen name="movie_rating_marginSide">4dp</dimen>
     <dimen name="movie_divider_height">1dp</dimen>
     <dimen name="movie_plot_textSize">16sp</dimen>
+    <dimen name="movie_rating1_textSize">30sp</dimen>
+    <dimen name="movie_rating2_textSize">12sp</dimen>
 
 </resources>

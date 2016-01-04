@@ -77,6 +77,7 @@ public class MovieActivity extends AppCompatActivity {
 
         // Find movie views
         movieContainer = findViewById(R.id.movie_container);
+        movieContainer.setVisibility(View.GONE);
         defaultPosterImage = (ImageView) movieContainer.findViewById(R.id.poster_image_default);
         moviePosterImage = (NetworkImageView) movieContainer.findViewById(R.id.poster_image);
         movieTitle = (TextView) movieContainer.findViewById(R.id.movie_title);

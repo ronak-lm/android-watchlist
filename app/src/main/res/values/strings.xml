@@ -24,4 +24,7 @@
     <string name="try_again">Try again?</string>
     <string name="loading">Loading&#8230;</string>
 
+    <!-- Movie Detail Activity -->
+    <string name="movie_rating_outOf">/10</string>
+
 </resources>
