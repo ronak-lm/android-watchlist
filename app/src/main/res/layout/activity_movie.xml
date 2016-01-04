@@ -174,7 +174,8 @@
                     android:layout_marginTop="@dimen/large_margin"
                     android:layout_marginBottom="@dimen/large_margin" />
                 <!-- Trailers -->
-                <RelativeLayout android:id="@+id/movie_video"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/movie_videos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:listitem="@layout/item_video"/>

@@ -6,6 +6,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,8 +22,10 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
+import com.ronakmanglani.watchlist.model.Video;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
+import com.ronakmanglani.watchlist.util.YoutubeHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,6 +39,8 @@ public class MovieActivity extends AppCompatActivity {
 
     // Movie associated with the activity
     private MovieDetail movie;
+    // Trailers/videos associated with the movie
+    private ArrayList<Video> videos;
 
     // AppBar Views
     private AppBarLayout appBarLayout;
@@ -51,6 +56,7 @@ public class MovieActivity extends AppCompatActivity {
     private TextView movieSubtitle;
     private TextView movieRating;
     private TextView moviePlot;
+    private RecyclerView movieVideos;
 
     // Error message and loading circle
     private View errorMessage;
@@ -83,6 +89,7 @@ public class MovieActivity extends AppCompatActivity {
         movieSubtitle = (TextView) movieContainer.findViewById(R.id.movie_subtitle);
         movieRating = (TextView) movieContainer.findViewById(R.id.movie_rating);
         moviePlot = (TextView) movieContainer.findViewById(R.id.movie_plot);
+        movieVideos = (RecyclerView) movieContainer.findViewById(R.id.movie_videos);
 
         // Find error and loading circle
         errorMessage = findViewById(R.id.error_message);
@@ -245,6 +252,48 @@ public class MovieActivity extends AppCompatActivity {
 
         // Add download request to queue
         VolleySingleton.getInstance(this).requestQueue.add(request);
+    }
+    // Download video details from Youtube
+    private void downloadVideoDetails() {
+        // Check if no videos available
+        if (movie.videos.size() == 0) {
+            findViewById(R.id.movie_video_holder).setVisibility(View.GONE);
+        } else {
+            // Initialize ArrayList
+            if (videos == null) {
+                videos = new ArrayList<>();
+            }
+            // Loop through all videos
+            for (int i = 0; i < movie.videos.size(); i++) {
+                final int currentPosition = i;
+                String urlToDownload = YoutubeHelper.getDetailURL(movie.videos.get(currentPosition));
+                JsonObjectRequest request = new JsonObjectRequest(
+                        // Request method and URL to be downloaded
+                        Request.Method.GET, urlToDownload, null,
+                        // To respond when JSON gets downloaded
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject jsonObject) {
+                                try {
+                                    String title = jsonObject.getString("title");
+                                    String youtubeID = movie.videos.get(currentPosition);
+                                    String imageURL = YoutubeHelper.getThumbnailURL(youtubeID);
+                                    String videoURL = YoutubeHelper.getVideoURL(youtubeID);
+                                    Video video = new Video(title, youtubeID, imageURL, videoURL);
+                                    videos.add(video);
+                                    // If last video added
+                                    if ((currentPosition + 1) == movie.videos.size()) {
+                                        // TODO: Setup RecyclerView
+                                    }
+                                } catch (Exception ex) {
+                                    // Parsing errors - Do nothing
+                                }
+                            }
+                        },
+                        // ErrorListener
+                        null);
+            }
+        }
     }
     // To show error message when download or parsing failed
     private void showErrorMessage() {
