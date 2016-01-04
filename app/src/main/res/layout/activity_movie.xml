@@ -177,7 +177,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/movie_videos"
                     android:layout_width="match_parent"
-                    android:layout_height="158dp"
+                    android:layout_height="@dimen/movie_video_grid_height"
                     tools:listitem="@layout/item_video"/>
             </LinearLayout>
 
