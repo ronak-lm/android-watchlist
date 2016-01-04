@@ -1,11 +1,11 @@
 package com.ronakmanglani.watchlist.fragment;
 
-import com.ronakmanglani.watchlist.util.APIHelper;
+import com.ronakmanglani.watchlist.util.TMDBHelper;
 
 public class MainPopularFragment extends MainBaseFragment {
 
     public String getUrlToDownload(int page) {
-        return APIHelper.getMostPopularMoviesLink(getActivity(), page);
+        return TMDBHelper.getMostPopularMoviesLink(getActivity(), page);
     }
 
     public boolean isDetailedViewEnabled() {

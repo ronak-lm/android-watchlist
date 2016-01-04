@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.ronakmanglani.watchlist.R;
 
-public class APIHelper {
+public class TMDBHelper {
 
     // API key for TMDB
     private static String getApiKey(Context context) {

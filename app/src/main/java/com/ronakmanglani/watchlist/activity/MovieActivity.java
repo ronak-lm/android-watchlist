@@ -21,8 +21,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
-import com.ronakmanglani.watchlist.model.Video;
-import com.ronakmanglani.watchlist.util.APIHelper;
+import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import org.json.JSONArray;
@@ -119,7 +118,7 @@ public class MovieActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_share:
-                String shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + APIHelper.getMovieShareURL(movie.id);
+                String shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
@@ -139,7 +138,7 @@ public class MovieActivity extends AppCompatActivity {
 
     // Download Movie Detail from TMDB
     private void downloadMovieDetails(String id) {
-        String urlToDownload = APIHelper.getMovieDetailLink(this, id);
+        String urlToDownload = TMDBHelper.getMovieDetailLink(this, id);
         JsonObjectRequest request = new JsonObjectRequest(
                 // Request method and URL to be downloaded
                 Request.Method.GET, urlToDownload, null,
@@ -204,7 +203,7 @@ public class MovieActivity extends AppCompatActivity {
                                 movieHeaderImage.setVisibility(View.GONE);
                             } else {
                                 int headerImageWidth = (int) getResources().getDimension(R.dimen.movie_header_width);
-                                movieHeaderImage.setImageUrl(APIHelper.getImageURL(movie.backdropImage, headerImageWidth),
+                                movieHeaderImage.setImageUrl(TMDBHelper.getImageURL(movie.backdropImage, headerImageWidth),
                                                             VolleySingleton.getInstance(getApplicationContext()).imageLoader);
                             }
                             if (movie.posterImage == null || movie.posterImage.equals("null")) {
@@ -212,7 +211,7 @@ public class MovieActivity extends AppCompatActivity {
                                 moviePosterImage.setVisibility(View.GONE);
                             } else {
                                 int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_detail_poster_width);
-                                moviePosterImage.setImageUrl(APIHelper.getImageURL(movie.posterImage, posterImageWidth),
+                                moviePosterImage.setImageUrl(TMDBHelper.getImageURL(movie.posterImage, posterImageWidth),
                                                             VolleySingleton.getInstance(getApplicationContext()).imageLoader);
                             }
                             movieTitle.setText(movie.title);

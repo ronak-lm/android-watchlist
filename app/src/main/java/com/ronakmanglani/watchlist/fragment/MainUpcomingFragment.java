@@ -1,11 +1,11 @@
 package com.ronakmanglani.watchlist.fragment;
 
-import com.ronakmanglani.watchlist.util.APIHelper;
+import com.ronakmanglani.watchlist.util.TMDBHelper;
 
 public class MainUpcomingFragment extends MainBaseFragment {
 
     public String getUrlToDownload(int page) {
-        return APIHelper.getUpcomingMoviesLink (getActivity(), page);
+        return TMDBHelper.getUpcomingMoviesLink(getActivity(), page);
     }
 
     public boolean isDetailedViewEnabled() {

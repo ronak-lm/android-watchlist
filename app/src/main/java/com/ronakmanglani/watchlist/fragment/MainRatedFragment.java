@@ -1,11 +1,11 @@
 package com.ronakmanglani.watchlist.fragment;
 
-import com.ronakmanglani.watchlist.util.APIHelper;
+import com.ronakmanglani.watchlist.util.TMDBHelper;
 
 public class MainRatedFragment extends MainBaseFragment {
 
     public String getUrlToDownload(int page) {
-        return APIHelper.getHighestRatedMoviesLink(getActivity(), page);
+        return TMDBHelper.getHighestRatedMoviesLink(getActivity(), page);
     }
 
     public boolean isDetailedViewEnabled() {
