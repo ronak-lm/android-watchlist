@@ -167,9 +167,8 @@ public class MovieActivity extends AppCompatActivity {
                             JSONArray videoArray = jsonObject.getJSONObject("trailers").getJSONArray("youtube");
                             for (int i = 0; i < videoArray.length(); i++) {
                                 JSONObject object = (JSONObject) videoArray.get(i);
-                                String videoName = object.getString("name");
                                 String videoID = object.getString("source");
-                                videos.add(new Video(videoName, videoID));
+                                videos.add(new Video(videoID));
                             }
                             ArrayList<Credit> cast = new ArrayList<>();
                             JSONArray castArray = jsonObject.getJSONObject("credits").getJSONArray("cast");
