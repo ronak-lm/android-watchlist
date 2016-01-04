@@ -221,7 +221,11 @@ public class MovieActivity extends AppCompatActivity {
                             } else {
                                 movieRating.setText(movie.voteAverage);
                             }
-                            moviePlot.setText(movie.overview);
+                            if (movie.overview == null || movie.overview.equals("null")) {
+                                findViewById(R.id.movie_plot_holder).setVisibility(View.GONE);
+                            } else {
+                                moviePlot.setText(movie.overview);
+                            }
                         } catch (Exception ex) {
                             // Show error message on parsing errors
                             showErrorMessage();

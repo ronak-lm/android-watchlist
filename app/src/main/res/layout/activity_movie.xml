@@ -140,21 +140,28 @@
 
             </LinearLayout>
 
-            <!-- Divider -->
-            <View android:background="@color/divider"
-                android:layout_height="@dimen/movie_divider_height"
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/large_margin"
-                android:layout_marginBottom="@dimen/large_margin" />
-
             <!-- Section 2: Plot Synopsis -->
-            <TextView android:id="@+id/movie_plot"
+            <LinearLayout android:id="@+id/movie_plot_holder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:textColor="@color/text_primary"
-                android:textSize="@dimen/movie_plot_textSize"
-                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus turpis ac sem varius pretium. Nam vitae mauris augue."/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Divider -->
+                <View android:background="@color/divider"
+                    android:layout_height="@dimen/movie_divider_height"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:layout_marginBottom="@dimen/large_margin" />
+
+                <TextView android:id="@+id/movie_plot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/movie_plot_textSize"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus turpis ac sem varius pretium. Nam vitae mauris augue."/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
