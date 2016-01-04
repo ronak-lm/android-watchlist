@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/video_item"
     android:layout_width="@dimen/movie_video_card_size"
     android:layout_height="@dimen/movie_video_card_size"
     android:layout_margin="@dimen/small_margin"
