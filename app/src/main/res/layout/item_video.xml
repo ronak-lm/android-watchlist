@@ -24,7 +24,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/movie_video_bar_height"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/image_tint">
 
@@ -34,7 +34,9 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/movie_video_text_margin"
                 android:layout_marginRight="@dimen/movie_video_text_margin"
-                android:maxLines="1"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:maxLines="2"
                 android:ellipsize="end"
                 android:includeFontPadding="false"
                 android:textColor="@color/text_secondary"
