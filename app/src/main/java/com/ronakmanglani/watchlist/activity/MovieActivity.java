@@ -40,6 +40,7 @@ public class MovieActivity extends AppCompatActivity {
     public static final String MOVIE_ID = "movie_id";
 
     // Movie associated with the activity
+    private String id;
     private MovieDetail movie;
 
     // AppBar Views
@@ -111,12 +112,12 @@ public class MovieActivity extends AppCompatActivity {
                 errorMessage.setVisibility(View.GONE);
                 progressCircle.setVisibility(View.VISIBLE);
                 appBarLayout.setVisibility(View.VISIBLE);
-                movieContainer.setVisibility(View.VISIBLE);
+                downloadMovieDetails(id);
             }
         });
 
         // Download movie data from TMDB
-        String id = getIntent().getStringExtra(MOVIE_ID);
+        id = getIntent().getStringExtra(MOVIE_ID);
         downloadMovieDetails(id);
     }
 
