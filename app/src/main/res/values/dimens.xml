@@ -5,6 +5,7 @@
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
     <dimen name="tab_indicator_height">3dp</dimen>
+    <dimen name="drawer_width">280dp</dimen>
 
     <!-- Loading Circle -->
     <dimen name="progress_circle_width">80dp</dimen>

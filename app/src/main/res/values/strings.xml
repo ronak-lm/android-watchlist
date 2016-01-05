@@ -2,6 +2,13 @@
     <!-- App Title -->
     <string name="app_name">Watchlist</string>
 
+    <!-- List For Navigation Drawer -->
+    <string-array name="drawer_list">
+        <item>Discover</item>
+        <item>Favorite</item>
+        <item>Watchlist</item>
+    </string-array>
+
     <!-- Toolbar actions -->
     <string name="action_search">Search</string>
     <string name="action_about">About</string>
