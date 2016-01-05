@@ -70,13 +70,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/large_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginBottom="@dimen/large_margin"
             android:orientation="vertical">
 
             <!-- Section 1: Movie Info -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginRight="@dimen/large_margin"
                 android:orientation="horizontal">
 
                 <!-- Movie poster -->
@@ -144,6 +147,8 @@
             <LinearLayout android:id="@+id/movie_plot_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginRight="@dimen/large_margin"
                 android:orientation="vertical">
                 <!-- Divider -->
                 <View android:background="@color/divider"
@@ -171,13 +176,15 @@
                 <View android:background="@color/divider"
                     android:layout_height="@dimen/movie_divider_height"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/large_margin"
-                    android:layout_marginBottom="@dimen/large_margin" />
+                    android:layout_margin="@dimen/large_margin"/>
                 <!-- Trailers -->
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/movie_videos"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/movie_video_grid_height"
+                    android:paddingLeft="@dimen/large_margin"
+                    android:paddingRight="@dimen/large_margin"
+                    android:clipToPadding="false"
                     tools:listitem="@layout/item_video"/>
             </LinearLayout>
 
