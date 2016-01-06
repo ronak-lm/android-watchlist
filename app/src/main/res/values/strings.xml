@@ -8,11 +8,11 @@
     <string name="settings_thumbnail_image_width">thumbnail_image_width</string>
 
     <!-- List For Navigation Drawer -->
-    <string name="drawer_popular">Popular</string>
+    <string name="drawer_popular">Most Popular</string>
     <string name="drawer_rated">Top Rated</string>
     <string name="drawer_upcoming">Upcoming</string>
     <string name="drawer_playing">Now Playing</string>
-    <string name="drawer_favorite">Favorite</string>
+    <string name="drawer_favorite">Favorites</string>
     <string name="drawer_watchlist">Watchlist</string>
 
     <!-- Toolbar actions -->

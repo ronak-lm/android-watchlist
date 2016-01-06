@@ -2,10 +2,10 @@ package com.ronakmanglani.watchlist.fragment;
 
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 
-public class MainRatedFragment extends MainBaseFragment {
+public class MostPopularFragment extends BaseMovieFragment {
 
     public String getUrlToDownload(int page) {
-        return TMDBHelper.getHighestRatedMoviesLink(getActivity(), page);
+        return TMDBHelper.getMostPopularMoviesLink(getActivity(), page);
     }
 
     public boolean isDetailedViewEnabled() {
@@ -17,6 +17,6 @@ public class MainRatedFragment extends MainBaseFragment {
     }
 
     public int getSpanLocation() {
-        return 1;
+        return 0;
     }
 }

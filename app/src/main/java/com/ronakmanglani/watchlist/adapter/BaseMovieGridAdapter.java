@@ -22,7 +22,7 @@ import com.ronakmanglani.watchlist.widget.AutoResizeTextView;
 
 import java.util.ArrayList;
 
-public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BaseMovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;                                    // Context of calling activity
     private SharedPreferences sharedPref;                       // Application's SharedPreferences
@@ -33,8 +33,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private boolean isDetailedViewEnabled;                      // Flag to enable/disable detailed layout
 
     // Constructor
-    public MainRecyclerAdapter(Context context, OnItemClickListener onItemClickListener,
-                               boolean isDetailedViewEnabled, int spanLocation) {
+    public BaseMovieGridAdapter(Context context, OnItemClickListener onItemClickListener,
+                                boolean isDetailedViewEnabled, int spanLocation) {
         // Initialize members
         this.context = context;
         this.movieList = new ArrayList<>();
