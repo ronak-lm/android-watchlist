@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group_explore"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/drawer_popular"
+            android:title="@string/drawer_popular"
+            android:icon="@drawable/drawer_popular"/>
+
+        <item android:id="@+id/drawer_rated"
+            android:title="@string/drawer_rated"
+            android:icon="@drawable/drawer_rated"/>
+
+        <item android:id="@+id/drawer_upcoming"
+            android:title="@string/drawer_upcoming"
+            android:icon="@drawable/drawer_upcoming"/>
+
+        <item android:id="@+id/drawer_playing"
+            android:title="@string/drawer_playing"
+            android:icon="@drawable/drawer_playing"/>
+
+    </group>
+
+    <group android:id="@+id/group_user"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/drawer_favorite"
+            android:title="@string/drawer_favorite"
+            android:icon="@drawable/drawer_favorite"/>
+
+        <item android:id="@+id/drawer_watchlist"
+            android:title="@string/drawer_watchlist"
+            android:icon="@drawable/drawer_watchlist"/>
+
+    </group>
+
+</menu>

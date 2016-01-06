@@ -3,11 +3,12 @@
     <string name="app_name">Watchlist</string>
 
     <!-- List For Navigation Drawer -->
-    <string-array name="drawer_list">
-        <item>Discover</item>
-        <item>Favorite</item>
-        <item>Watchlist</item>
-    </string-array>
+    <string name="drawer_popular">Popular</string>
+    <string name="drawer_rated">Top Rated</string>
+    <string name="drawer_upcoming">Upcoming</string>
+    <string name="drawer_playing">Now Playing</string>
+    <string name="drawer_favorite">Favorite</string>
+    <string name="drawer_watchlist">Watchlist</string>
 
     <!-- Toolbar actions -->
     <string name="action_search">Search</string>
