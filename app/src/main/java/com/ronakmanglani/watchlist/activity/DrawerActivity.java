@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import com.ronakmanglani.watchlist.R;
 
@@ -21,7 +20,7 @@ import butterknife.ButterKnife;
 public class DrawerActivity extends AppCompatActivity {
 
     // Key for SharedPreferences
-    @BindString(R.string.settings_last_page) String LAST_SELECTION;
+    @BindString(R.string.settings_last_page) String LAST_SELECTION_KEY;
 
     // Layout Views
     @Bind(R.id.toolbar) Toolbar toolbar;
@@ -46,6 +45,8 @@ public class DrawerActivity extends AppCompatActivity {
                 }
                 // Close the drawer
                 drawerLayout.closeDrawers();
+                // Set Toolbar title
+                setTitle(item.getTitle());
                 // Load the fragment required
                 int id = item.getItemId();
                 switch (id) {
@@ -94,13 +95,15 @@ public class DrawerActivity extends AppCompatActivity {
 
     private void loadSelection() {
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        int lastPosition = preferences.getInt(LAST_SELECTION, 0);
-        navigationView.getMenu().getItem(lastPosition).setChecked(true);
+        int lastPosition = preferences.getInt(LAST_SELECTION_KEY, 0);
+        MenuItem item = navigationView.getMenu().getItem(lastPosition);
+        item.setChecked(true);
+        setTitle(item.getTitle());
     }
     private void saveSelection(int position) {
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(LAST_SELECTION, position);
+        editor.putInt(LAST_SELECTION_KEY, position);
         editor.apply();
     }
 }
