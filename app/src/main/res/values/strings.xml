@@ -2,6 +2,11 @@
     <!-- App Title -->
     <string name="app_name">Watchlist</string>
 
+    <!-- SharedPreference Keys -->
+    <string name="settings_last_page">tab_last_page</string>
+    <string name="settings_last_selection">drawer_last_page</string>
+    <string name="settings_thumbnail_image_width">thumbnail_image_width</string>
+
     <!-- List For Navigation Drawer -->
     <string name="drawer_popular">Popular</string>
     <string name="drawer_rated">Top Rated</string>
@@ -22,10 +27,6 @@
     <string name="main_tab_rated">Top Rated</string>
     <string name="main_tab_upcoming">Upcoming</string>
     <string name="main_tab_playing">Now Playing</string>
-
-    <!-- SharedPreference Keys -->
-    <string name="settings_last_page">tab_last_page</string>
-    <string name="settings_thumbnail_image_width">thumbnail_image_width</string>
 
     <!-- Loading and Error Message -->
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>

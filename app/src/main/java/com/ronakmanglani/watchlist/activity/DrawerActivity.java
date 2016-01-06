@@ -1,5 +1,7 @@
 package com.ronakmanglani.watchlist.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -13,15 +15,20 @@ import android.widget.Button;
 import com.ronakmanglani.watchlist.R;
 
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.ButterKnife;
 
 public class DrawerActivity extends AppCompatActivity {
 
+    // Key for SharedPreferences
+    @BindString(R.string.settings_last_page) String LAST_SELECTION;
+
+    // Layout Views
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.drawer_layout) DrawerLayout drawerLayout;
     @Bind(R.id.navigation_view) NavigationView navigationView;
 
-    // Start activity
+    // Create activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,16 +50,22 @@ public class DrawerActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.drawer_popular:
+                        saveSelection(0);
                         return true;
                     case R.id.drawer_rated:
+                        saveSelection(1);
                         return true;
                     case R.id.drawer_upcoming:
+                        saveSelection(2);
                         return true;
                     case R.id.drawer_playing:
+                        saveSelection(3);
                         return true;
                     case R.id.drawer_favorite:
+                        saveSelection(4);
                         return true;
                     case R.id.drawer_watchlist:
+                        saveSelection(5);
                         return true;
                     default: return false;
                 }
@@ -73,8 +86,21 @@ public class DrawerActivity extends AppCompatActivity {
 
         //Setting the ActionBarToggle to DrawerLayout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
         // Add hamburger icon to Toolbar
         actionBarDrawerToggle.syncState();
+        // Load the last selected item from drawer
+        loadSelection();
+    }
+
+    private void loadSelection() {
+        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+        int lastPosition = preferences.getInt(LAST_SELECTION, 0);
+        navigationView.getMenu().getItem(lastPosition).setChecked(true);
+    }
+    private void saveSelection(int position) {
+        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(LAST_SELECTION, position);
+        editor.apply();
     }
 }
