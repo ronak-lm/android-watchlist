@@ -33,12 +33,13 @@ public class DrawerActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                // Set selected item as checked
                 if (!item.isChecked()) {
                     item.setChecked(true);
                 }
-
+                // Close the drawer
                 drawerLayout.closeDrawers();
-
+                // Load the fragment required
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.drawer_popular:
