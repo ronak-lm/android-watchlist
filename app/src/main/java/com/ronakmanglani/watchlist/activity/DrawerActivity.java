@@ -1,5 +1,7 @@
 package com.ronakmanglani.watchlist.activity;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.fragment.MainPlayingFragment;
+import com.ronakmanglani.watchlist.fragment.MainPopularFragment;
+import com.ronakmanglani.watchlist.fragment.MainRatedFragment;
+import com.ronakmanglani.watchlist.fragment.MainUpcomingFragment;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -39,36 +45,29 @@ public class DrawerActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                // Set selected item as checked
-                if (!item.isChecked()) {
-                    item.setChecked(true);
-                }
                 // Close the drawer
                 drawerLayout.closeDrawers();
-                // Set Toolbar title
-                setTitle(item.getTitle());
                 // Load the fragment required
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.drawer_popular:
-                        saveSelection(0);
+                        selectDrawerItem(0);
                         return true;
                     case R.id.drawer_rated:
-                        saveSelection(1);
+                        selectDrawerItem(1);
                         return true;
                     case R.id.drawer_upcoming:
-                        saveSelection(2);
+                        selectDrawerItem(2);
                         return true;
                     case R.id.drawer_playing:
-                        saveSelection(3);
+                        selectDrawerItem(3);
                         return true;
                     case R.id.drawer_favorite:
-                        saveSelection(4);
                         return true;
                     case R.id.drawer_watchlist:
-                        saveSelection(5);
                         return true;
-                    default: return false;
+                    default:
+                        return false;
                 }
             }
         });
@@ -90,17 +89,32 @@ public class DrawerActivity extends AppCompatActivity {
         // Add hamburger icon to Toolbar
         actionBarDrawerToggle.syncState();
         // Load the last selected item from drawer
-        loadSelection();
-    }
-
-    private void loadSelection() {
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
         int lastPosition = preferences.getInt(LAST_SELECTION_KEY, 0);
-        MenuItem item = navigationView.getMenu().getItem(lastPosition);
-        item.setChecked(true);
-        setTitle(item.getTitle());
+        selectDrawerItem(lastPosition);
     }
-    private void saveSelection(int position) {
+
+    private void selectDrawerItem(int position) {
+        MenuItem item = navigationView.getMenu().getItem(position);
+        // Set toolbar title
+        setTitle(item.getTitle());
+        // Set selection in drawer
+        item.setChecked(true);
+        // Change the fragment
+        Fragment fragment;
+        if (position == 0) {
+            fragment = new MainPopularFragment();
+        } else if (position == 1) {
+            fragment = new MainRatedFragment();
+        } else if (position == 2) {
+            fragment = new MainUpcomingFragment();
+        } else {
+            fragment = new MainPlayingFragment();
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, fragment);
+        transaction.commit();
+        // Save selected position to preference
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(LAST_SELECTION_KEY, position);
