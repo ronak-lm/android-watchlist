@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     // Key for SharedPreferences
-    @BindString(R.string.settings_last_page) String LAST_SELECTION_KEY;
+    @BindString(R.string.settings_last_selection) String LAST_SELECTION_KEY;
 
     // Layout Views
     @Bind(R.id.toolbar) Toolbar toolbar;
