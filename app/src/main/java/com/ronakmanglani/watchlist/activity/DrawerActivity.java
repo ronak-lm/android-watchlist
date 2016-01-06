@@ -51,16 +51,16 @@ public class DrawerActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.drawer_popular:
-                        selectDrawerItem(0);
+                        setSelectedDrawerItem(0);
                         return true;
                     case R.id.drawer_rated:
-                        selectDrawerItem(1);
+                        setSelectedDrawerItem(1);
                         return true;
                     case R.id.drawer_upcoming:
-                        selectDrawerItem(2);
+                        setSelectedDrawerItem(2);
                         return true;
                     case R.id.drawer_playing:
-                        selectDrawerItem(3);
+                        setSelectedDrawerItem(3);
                         return true;
                     case R.id.drawer_favorite:
                         return true;
@@ -88,13 +88,15 @@ public class DrawerActivity extends AppCompatActivity {
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         // Add hamburger icon to Toolbar
         actionBarDrawerToggle.syncState();
+
         // Load the last selected item from drawer
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
         int lastPosition = preferences.getInt(LAST_SELECTION_KEY, 0);
-        selectDrawerItem(lastPosition);
+        setSelectedDrawerItem(lastPosition);
     }
 
-    private void selectDrawerItem(int position) {
+    // Set "position" as current drawer item
+    private void setSelectedDrawerItem(int position) {
         MenuItem item = navigationView.getMenu().getItem(position);
         // Set toolbar title
         setTitle(item.getTitle());
