@@ -16,10 +16,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.fragment.FavoritesFragment;
 import com.ronakmanglani.watchlist.fragment.MostPopularFragment;
 import com.ronakmanglani.watchlist.fragment.NowPlayingFragment;
 import com.ronakmanglani.watchlist.fragment.TopRatedFragment;
 import com.ronakmanglani.watchlist.fragment.UpcomingFragment;
+import com.ronakmanglani.watchlist.fragment.WatchlistFragment;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -65,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
                         setSelectedDrawerItem(3);
                         return true;
                     case R.id.drawer_favorite:
+                        setSelectedDrawerItem(4);
                         return true;
                     case R.id.drawer_watchlist:
+                        setSelectedDrawerItem(5);
                         return true;
                     default:
                         return false;
@@ -112,8 +116,12 @@ public class MainActivity extends AppCompatActivity {
             fragment = new TopRatedFragment();
         } else if (position == 2) {
             fragment = new UpcomingFragment();
-        } else {
+        } else if (position == 3) {
             fragment = new NowPlayingFragment();
+        } else if (position == 4) {
+            fragment = new FavoritesFragment();
+        } else {
+            fragment = new WatchlistFragment();
         }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, fragment);
