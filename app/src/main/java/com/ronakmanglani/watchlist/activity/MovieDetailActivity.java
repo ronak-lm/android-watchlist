@@ -135,12 +135,14 @@ public class MovieDetailActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_share:
-                String shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
-                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.action_share_using)));
+                if (movie != null) {
+                    String shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
+                    startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.action_share_using)));
+                }
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
