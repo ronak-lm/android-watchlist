@@ -21,7 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.adapter.MovieDetailVideoAdapter;
+import com.ronakmanglani.watchlist.adapter.MovieVideoAdapter;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.model.Video;
@@ -34,7 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class MovieActivity extends AppCompatActivity {
 
     // Key for intent extra
     public static final String MOVIE_ID = "movie_id";
@@ -58,7 +58,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView movieRating;
     private TextView moviePlot;
     private RecyclerView movieVideos;
-    private MovieDetailVideoAdapter videoAdapter;
+    private MovieVideoAdapter videoAdapter;
 
     // Error message and loading circle
     private View errorMessage;
@@ -68,7 +68,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.activity_movie);
 
         // Setup Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,7 +96,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         ArrayList<Video> videos = new ArrayList<>();
         movieVideos = (RecyclerView) movieContainer.findViewById(R.id.movie_videos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        videoAdapter = new MovieDetailVideoAdapter(this, videos, onItemClickListener);
+        videoAdapter = new MovieVideoAdapter(this, videos, onItemClickListener);
         movieVideos.setHasFixedSize(true);
         movieVideos.setLayoutManager(layoutManager);
         movieVideos.setAdapter(videoAdapter);
@@ -321,7 +321,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     // Click listner for videos
-    MovieDetailVideoAdapter.OnItemClickListener onItemClickListener = new MovieDetailVideoAdapter.OnItemClickListener() {
+    MovieVideoAdapter.OnItemClickListener onItemClickListener = new MovieVideoAdapter.OnItemClickListener() {
         @Override
         public void onItemClicked(int position) {
             // TODO: Respond to click

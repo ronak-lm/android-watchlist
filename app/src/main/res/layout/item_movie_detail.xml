@@ -117,7 +117,7 @@
                 android:layout_height="@dimen/movie_rating_icon_size"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/rating_icon"
+                android:src="@drawable/icon_star"
                 android:scaleType="fitCenter"
                 tools:ignore="contentDescription"/>
 

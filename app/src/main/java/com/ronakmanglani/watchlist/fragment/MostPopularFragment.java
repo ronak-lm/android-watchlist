@@ -2,7 +2,7 @@ package com.ronakmanglani.watchlist.fragment;
 
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 
-public class MostPopularFragment extends BaseMovieFragment {
+public class MostPopularFragment extends BaseGridFragment {
 
     public String getUrlToDownload(int page) {
         return TMDBHelper.getMostPopularMoviesLink(getActivity(), page);

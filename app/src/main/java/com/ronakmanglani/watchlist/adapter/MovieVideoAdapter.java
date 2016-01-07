@@ -15,16 +15,16 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
 
-public class MovieDetailVideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MovieVideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;                                    // Context of calling activity
     private final OnItemClickListener onItemClickListener;      // Click Listener
     public ArrayList<Video> videos;                             // Videos to display
 
     // Constructor
-    public MovieDetailVideoAdapter(Context context,
-                                   ArrayList<Video> videos,
-                                   OnItemClickListener onItemClickListener) {
+    public MovieVideoAdapter(Context context,
+                             ArrayList<Video> videos,
+                             OnItemClickListener onItemClickListener) {
         this.context = context;
         this.videos = videos;
         this.onItemClickListener = onItemClickListener;
