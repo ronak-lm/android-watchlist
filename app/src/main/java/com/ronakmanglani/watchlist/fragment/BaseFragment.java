@@ -20,14 +20,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
-import com.ronakmanglani.watchlist.adapter.BaseGridAdapter;
+import com.ronakmanglani.watchlist.adapter.BaseMovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public abstract class BaseGridFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
 
@@ -40,7 +40,7 @@ public abstract class BaseGridFragment extends Fragment {
     private View progressCircle;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private BaseGridAdapter adapter;
+    private BaseMovieAdapter adapter;
     private GridLayoutManager layoutManager;
 
     // Abstract methods
@@ -51,7 +51,7 @@ public abstract class BaseGridFragment extends Fragment {
     // Fragment Initialization
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_base_grid,container,false);
+        View v = inflater.inflate(R.layout.fragment_base,container,false);
         context = getContext();
 
         // Initialize count
@@ -61,7 +61,7 @@ public abstract class BaseGridFragment extends Fragment {
         errorMessage = v.findViewById(R.id.error_message);
         progressCircle = v.findViewById(R.id.progress_circle);
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
-        adapter = new BaseGridAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
+        adapter = new BaseMovieAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
         recyclerView = (RecyclerView) v.findViewById(R.id.movie_grid);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -192,7 +192,7 @@ public abstract class BaseGridFragment extends Fragment {
 
         // Create new adapter if first time
         if (adapter == null) {
-            adapter = new BaseGridAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
+            adapter = new BaseMovieAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
             recyclerView.setAdapter(adapter);
         }
 
@@ -277,7 +277,7 @@ public abstract class BaseGridFragment extends Fragment {
     }
 
     // Respond to clicks of items in RecyclerView
-    BaseGridAdapter.OnItemClickListener onClickListener = new BaseGridAdapter.OnItemClickListener() {
+    BaseMovieAdapter.OnItemClickListener onClickListener = new BaseMovieAdapter.OnItemClickListener() {
         @Override
         public void onCardClicked(int position) {
             Intent intent = new Intent(context, MovieActivity.class);

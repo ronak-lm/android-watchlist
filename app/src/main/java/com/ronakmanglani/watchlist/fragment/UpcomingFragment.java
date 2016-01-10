@@ -2,7 +2,7 @@ package com.ronakmanglani.watchlist.fragment;
 
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 
-public class UpcomingFragment extends BaseGridFragment {
+public class UpcomingFragment extends BaseFragment {
 
     public String getUrlToDownload(int page) {
         return TMDBHelper.getUpcomingMoviesLink(getActivity(), page);

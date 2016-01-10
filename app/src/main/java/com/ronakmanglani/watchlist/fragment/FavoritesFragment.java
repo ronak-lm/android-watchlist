@@ -13,7 +13,7 @@ public class FavoritesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_base_grid, container, false);
+        View v = inflater.inflate(R.layout.fragment_base, container, false);
         return v;
     }
 }
