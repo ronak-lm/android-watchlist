@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.activity.DetailActivity;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.adapter.BaseMovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
@@ -280,7 +281,7 @@ public abstract class BaseFragment extends Fragment {
     BaseMovieAdapter.OnItemClickListener onClickListener = new BaseMovieAdapter.OnItemClickListener() {
         @Override
         public void onCardClicked(int position) {
-            Intent intent = new Intent(context, MovieActivity.class);
+            Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra(MovieActivity.MOVIE_ID, adapter.movieList.get(position).id);
             startActivity(intent);
         }
