@@ -89,7 +89,7 @@ public abstract class BaseFragment extends Fragment {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 // Check if RecyclerView has reached the end and isn't already loading
-                if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.movieList.size() - 1 && !isLoading) {
+                if (layoutManager.findLastVisibleItemPosition() == adapter.movieList.size() - 1 && !isLoading) {
                     // Set flag
                     isLoading = true;
                     // Check if page to download is less than total number of pages
