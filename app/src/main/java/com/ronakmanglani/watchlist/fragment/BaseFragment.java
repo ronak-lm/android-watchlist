@@ -28,21 +28,24 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
     private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
 
     private Context context;                        // Activity context
-    private int pageToDownload;                     // Page number to download
     private boolean isLoading;                      // Flag for loading
+    private int pageToDownload;                     // Page number to download
 
-    // Views for reference
-    private View errorMessage;
-    private View progressCircle;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
+    // Layout views
+    @Bind(R.id.error_message) View errorMessage;
+    @Bind(R.id.progress_circle) View progressCircle;
+    @Bind(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.movie_grid) RecyclerView recyclerView;
+
+    // Adapter and layout manager for RecyclerView
     private BaseMovieAdapter adapter;
     private GridLayoutManager layoutManager;
 
@@ -51,28 +54,19 @@ public abstract class BaseFragment extends Fragment {
     public abstract boolean isDetailedViewEnabled();
     public abstract int getSpanLocation();
 
-    // Fragment Initialization
+    // Fragment initialization
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_base,container,false);
         context = getContext();
+        ButterKnife.bind(this, v);
 
         // Initialize count
         pageToDownload = 1;
 
-        // Find and initialize views
-        errorMessage = v.findViewById(R.id.error_message);
-        progressCircle = v.findViewById(R.id.progress_circle);
-        layoutManager = new GridLayoutManager(context, getNumberOfColumns());
+        // Setup layout manager and adapter
         adapter = new BaseMovieAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
-        recyclerView = (RecyclerView) v.findViewById(R.id.movie_grid);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
-        swipeRefreshLayout.setColorSchemeResources(R.color.accent);
-
-        // Set spanning for RecyclerView items if detailed view is enabled
+        layoutManager = new GridLayoutManager(context, getNumberOfColumns());
         if (isDetailedViewEnabled()) {
             layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
@@ -86,7 +80,10 @@ public abstract class BaseFragment extends Fragment {
             });
         }
 
-        // Set listeners
+        // Setup RecyclerView
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -106,6 +103,9 @@ public abstract class BaseFragment extends Fragment {
                 }
             }
         });
+
+        // Setup swipe to refresh
+        swipeRefreshLayout.setColorSchemeResources(R.color.accent);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -122,6 +122,8 @@ public abstract class BaseFragment extends Fragment {
                 downloadMoviesList();
             }
         });
+
+        // Setup click of "Try Again" button on error screen
         errorMessage.findViewById(R.id.try_again).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,7 +158,7 @@ public abstract class BaseFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 swipeRefreshLayout.setEnabled(true);
             } else {
-                // Data not found
+                // Data not found, download from TMDB
                 downloadMoviesList();
             }
         }
@@ -195,7 +197,7 @@ public abstract class BaseFragment extends Fragment {
         // Select which URL to download
         String urlToDownload = getUrlToDownload(pageToDownload);
 
-        // Create new adapter if first time
+        // Create new adapter if it's null
         if (adapter == null) {
             adapter = new BaseMovieAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
             recyclerView.setAdapter(adapter);
