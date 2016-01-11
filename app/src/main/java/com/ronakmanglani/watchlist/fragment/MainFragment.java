@@ -110,7 +110,15 @@ public class MainFragment extends Fragment {
         // Load the last selected item from drawer
         SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         int lastPosition = preferences.getInt(LAST_SELECTION_KEY, 0);
-        setSelectedDrawerItem(lastPosition);
+        if (savedInstanceState == null) {
+            setSelectedDrawerItem(lastPosition);
+        } else {
+            if (savedInstanceState.containsKey("toolbar_title")) {
+                toolbar.setTitle(savedInstanceState.getString("toolbar_title"));
+            } else {
+                toolbar.setTitle(navigationView.getMenu().getItem(lastPosition).getTitle());
+            }
+        }
         return v;
     }
 
@@ -146,4 +154,9 @@ public class MainFragment extends Fragment {
         editor.apply();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("toolbar_title", toolbar.getTitle().toString());
+    }
 }
