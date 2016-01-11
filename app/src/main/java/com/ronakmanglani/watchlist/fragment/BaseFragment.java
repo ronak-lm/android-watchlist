@@ -28,6 +28,8 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public abstract class BaseFragment extends Fragment {
 
     private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
@@ -111,6 +113,8 @@ public abstract class BaseFragment extends Fragment {
                 errorMessage.setVisibility(View.GONE);
                 progressCircle.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
+                // Invalidate current adapter
+                adapter = null;
                 // Invalidate cache
                 VolleySingleton.getInstance(context).requestQueue.getCache().remove(getUrlToDownload(1));
                 // Download refreshed data
