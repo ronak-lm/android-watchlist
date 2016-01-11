@@ -23,7 +23,7 @@ import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     // Key for SharedPreferences
     @BindString(R.string.settings_last_selection) String LAST_SELECTION_KEY;
@@ -41,54 +41,10 @@ public class MainFragment extends Fragment {
 
         // Initialize options menu
         toolbar.inflateMenu(R.menu.menu_main);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-                switch (id) {
-                    case R.id.action_search:
-                        Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.action_about:
-                        Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                        return true;
-                    default: return false;
-                }
-            }
-        });
+        toolbar.setOnMenuItemClickListener(this);
 
         // Respond to clicks of NavigationView
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                // Close the drawer
-                drawerLayout.closeDrawers();
-                // Load the fragment required
-                int id = item.getItemId();
-                switch (id) {
-                    case R.id.drawer_popular:
-                        setSelectedDrawerItem(0);
-                        return true;
-                    case R.id.drawer_rated:
-                        setSelectedDrawerItem(1);
-                        return true;
-                    case R.id.drawer_upcoming:
-                        setSelectedDrawerItem(2);
-                        return true;
-                    case R.id.drawer_playing:
-                        setSelectedDrawerItem(3);
-                        return true;
-                    case R.id.drawer_favorite:
-                        setSelectedDrawerItem(4);
-                        return true;
-                    case R.id.drawer_watchlist:
-                        setSelectedDrawerItem(5);
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
+        navigationView.setNavigationItemSelectedListener(this);
 
         // Respond to opening/closing of navigation drawer
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.app_name, R.string.app_name) {
@@ -122,6 +78,36 @@ public class MainFragment extends Fragment {
         return v;
     }
 
+    // Respond to selection of navigation drawer items
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Close the drawer
+        drawerLayout.closeDrawers();
+        // Load the fragment required
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.drawer_popular:
+                setSelectedDrawerItem(0);
+                return true;
+            case R.id.drawer_rated:
+                setSelectedDrawerItem(1);
+                return true;
+            case R.id.drawer_upcoming:
+                setSelectedDrawerItem(2);
+                return true;
+            case R.id.drawer_playing:
+                setSelectedDrawerItem(3);
+                return true;
+            case R.id.drawer_favorite:
+                setSelectedDrawerItem(4);
+                return true;
+            case R.id.drawer_watchlist:
+                setSelectedDrawerItem(5);
+                return true;
+            default:
+                return false;
+        }
+    }
     // Set "position" as current drawer item
     private void setSelectedDrawerItem(int position) {
         MenuItem item = navigationView.getMenu().getItem(position);
@@ -154,10 +140,26 @@ public class MainFragment extends Fragment {
         editor.apply();
     }
 
-    // Save toolbar title
+    // Save fragment state
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("toolbar_title", toolbar.getTitle().toString());
     }
+
+    // Respond to clicks of toolbar menu
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_search:
+                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_about:
+                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
+                return true;
+            default: return false;
+        }
+    }
+
 }
