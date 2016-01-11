@@ -154,6 +154,7 @@ public class MainFragment extends Fragment {
         editor.apply();
     }
 
+    // Save toolbar title
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
