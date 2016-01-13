@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_overview_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/medium_margin"
+    android:orientation="vertical"
+    android:padding="@dimen/large_margin"
+    android:background="@color/text_secondary">
+
+    <!-- Header -->
+    <LinearLayout android:id="@+id/movie_overview_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView style="@style/MovieItemIconsStyle"
+            android:src="@drawable/icon_overview"
+            tools:ignore="ContentDescription" />
+        <TextView style="@style/MovieItemHeaderStyle"
+            android:text="@string/detail_header_overview" />
+    </LinearLayout>
+
+    <!-- Value -->
+    <TextView android:id="@+id/movie_overview_value"
+        style="@style/MovieItemValueStyle"
+        tools:text="My movie overview goes here"/>
+
+</LinearLayout>

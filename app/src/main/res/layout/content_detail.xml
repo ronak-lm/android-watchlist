@@ -2,7 +2,6 @@
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -14,107 +13,13 @@
         android:orientation="vertical">
 
         <!-- Header Image -->
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/backdrop_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/detail_backdrop_height"
-            android:scaleType="centerCrop"
-            android:background="@color/default_image_background"/>
+        <include layout="@layout/view_detail_backdrop" />
 
         <!-- Section 1: Basic Info -->
-        <LinearLayout android:id="@+id/basic_info_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/large_margin"
-            android:background="@color/text_secondary"
-            android:orientation="horizontal">
-
-            <!-- Movie poster -->
-            <FrameLayout android:id="@+id/poster_image_container"
-                android:layout_width="@dimen/detail_poster_width"
-                android:layout_height="@dimen/detail_poster_height">
-                <ImageView android:id="@+id/poster_image_default"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/default_poster"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    tools:ignore="contentDescription" />
-                <com.android.volley.toolbox.NetworkImageView
-                    android:id="@+id/poster_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/default_image_background"
-                    android:scaleType="centerCrop" />
-            </FrameLayout>
-
-            <!-- Movie Text -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/large_margin"
-                android:layout_marginStart="@dimen/large_margin"
-                android:orientation="vertical">
-                <!-- Title -->
-                <TextView android:id="@+id/movie_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_primary"
-                    android:textSize="@dimen/detail_title_textSize"
-                    tools:text="My Awesome Movie Title"/>
-                <!-- Release date and runtime -->
-                <TextView android:id="@+id/movie_subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_chrome"
-                    tools:text="01 January 2016\n120 mins"/>
-                <!-- Average rating -->
-                <LinearLayout android:id="@+id/movie_rating_holder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView android:id="@+id/movie_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/detail_rating1_textSize"
-                        android:textColor="@color/text_primary"
-                        tools:text="8.67"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/detail_rating_outOf"
-                        android:textSize="@dimen/detail_rating2_textSize"
-                        android:textColor="@color/text_primary"/>
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
+        <include layout="@layout/view_detail_info" />
 
         <!-- Section 2: Overview -->
-        <LinearLayout android:id="@+id/movie_overview_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
-            android:orientation="vertical"
-            android:padding="@dimen/large_margin"
-            android:background="@color/text_secondary">
-            <!-- Header -->
-            <LinearLayout android:id="@+id/movie_overview_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <ImageView style="@style/MovieItemIconsStyle"
-                    android:src="@drawable/icon_overview"
-                    tools:ignore="ContentDescription" />
-                <TextView style="@style/MovieItemHeaderStyle"
-                    android:text="@string/detail_header_overview" />
-            </LinearLayout>
-            <!-- Value -->
-            <TextView android:id="@+id/movie_overview_value"
-                style="@style/MovieItemValueStyle"
-                tools:text="My movie overview goes here"/>
-        </LinearLayout>
+        <include layout="@layout/view_detail_overview" />
 
     </LinearLayout>
 
