@@ -24,4 +24,27 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Shop Info -->
+    <style name="MovieItemIconsStyle">
+        <item name="android:layout_height">@dimen/detail_icon_size</item>
+        <item name="android:layout_width">@dimen/detail_icon_size</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+    <style name="MovieItemHeaderStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/medium_margin</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/detail_item_textSize</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="MovieItemValueStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/medium_margin</item>
+        <item name="android:textSize">@dimen/detail_item_textSize</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
 </resources>
