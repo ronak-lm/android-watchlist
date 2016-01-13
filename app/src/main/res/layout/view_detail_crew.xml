@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Crew Header -->
+    <LinearLayout android:id="@+id/movie_crew_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView style="@style/MovieItemIconsStyle"
+            android:src="@drawable/icon_crew"
+            tools:ignore="ContentDescription" />
+
+        <TextView style="@style/MovieItemHeaderStyle"
+            android:text="@string/detail_header_crew" />
+
+    </LinearLayout>
+
+    <!-- Crew Value 1 -->
+    <TextView android:id="@+id/movie_crew_value1"
+        style="@style/MovieItemValueStyle"
+        tools:text="Director: Christopher Nolan" />
+
+    <!-- Crew Value 2 -->
+    <TextView android:id="@+id/movie_crew_value2"
+        style="@style/MovieItemValueStyle"
+        tools:text="Writer: Christopher Nolan" />
+
+    <TextView android:id="@+id/crew_see_all"
+        style="@style/MovieSeeAllButtonStyle"
+        android:text="@string/detail_button_see_all" />
+
+</LinearLayout>

@@ -21,6 +21,9 @@
         <!-- Section 2: Overview -->
         <include layout="@layout/view_detail_overview" />
 
+        <!-- Section 3: Cast and Crew -->
+        <include layout="@layout/view_detail_credits" />
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

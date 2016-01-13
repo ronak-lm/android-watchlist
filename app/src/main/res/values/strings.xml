@@ -30,5 +30,8 @@
     <string name="movie_rating_outOf">/10</string>
     <string name="detail_rating_outOf">/10</string>
     <string name="detail_header_overview">OVERVIEW</string>
+    <string name="detail_header_crew">CREW</string>
+    <string name="detail_header_cast">CAST</string>
+    <string name="detail_button_see_all">SEE ALL</string>
 
 </resources>

@@ -24,7 +24,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <!-- Shop Info -->
+    <!-- Detail Activity Styles -->
     <style name="MovieItemIconsStyle">
         <item name="android:layout_height">@dimen/detail_icon_size</item>
         <item name="android:layout_width">@dimen/detail_icon_size</item>
@@ -38,13 +38,23 @@
         <item name="android:textSize">@dimen/detail_item_textSize</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
-
     <style name="MovieItemValueStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/medium_margin</item>
         <item name="android:textSize">@dimen/detail_item_textSize</item>
         <item name="android:textColor">@color/text_primary</item>
+    </style>
+    <style name="MovieSeeAllButtonStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/small_margin</item>
+        <item name="android:layout_marginBottom">@dimen/small_margin</item>
+        <item name="android:paddingTop">@dimen/small_margin</item>
+        <item name="android:paddingBottom">@dimen/small_margin</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/accent</item>
     </style>
 
 </resources>
