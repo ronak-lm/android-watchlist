@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_cast_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/medium_margin"
-    android:orientation="vertical">
+    android:paddingTop="@dimen/large_margin"
+    android:paddingLeft="@dimen/large_margin"
+    android:paddingRight="@dimen/large_margin"
+    android:paddingBottom="@dimen/small_margin"
+    android:orientation="vertical"
+    android:background="@color/text_secondary">
 
     <!-- Cast Header -->
-    <LinearLayout android:id="@+id/movie_cast_header"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -22,6 +28,69 @@
 
     </LinearLayout>
 
-    <!-- Cast Value 1 -->
+    <!-- Cast Item 1 -->
+    <LinearLayout android:id="@+id/movie_cast_item1"
+        style="@style/MovieCastHolderStyle">
+        <!-- Image -->
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/movie_cast_image1"
+            style="@style/MovieCastImageStyle"/>
+        <!-- Text Area -->
+        <LinearLayout style="@style/MovieCastTextHolderStyle">
+            <!-- Name -->
+            <TextView android:id="@+id/movie_cast_name1"
+                style="@style/MovieCastNameStyle"
+                tools:text="Bruce Wayne"/>
+            <!-- Role -->
+            <TextView android:id="@+id/movie_cast_role1"
+                style="@style/MovieCastRoleStyle"
+                tools:text="as Batman"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Cast Item 2 -->
+    <LinearLayout android:id="@+id/movie_cast_item2"
+        style="@style/MovieCastHolderStyle">
+        <!-- Image -->
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/movie_cast_image2"
+            style="@style/MovieCastImageStyle"/>
+        <!-- Text Area -->
+        <LinearLayout style="@style/MovieCastTextHolderStyle">
+            <!-- Name -->
+            <TextView android:id="@+id/movie_cast_name2"
+                style="@style/MovieCastNameStyle"
+                tools:text="Clark Kent"/>
+            <!-- Role -->
+            <TextView android:id="@+id/movie_cast_role2"
+                style="@style/MovieCastRoleStyle"
+                tools:text="as Superman"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Cast Item 3 -->
+    <LinearLayout android:id="@+id/movie_cast_item3"
+        style="@style/MovieCastHolderStyle">
+        <!-- Image -->
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/movie_cast_image3"
+            style="@style/MovieCastImageStyle"/>
+        <!-- Text Area -->
+        <LinearLayout style="@style/MovieCastTextHolderStyle">
+            <!-- Name -->
+            <TextView android:id="@+id/movie_cast_name3"
+                style="@style/MovieCastNameStyle"
+                tools:text="Peter Parker"/>
+            <!-- Role -->
+            <TextView android:id="@+id/movie_cast_role3"
+                style="@style/MovieCastRoleStyle"
+                tools:text="as Spiderman"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- See All Button -->
+    <include android:id="@+id/movie_cast_see_all"
+        layout="@layout/view_detail_see_all"/>
+
 
 </LinearLayout>

@@ -21,8 +21,11 @@
         <!-- Section 2: Overview -->
         <include layout="@layout/view_detail_overview" />
 
-        <!-- Section 3: Cast and Crew -->
-        <include layout="@layout/view_detail_credits" />
+        <!-- Section 3: Crew -->
+        <include layout="@layout/view_detail_crew" />
+
+        <!-- Section 4: Cast -->
+        <include layout="@layout/view_detail_cast" />
 
     </LinearLayout>
 
