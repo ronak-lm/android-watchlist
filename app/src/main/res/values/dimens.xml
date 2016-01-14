@@ -68,5 +68,7 @@
     <dimen name="detail_rating2_textSize">12sp</dimen>
     <dimen name="detail_item_textSize">14sp</dimen>
     <dimen name="detail_icon_size">16dp</dimen>
+    <dimen name="detail_see_all_height">40dp</dimen>
+    <dimen name="detail_arrow_size">12dp</dimen>
 
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_crew_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -31,8 +32,12 @@
         style="@style/MovieItemValueStyle"
         tools:text="Writer: Christopher Nolan" />
 
-    <TextView android:id="@+id/crew_see_all"
-        style="@style/MovieSeeAllButtonStyle"
-        android:text="@string/detail_button_see_all" />
+    <!-- See All Button -->
+    <LinearLayout android:id="@+id/movie_crew_see_all"
+        style="@style/MovieSeeAllHolderStyle">
+        <TextView style="@style/MovieSeeAllTextStyle" />
+        <ImageView style="@style/MovieSeeAllArrowStyle"
+            tools:ignore="contentDescription"/>
+    </LinearLayout>
 
 </LinearLayout>

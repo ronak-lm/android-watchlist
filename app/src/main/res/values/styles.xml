@@ -45,16 +45,26 @@
         <item name="android:textSize">@dimen/detail_item_textSize</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
-    <style name="MovieSeeAllButtonStyle">
-        <item name="android:layout_height">wrap_content</item>
+    <style name="MovieSeeAllHolderStyle">
+        <item name="android:layout_height">@dimen/detail_see_all_height</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_marginTop">@dimen/small_margin</item>
-        <item name="android:layout_marginBottom">@dimen/small_margin</item>
-        <item name="android:paddingTop">@dimen/small_margin</item>
-        <item name="android:paddingBottom">@dimen/small_margin</item>
-        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="MovieSeeAllTextStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/accent</item>
+        <item name="android:text">@string/detail_button_see_all</item>
+    </style>
+    <style name="MovieSeeAllArrowStyle">
+        <item name="android:layout_height">@dimen/detail_arrow_size</item>
+        <item name="android:layout_width">@dimen/detail_arrow_size</item>
+        <item name="android:layout_marginLeft">@dimen/small_margin</item>
+        <item name="android:src">@drawable/icon_arrow_right</item>
+        <item name="android:scaleType">fitCenter</item>
     </style>
 
 </resources>
