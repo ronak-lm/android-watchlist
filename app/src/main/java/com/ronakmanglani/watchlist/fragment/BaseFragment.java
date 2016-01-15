@@ -288,7 +288,7 @@ public abstract class BaseFragment extends Fragment {
         @Override
         public void onCardClicked(int position) {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra(DetailFragment.MOVIE_ID, adapter.movieList.get(position).id);
+            intent.putExtra(DetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
             startActivity(intent);
         }
     };

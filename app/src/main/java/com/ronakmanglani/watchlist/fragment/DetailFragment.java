@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.activity.DetailActivity;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
@@ -31,9 +32,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class DetailFragment extends Fragment {
-
-    // Key for intent extra
-    public static final String MOVIE_ID = "movie_id";
 
     // Movie associated with the activity
     private String id;
@@ -83,7 +81,7 @@ public class DetailFragment extends Fragment {
         toolbar.setTitle(R.string.loading);
 
         // Download movie details
-        id = savedInstanceState.getString(MOVIE_ID);
+        id = getArguments().getString(DetailActivity.MOVIE_ID);
         downloadMovieDetails(id);
 
         return v;
