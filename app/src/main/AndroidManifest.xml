@@ -27,7 +27,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DetailActivity"
-            android:label="@string/loading"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

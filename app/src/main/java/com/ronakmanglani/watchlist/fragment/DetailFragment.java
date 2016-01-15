@@ -2,6 +2,7 @@ package com.ronakmanglani.watchlist.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import butterknife.OnClick;
 public class DetailFragment extends Fragment {
 
     // Main views
+    @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.progress_circle) View progressCircle;
     @Bind(R.id.error_message) View errorMessage;
     @Bind(R.id.movie_detail_holder) View movieHolder;
@@ -56,6 +58,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, v);
+        toolbar.setTitle(R.string.loading);
         return v;
     }
 
