@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    app:layout_scrollFlags="scroll">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <FrameLayout
+    <!-- Details Area -->
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_scrollFlags="scroll">
 
-        <!-- Details Area -->
         <LinearLayout android:id="@+id/movie_detail_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,28 +34,28 @@
 
         </LinearLayout>
 
-        <!-- Error message and loading circle -->
-        <RelativeLayout
+    </android.support.v4.widget.NestedScrollView>
+
+    <!-- Error message and loading circle -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- To show when unable to load data -->
+        <include android:id="@+id/error_message"
+            layout="@layout/view_error_message"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
-            <!-- To show when unable to load data -->
-            <include android:id="@+id/error_message"
-                layout="@layout/view_error_message"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"/>
+        <!-- Progress Circle -->
+        <include android:id="@+id/progress_circle"
+            layout="@layout/view_progress_circle"
+            android:layout_width="@dimen/progress_circle_width"
+            android:layout_height="@dimen/progress_circle_height"
+            android:layout_centerInParent="true"
+            android:visibility="visible"/>
 
-            <!-- Progress Circle -->
-            <include android:id="@+id/progress_circle"
-                layout="@layout/view_progress_circle"
-                android:layout_width="@dimen/progress_circle_width"
-                android:layout_height="@dimen/progress_circle_height"
-                android:layout_centerInParent="true"
-                android:visibility="visible"/>
+    </RelativeLayout>
 
-        </RelativeLayout>
-
-    </FrameLayout>
-
-</android.support.v4.widget.NestedScrollView>
+</FrameLayout>
