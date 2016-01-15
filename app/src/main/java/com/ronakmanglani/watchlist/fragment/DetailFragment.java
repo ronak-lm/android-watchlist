@@ -3,6 +3,7 @@ package com.ronakmanglani.watchlist.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,6 +160,7 @@ public class DetailFragment extends Fragment {
                         } catch (Exception ex) {
                             // Show error message on parsing errors
                             onDownloadFailed();
+                            Log.d("ParseError", ex.getMessage(), ex);
                         }
                     }
                 },
@@ -226,13 +228,22 @@ public class DetailFragment extends Fragment {
         if (movie.crew.size() == 0) {
             movieCrewHolder.setVisibility(View.GONE);
         } else if (movie.crew.size() == 1) {
-            movieCrewValues.get(1).setText(View.GONE);
-            movieCrewSeeAllButton.setVisibility(View.GONE);
+            // Set value
             movieCrewValues.get(0).setText(movie.crew.get(0).role + ": " + movie.crew.get(0).name);
+            // Hide views
+            movieCrewValues.get(1).setVisibility(View.GONE);
+            movieCrewSeeAllButton.setVisibility(View.GONE);
+            // Fix padding
+            int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+            movieCrewHolder.setPadding(padding, padding, padding, padding);
         } else if (movie.crew.size() >= 2) {
+            // Set values
             movieCrewValues.get(0).setText(movie.crew.get(0).role + ": " + movie.crew.get(0).name);
             movieCrewValues.get(1).setText(movie.crew.get(1).role + ": " + movie.crew.get(1).name);
+            // Hide views
             if (movie.crew.size() == 2) {
+                int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+                movieCrewHolder.setPadding(padding, padding, padding, padding);
                 movieCrewSeeAllButton.setVisibility(View.GONE);
             }
         }
@@ -241,20 +252,20 @@ public class DetailFragment extends Fragment {
         if (movie.cast.size() == 0) {
             movieCastHolder.setVisibility(View.GONE);
         } else if (movie.cast.size() == 1) {
-            // Hide views
-            movieCastSeeAllButton.setVisibility(View.GONE);
-            movieCastItems.get(2).setVisibility(View.GONE);
-            movieCastItems.get(1).setVisibility(View.GONE);
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 0
             movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
-        } else if (movie.cast.size() == 2) {
             // Hide views
             movieCastSeeAllButton.setVisibility(View.GONE);
             movieCastItems.get(2).setVisibility(View.GONE);
+            movieCastItems.get(1).setVisibility(View.GONE);
+            // Fix padding
+            int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+            movieCastHolder.setPadding(padding, padding, padding, padding);
+        } else if (movie.cast.size() == 2) {
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 1
             movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
@@ -266,6 +277,12 @@ public class DetailFragment extends Fragment {
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
+            // Hide views
+            movieCastSeeAllButton.setVisibility(View.GONE);
+            movieCastItems.get(2).setVisibility(View.GONE);
+            // Fix padding
+            int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+            movieCastHolder.setPadding(padding, padding, padding, padding);
         } else if (movie.cast.size() >= 3) {
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 2
@@ -285,6 +302,8 @@ public class DetailFragment extends Fragment {
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide show all button
             if (movie.cast.size() == 3) {
+                int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+                movieCastHolder.setPadding(padding, padding, padding, padding);
                 movieCastSeeAllButton.setVisibility(View.GONE);
             }
         }
