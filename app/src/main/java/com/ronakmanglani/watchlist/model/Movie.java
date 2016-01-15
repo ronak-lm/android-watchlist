@@ -38,7 +38,9 @@ public class Movie implements Parcelable {
         this.id = in.readString();
         this.title = in.readString();
         this.year = in.readString();
+        this.overview = in.readString();
         this.rating = in.readString();
+        this.posterImage = in.readString();
         this.backdropImage = in.readString();
     }
     @Override
@@ -46,7 +48,9 @@ public class Movie implements Parcelable {
         out.writeString(id);
         out.writeString(title);
         out.writeString(year);
+        out.writeString(overview);
         out.writeString(rating);
+        out.writeString(posterImage);
         out.writeString(backdropImage);
     }
     @Override
