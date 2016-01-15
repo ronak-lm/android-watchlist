@@ -8,6 +8,7 @@ public class MovieDetail {
 
     public String id;
     public String title;
+    public String tagline;
     public String releaseDate;
     public String runtime;
     public String overview;
@@ -16,16 +17,18 @@ public class MovieDetail {
     public String backdropImage;
     public String posterImage;
     public ArrayList<String> genre;
-    public ArrayList<String > videos;
+    public ArrayList<String> images;
+    public ArrayList<String> videos;
     public ArrayList<Credit> cast;
     public ArrayList<Credit> crew;
 
-    public MovieDetail(String id, String title, String releaseDate, String runtime, String overview,
-                       String voteAverage, String voteCount, ArrayList<String> genre,
-                       String backdropImage, String posterImage, ArrayList<String> videos,
-                       ArrayList<Credit> cast, ArrayList<Credit> crew) {
+    public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime,
+                       String overview, String voteAverage, String voteCount, ArrayList<String> genre,
+                       String backdropImage, String posterImage, ArrayList<String> images,
+                       ArrayList<String> videos, ArrayList<Credit> cast, ArrayList<Credit> crew) {
         this.id = id;
         this.title = title;
+        this.tagline = tagline;
         this.releaseDate = releaseDate;
         this.runtime = runtime;
         this.overview = overview;
@@ -34,6 +37,7 @@ public class MovieDetail {
         this.genre = genre;
         this.backdropImage = backdropImage;
         this.posterImage = posterImage;
+        this.images = images;
         this.videos = videos;
         this.cast = cast;
         this.crew = crew;

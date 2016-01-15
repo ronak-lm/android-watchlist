@@ -111,16 +111,10 @@ public class DetailFragment extends Fragment {
                             String posterImage = jsonObject.getString("poster_path");
                             String releaseDate = jsonObject.getString("release_date");
                             String runtime = jsonObject.getString("runtime");
+                            String tagline = jsonObject.getString("tagline");
                             String title = jsonObject.getString("title");
                             String voteAverage = jsonObject.getString("vote_average");
                             String voteCount = jsonObject.getString("vote_count");
-                            ArrayList<String> videos = new ArrayList<>();
-                            JSONArray videoArray = jsonObject.getJSONObject("trailers").getJSONArray("youtube");
-                            for (int i = 0; i < videoArray.length(); i++) {
-                                JSONObject object = (JSONObject) videoArray.get(i);
-                                String videoID = object.getString("source");
-                                videos.add(videoID);
-                            }
                             ArrayList<Credit> cast = new ArrayList<>();
                             JSONArray castArray = jsonObject.getJSONObject("credits").getJSONArray("cast");
                             for (int i = 0; i < castArray.length(); i++) {
@@ -141,10 +135,23 @@ public class DetailFragment extends Fragment {
                                 String profileImage = object.getString("profile_path");
                                 crew.add(new Credit(person_id, name, role, profileImage));
                             }
+                            ArrayList<String> images = new ArrayList<>();
+                            JSONArray imageArray = jsonObject.getJSONObject("images").getJSONArray("backdrops");
+                            for (int i = 0; i < imageArray.length(); i++) {
+                                JSONObject object = (JSONObject) imageArray.get(i);
+                                String url = object.getString("file_path");
+                                images.add(url);
+                            }
+                            ArrayList<String> videos = new ArrayList<>();
+                            JSONArray videoArray = jsonObject.getJSONObject("trailers").getJSONArray("youtube");
+                            for (int i = 0; i < videoArray.length(); i++) {
+                                JSONObject object = (JSONObject) videoArray.get(i);
+                                String videoID = object.getString("source");
+                                videos.add(videoID);
+                            }
                             // Create movie object
-                            movie = new MovieDetail(id, title, releaseDate, runtime, overview, voteAverage,
-                                    voteCount, genre, backdropImage, posterImage, videos, cast, crew);
-                            // TODO: Parse backdrop images and tagline
+                            movie = new MovieDetail(id, title, tagline, releaseDate, runtime, overview, voteAverage,
+                                    voteCount, genre, backdropImage, posterImage, images, videos, cast, crew);
                             // TODO: Update UI
                         } catch (Exception ex) {
                             // Show error message on parsing errors
