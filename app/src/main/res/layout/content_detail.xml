@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <!-- Details Area -->
-        <LinearLayout android:id="@id/movie_detail_holder"
+        <LinearLayout android:id="@+id/movie_detail_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
