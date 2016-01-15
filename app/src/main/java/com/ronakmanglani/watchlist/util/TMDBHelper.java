@@ -25,7 +25,7 @@ public class TMDBHelper {
         return "http://api.themoviedb.org/3/movie/now_playing?&page=" + page + "&api_key=" + getApiKey(context);
     }
     public static String getMovieDetailLink(Context context,String id) {
-        return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getApiKey(context) + "&append_to_response=trailers,credits";
+        return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getApiKey(context) + "&append_to_response=credits,images,trailers";
     }
 
     // Get image of the given pixel size
