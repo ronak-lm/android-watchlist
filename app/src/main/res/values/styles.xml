@@ -81,6 +81,7 @@
     <style name="MovieCastImageStyle">
         <item name="android:layout_width">@dimen/detail_cast_image_width</item>
         <item name="android:layout_height">@dimen/detail_cast_image_height</item>
+        <item name="android:scaleType">centerCrop</item>
         <item name="android:background">@color/default_image_background</item>
     </style>
     <style name="MovieCastTextHolderStyle">
