@@ -77,6 +77,8 @@
         <item name="android:layout_marginTop">@dimen/medium_margin</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
     </style>
     <style name="MovieCastImageStyle">
         <item name="android:layout_width">@dimen/detail_cast_image_width</item>
