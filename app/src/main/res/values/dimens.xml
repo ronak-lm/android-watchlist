@@ -60,6 +60,7 @@
     <dimen name="movie_video_text_margin">6dp</dimen>
 
     <!-- Detail Activity -->
+    <dimen name="detail_backdrop_width">444dp</dimen>
     <dimen name="detail_backdrop_height">250dp</dimen>
     <dimen name="detail_poster_width">100dp</dimen>
     <dimen name="detail_poster_height">150dp</dimen>

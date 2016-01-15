@@ -209,8 +209,8 @@ public class MovieActivity extends AppCompatActivity {
                                 crew.add(new Credit(person_id, name, role, profileImage));
                             }
                             // Create movie object
-                            movie = new MovieDetail(id, title, releaseDate, runtime, overview, voteAverage,
-                                    voteCount, genre, backdropImage, posterImage, videos, cast, crew);
+                            movie = new MovieDetail(id, title, "", releaseDate, runtime, overview, voteAverage,
+                                    voteCount, genre, backdropImage, posterImage, videos, new ArrayList<String>(), cast, crew);
                             // Download trailers
                             downloadVideoDetails();
                             // Update the UI

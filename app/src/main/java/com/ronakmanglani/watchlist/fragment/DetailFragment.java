@@ -55,23 +55,24 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.movie_title) TextView movieTitle;
     @Bind(R.id.movie_subtitle) TextView movieSubtitle;
     @Bind(R.id.movie_rating_holder) View movieRatingHolder;
-    @Bind(R.id.movie_rating) View movieRating;
+    @Bind(R.id.movie_rating) TextView movieRating;
 
     // Overview
     @Bind(R.id.movie_overview_holder) View movieOverviewHolder;
     @Bind(R.id.movie_overview_value) TextView movieOverviewValue;
 
-    // Crew views
+    // Crew
     @Bind(R.id.movie_crew_holder) View movieCrewHolder;
-    @Bind(R.id.movie_crew_value1) TextView movieCrewValue1;
-    @Bind(R.id.movie_crew_value2) TextView movieCrewValue2;
+    @Bind({R.id.movie_crew_value1, R.id.movie_crew_value2}) List<TextView> movieCrewValues;
+    @Bind(R.id.movie_crew_see_all) View movieCrewSeeAllButton;
 
-    // Cast views
+    // Cast
     @Bind(R.id.movie_cast_holder) View movieCastHolder;
     @Bind({R.id.movie_cast_item1, R.id.movie_cast_item2, R.id.movie_cast_item3}) List<View> movieCastItems;
     @Bind({R.id.movie_cast_image1, R.id.movie_cast_image2, R.id.movie_cast_image3}) List<NetworkImageView> movieCastImages;
     @Bind({R.id.movie_cast_name1, R.id.movie_cast_name2, R.id.movie_cast_name3}) List<TextView> movieCastNames;
     @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
+    @Bind(R.id.movie_cast_see_all) View movieCastSeeAllButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -149,13 +150,17 @@ public class DetailFragment extends Fragment {
                                 String videoID = object.getString("source");
                                 videos.add(videoID);
                             }
+
                             // Create movie object
                             movie = new MovieDetail(id, title, tagline, releaseDate, runtime, overview, voteAverage,
                                     voteCount, genre, backdropImage, posterImage, images, videos, cast, crew);
-                            // TODO: Update UI
+
+                            // Bind class to layout views
+                            onDownloadSuccessful();
+
                         } catch (Exception ex) {
                             // Show error message on parsing errors
-                            showErrorMessage();
+                            onDownloadFailed();
                         }
                     }
                 },
@@ -163,7 +168,7 @@ public class DetailFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        showErrorMessage();
+                        onDownloadFailed();
                     }
                 });
 
@@ -174,8 +179,121 @@ public class DetailFragment extends Fragment {
         VolleySingleton.getInstance(getActivity()).requestQueue.add(request);
     }
 
-    // To show error message when download or parsing failed
-    private void showErrorMessage() {
+    // Bind movie class attribute to layout views
+    private void onDownloadSuccessful() {
+
+        // Toggle visibility
+        progressCircle.setVisibility(View.GONE);
+        errorMessage.setVisibility(View.GONE);
+        movieHolder.setVisibility(View.VISIBLE);
+
+        // Set title
+        toolbar.setTitle(movie.title);
+
+        // Backdrop image
+        if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
+            int headerImageWidth = (int) getResources().getDimension(R.dimen.detail_backdrop_width);
+            backdropImage.setImageUrl(TMDBHelper.getImageURL(movie.backdropImage, headerImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+        } else {
+            backdropImageDefault.setVisibility(View.VISIBLE);
+            backdropImage.setVisibility(View.GONE);
+        }
+
+        // Basic info
+        if (movie.posterImage != null && !movie.posterImage.equals("null")) {
+            int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_detail_poster_width);
+            posterImage.setImageUrl(TMDBHelper.getImageURL(movie.posterImage, posterImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+        } else {
+            posterImageDefault.setVisibility(View.VISIBLE);
+            posterImage.setVisibility(View.GONE);
+        }
+        movieTitle.setText(movie.title);
+        movieSubtitle.setText(movie.getSubtitle());
+        if (movie.voteAverage == null || movie.voteAverage.equals("null") || movie.voteAverage.equals("0.0")) {
+            movieRatingHolder.setVisibility(View.GONE);
+        } else {
+            movieRating.setText(movie.voteAverage);
+        }
+
+        // Overview
+        if (movie.overview != null && !movie.overview.equals("null")) {
+            movieOverviewValue.setText(movie.overview);
+        } else {
+            movieOverviewHolder.setVisibility(View.GONE);
+        }
+
+        // Crew
+        if (movie.crew.size() == 0) {
+            movieCrewHolder.setVisibility(View.GONE);
+        } else if (movie.crew.size() == 1) {
+            movieCrewValues.get(1).setText(View.GONE);
+            movieCrewSeeAllButton.setVisibility(View.GONE);
+            movieCrewValues.get(0).setText(movie.crew.get(0).role + ": " + movie.crew.get(0).name);
+        } else if (movie.crew.size() >= 2) {
+            movieCrewValues.get(0).setText(movie.crew.get(0).role + ": " + movie.crew.get(0).name);
+            movieCrewValues.get(1).setText(movie.crew.get(1).role + ": " + movie.crew.get(1).name);
+            if (movie.crew.size() == 2) {
+                movieCrewSeeAllButton.setVisibility(View.GONE);
+            }
+        }
+
+        // Cast
+        if (movie.cast.size() == 0) {
+            movieCastHolder.setVisibility(View.GONE);
+        } else if (movie.cast.size() == 1) {
+            // Hide views
+            movieCastSeeAllButton.setVisibility(View.GONE);
+            movieCastItems.get(2).setVisibility(View.GONE);
+            movieCastItems.get(1).setVisibility(View.GONE);
+            int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
+            // 0
+            movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+            movieCastNames.get(0).setText(movie.cast.get(0).name);
+            movieCastRoles.get(0).setText(movie.cast.get(0).role);
+        } else if (movie.cast.size() == 2) {
+            // Hide views
+            movieCastSeeAllButton.setVisibility(View.GONE);
+            movieCastItems.get(2).setVisibility(View.GONE);
+            int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
+            // 1
+            movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+            movieCastNames.get(1).setText(movie.cast.get(1).name);
+            movieCastRoles.get(1).setText(movie.cast.get(1).role);
+            // 0
+            movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+            movieCastNames.get(0).setText(movie.cast.get(0).name);
+            movieCastRoles.get(0).setText(movie.cast.get(0).role);
+        } else if (movie.cast.size() >= 3) {
+            int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
+            // 2
+            movieCastImages.get(2).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(2).imagePath, castImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+            movieCastNames.get(2).setText(movie.cast.get(2).name);
+            movieCastRoles.get(2).setText(movie.cast.get(2).role);
+            // 1
+            movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+            movieCastNames.get(1).setText(movie.cast.get(1).name);
+            movieCastRoles.get(1).setText(movie.cast.get(1).role);
+            // 0
+            movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
+                    VolleySingleton.getInstance(getActivity()).imageLoader);
+            movieCastNames.get(0).setText(movie.cast.get(0).name);
+            movieCastRoles.get(0).setText(movie.cast.get(0).role);
+            // Hide show all button
+            if (movie.cast.size() == 3) {
+                movieCastSeeAllButton.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    // Show error message when download or parsing failed
+    private void onDownloadFailed() {
         errorMessage.setVisibility(View.VISIBLE);
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
@@ -185,17 +303,17 @@ public class DetailFragment extends Fragment {
     public void onTryAgainClicked() {
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.VISIBLE);
-        // downloadMovieDetails(id);
+        downloadMovieDetails(id);
     }
 
     @OnClick(R.id.movie_crew_see_all)
     public void onSeeAllCrewClicked() {
-
+        // TODO
     }
 
     @OnClick(R.id.movie_cast_see_all)
     public void onSeeAllCastClicked() {
-
+        // TODO
     }
 
     @Override
