@@ -140,7 +140,7 @@
                 android:layout_marginRight="@dimen/large_margin"
                 android:orientation="vertical">
                 <!-- Divider -->
-                <View android:background="@color/divider"
+                <View android:background="@color/separator"
                     android:layout_height="@dimen/movie_divider_height"
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/large_margin"
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <!-- Divider -->
-                <View android:background="@color/divider"
+                <View android:background="@color/separator"
                     android:layout_height="@dimen/movie_divider_height"
                     android:layout_width="match_parent"
                     android:layout_margin="@dimen/large_margin"/>

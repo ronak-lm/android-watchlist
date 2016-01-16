@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/detail_button_height"
+    android:background="@color/image_dark_tint"
+    android:baselineAligned="false">
+
+    <!-- Photos Button -->
+    <RelativeLayout android:id="@+id/button_photos"
+        style="@style/MovieButtonStyle">
+        <LinearLayout style="@style/MovieButtonContainerStyle">
+            <ImageView android:src="@drawable/button_photos"
+                style="@style/MovieButtonIconStyle"
+                tools:ignore="contentDescription"/>
+            <TextView android:text="@string/detail_button_photos"
+                style="@style/MovieButtonTextStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view_separator" />
+
+    <!-- Videos Button -->
+    <RelativeLayout android:id="@+id/button_videos"
+        style="@style/MovieButtonStyle">
+        <LinearLayout style="@style/MovieButtonContainerStyle">
+            <ImageView android:src="@drawable/button_videos"
+                style="@style/MovieButtonIconStyle"
+                tools:ignore="contentDescription"/>
+            <TextView android:text="@string/detail_button_videos"
+                style="@style/MovieButtonTextStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/view_separator" />
+
+    <!-- Reviews Button -->
+    <RelativeLayout android:id="@+id/button_reviews"
+        style="@style/MovieButtonStyle">
+        <LinearLayout style="@style/MovieButtonContainerStyle">
+            <ImageView android:src="@drawable/button_reviews"
+                style="@style/MovieButtonIconStyle"
+                tools:ignore="contentDescription"/>
+            <TextView android:text="@string/detail_button_reviews"
+                style="@style/MovieButtonTextStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

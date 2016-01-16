@@ -46,9 +46,39 @@
         <item name="android:textColor">@color/text_primary</item>
     </style>
 
+    <!-- Detail Activity Buttons -->
+    <style name="MovieButtonStyle">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="MovieButtonContainerStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:paddingTop">@dimen/small_margin</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="MovieButtonIconStyle">
+        <item name="android:layout_width">@dimen/detail_button_icon_size</item>
+        <item name="android:layout_height">@dimen/detail_button_icon_size</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+    <style name="MovieButtonTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/medium_margin</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/detail_button_textSize</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!-- Detail Activity See All Button -->
     <style name="MovieSeeAllHolderStyle">
-        <item name="android:layout_height">@dimen/detail_button_height</item>
+        <item name="android:layout_height">@dimen/detail_see_all_height</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginTop">@dimen/small_margin</item>
         <item name="android:orientation">horizontal</item>
