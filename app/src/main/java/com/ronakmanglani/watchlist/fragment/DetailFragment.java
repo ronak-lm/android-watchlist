@@ -252,6 +252,7 @@ public class DetailFragment extends Fragment {
         } else if (movie.cast.size() == 1) {
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 0
+            movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
@@ -266,11 +267,13 @@ public class DetailFragment extends Fragment {
         } else if (movie.cast.size() == 2) {
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 1
+            movieCastImages.get(1).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
             movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
+            movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
@@ -284,16 +287,19 @@ public class DetailFragment extends Fragment {
         } else if (movie.cast.size() >= 3) {
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 2
+            movieCastImages.get(2).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(2).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(2).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(2).setText(movie.cast.get(2).name);
             movieCastRoles.get(2).setText(movie.cast.get(2).role);
             // 1
+            movieCastImages.get(1).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
             movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
+            movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
