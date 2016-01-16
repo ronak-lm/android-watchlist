@@ -34,7 +34,7 @@ import butterknife.OnClick;
 
 public class DetailFragment extends Fragment {
 
-    // Movie associated with the activity
+    // Movie associated with the fragment
     private String id;
     private MovieDetail movie;
 
