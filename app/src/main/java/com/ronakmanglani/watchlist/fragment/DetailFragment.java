@@ -2,6 +2,7 @@ package com.ronakmanglani.watchlist.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,8 +79,15 @@ public class DetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, v);
 
-        // Set loading as title
+        // Setup toolbar
         toolbar.setTitle(R.string.loading);
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.button_back));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
 
         // Download movie details
         id = getArguments().getString(DetailActivity.MOVIE_ID);
