@@ -72,6 +72,7 @@ public class DetailFragment extends Fragment {
     @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
     @Bind(R.id.movie_cast_see_all) View movieCastSeeAllButton;
 
+    // Create fragment view
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
@@ -312,7 +313,6 @@ public class DetailFragment extends Fragment {
             }
         }
     }
-
     // Show error message when download or parsing failed
     private void onDownloadFailed() {
         errorMessage.setVisibility(View.VISIBLE);
@@ -320,6 +320,7 @@ public class DetailFragment extends Fragment {
         movieHolder.setVisibility(View.GONE);
     }
 
+    // Try again button if loading failed
     @OnClick(R.id.try_again)
     public void onTryAgainClicked() {
         errorMessage.setVisibility(View.GONE);
@@ -327,16 +328,29 @@ public class DetailFragment extends Fragment {
         downloadMovieDetails(id);
     }
 
+    // Cast and crew click events
     @OnClick(R.id.movie_crew_see_all)
     public void onSeeAllCrewClicked() {
         // TODO
     }
-
     @OnClick(R.id.movie_cast_see_all)
     public void onSeeAllCastClicked() {
         // TODO
     }
+    @OnClick(R.id.movie_cast_item1)
+    public void onFirstCastItemClicked() {
+        // TODO
+    }
+    @OnClick(R.id.movie_cast_item2)
+    public void onSecondCastItemClicked() {
+        // TODO
+    }
+    @OnClick(R.id.movie_cast_item3)
+    public void onThirdCastItemClicked() {
+        // TODO
+    }
 
+    // Unbind layout views on destroy of fragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
