@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/detail_backdrop_height">
+
+    <!-- Backdrop Image -->
+    <include layout="@layout/view_detail_backdrop" />
+
+    <!-- Buttons -->
+    <include layout="@layout/view_detail_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_button_height"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

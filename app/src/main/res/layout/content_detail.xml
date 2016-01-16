@@ -20,7 +20,7 @@
             android:visibility="gone">
 
             <!-- Header Image -->
-            <include layout="@layout/view_detail_backdrop" />
+            <include layout="@layout/view_detail_header" />
 
             <!-- Section 1: Basic Info -->
             <include layout="@layout/view_detail_info" />
