@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.android.volley.toolbox.NetworkImageView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/backdrop_image"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/detail_backdrop_height"
-    android:scaleType="centerCrop"
-    android:background="@color/default_image_background" />
+    android:layout_height="@dimen/detail_backdrop_height">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/backdrop_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/default_image_background" />
+
+    <include layout="@layout/view_detail_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_button_height"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
