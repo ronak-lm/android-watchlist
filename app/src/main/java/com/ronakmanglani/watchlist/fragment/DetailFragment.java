@@ -45,10 +45,9 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.movie_detail_holder) View movieHolder;
 
     // Image views
-    @Bind(R.id.backdrop_image_default) ImageView backdropImageDefault;
     @Bind(R.id.backdrop_image) NetworkImageView backdropImage;
-    @Bind(R.id.poster_image_default) ImageView posterImageDefault;
     @Bind(R.id.poster_image) NetworkImageView posterImage;
+    @Bind(R.id.poster_image_default) ImageView posterImageDefault;
 
     // Basic info
     @Bind(R.id.movie_title) TextView movieTitle;
@@ -196,7 +195,6 @@ public class DetailFragment extends Fragment {
             backdropImage.setImageUrl(TMDBHelper.getImageURL(movie.backdropImage, headerImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
         } else {
-            backdropImageDefault.setVisibility(View.VISIBLE);
             backdropImage.setVisibility(View.GONE);
         }
 
