@@ -356,4 +356,11 @@ public class DetailFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+    // Cancel any pending network requests when fragment stops
+    @Override
+    public void onStop() {
+        super.onStop();
+        VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
+    }
 }
