@@ -45,11 +45,14 @@ public class MovieDetail {
 
     public String getSubtitle() {
         try {
-            if (releaseDate.equals("null") && runtime.equals("null")) {
+            boolean isReleaseDateNull = (releaseDate == null || releaseDate.equals("null"));
+            boolean isRuntimeNull = (runtime == null || runtime.equals("null") || runtime.equals("0"));
+
+            if (isReleaseDateNull && isRuntimeNull) {
                 return "";
-            } else if (releaseDate.equals("null")) {
+            } else if (isReleaseDateNull) {
                 return runtime + " mins";
-            } else if (runtime.equals("null")) {
+            } else if (isRuntimeNull) {
                 return getFormattedDate();
             } else {
                 return getFormattedDate() + "\n" + runtime + " mins";
