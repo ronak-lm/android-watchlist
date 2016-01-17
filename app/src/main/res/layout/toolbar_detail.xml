@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar_text_holder"
+    android:layout_width="wrap_content"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_marginRight="@dimen/large_margin"
+    android:layout_marginEnd="@dimen/large_margin"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/detail_toolbar_title_textSize"
+        android:textColor="@android:color/white"
+        tools:text="Movie Name"/>
+
+    <TextView android:id="@+id/toolbar_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/detail_toolbar_subtitle_textSize"
+        android:textColor="@android:color/white"
+        tools:text="Tagline"/>
+
+</LinearLayout>

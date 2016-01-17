@@ -39,8 +39,13 @@ public class DetailFragment extends Fragment {
     private String id;
     private MovieDetail movie;
 
-    // Main views
+    // Toolbar
     @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.toolbar_text_holder) View toolbarTextHolder;
+    @Bind(R.id.toolbar_title) TextView toolbarTitle;
+    @Bind(R.id.toolbar_subtitle) TextView toolbarSubtitle;
+
+    // Main views
     @Bind(R.id.progress_circle) View progressCircle;
     @Bind(R.id.error_message) View errorMessage;
     @Bind(R.id.movie_detail_holder) View movieHolder;
@@ -196,7 +201,14 @@ public class DetailFragment extends Fragment {
         movieHolder.setVisibility(View.VISIBLE);
 
         // Set title
-        toolbar.setTitle(movie.title);
+        if (movie.tagline == null || movie.tagline.equals("null") || movie.tagline.equals("")) {
+            toolbar.setTitle(movie.title);
+        } else {
+            toolbar.setTitle("");
+            toolbarTextHolder.setVisibility(View.VISIBLE);
+            toolbarTitle.setText(movie.title);
+            toolbarSubtitle.setText(movie.tagline);
+        }
 
         // Backdrop image
         if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
