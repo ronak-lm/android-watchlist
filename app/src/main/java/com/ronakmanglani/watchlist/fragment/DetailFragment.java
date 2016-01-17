@@ -86,7 +86,7 @@ public class DetailFragment extends Fragment {
 
         // Setup toolbar
         toolbar.setTitle(R.string.loading);
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.button_back));
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
