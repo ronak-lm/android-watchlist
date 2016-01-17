@@ -53,7 +53,7 @@
             android:layout_toEndOf="@+id/movie_poster_holder"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textSize="@dimen/movie_title_textSize"
+            android:textSize="@dimen/movie_detail_title_textSize"
             android:textColor="@color/text_primary"
             tools:text="My Awesome Movie Title"/>
 

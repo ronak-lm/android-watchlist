@@ -38,26 +38,11 @@
     <integer name="movie_year_maxLines">1</integer>
 
     <!-- Movie Detail Item in RecyclerView -->
+    <dimen name="movie_detail_title_textSize">20sp</dimen>
     <dimen name="movie_detail_card_height">200dp</dimen>
     <dimen name="movie_detail_poster_width">120dp</dimen>
     <dimen name="movie_detail_year_textSize">14sp</dimen>
     <dimen name="movie_detail_overview_textSize">15sp</dimen>
-
-    <!-- Movie Detail Activity -->
-    <dimen name="movie_header_width">444dp</dimen>
-    <dimen name="movie_header_height">250dp</dimen>
-    <dimen name="movie_activity_paddingBottom">32dp</dimen>
-    <dimen name="movie_poster_width">100dp</dimen>
-    <dimen name="movie_poster_height">150dp</dimen>
-    <dimen name="movie_title_textSize">20sp</dimen>
-    <dimen name="movie_divider_height">1dp</dimen>
-    <dimen name="movie_plot_textSize">16sp</dimen>
-    <dimen name="movie_rating1_textSize">30sp</dimen>
-    <dimen name="movie_rating2_textSize">12sp</dimen>
-    <dimen name="movie_video_grid_height">158dp</dimen>
-    <dimen name="movie_video_card_height">150dp</dimen>
-    <dimen name="movie_video_card_width">200dp</dimen>
-    <dimen name="movie_video_text_margin">6dp</dimen>
 
     <!-- Detail Activity -->
     <dimen name="detail_toolbar_title_textSize">18sp</dimen>

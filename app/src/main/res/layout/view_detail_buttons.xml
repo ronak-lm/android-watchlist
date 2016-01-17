@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/detail_button_height"
-    android:background="@color/image_dark_tint"
+    android:background="@color/button_background"
     android:baselineAligned="false">
 
     <!-- Photos Button -->

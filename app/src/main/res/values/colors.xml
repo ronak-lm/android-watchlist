@@ -16,8 +16,7 @@
     <!-- Other Colors -->
     <color name="default_image_background">#d8d8d8</color>
     <color name="card_background">#fafafa</color>
-    <color name="image_tint">#32000000</color>
-    <color name="image_dark_tint">#c8000000</color>
+    <color name="button_background">#c8000000</color>
     <color name="separator">#9e9e9e</color>
 
 </resources>
