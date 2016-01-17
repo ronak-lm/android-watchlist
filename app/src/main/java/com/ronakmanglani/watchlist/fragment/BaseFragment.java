@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -122,23 +123,6 @@ public abstract class BaseFragment extends Fragment {
             }
         });
 
-        // Setup click of "Try Again" button on error screen
-        errorMessage.findViewById(R.id.try_again).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Hide all views
-                errorMessage.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.GONE);
-                swipeRefreshLayout.setRefreshing(false);
-                swipeRefreshLayout.setVisibility(View.GONE);
-                // Show progress circle
-                progressCircle.setVisibility(View.VISIBLE);
-                // Try to download the data again
-                pageToDownload = 1;
-                downloadMoviesList();
-            }
-        });
-
         // Get the movies list
         if (savedInstanceState == null) {
             downloadMoviesList();
@@ -184,13 +168,6 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    // Cancel any pending network requests when fragment stops
-    @Override
-    public void onStop() {
-        super.onStop();
-        VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
-    }
-
     // Download JSON data from TMDB
     private void downloadMoviesList() {
         // Select which URL to download
@@ -233,20 +210,7 @@ public abstract class BaseFragment extends Fragment {
                             }
 
                             // Update UI
-                            errorMessage.setVisibility(View.GONE);
-                            progressCircle.setVisibility(View.GONE);
-                            recyclerView.setVisibility(View.VISIBLE);
-                            swipeRefreshLayout.setVisibility(View.VISIBLE);
-                            swipeRefreshLayout.setRefreshing(true);
-                            swipeRefreshLayout.setEnabled(false);
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    swipeRefreshLayout.setRefreshing(false);
-                                    swipeRefreshLayout.setEnabled(true);
-                                }
-                            }, 1000);
-                            adapter.notifyDataSetChanged();
+                            onDownloadSuccessful();
 
                             // Set next page for download
                             pageToDownload++;
@@ -254,7 +218,7 @@ public abstract class BaseFragment extends Fragment {
 
                         } catch (Exception ex) {
                             // To show error message on parsing errors
-                            showErrorMessage();
+                            onDownloadFailed();
                         }
                     }
                 },
@@ -262,7 +226,7 @@ public abstract class BaseFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        showErrorMessage();
+                        onDownloadFailed();
                     }
                 });
 
@@ -272,14 +236,45 @@ public abstract class BaseFragment extends Fragment {
         // Add download request to queue
         VolleySingleton.getInstance(context).requestQueue.add(request);
     }
+    // Toggle visibility of layout views
+    private void onDownloadSuccessful() {
+        errorMessage.setVisibility(View.GONE);
+        progressCircle.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setEnabled(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setEnabled(true);
+            }
+        }, 1000);
+        adapter.notifyDataSetChanged();
+    }
     // Show error message when download failed
-    private void showErrorMessage() {
+    private void onDownloadFailed() {
         adapter.movieList.clear();
         progressCircle.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setVisibility(View.GONE);
         errorMessage.setVisibility(View.VISIBLE);
+    }
+    // Try again button if loading failed
+    @OnClick(R.id.try_again)
+    public void onTryAgainClicked() {
+        // Hide all views
+        errorMessage.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setVisibility(View.GONE);
+        // Show progress circle
+        progressCircle.setVisibility(View.VISIBLE);
+        // Try to download the data again
+        pageToDownload = 1;
+        downloadMoviesList();
     }
 
     // Respond to clicks of items in RecyclerView
@@ -291,4 +286,17 @@ public abstract class BaseFragment extends Fragment {
             startActivity(intent);
         }
     };
+
+    // Unbind layout views on destroy of fragment
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+    // Cancel any pending network requests when fragment stops
+    @Override
+    public void onStop() {
+        super.onStop();
+        VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
+    }
 }

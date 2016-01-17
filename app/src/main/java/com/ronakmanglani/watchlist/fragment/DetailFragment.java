@@ -213,7 +213,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         // Add download request to queue
         VolleySingleton.getInstance(getActivity()).requestQueue.add(request);
     }
-    // Bind movie class attribute to layout views
+    // Bind movie class attributes to layout views
     private void onDownloadSuccessful() {
 
         // Toggle visibility

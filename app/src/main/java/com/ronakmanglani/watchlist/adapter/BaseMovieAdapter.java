@@ -22,6 +22,9 @@ import com.ronakmanglani.watchlist.widget.AutoResizeTextView;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;                                    // Context of calling activity
@@ -166,24 +169,17 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     // ViewHolder for the layout
     public class MovieBasicViewHolder extends RecyclerView.ViewHolder {
-        final CardView cardView;
-        final ImageView defaultImageView;
-        final NetworkImageView imageView;
-        final TextView movieName;
-        final TextView movieRating;
-        final ImageView movieRatingIcon;
-        final TextView releaseYear;
+        @Bind(R.id.movie_card) CardView cardView;
+        @Bind(R.id.movie_poster_default) ImageView defaultImageView;
+        @Bind(R.id.movie_poster) NetworkImageView imageView;
+        @Bind(R.id.movie_title) TextView movieName;
+        @Bind(R.id.movie_year) TextView releaseYear;
+        @Bind(R.id.movie_rating) TextView movieRating;
+        @Bind(R.id.rating_icon) ImageView movieRatingIcon;
 
-        public MovieBasicViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
-        {
+        public MovieBasicViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener) {
             super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.movie_card);
-            defaultImageView = (ImageView) itemView.findViewById(R.id.movie_poster_default);
-            imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
-            movieName = (TextView) itemView.findViewById(R.id.movie_title);
-            releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
-            movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
-            movieRatingIcon = (ImageView) itemView.findViewById(R.id.rating_icon);
+            ButterKnife.bind(this, itemView);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -196,26 +192,18 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     // ViewHolder for the layout
     public class MovieDetailViewHolder extends RecyclerView.ViewHolder {
-        final CardView cardView;
-        final ImageView defaultImageView;
-        final NetworkImageView imageView;
-        final TextView movieName;
-        final TextView releaseYear;
-        final AutoResizeTextView overview;
-        final TextView movieRating;
-        final ImageView movieRatingIcon;
+        @Bind(R.id.movie_card) CardView cardView;
+        @Bind(R.id.movie_poster_default) ImageView defaultImageView;
+        @Bind(R.id.movie_poster) NetworkImageView imageView;
+        @Bind(R.id.movie_title) TextView movieName;
+        @Bind(R.id.movie_year) TextView releaseYear;
+        @Bind(R.id.movie_overview) AutoResizeTextView overview;
+        @Bind(R.id.movie_rating) TextView movieRating;
+        @Bind(R.id.rating_icon) ImageView movieRatingIcon;
 
-        public MovieDetailViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener)
-        {
+        public MovieDetailViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener) {
             super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.movie_card);
-            defaultImageView = (ImageView) itemView.findViewById(R.id.movie_poster_default);
-            imageView = (NetworkImageView) itemView.findViewById(R.id.movie_poster);
-            movieName = (TextView) itemView.findViewById(R.id.movie_title);
-            releaseYear = (TextView) itemView.findViewById(R.id.movie_year);
-            overview = (AutoResizeTextView) itemView.findViewById(R.id.movie_overview);
-            movieRating = (TextView) itemView.findViewById(R.id.movie_rating);
-            movieRatingIcon = (ImageView) itemView.findViewById(R.id.rating_icon);
+            ButterKnife.bind(this, itemView);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
