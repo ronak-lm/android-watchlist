@@ -1,10 +1,13 @@
 package com.ronakmanglani.watchlist.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MovieDetail {
+public class MovieDetail implements Parcelable {
 
     // Attributes
     public String id;
@@ -44,6 +47,33 @@ public class MovieDetail {
         this.cast = cast;
         this.crew = crew;
     }
+    public MovieDetail(Parcel in) {
+        this.id = in.readString();
+        this.title = in.readString();
+        this.tagline = in.readString();
+        this.releaseDate = in.readString();
+        this.runtime = in.readString();
+        this.overview = in.readString();
+        this.voteAverage = in.readString();
+        this.voteCount = in.readString();
+        this.backdropImage = in.readString();
+        this.posterImage = in.readString();
+        in.readStringList(genre);
+        in.readStringList(images);
+        in.readStringList(videos);
+        in.readList(cast, Credit.class.getClassLoader());
+        in.readList(crew, Credit.class.getClassLoader());
+    }
+
+    // Parcelable Creator
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public MovieDetail createFromParcel(Parcel in) {
+            return new MovieDetail(in);
+        }
+        public MovieDetail[] newArray(int size) {
+            return new MovieDetail[size];
+        }
+    };
 
     // Helper methods
     public String getSubtitle() {
@@ -72,5 +102,29 @@ public class MovieDetail {
         } catch (Exception ex) { }
         SimpleDateFormat newFormat = new SimpleDateFormat("dd MMMM yyyy");
         return newFormat.format(date);
+    }
+
+    // Parcelling methods
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeString(id);
+        out.writeString(title);
+        out.writeString(tagline);
+        out.writeString(releaseDate);
+        out.writeString(runtime);
+        out.writeString(overview);
+        out.writeString(voteAverage);
+        out.writeString(voteCount);
+        out.writeString(backdropImage);
+        out.writeString(posterImage);
+        out.writeStringList(genre);
+        out.writeStringList(images);
+        out.writeStringList(videos);
+        out.writeList(cast);
+        out.writeList(crew);
+    }
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

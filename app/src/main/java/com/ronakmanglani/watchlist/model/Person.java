@@ -1,6 +1,9 @@
 package com.ronakmanglani.watchlist.model;
 
-public class Person {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Person implements Parcelable {
 
     // Attributes
     public String id;
@@ -23,5 +26,42 @@ public class Person {
         this.biography = biography;
         this.homepage = homepage;
         this.imagePath = imagePath;
+    }
+    public Person(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.placeOfBirth = in.readString();
+        this.birthDay = in.readString();
+        this.deathDay = in.readString();
+        this.biography = in.readString();
+        this.homepage = in.readString();
+        this.imagePath = in.readString();
+    }
+
+    // Parcelable Creator
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
+        }
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
+
+    // Parcelling methods
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeString(id);
+        out.writeString(name);
+        out.writeString(placeOfBirth);
+        out.writeString(birthDay);
+        out.writeString(deathDay);
+        out.writeString(biography);
+        out.writeString(homepage);
+        out.writeString(imagePath);
+    }
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }

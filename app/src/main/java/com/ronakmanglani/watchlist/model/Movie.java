@@ -24,16 +24,6 @@ public class Movie implements Parcelable {
         this.posterImage = posterImage;
         this.backdropImage = backdropImage;
     }
-
-    // Parcelling methods
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
     public Movie(Parcel in) {
         this.id = in.readString();
         this.title = in.readString();
@@ -43,6 +33,18 @@ public class Movie implements Parcelable {
         this.posterImage = in.readString();
         this.backdropImage = in.readString();
     }
+
+    // Parcelable Creator
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
+
+    // Parcelling methods
     @Override
     public void writeToParcel(Parcel out, int i) {
         out.writeString(id);
