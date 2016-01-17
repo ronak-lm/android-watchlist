@@ -363,6 +363,8 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         errorMessage.setVisibility(View.VISIBLE);
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
+        toolbarTextHolder.setVisibility(View.GONE);
+        toolbar.setTitle("");
     }
     // Try again button if loading failed
     @OnClick(R.id.try_again)
