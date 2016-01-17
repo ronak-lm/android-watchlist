@@ -54,6 +54,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
 
     // Image views
     @Bind(R.id.backdrop_image) NetworkImageView backdropImage;
+    @Bind(R.id.backdrop_image_default) ImageView backdropImageDefault;
     @Bind(R.id.poster_image) NetworkImageView posterImage;
     @Bind(R.id.poster_image_default) ImageView posterImageDefault;
 
@@ -234,12 +235,13 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         toolbar.inflateMenu(R.menu.menu_detail);
 
         // Backdrop image
-        if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
+        if (movie.backdropImage != null && !movie.backdropImage.equals("null") && !movie.backdropImage.equals("")) {
             int headerImageWidth = (int) getResources().getDimension(R.dimen.detail_backdrop_width);
             backdropImage.setImageUrl(TMDBHelper.getImageURL(movie.backdropImage, headerImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
         } else {
             backdropImage.setVisibility(View.GONE);
+            backdropImageDefault.setVisibility(View.VISIBLE);
         }
 
         // Basic info
