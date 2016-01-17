@@ -2,6 +2,7 @@ package com.ronakmanglani.watchlist.model;
 
 public class Person {
 
+    // Attributes
     public String id;
     public String name;
     public String placeOfBirth;
@@ -11,6 +12,7 @@ public class Person {
     public String homepage;
     public String imagePath;
 
+    // Constructor
     public Person(String id, String name, String placeOfBirth, String birthDay, String deathDay,
                   String biography, String homepage, String imagePath) {
         this.id = id;

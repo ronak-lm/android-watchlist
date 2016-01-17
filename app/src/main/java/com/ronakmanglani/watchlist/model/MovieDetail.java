@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class MovieDetail {
 
+    // Attributes
     public String id;
     public String title;
     public String tagline;
@@ -22,6 +23,7 @@ public class MovieDetail {
     public ArrayList<Credit> cast;
     public ArrayList<Credit> crew;
 
+    // Constructors
     public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime,
                        String overview, String voteAverage, String voteCount, ArrayList<String> genre,
                        String backdropImage, String posterImage, ArrayList<String> images,
@@ -43,6 +45,7 @@ public class MovieDetail {
         this.crew = crew;
     }
 
+    // Helper methods
     public String getSubtitle() {
         try {
             boolean isReleaseDateNull = (releaseDate == null || releaseDate.equals("null"));

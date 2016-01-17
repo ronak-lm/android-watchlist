@@ -2,7 +2,7 @@ package com.ronakmanglani.watchlist.model;
 
 public class Video {
 
-    // Youtube Video ID
+    // Attributes
     public String title;
     public String youtubeID;
     public String imageURL;
