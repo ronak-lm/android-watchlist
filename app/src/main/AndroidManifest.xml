@@ -22,10 +22,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MovieActivity"
-            android:label="@string/loading"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

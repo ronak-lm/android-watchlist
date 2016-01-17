@@ -20,7 +20,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.DetailActivity;
-import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.adapter.BaseMovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
