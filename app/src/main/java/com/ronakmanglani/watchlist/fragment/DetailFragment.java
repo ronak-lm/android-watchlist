@@ -1,11 +1,13 @@
 package com.ronakmanglani.watchlist.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,7 +35,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DetailFragment extends Fragment {
+public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
 
     // Movie associated with the fragment
     private String id;
@@ -93,12 +95,31 @@ public class DetailFragment extends Fragment {
                 getActivity().finish();
             }
         });
+        toolbar.setOnMenuItemClickListener(this);
 
         // Download movie details
         id = getArguments().getString(DetailActivity.MOVIE_ID);
         downloadMovieDetails(id);
 
         return v;
+    }
+
+    // Toolbar menu click
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.action_share) {
+            if (movie != null) {
+                String shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
+                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.action_share_using)));
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Download Movie Detail from TMDB
@@ -191,7 +212,6 @@ public class DetailFragment extends Fragment {
         // Add download request to queue
         VolleySingleton.getInstance(getActivity()).requestQueue.add(request);
     }
-
     // Bind movie class attribute to layout views
     private void onDownloadSuccessful() {
 
@@ -200,7 +220,7 @@ public class DetailFragment extends Fragment {
         errorMessage.setVisibility(View.GONE);
         movieHolder.setVisibility(View.VISIBLE);
 
-        // Set title
+        // Set title and tagline
         if (movie.tagline == null || movie.tagline.equals("null") || movie.tagline.equals("")) {
             toolbar.setTitle(movie.title);
         } else {
@@ -209,6 +229,9 @@ public class DetailFragment extends Fragment {
             toolbarTitle.setText(movie.title);
             toolbarSubtitle.setText(movie.tagline);
         }
+
+        // Add share button to toolbar
+        toolbar.inflateMenu(R.menu.menu_detail);
 
         // Backdrop image
         if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
@@ -339,7 +362,6 @@ public class DetailFragment extends Fragment {
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
     }
-
     // Try again button if loading failed
     @OnClick(R.id.try_again)
     public void onTryAgainClicked() {
@@ -376,11 +398,12 @@ public class DetailFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
     // Cancel any pending network requests when fragment stops
     @Override
     public void onStop() {
         super.onStop();
         VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
     }
+
+
 }

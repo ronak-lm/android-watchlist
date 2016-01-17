@@ -123,7 +123,7 @@ public class MovieActivity extends AppCompatActivity {
     // Toolbar menu functions
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_movie, menu);
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
     @Override
