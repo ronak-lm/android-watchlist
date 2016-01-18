@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -36,6 +37,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
+
+    // Keys for savedInstanceState
+    private static final String MOVIE_ID_KEY = "movie_id";
+    private static final String MOVIE_OBJECTS_KEY = "movie_object";
 
     // Movie associated with the fragment
     private String id;
@@ -98,11 +103,27 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         });
         toolbar.setOnMenuItemClickListener(this);
 
-        // Download movie details
-        id = getArguments().getString(DetailActivity.MOVIE_ID);
-        downloadMovieDetails(id);
+        // Download movie details if new instance, else restore from saved instance
+        if (savedInstanceState == null || !(savedInstanceState.containsKey("movie_id") && savedInstanceState.containsKey("movie_object"))) {
+            id = getArguments().getString(DetailActivity.MOVIE_ID);
+            downloadMovieDetails(id);
+        } else {
+            id = savedInstanceState.getString(MOVIE_ID_KEY);
+            movie = savedInstanceState.getParcelable(MOVIE_OBJECTS_KEY);
+            onDownloadSuccessful();
+        }
 
         return v;
+    }
+
+    // Persist changes when fragment is destroyed
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (movie != null && id != null) {
+            outState.putString(MOVIE_ID_KEY, id);
+            outState.putParcelable(MOVIE_OBJECTS_KEY, movie);
+        }
     }
 
     // Toolbar menu click
