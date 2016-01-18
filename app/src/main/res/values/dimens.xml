@@ -52,7 +52,6 @@
     <dimen name="detail_poster_width">100dp</dimen>
     <dimen name="detail_poster_height">150dp</dimen>
     <dimen name="detail_title_textSize">20sp</dimen>
-    <dimen name="detail_vote_icon_size">18dp</dimen>
     <dimen name="detail_vote_textSize">12sp</dimen>
     <dimen name="detail_button_height">65dp</dimen>
     <dimen name="detail_button_icon_size">22dp</dimen>
