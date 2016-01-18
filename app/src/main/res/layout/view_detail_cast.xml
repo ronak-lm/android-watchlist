@@ -84,7 +84,7 @@
             <!-- Role -->
             <TextView android:id="@+id/movie_cast_role3"
                 style="@style/MovieCastRoleStyle"
-                tools:text="as Spiderman"/>
+                tools:text="as Spider-Man"/>
         </LinearLayout>
     </LinearLayout>
 

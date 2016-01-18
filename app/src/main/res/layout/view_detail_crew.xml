@@ -30,12 +30,12 @@
 
     <!-- Crew Value 1 -->
     <TextView android:id="@+id/movie_crew_value1"
-        style="@style/MovieItemValueStyle"
+        style="@style/MovieCrewItemValueStyle"
         tools:text="Director: Christopher Nolan" />
 
     <!-- Crew Value 2 -->
     <TextView android:id="@+id/movie_crew_value2"
-        style="@style/MovieItemValueStyle"
+        style="@style/MovieCrewItemValueStyle"
         tools:text="Writer: Christopher Nolan" />
 
     <!-- See All Button -->
