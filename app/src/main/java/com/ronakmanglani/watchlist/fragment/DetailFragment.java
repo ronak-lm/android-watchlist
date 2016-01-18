@@ -68,6 +68,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     @Bind(R.id.movie_subtitle) TextView movieSubtitle;
     @Bind(R.id.movie_rating_holder) View movieRatingHolder;
     @Bind(R.id.movie_rating) TextView movieRating;
+    @Bind(R.id.movie_vote_count) TextView movieVoteCount;
 
     // Overview
     @Bind(R.id.movie_overview_holder) View movieOverviewHolder;
@@ -280,6 +281,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
             movieRatingHolder.setVisibility(View.GONE);
         } else {
             movieRating.setText(movie.voteAverage);
+            movieVoteCount.setText(movie.voteCount + " votes");
         }
 
         // Overview

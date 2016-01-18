@@ -13,6 +13,7 @@
         android:layout_width="@dimen/detail_poster_width"
         android:layout_height="@dimen/detail_poster_height">
 
+        <!-- Default Image -->
         <ImageView android:id="@+id/poster_image_default"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,6 +22,7 @@
             android:visibility="gone"
             tools:ignore="contentDescription" />
 
+        <!-- Poster Image -->
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/poster_image"
             android:layout_width="match_parent"
@@ -42,6 +44,8 @@
         <TextView android:id="@+id/movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/detail_title_textSize"
             tools:text="My Awesome Movie Title"/>
@@ -53,25 +57,35 @@
             android:textColor="@color/text_chrome"
             tools:text="01 January 2016\n120 mins"/>
 
-        <!-- Average rating -->
+        <!-- Rating Area -->
         <LinearLayout android:id="@+id/movie_rating_holder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/large_margin"
+            android:orientation="vertical">
 
+            <!-- Average Rating -->
             <TextView android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/detail_rating1_textSize"
-                android:textColor="@color/text_primary"
-                tools:text="8.67"/>
+                android:background="@drawable/background_rating"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                tools:text="8.76"/>
 
-            <TextView
+            <!-- Vote Count -->
+            <TextView android:id="@+id/movie_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_rating_outOf"
-                android:textSize="@dimen/detail_rating2_textSize"
-                android:textColor="@color/text_primary"/>
+                android:layout_marginTop="@dimen/small_margin"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:textSize="@dimen/detail_vote_textSize"
+                android:textColor="@color/text_primary"
+                android:drawableLeft="@drawable/icon_votes"
+                android:drawableStart="@drawable/icon_votes"
+                android:drawablePadding="@dimen/small_margin"
+                tools:text="256 votes"/>
 
         </LinearLayout>
 

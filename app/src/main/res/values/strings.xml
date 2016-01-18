@@ -27,7 +27,6 @@
     <string name="loading">Loading&#8230;</string>
 
     <!-- Movie Detail Activity -->
-    <string name="detail_rating_outOf">/10</string>
     <string name="detail_header_overview">OVERVIEW</string>
     <string name="detail_button_photos">PHOTOS</string>
     <string name="detail_button_videos">VIDEOS</string>

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <!-- Details Area -->
@@ -13,7 +14,8 @@
         android:paddingBottom="@dimen/medium_margin"
         android:clipToPadding="false"
         android:visibility="gone"
-        app:layout_scrollFlags="scroll">
+        app:layout_scrollFlags="scroll"
+        tools:visibility="visible">
 
         <LinearLayout android:orientation="vertical"
             android:layout_width="match_parent"
