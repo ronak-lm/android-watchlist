@@ -18,7 +18,6 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
     <!-- Detail Activity Buttons -->
     <style name="MovieButtonStyle">
         <item name="android:layout_weight">1</item>
