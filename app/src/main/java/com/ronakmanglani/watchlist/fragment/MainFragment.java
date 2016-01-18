@@ -77,6 +77,28 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
         return v;
     }
 
+    // Respond to clicks of toolbar menu
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_search:
+                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_about:
+                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
+                return true;
+            default: return false;
+        }
+    }
+
+    // Save fragment state
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("toolbar_title", toolbar.getTitle().toString());
+    }
+
     // Respond to selection of navigation drawer items
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -138,27 +160,4 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
         editor.putInt(LAST_SELECTION_KEY, position);
         editor.apply();
     }
-
-    // Save fragment state
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("toolbar_title", toolbar.getTitle().toString());
-    }
-
-    // Respond to clicks of toolbar menu
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_search:
-                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.action_about:
-                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                return true;
-            default: return false;
-        }
-    }
-
 }

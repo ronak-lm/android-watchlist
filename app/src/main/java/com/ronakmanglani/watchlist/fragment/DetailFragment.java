@@ -408,6 +408,4 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         super.onStop();
         VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
     }
-
-
 }
