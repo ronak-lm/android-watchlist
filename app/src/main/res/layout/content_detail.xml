@@ -7,17 +7,17 @@
 
     <!-- Details Area -->
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/movie_detail_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/medium_margin"
         android:clipToPadding="false"
+        android:visibility="gone"
         app:layout_scrollFlags="scroll">
 
-        <LinearLayout android:id="@+id/movie_detail_holder"
+        <LinearLayout android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
             <!-- Header Image -->
             <include layout="@layout/view_detail_header" />
