@@ -31,7 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.OnItemClickListener {
 
     private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
 
@@ -65,7 +65,7 @@ public abstract class BaseFragment extends Fragment {
         pageToDownload = 1;
 
         // Setup layout manager and adapter
-        adapter = new BaseMovieAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
+        adapter = new BaseMovieAdapter(context, this, isDetailedViewEnabled(), getSpanLocation());
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
         if (isDetailedViewEnabled()) {
             layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -175,7 +175,7 @@ public abstract class BaseFragment extends Fragment {
 
         // Create new adapter if it's null
         if (adapter == null) {
-            adapter = new BaseMovieAdapter(context, onClickListener, isDetailedViewEnabled(), getSpanLocation());
+            adapter = new BaseMovieAdapter(context, this, isDetailedViewEnabled(), getSpanLocation());
             recyclerView.setAdapter(adapter);
         }
 
@@ -246,7 +246,6 @@ public abstract class BaseFragment extends Fragment {
         swipeRefreshLayout.setEnabled(true);
         adapter.notifyDataSetChanged();
     }
-
     // Show error message when download failed
     private void onDownloadFailed() {
         adapter.movieList.clear();
@@ -272,14 +271,12 @@ public abstract class BaseFragment extends Fragment {
     }
 
     // Respond to clicks of items in RecyclerView
-    BaseMovieAdapter.OnItemClickListener onClickListener = new BaseMovieAdapter.OnItemClickListener() {
-        @Override
-        public void onCardClicked(int position) {
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra(DetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
-            startActivity(intent);
-        }
-    };
+    @Override
+    public void onCardClicked(int position) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(DetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
+        startActivity(intent);
+    }
 
     // Unbind layout views on destroy of fragment
     @Override
