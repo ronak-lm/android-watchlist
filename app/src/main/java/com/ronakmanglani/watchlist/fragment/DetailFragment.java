@@ -324,7 +324,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
             movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
-            movieCastRoles.get(0).setText("as " + movie.cast.get(0).role);
+            movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide views
             movieCastSeeAllButton.setVisibility(View.GONE);
             movieCastItems.get(2).setVisibility(View.GONE);
@@ -339,13 +339,13 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
             movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
-            movieCastRoles.get(1).setText("as " + movie.cast.get(1).role);
+            movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
-            movieCastRoles.get(0).setText("as " + movie.cast.get(0).role);
+            movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide views
             movieCastSeeAllButton.setVisibility(View.GONE);
             movieCastItems.get(2).setVisibility(View.GONE);
@@ -359,19 +359,19 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
             movieCastImages.get(2).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(2).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(2).setText(movie.cast.get(2).name);
-            movieCastRoles.get(2).setText("as " + movie.cast.get(2).role);
+            movieCastRoles.get(2).setText(movie.cast.get(2).role);
             // 1
             movieCastImages.get(1).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
-            movieCastRoles.get(1).setText("as " + movie.cast.get(1).role);
+            movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
-            movieCastRoles.get(0).setText("as " + movie.cast.get(0).role);
+            movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide show all button
             if (movie.cast.size() == 3) {
                 int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
