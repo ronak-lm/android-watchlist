@@ -3,7 +3,6 @@ package com.ronakmanglani.watchlist.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -248,12 +247,21 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     }
     // Show error message when download failed
     private void onDownloadFailed() {
-        adapter.movieList.clear();
-        progressCircle.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.GONE);
-        swipeRefreshLayout.setRefreshing(false);
-        swipeRefreshLayout.setVisibility(View.GONE);
-        errorMessage.setVisibility(View.VISIBLE);
+        if (pageToDownload == 1) {
+            adapter.movieList.clear();
+            progressCircle.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setVisibility(View.GONE);
+            errorMessage.setVisibility(View.VISIBLE);
+        } else {
+            progressCircle.setVisibility(View.GONE);
+            errorMessage.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setRefreshing(false);
+            swipeRefreshLayout.setEnabled(true);
+        }
     }
     // Try again button if loading failed
     @OnClick(R.id.try_again)
