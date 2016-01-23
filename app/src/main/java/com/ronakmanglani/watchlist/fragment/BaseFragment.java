@@ -242,17 +242,11 @@ public abstract class BaseFragment extends Fragment {
         progressCircle.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(true);
-        swipeRefreshLayout.setEnabled(false);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-                swipeRefreshLayout.setEnabled(true);
-            }
-        }, 1000);
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(true);
         adapter.notifyDataSetChanged();
     }
+
     // Show error message when download failed
     private void onDownloadFailed() {
         adapter.movieList.clear();
