@@ -6,7 +6,7 @@
     <dimen name="small_margin">4dp</dimen>
 
     <!-- App Drawer -->
-    <dimen name="drawer_header_height">144dp</dimen>
+    <dimen name="drawer_header_height">165dp</dimen>
 
     <!-- Loading Circle -->
     <dimen name="progress_circle_width">80dp</dimen>
