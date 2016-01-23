@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <!-- Average Rating -->
             <TextView android:id="@+id/movie_rating"
@@ -71,16 +71,16 @@
                 android:background="@drawable/background_rating"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                tools:text="8.76"/>
+                tools:text="8.6"/>
 
             <!-- Vote Count -->
             <TextView android:id="@+id/movie_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginStart="@dimen/small_margin"
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
-                android:textSize="@dimen/detail_vote_textSize"
                 android:textColor="@color/text_primary"
                 android:drawableLeft="@drawable/icon_votes"
                 android:drawableStart="@drawable/icon_votes"
