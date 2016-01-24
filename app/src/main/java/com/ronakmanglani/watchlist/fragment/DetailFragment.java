@@ -191,13 +191,6 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
                                 String profileImage = object.getString("profile_path");
                                 crew.add(new Credit(person_id, name, role, profileImage));
                             }
-                            ArrayList<String> images = new ArrayList<>();
-                            JSONArray imageArray = jsonObject.getJSONObject("images").getJSONArray("backdrops");
-                            for (int i = 0; i < imageArray.length(); i++) {
-                                JSONObject object = (JSONObject) imageArray.get(i);
-                                String url = object.getString("file_path");
-                                images.add(url);
-                            }
                             ArrayList<String> videos = new ArrayList<>();
                             JSONArray videoArray = jsonObject.getJSONObject("trailers").getJSONArray("youtube");
                             for (int i = 0; i < videoArray.length(); i++) {
@@ -208,7 +201,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
 
                             // Create movie object
                             movie = new MovieDetail(id, title, tagline, releaseDate, runtime, overview, voteAverage,
-                                    voteCount, genre, backdropImage, posterImage, images, videos, cast, crew);
+                                    voteCount, genre, backdropImage, posterImage, videos, cast, crew);
 
                             // Bind class to layout views
                             onDownloadSuccessful();

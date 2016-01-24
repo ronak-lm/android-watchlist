@@ -21,16 +21,14 @@ public class MovieDetail implements Parcelable {
     public String backdropImage;
     public String posterImage;
     public ArrayList<String> genre;
-    public ArrayList<String> images;
     public ArrayList<String> videos;
     public ArrayList<Credit> cast;
     public ArrayList<Credit> crew;
 
     // Constructors
-    public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime,
-                       String overview, String voteAverage, String voteCount, ArrayList<String> genre,
-                       String backdropImage, String posterImage, ArrayList<String> images,
-                       ArrayList<String> videos, ArrayList<Credit> cast, ArrayList<Credit> crew) {
+    public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime, String overview,
+                       String voteAverage, String voteCount, ArrayList<String> genre, String backdropImage,
+                       String posterImage, ArrayList<String> videos, ArrayList<Credit> cast, ArrayList<Credit> crew) {
         this.id = id;
         this.title = title;
         this.tagline = tagline;
@@ -42,7 +40,6 @@ public class MovieDetail implements Parcelable {
         this.genre = genre;
         this.backdropImage = backdropImage;
         this.posterImage = posterImage;
-        this.images = images;
         this.videos = videos;
         this.cast = cast;
         this.crew = crew;
@@ -59,7 +56,6 @@ public class MovieDetail implements Parcelable {
         this.backdropImage = in.readString();
         this.posterImage = in.readString();
         in.readStringList(genre);
-        in.readStringList(images);
         in.readStringList(videos);
         in.readList(cast, Credit.class.getClassLoader());
         in.readList(crew, Credit.class.getClassLoader());
@@ -118,7 +114,6 @@ public class MovieDetail implements Parcelable {
         out.writeString(backdropImage);
         out.writeString(posterImage);
         out.writeStringList(genre);
-        out.writeStringList(images);
         out.writeStringList(videos);
         out.writeList(cast);
         out.writeList(crew);

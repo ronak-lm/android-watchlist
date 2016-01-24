@@ -25,7 +25,7 @@ public class TMDBHelper {
         return "http://api.themoviedb.org/3/movie/now_playing?&page=" + page + "&api_key=" + getApiKey(context);
     }
     public static String getMovieDetailLink(Context context,String id) {
-        return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getApiKey(context) + "&append_to_response=credits,images,trailers";
+        return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getApiKey(context) + "&append_to_response=credits,trailers";
     }
 
     // Get image of the given pixel size
@@ -47,6 +47,7 @@ public class TMDBHelper {
         }
     }
 
+    // URL to share the movie
     public static String getMovieShareURL(String id) {
         return "https://www.themoviedb.org/movie/" + id;
     }
