@@ -1,6 +1,8 @@
 package com.ronakmanglani.watchlist.fragment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -24,6 +26,7 @@ import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
+import com.ronakmanglani.watchlist.util.YoutubeHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,6 +48,9 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     private String id;
     private MovieDetail movie;
 
+    // Flag for trailers
+    private boolean isVideoAvailable = false;
+
     // Toolbar
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.toolbar_text_holder) View toolbarTextHolder;
@@ -59,6 +65,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     // Image views
     @Bind(R.id.backdrop_image) NetworkImageView backdropImage;
     @Bind(R.id.backdrop_image_default) ImageView backdropImageDefault;
+    @Bind(R.id.backdrop_play_button) ImageView backdropPlayButton;
     @Bind(R.id.poster_image) NetworkImageView posterImage;
     @Bind(R.id.poster_image_default) ImageView posterImageDefault;
 
@@ -131,7 +138,12 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.action_share) {
             if (movie != null) {
-                String shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
+                String shareText;
+                if (movie.videos.size() == 0) {
+                    shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
+                } else {
+                    shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + YoutubeHelper.getVideoURL(movie.videos.get(0));
+                }
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
@@ -253,9 +265,23 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
             int headerImageWidth = (int) getResources().getDimension(R.dimen.detail_backdrop_width);
             backdropImage.setImageUrl(TMDBHelper.getImageURL(movie.backdropImage, headerImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
+            if (movie.videos.size() == 0) {
+                isVideoAvailable = false;
+            } else {
+                backdropPlayButton.setVisibility(View.VISIBLE);
+                isVideoAvailable = true;
+            }
         } else {
-            backdropImage.setVisibility(View.GONE);
-            backdropImageDefault.setVisibility(View.VISIBLE);
+            if (movie.videos.size() == 0) {
+                backdropImage.setVisibility(View.GONE);
+                backdropImageDefault.setVisibility(View.VISIBLE);
+                isVideoAvailable = false;
+            } else {
+                backdropImage.setImageUrl(YoutubeHelper.getThumbnailURL(movie.videos.get(0)),
+                        VolleySingleton.getInstance(getActivity()).imageLoader);
+                backdropPlayButton.setVisibility(View.VISIBLE);
+                isVideoAvailable = true;
+            }
         }
 
         // Basic info
@@ -381,15 +407,26 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         toolbarTextHolder.setVisibility(View.GONE);
         toolbar.setTitle("");
     }
-    // Try again button if loading failed
+
+    // Click events
     @OnClick(R.id.try_again)
     public void onTryAgainClicked() {
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.VISIBLE);
         downloadMovieDetails(id);
     }
-
-    // Cast and crew click events
+    @OnClick(R.id.backdrop_image)
+    public void onTrailedPlayClicked() {
+        if (isVideoAvailable) {
+            try{
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + movie.videos.get(0)));
+                startActivity(intent);
+            } catch (ActivityNotFoundException ex) {
+                Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + movie.videos.get(0)));
+                startActivity(intent);
+            }
+        }
+    }
     @OnClick(R.id.movie_crew_see_all)
     public void onSeeAllCrewClicked() {
         // TODO

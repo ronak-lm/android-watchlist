@@ -21,4 +21,14 @@
         android:scaleType="centerCrop"
         android:background="@color/default_image_background" />
 
+    <ImageView android:id="@+id/backdrop_play_button"
+        android:layout_width="@dimen/detail_play_button_size"
+        android:layout_height="@dimen/detail_play_button_size"
+        android:layout_marginBottom="@dimen/very_large_margin"
+        android:layout_gravity="center"
+        android:src="@drawable/button_play"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:ignore="contentDescription"/>
+
 </FrameLayout>

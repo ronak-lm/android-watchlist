@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General - For all activities -->
+    <dimen name="very_large_margin">32dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
@@ -49,6 +50,7 @@
     <dimen name="detail_toolbar_subtitle_textSize">12sp</dimen>
     <dimen name="detail_backdrop_width">444dp</dimen>
     <dimen name="detail_backdrop_height">250dp</dimen>
+    <dimen name="detail_play_button_size">50dp</dimen>
     <dimen name="detail_poster_width">100dp</dimen>
     <dimen name="detail_poster_height">150dp</dimen>
     <dimen name="detail_title_textSize">20sp</dimen>
