@@ -65,7 +65,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     // Image views
     @Bind(R.id.backdrop_image) NetworkImageView backdropImage;
     @Bind(R.id.backdrop_image_default) ImageView backdropImageDefault;
-    @Bind(R.id.backdrop_play_button) ImageView backdropPlayButton;
+    @Bind(R.id.backdrop_play_button) View backdropPlayButton;
     @Bind(R.id.poster_image) NetworkImageView posterImage;
     @Bind(R.id.poster_image_default) ImageView posterImageDefault;
 
@@ -415,14 +415,14 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         progressCircle.setVisibility(View.VISIBLE);
         downloadMovieDetails(id);
     }
-    @OnClick(R.id.backdrop_image)
+    @OnClick(R.id.backdrop_play_button)
     public void onTrailedPlayClicked() {
         if (isVideoAvailable) {
             try{
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + movie.videos.get(0)));
                 startActivity(intent);
             } catch (ActivityNotFoundException ex) {
-                Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + movie.videos.get(0)));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + movie.videos.get(0)));
                 startActivity(intent);
             }
         }
