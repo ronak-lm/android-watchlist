@@ -8,6 +8,7 @@
 
     <!-- App Drawer -->
     <dimen name="drawer_header_height">165dp</dimen>
+    <dimen name="drawer_icon_size">56dp</dimen>
 
     <!-- Loading Circle -->
     <dimen name="progress_circle_width">80dp</dimen>

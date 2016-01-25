@@ -11,15 +11,15 @@
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription"/>
 
-    <ImageView
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+    <ImageView android:src="@drawable/drawer_icon"
+        android:layout_width="@dimen/drawer_icon_size"
+        android:layout_height="@dimen/drawer_icon_size"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/large_margin"
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginBottom="@dimen/large_margin"
-        android:src="@drawable/drawer_icon"/>
+        tools:ignore="contentDescription"/>
 
 </RelativeLayout>
