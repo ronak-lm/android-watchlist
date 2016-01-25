@@ -9,6 +9,7 @@
         <item name="android:colorBackground">@color/background</item>
         <item name="android:colorForeground">@color/foreground</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -16,6 +17,7 @@
 
     <!-- Toolbar Styles -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Detail Activity Buttons -->
@@ -26,6 +28,7 @@
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="MovieButtonContainerStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -34,11 +37,13 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:orientation">vertical</item>
     </style>
+
     <style name="MovieButtonIconStyle">
         <item name="android:layout_width">@dimen/detail_button_icon_size</item>
         <item name="android:layout_height">@dimen/detail_button_icon_size</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
+
     <style name="MovieButtonTextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -54,6 +59,7 @@
         <item name="android:layout_width">@dimen/detail_icon_size</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
+
     <style name="MovieItemHeaderStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -62,6 +68,7 @@
         <item name="android:textSize">@dimen/detail_item_textSize</item>
         <item name="android:textColor">@color/text_primary</item>
     </style>
+
     <style name="MovieItemValueStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -71,8 +78,7 @@
     </style>
 
     <!-- Detail Activity Crew Style -->
-    <style name="MovieCrewItemValueStyle"
-        parent="@style/MovieItemValueStyle">
+    <style name="MovieCrewItemValueStyle" parent="@style/MovieItemValueStyle">
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
@@ -87,18 +93,21 @@
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="MovieCastImageStyle">
         <item name="android:layout_width">@dimen/detail_cast_image_width</item>
         <item name="android:layout_height">@dimen/detail_cast_image_height</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:background">@color/default_image_background</item>
     </style>
+
     <style name="MovieCastTextHolderStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/medium_margin</item>
         <item name="android:orientation">vertical</item>
     </style>
+
     <style name="MovieCastNameStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -106,6 +115,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
+
     <style name="MovieCastRoleStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -123,12 +133,14 @@
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:clickable">true</item>
     </style>
+
     <style name="MovieSeeAllTextStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textStyle">bold</item>
         <item name="android:text">@string/detail_button_see_all</item>
     </style>
+
     <style name="MovieSeeAllArrowStyle">
         <item name="android:layout_height">@dimen/detail_arrow_size</item>
         <item name="android:layout_width">@dimen/detail_arrow_size</item>
