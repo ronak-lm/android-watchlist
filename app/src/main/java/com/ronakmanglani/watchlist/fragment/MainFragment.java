@@ -119,11 +119,8 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
             case R.id.drawer_playing:
                 setSelectedDrawerItem(3);
                 return true;
-            case R.id.drawer_favorite:
+            case R.id.drawer_my_movies:
                 setSelectedDrawerItem(4);
-                return true;
-            case R.id.drawer_watchlist:
-                setSelectedDrawerItem(5);
                 return true;
             default:
                 return false;
@@ -146,10 +143,8 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
             fragment = new UpcomingFragment();
         } else if (position == 3) {
             fragment = new NowPlayingFragment();
-        } else if (position == 4) {
-            fragment = new FavoritesFragment();
         } else {
-            fragment = new WatchlistFragment();
+            fragment = new MyMoviesFragment();
         }
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, fragment);
