@@ -149,4 +149,10 @@
         <item name="android:scaleType">fitCenter</item>
     </style>
 
+    <!-- Review Activity -->
+    <style name="ReviewItemValueStyle" parent="MovieItemValueStyle">
+        <item name="android:maxLines">4</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 </resources>
