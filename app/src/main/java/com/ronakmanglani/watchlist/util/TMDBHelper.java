@@ -15,17 +15,20 @@ public class TMDBHelper {
     public static String getMostPopularMoviesLink(Context context, int page) {
         return "http://api.themoviedb.org/3/movie/popular?&page=" + page + "&api_key=" + getApiKey(context);
     }
-    public static String getHighestRatedMoviesLink(Context context,int page) {
+    public static String getHighestRatedMoviesLink(Context context, int page) {
         return "http://api.themoviedb.org/3/movie/top_rated?&page=" + page + "&api_key=" + getApiKey(context);
     }
-    public static String getUpcomingMoviesLink(Context context,int page) {
+    public static String getUpcomingMoviesLink(Context context, int page) {
         return "http://api.themoviedb.org/3/movie/upcoming?&page=" + page + "&api_key=" + getApiKey(context);
     }
-    public static String getNowPlayingMoviesLink(Context context,int page) {
+    public static String getNowPlayingMoviesLink(Context context, int page) {
         return "http://api.themoviedb.org/3/movie/now_playing?&page=" + page + "&api_key=" + getApiKey(context);
     }
-    public static String getMovieDetailLink(Context context,String id) {
+    public static String getMovieDetailLink(Context context, String id) {
         return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getApiKey(context) + "&append_to_response=credits,trailers";
+    }
+    public static String getMovieReviewsLink(Context context, String id, int page) {
+        return "http://api.themoviedb.org/3/movie/" + id + "/reviews?page=" + page + "&api_key=" + getApiKey(context);
     }
 
     // Get image of the given pixel size

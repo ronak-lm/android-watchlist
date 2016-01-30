@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/review_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.ReviewsActivity"
-    tools:showIn="@layout/activity_reviews"
-    tools:listitem="@layout/item_review" />
+    tools:showIn="@layout/activity_reviews">
+
+    <!-- Reviews -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/review_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:listitem="@layout/item_review" />
+
+    <!-- To show when unable to load data -->
+    <include android:id="@+id/error_message"
+        layout="@layout/view_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Progress Circle -->
+    <include android:id="@+id/progress_circle"
+        layout="@layout/view_progress_circle"
+        android:layout_width="@dimen/progress_circle_width"
+        android:layout_height="@dimen/progress_circle_height"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        tools:visibility="gone" />
+
+    <!-- Indicator for loading more -->
+    <include android:id="@+id/loading_more"
+        layout="@layout/view_progress_circle_white"
+        android:layout_width="@dimen/progress_circle_small_width"
+        android:layout_height="@dimen/progress_circle_small_height"
+        android:layout_marginBottom="@dimen/very_large_margin"
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="gone" />
+
+</FrameLayout>
