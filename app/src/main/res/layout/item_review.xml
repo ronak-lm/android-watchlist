@@ -15,17 +15,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
-        <ImageView style="@style/MovieItemIconsStyle"
-            android:src="@drawable/icon_review"
+        <ImageView style="@style/ReviewIconStyle"
+            android:src="@drawable/icon_user"
             tools:ignore="ContentDescription" />
         <TextView android:id="@+id/review_author"
-            style="@style/MovieItemHeaderStyle"
+            style="@style/ReviewAuthorStyle"
             tools:text="User Name"/>
     </LinearLayout>
 
     <!-- Value -->
     <TextView android:id="@+id/review_body"
-        style="@style/ReviewItemValueStyle"
+        style="@style/ReviewBodyStyle"
         tools:text="The movie's review goes here..."/>
 
 </LinearLayout>
