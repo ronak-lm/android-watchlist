@@ -13,6 +13,8 @@
         android:id="@+id/review_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="88dp"
+        android:clipToPadding="false"
         android:visibility="gone"
         tools:visibility="visible"
         tools:listitem="@layout/item_review" />

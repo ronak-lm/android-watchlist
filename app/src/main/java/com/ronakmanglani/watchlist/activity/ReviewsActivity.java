@@ -3,6 +3,7 @@ package com.ronakmanglani.watchlist.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -59,6 +61,7 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
     @Bind(R.id.no_results_message)  TextView noResultsMessage;
     @Bind(R.id.progress_circle)     View progressCircle;
     @Bind(R.id.loading_more)        View loadingMore;
+    @Bind(R.id.write_review_button) FloatingActionButton writeReviewButton;
 
     // Activity lifecycle methods
     @Override
@@ -88,15 +91,11 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                // Check if RecyclerView has reached the end and isn't already loading
+                // Load more data if reached the end of the list
                 if (layoutManager.findLastVisibleItemPosition() == adapter.reviewList.size() - 1 && !isLoading) {
-                    // Set flag
                     isLoading = true;
-                    // Check if page to download is less than total number of pages
                     if (pageToDownload < totalPages) {
-                        // Show loading circle
                         loadingMore.setVisibility(View.VISIBLE);
-                        // Download the next page
                         downloadMovieReviews();
                     }
                 }
