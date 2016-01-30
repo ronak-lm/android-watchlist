@@ -5,6 +5,7 @@
     <dimen name="large_margin">16dp</dimen>
     <dimen name="medium_margin">8dp</dimen>
     <dimen name="small_margin">4dp</dimen>
+    <dimen name="message_textSize">20sp</dimen>
 
     <!-- App Drawer -->
     <dimen name="drawer_header_height">165dp</dimen>

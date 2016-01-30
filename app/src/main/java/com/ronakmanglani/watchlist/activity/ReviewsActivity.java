@@ -48,13 +48,15 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
     private LinearLayoutManager layoutManager;
 
     // Layout Views
-    @Bind(R.id.toolbar)          Toolbar toolbar;
-    @Bind(R.id.toolbar_title)    TextView toolbarTitle;
-    @Bind(R.id.toolbar_subtitle) TextView toolbarSubtitle;
-    @Bind(R.id.review_list)      RecyclerView reviewList;
-    @Bind(R.id.error_message)    View errorMessage;
-    @Bind(R.id.progress_circle)  View progressCircle;
-    @Bind(R.id.loading_more)     View loadingMore;
+    @Bind(R.id.toolbar)             Toolbar toolbar;
+    @Bind(R.id.toolbar_title)       TextView toolbarTitle;
+    @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
+    @Bind(R.id.review_list)         RecyclerView reviewList;
+    @Bind(R.id.error_message)       View errorMessage;
+    @Bind(R.id.no_results)          View noResults;
+    @Bind(R.id.no_results_message)  TextView noResultsMessage;
+    @Bind(R.id.progress_circle)     View progressCircle;
+    @Bind(R.id.loading_more)        View loadingMore;
 
     // Activity lifecycle methods
     @Override
@@ -166,15 +168,26 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
         VolleySingleton.getInstance(this).requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
-        // Update flag
-        isLoading = false;
-        // Toggle visibility
-        errorMessage.setVisibility(View.GONE);
-        progressCircle.setVisibility(View.GONE);
-        loadingMore.setVisibility(View.GONE);
-        reviewList.setVisibility(View.VISIBLE);
-        // Notify adapter of change
-        adapter.notifyDataSetChanged();
+        if (adapter.reviewList.size() == 0) {
+            // Set text message for no reviews
+            noResultsMessage.setText(R.string.review_no_results);
+            // Toggle visibility
+            noResults.setVisibility(View.VISIBLE);
+            errorMessage.setVisibility(View.GONE);
+            progressCircle.setVisibility(View.GONE);
+            loadingMore.setVisibility(View.GONE);
+            reviewList.setVisibility(View.GONE);
+        } else {
+            // Update flag
+            isLoading = false;
+            // Toggle visibility
+            errorMessage.setVisibility(View.GONE);
+            progressCircle.setVisibility(View.GONE);
+            loadingMore.setVisibility(View.GONE);
+            reviewList.setVisibility(View.VISIBLE);
+            // Notify adapter of change
+            adapter.notifyDataSetChanged();
+        }
     }
     private void onDownloadFailed() {
         if (pageToDownload == 1) {

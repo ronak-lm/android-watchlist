@@ -35,4 +35,7 @@
     <string name="detail_header_cast">CAST</string>
     <string name="detail_button_see_all">SEE ALL</string>
 
+    <!-- Reviews Activity -->
+    <string name="review_no_results">We don\'t have any reviews for\nthis movie!</string>
+
 </resources>

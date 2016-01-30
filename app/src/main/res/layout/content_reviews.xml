@@ -17,13 +17,17 @@
         tools:visibility="visible"
         tools:listitem="@layout/item_review" />
 
-    <!-- To show when unable to load data -->
+    <!-- Network Error Message -->
     <include android:id="@+id/error_message"
         layout="@layout/view_error_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:visibility="gone" />
+
+    <!-- No Results Error Message -->
+    <include layout="@layout/view_no_results"
+        android:visibility="gone"/>
 
     <!-- Progress Circle -->
     <include android:id="@+id/progress_circle"
