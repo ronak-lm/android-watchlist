@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/review_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/large_margin"
-    android:paddingLeft="@dimen/large_margin"
-    android:paddingRight="@dimen/large_margin"
-    android:paddingTop="@dimen/large_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.ReviewsActivity"
-    tools:showIn="@layout/activity_reviews">
-
-</RelativeLayout>
+    tools:showIn="@layout/activity_reviews"
+    tools:listitem="@layout/item_review" />
