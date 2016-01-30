@@ -29,19 +29,21 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private Context context;                                    // Context of calling activity
     private SharedPreferences sharedPref;                       // Application's SharedPreferences
+
     public ArrayList<Movie> movieList;                          // List of movies to be displayed
-    private final OnItemClickListener onItemClickListener;      // Click Listener
+    private final OnMovieClickListener onMovieClickListener;      // Click listener for movie item
+
     private int imageWidth;                                     // Width of the CardView (in pixels)
     private int spanLocation;                                   // Flag to decide which view's to be detailed
     private boolean isDetailedViewEnabled;                      // Flag to enable/disable detailed layout
 
     // Constructor
-    public BaseMovieAdapter(Context context, OnItemClickListener onItemClickListener,
+    public BaseMovieAdapter(Context context, OnMovieClickListener onMovieClickListener,
                             boolean isDetailedViewEnabled, int spanLocation) {
         // Initialize members
         this.context = context;
         this.movieList = new ArrayList<>();
-        this.onItemClickListener = onItemClickListener;
+        this.onMovieClickListener = onMovieClickListener;
         this.isDetailedViewEnabled = isDetailedViewEnabled;
         this.spanLocation = spanLocation;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -49,7 +51,7 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         imageWidth = sharedPref.getInt(context.getString(R.string.settings_thumbnail_image_width), 0);
     }
 
-    // Returns size of ArrayList
+    // Return size of ArrayList
     @Override
     public int getItemCount() {
         return movieList.size();
@@ -65,13 +67,13 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    // Inflate Layout
+    // Inflate layout and fill data
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 1) {
             // Inflate detailed layout
             ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_detail, parent, false);
-            return new MovieDetailViewHolder(v, onItemClickListener);
+            return new MovieDetailViewHolder(v, onMovieClickListener);
         } else {
             // Inflate basic layout
             final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_basic, parent, false);
@@ -98,11 +100,9 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 });
             }
             // Return ViewHolder
-            return new MovieBasicViewHolder(v, onItemClickListener);
+            return new MovieBasicViewHolder(v, onMovieClickListener);
         }
     }
-
-    // Insert data into the layout
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         // Get Movie object
@@ -162,12 +162,7 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    // Interface to respond to clicks
-    public interface OnItemClickListener {
-        void onCardClicked(final int position);
-    }
-
-    // ViewHolder for the layout
+    // ViewHolders
     public class MovieBasicViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.movie_card) CardView cardView;
         @Bind(R.id.movie_poster_default) ImageView defaultImageView;
@@ -177,20 +172,18 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Bind(R.id.movie_rating) TextView movieRating;
         @Bind(R.id.rating_icon) ImageView movieRatingIcon;
 
-        public MovieBasicViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener) {
+        public MovieBasicViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onCardClicked(getAdapterPosition());
+                    onMovieClickListener.onMovieClicked(getAdapterPosition());
                 }
             });
         }
     }
-
-    // ViewHolder for the layout
     public class MovieDetailViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.movie_card) CardView cardView;
         @Bind(R.id.movie_poster_default) ImageView defaultImageView;
@@ -201,16 +194,21 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Bind(R.id.movie_rating) TextView movieRating;
         @Bind(R.id.rating_icon) ImageView movieRatingIcon;
 
-        public MovieDetailViewHolder(final ViewGroup itemView, final OnItemClickListener onItemClickListener) {
+        public MovieDetailViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemClickListener.onCardClicked(getAdapterPosition());
+                    onMovieClickListener.onMovieClicked(getAdapterPosition());
                 }
             });
         }
+    }
+
+    // Interface to respond to clicks
+    public interface OnMovieClickListener {
+        void onMovieClicked(final int position);
     }
 }

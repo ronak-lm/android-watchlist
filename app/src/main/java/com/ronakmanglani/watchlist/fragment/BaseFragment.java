@@ -30,7 +30,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.OnItemClickListener {
+public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieClickListener {
 
     private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
 
@@ -53,7 +53,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     public abstract boolean isDetailedViewEnabled();
     public abstract int getSpanLocation();
 
-    // Fragment initialization
+    // Fragment lifecycle methods
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_base,container,false);
@@ -147,27 +147,26 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
 
         return v;
     }
-    // Returns the number of columns to display in the RecyclerView
-    public int getNumberOfColumns() {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float widthPx = displayMetrics.widthPixels;
-        float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
-        int columns = Math.round(widthPx / desiredPx);
-        return columns > 2 ? columns : 2;
-    }
-
-    // Persist changes when fragment is destroyed
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        // Persist changes when fragment is destroyed
         if (layoutManager != null && adapter != null) {
             outState.putInt("pageToDownload", pageToDownload);
             outState.putParcelable("layoutManagerState", layoutManager.onSaveInstanceState());
             outState.putParcelableArrayList("movieList", adapter.movieList);
         }
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Cancel any pending network requests
+        VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
+        // Unbind layout views
+        ButterKnife.unbind(this);
+    }
 
-    // Download JSON data from TMDB
+    // Network related methods
     private void downloadMoviesList() {
         // Select which URL to download
         String urlToDownload = getUrlToDownload(pageToDownload);
@@ -235,7 +234,6 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         // Add download request to queue
         VolleySingleton.getInstance(context).requestQueue.add(request);
     }
-    // Toggle visibility of layout views
     private void onDownloadSuccessful() {
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
@@ -245,7 +243,6 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         swipeRefreshLayout.setEnabled(true);
         adapter.notifyDataSetChanged();
     }
-    // Show error message when download failed
     private void onDownloadFailed() {
         if (pageToDownload == 1) {
             adapter.movieList.clear();
@@ -263,7 +260,17 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
             swipeRefreshLayout.setEnabled(true);
         }
     }
-    // Try again button if loading failed
+
+    // Helper methods
+    public int getNumberOfColumns() {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float widthPx = displayMetrics.widthPixels;
+        float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
+        int columns = Math.round(widthPx / desiredPx);
+        return columns > 2 ? columns : 2;
+    }
+
+    // Click events
     @OnClick(R.id.try_again)
     public void onTryAgainClicked() {
         // Hide all views
@@ -277,25 +284,10 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         pageToDownload = 1;
         downloadMoviesList();
     }
-
-    // Respond to clicks of items in RecyclerView
     @Override
-    public void onCardClicked(int position) {
+    public void onMovieClicked(int position) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(DetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
         startActivity(intent);
-    }
-
-    // Unbind layout views on destroy of fragment
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-    // Cancel any pending network requests when fragment stops
-    @Override
-    public void onStop() {
-        super.onStop();
-        VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
     }
 }

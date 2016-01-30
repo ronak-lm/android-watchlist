@@ -93,7 +93,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
     @Bind(R.id.movie_cast_see_all) View movieCastSeeAllButton;
 
-    // Create fragment view
+    // Fragment lifecycle methods
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
@@ -122,15 +122,22 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
 
         return v;
     }
-
-    // Persist changes when fragment is destroyed
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        // Persist changes when fragment is destroyed
         if (movie != null && id != null) {
             outState.putString(MOVIE_ID_KEY, id);
             outState.putParcelable(MOVIE_OBJECTS_KEY, movie);
         }
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Cancel any pending network requests
+        VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
+        // Unbind layout views
+        ButterKnife.unbind(this);
     }
 
     // Toolbar menu click
@@ -156,7 +163,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         }
     }
 
-    // Download Movie Detail from TMDB
+    // Network related methods
     private void downloadMovieDetails(String id) {
         String urlToDownload = TMDBHelper.getMovieDetailLink(getActivity(), id);
         JsonObjectRequest request = new JsonObjectRequest(
@@ -239,7 +246,6 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         // Add download request to queue
         VolleySingleton.getInstance(getActivity()).requestQueue.add(request);
     }
-    // Bind movie class attributes to layout views
     private void onDownloadSuccessful() {
 
         // Toggle visibility
@@ -399,7 +405,6 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
             }
         }
     }
-    // Show error message when download or parsing failed
     private void onDownloadFailed() {
         errorMessage.setVisibility(View.VISIBLE);
         progressCircle.setVisibility(View.GONE);
@@ -446,18 +451,5 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     @OnClick(R.id.movie_cast_item3)
     public void onThirdCastItemClicked() {
         // TODO
-    }
-
-    // Unbind layout views on destroy of fragment
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-    // Cancel any pending network requests when fragment stops
-    @Override
-    public void onStop() {
-        super.onStop();
-        VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
     }
 }
