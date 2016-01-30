@@ -1,5 +1,7 @@
 package com.ronakmanglani.watchlist.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -218,7 +220,8 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
     }
     @OnClick(R.id.write_review_button)
     public void onWriteReviewButtonClicked() {
-        // TODO
+        Intent writeReview = new Intent(Intent.ACTION_VIEW, Uri.parse(TMDBHelper.getWriteReviewLink(movieId)));
+        startActivity(writeReview);
     }
 
     // Respond to clicks of review item
