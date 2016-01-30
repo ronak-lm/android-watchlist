@@ -23,9 +23,9 @@
     </group>
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/drawer_my_movies"
-            android:title="@string/drawer_my_movies"
-            android:icon="@drawable/drawer_my_movies"/>
+        <item android:id="@+id/drawer_favorite"
+            android:title="@string/drawer_favorite"
+            android:icon="@drawable/drawer_favorite"/>
     </group>
 
 </menu>

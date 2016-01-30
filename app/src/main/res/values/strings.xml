@@ -11,7 +11,7 @@
     <string name="drawer_rated">Top Rated</string>
     <string name="drawer_upcoming">Upcoming</string>
     <string name="drawer_playing">Now Playing</string>
-    <string name="drawer_my_movies">My Movies</string>
+    <string name="drawer_favorite">Favorites</string>
 
     <!-- Toolbar actions -->
     <string name="action_search">Search</string>

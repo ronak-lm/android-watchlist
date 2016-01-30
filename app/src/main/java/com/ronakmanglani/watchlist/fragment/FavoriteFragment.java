@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.ronakmanglani.watchlist.R;
 
-public class MyMoviesFragment extends Fragment {
+public class FavoriteFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

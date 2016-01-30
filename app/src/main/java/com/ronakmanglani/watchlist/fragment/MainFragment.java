@@ -119,7 +119,7 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
             case R.id.drawer_playing:
                 setSelectedDrawerItem(3);
                 return true;
-            case R.id.drawer_my_movies:
+            case R.id.drawer_favorite:
                 setSelectedDrawerItem(4);
                 return true;
             default:
@@ -144,7 +144,7 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
         } else if (position == 3) {
             fragment = new NowPlayingFragment();
         } else {
-            fragment = new MyMoviesFragment();
+            fragment = new FavoriteFragment();
         }
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, fragment);
