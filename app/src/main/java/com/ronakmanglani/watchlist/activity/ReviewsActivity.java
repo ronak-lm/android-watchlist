@@ -143,7 +143,7 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
                                 JSONObject review = reviewsArray.getJSONObject(i);
                                 String id = review.getString("id");
                                 String author = review.getString("author");
-                                String body = review.getString("content");
+                                String body = android.text.Html.fromHtml(review.getString("content")).toString();
                                 String url = review.getString("url");
                                 adapter.reviewList.add(new Review(id, author, body, url));
                             }
