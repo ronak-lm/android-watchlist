@@ -151,13 +151,13 @@
 
     <!-- Review Activity -->
     <style name="ReviewIconStyle" parent="MovieButtonIconStyle">
-        <item name="android:layout_width">@dimen/review_icon_size</item>
-        <item name="android:layout_height">@dimen/review_icon_size</item>
+        <item name="android:layout_width">@dimen/review_user_icon_size</item>
+        <item name="android:layout_height">@dimen/review_user_icon_size</item>
     </style>
     <style name="ReviewAuthorStyle" parent="MovieItemHeaderStyle">
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textSize">@dimen/review_author_textSize</item>
+        <item name="android:textSize">@dimen/review_username_textSize</item>
     </style>
     <style name="ReviewBodyStyle" parent="MovieItemValueStyle">
         <item name="android:maxLines">4</item>
