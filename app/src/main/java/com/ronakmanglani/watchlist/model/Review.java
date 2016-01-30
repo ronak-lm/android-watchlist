@@ -6,20 +6,20 @@ import android.os.Parcelable;
 public class Review implements Parcelable {
 
     // Attributes
-    public String reviewId;
+    public String id;
     public String author;
     public String body;
     public String url;
 
     // Constructors
-    public Review(String reviewId, String author, String body, String url) {
-        this.reviewId = reviewId;
+    public Review(String id, String author, String body, String url) {
+        this.id = id;
         this.author = author;
         this.body = body;
         this.url = url;
     }
     public Review(Parcel in) {
-        this.reviewId = in.readString();
+        this.id = in.readString();
         this.author = in.readString();
         this.body = in.readString();
         this.url = in.readString();
@@ -38,7 +38,7 @@ public class Review implements Parcelable {
     // Parcelling methods
     @Override
     public void writeToParcel(Parcel out, int i) {
-        out.writeString(reviewId);
+        out.writeString(id);
         out.writeString(author);
         out.writeString(body);
         out.writeString(url);
