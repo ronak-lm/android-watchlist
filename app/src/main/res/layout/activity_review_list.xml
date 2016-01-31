@@ -34,6 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/large_margin"
-        android:src="@drawable/fab_add" />
+        android:src="@drawable/fab_write" />
 
 </android.support.design.widget.CoordinatorLayout>
