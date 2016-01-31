@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/very_large_margin"
+    android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.ReviewDetailActivity"
     tools:showIn="@layout/activity_review_detail">
@@ -14,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/large_margin"
         android:textColor="@color/text_primary"
-        android:textSize="16sp"
+        android:textSize="@dimen/review_detail_textSize"
         tools:text="Movie review goes here..."/>
 
 </android.support.v4.widget.NestedScrollView>
