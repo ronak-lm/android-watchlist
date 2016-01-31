@@ -40,6 +40,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
 
     // Movie associated with the activity
     private String movieId;
+    private String movieName;
 
     // Flag variables and counters
     private boolean isLoading = false;
@@ -71,14 +72,14 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
 
         // Get intent extras
         movieId = getIntent().getStringExtra(MOVIE_ID_KEY);
-        String name = getIntent().getStringExtra(MOVIE_NAME_KEY);
+        movieName = getIntent().getStringExtra(MOVIE_NAME_KEY);
 
         // Setup toolbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         toolbarTitle.setText(R.string.title_reviews);
-        toolbarSubtitle.setText(name);
+        toolbarSubtitle.setText(movieName);
 
         // Setup RecyclerView
         adapter = new ReviewListAdapter(new ArrayList<Review>(), this);
@@ -142,7 +143,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
                                 JSONObject review = reviewsArray.getJSONObject(i);
                                 String id = review.getString("id");
                                 String author = review.getString("author");
-                                String body = android.text.Html.fromHtml(review.getString("content")).toString();
+                                String body = review.getString("content");
                                 String url = review.getString("url");
                                 adapter.reviewList.add(new Review(id, author, body, url));
                             }
@@ -225,6 +226,10 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     // Respond to clicks of review item
     @Override
     public void onReviewClicked(int position) {
-        // TODO
+        Review review = adapter.reviewList.get(position);
+        Intent intent = new Intent(this, ReviewDetailActivity.class);
+        intent.putExtra(ReviewDetailActivity.REVIEW_KEY, review);
+        intent.putExtra(ReviewDetailActivity.MOVIE_NAME_KEY, movieName);
+        startActivity(intent);
     }
 }
