@@ -13,7 +13,7 @@
     tools:context=".activity.ReviewDetailActivity"
     tools:showIn="@layout/activity_review_detail">
 
-    <TextView android:id="@+id/review_body_detail"
+    <TextView android:id="@+id/review_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="@color/text_primary"
