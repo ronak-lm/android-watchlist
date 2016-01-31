@@ -12,7 +12,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -36,8 +35,9 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
 
     private Context context;                        // Activity context
-    private boolean isLoading;                      // Flag for loading
     private int pageToDownload;                     // Page number to download
+    private boolean isLoading;                      // Flag for loading
+    private boolean isLoadingLocked;                // Flag to lock loading more data
 
     // Layout views
     @Bind(R.id.error_message) View errorMessage;
@@ -89,15 +89,10 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 // Check if RecyclerView has reached the end and isn't already loading
-                if (layoutManager.findLastVisibleItemPosition() == adapter.movieList.size() - 1 && !isLoading) {
-                    // Set flag
-                    isLoading = true;
-                    // Check if page to download is less than total number of pages
+                if (layoutManager.findLastVisibleItemPosition() == adapter.movieList.size() - 1 && !isLoadingLocked && !isLoading) {
                     if (pageToDownload < TOTAL_PAGES) {
-                        // Show loading circle
                         swipeRefreshLayout.setRefreshing(true);
                         swipeRefreshLayout.setEnabled(false);
-                        // Download the next page
                         downloadMoviesList();
                     }
                 }
@@ -127,14 +122,24 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         if (savedInstanceState == null) {
             downloadMoviesList();
         } else {
-            if (savedInstanceState.containsKey("movieList") && savedInstanceState.containsKey("layoutManagerState")) {
+            if (savedInstanceState.containsKey("movie_list")) {
                 // Restore data from bundle
-                adapter.movieList = savedInstanceState.getParcelableArrayList("movieList");
-                adapter.notifyDataSetChanged();
-                pageToDownload = savedInstanceState.getInt("pageToDownload");
-                layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layoutManagerState"));
-                // Update UI
-                onDownloadSuccessful();
+                adapter.movieList = savedInstanceState.getParcelableArrayList("movie_list");
+                layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layout_state"));
+                pageToDownload = savedInstanceState.getInt("page_to_download");
+                isLoadingLocked = savedInstanceState.getBoolean("is_locked");
+                isLoading = savedInstanceState.getBoolean("is_loading");
+                // Continue download if stopped, else show list
+                if (isLoading) {
+                    progressCircle.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setRefreshing(true);
+                    swipeRefreshLayout.setEnabled(false);
+                    downloadMoviesList();
+                } else {
+                    onDownloadSuccessful();
+                }
             } else {
                 // Data not found, download from TMDB
                 downloadMoviesList();
@@ -148,9 +153,11 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         super.onSaveInstanceState(outState);
         // Persist changes when fragment is destroyed
         if (layoutManager != null && adapter != null) {
-            outState.putInt("pageToDownload", pageToDownload);
-            outState.putParcelable("layoutManagerState", layoutManager.onSaveInstanceState());
-            outState.putParcelableArrayList("movieList", adapter.movieList);
+            outState.putBoolean("is_loading", isLoading);
+            outState.putBoolean("is_locked", isLoadingLocked);
+            outState.putInt("page_to_download", pageToDownload);
+            outState.putParcelable("layout_state", layoutManager.onSaveInstanceState());
+            outState.putParcelableArrayList("movie_list", adapter.movieList);
         }
     }
     @Override
@@ -166,13 +173,13 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     private void downloadMoviesList() {
         // Select which URL to download
         String urlToDownload = getUrlToDownload(pageToDownload);
-
         // Create new adapter if it's null
         if (adapter == null) {
             adapter = new BaseMovieAdapter(context, this, isDetailedViewEnabled(), getSpanLocation());
             recyclerView.setAdapter(adapter);
         }
-
+        // Set flag
+        isLoading = true;
         // Make JSON Request
         final JsonObjectRequest request = new JsonObjectRequest (
                 // Request method and URL to be downloaded
@@ -202,14 +209,10 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
                                 Movie thumb = new Movie(id, title, year, overview, rating, poster, backdrop);
                                 adapter.movieList.add(thumb);
                             }
-
-                            // Update UI
-                            onDownloadSuccessful();
-
                             // Set next page for download
                             pageToDownload++;
-                            isLoading = false;
-
+                            // Update UI
+                            onDownloadSuccessful();
                         } catch (Exception ex) {
                             // To show error message on parsing errors
                             onDownloadFailed();
@@ -231,6 +234,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         VolleySingleton.getInstance(context).requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
+        isLoading = false;
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
@@ -240,8 +244,8 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         adapter.notifyDataSetChanged();
     }
     private void onDownloadFailed() {
+        isLoading = false;
         if (pageToDownload == 1) {
-            adapter.movieList.clear();
             progressCircle.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);
             swipeRefreshLayout.setRefreshing(false);
@@ -254,6 +258,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
             swipeRefreshLayout.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setRefreshing(false);
             swipeRefreshLayout.setEnabled(true);
+            isLoadingLocked = true;
         }
     }
 
