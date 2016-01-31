@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,4 +13,11 @@
     tools:context=".activity.ReviewDetailActivity"
     tools:showIn="@layout/activity_review_detail">
 
-</RelativeLayout>
+    <TextView android:id="@+id/review_body_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        tools:text="Movie review goes here..."/>
+
+</android.support.v4.widget.NestedScrollView>
