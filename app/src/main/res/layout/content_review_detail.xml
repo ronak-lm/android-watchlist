@@ -5,10 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/large_margin"
-    android:paddingLeft="@dimen/large_margin"
-    android:paddingRight="@dimen/large_margin"
-    android:paddingTop="@dimen/large_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.ReviewDetailActivity"
     tools:showIn="@layout/activity_review_detail">
@@ -16,6 +12,7 @@
     <TextView android:id="@+id/review_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/large_margin"
         android:textColor="@color/text_primary"
         android:textSize="16sp"
         tools:text="Movie review goes here..."/>
