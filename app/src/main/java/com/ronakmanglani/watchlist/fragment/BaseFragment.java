@@ -125,7 +125,6 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
             if (savedInstanceState.containsKey("movie_list")) {
                 // Restore data from bundle
                 adapter.movieList = savedInstanceState.getParcelableArrayList("movie_list");
-                layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layout_state"));
                 pageToDownload = savedInstanceState.getInt("page_to_download");
                 isLoadingLocked = savedInstanceState.getBoolean("is_locked");
                 isLoading = savedInstanceState.getBoolean("is_loading");
@@ -156,7 +155,6 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
             outState.putBoolean("is_loading", isLoading);
             outState.putBoolean("is_locked", isLoadingLocked);
             outState.putInt("page_to_download", pageToDownload);
-            outState.putParcelable("layout_state", layoutManager.onSaveInstanceState());
             outState.putParcelableArrayList("movie_list", adapter.movieList);
         }
     }

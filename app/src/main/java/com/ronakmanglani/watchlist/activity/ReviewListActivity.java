@@ -119,10 +119,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (layoutManager != null && adapter != null) {
-            // Put reviews and layout manager
             outState.putParcelableArrayList("review_list", adapter.reviewList);
-            outState.putParcelable("layout_manager_state", layoutManager.onSaveInstanceState());
-            // Put counters and flags
             outState.putBoolean("is_loading", isLoading);
             outState.putBoolean("is_locked", isLoadMoreLocked);
             outState.putInt("page_to_download", pageToDownload);
@@ -133,10 +130,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        // Get reviews and layout manager
         adapter.reviewList = savedInstanceState.getParcelableArrayList("review_list");
-        layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layout_manager_state"));
-        // Get flag counters and flags
         totalPages = savedInstanceState.getInt("total_pages");
         pageToDownload = savedInstanceState.getInt("page_to_download");
         isLoadMoreLocked = savedInstanceState.getBoolean("is_locked");
