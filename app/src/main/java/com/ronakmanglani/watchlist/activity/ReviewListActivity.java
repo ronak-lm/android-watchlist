@@ -119,15 +119,12 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (layoutManager != null && adapter != null) {
-            // Put movie and reviews
-            outState.putString("movie_id", movieId);
-            outState.putString("movie_name", movieName);
+            // Put reviews and layout manager
             outState.putParcelableArrayList("review_list", adapter.reviewList);
-            // Put layout manager state
             outState.putParcelable("layout_manager_state", layoutManager.onSaveInstanceState());
             // Put counters and flags
             outState.putBoolean("is_loading", isLoading);
-            outState.putBoolean("is_more_locked", isLoadMoreLocked);
+            outState.putBoolean("is_locked", isLoadMoreLocked);
             outState.putInt("page_to_download", pageToDownload);
             outState.putInt("total_pages", totalPages);
         }
@@ -136,19 +133,21 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        // Get movie and reviews
-        movieId = savedInstanceState.getString("movie_id");
-        movieName = savedInstanceState.getString("movie_name");
+        // Get reviews and layout manager
         adapter.reviewList = savedInstanceState.getParcelableArrayList("review_list");
-        // Get layout manager state
         layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layout_manager_state"));
         // Get flag counters and flags
         totalPages = savedInstanceState.getInt("total_pages");
         pageToDownload = savedInstanceState.getInt("page_to_download");
-        isLoadMoreLocked = savedInstanceState.getBoolean("is_more_locked");
+        isLoadMoreLocked = savedInstanceState.getBoolean("is_locked");
         isLoading = savedInstanceState.getBoolean("is_loading");
         // If activity was previously downloading and it stopped, download again
         if (isLoading) {
+            if (pageToDownload > 1) {
+                progressCircle.setVisibility(View.GONE);
+                reviewList.setVisibility(View.VISIBLE);
+                loadingMore.setVisibility(View.VISIBLE);
+            }
             downloadMovieReviews();
         } else {
             onDownloadSuccessful();
