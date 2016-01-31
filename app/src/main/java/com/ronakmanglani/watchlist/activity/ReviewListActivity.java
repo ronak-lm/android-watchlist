@@ -11,15 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.adapter.ReviewsAdapter;
-import com.ronakmanglani.watchlist.adapter.ReviewsAdapter.OnReviewClickListener;
+import com.ronakmanglani.watchlist.adapter.ReviewListAdapter;
+import com.ronakmanglani.watchlist.adapter.ReviewListAdapter.OnReviewClickListener;
 import com.ronakmanglani.watchlist.model.Review;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -33,7 +32,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReviewsActivity extends AppCompatActivity implements OnReviewClickListener {
+public class ReviewListActivity extends AppCompatActivity implements OnReviewClickListener {
 
     // Key for intent extra
     public static final String MOVIE_ID_KEY = "movie_id";
@@ -48,7 +47,7 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
     private int totalPages = 1;
 
     // RecyclerView objects
-    private ReviewsAdapter adapter;
+    private ReviewListAdapter adapter;
     private LinearLayoutManager layoutManager;
 
     // Layout Views
@@ -67,7 +66,7 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reviews);
+        setContentView(R.layout.activity_review_list);
         ButterKnife.bind(this);
 
         // Get intent extras
@@ -82,7 +81,7 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
         toolbarSubtitle.setText(name);
 
         // Setup RecyclerView
-        adapter = new ReviewsAdapter(new ArrayList<Review>(), this);
+        adapter = new ReviewListAdapter(new ArrayList<Review>(), this);
         layoutManager = new LinearLayoutManager(this);
         reviewList.setHasFixedSize(true);
         reviewList.setLayoutManager(layoutManager);
@@ -127,7 +126,7 @@ public class ReviewsActivity extends AppCompatActivity implements OnReviewClickL
     private void downloadMovieReviews() {
         // Initialize adapter if null
         if (adapter == null) {
-            adapter = new ReviewsAdapter(new ArrayList<Review>(), this);
+            adapter = new ReviewListAdapter(new ArrayList<Review>(), this);
             reviewList.setAdapter(adapter);
         }
         // Download reviews

@@ -22,7 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.DetailActivity;
-import com.ronakmanglani.watchlist.activity.ReviewsActivity;
+import com.ronakmanglani.watchlist.activity.ReviewListActivity;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
@@ -418,9 +418,9 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     // Click events
     @OnClick(R.id.button_reviews)
     public void onReviewsButtonClicked() {
-        Intent intent = new Intent(getContext(), ReviewsActivity.class);
-        intent.putExtra(ReviewsActivity.MOVIE_ID_KEY, movie.id);
-        intent.putExtra(ReviewsActivity.MOVIE_NAME_KEY, movie.title);
+        Intent intent = new Intent(getContext(), ReviewListActivity.class);
+        intent.putExtra(ReviewListActivity.MOVIE_ID_KEY, movie.id);
+        intent.putExtra(ReviewListActivity.MOVIE_NAME_KEY, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.try_again)
