@@ -3,6 +3,7 @@ package com.ronakmanglani.watchlist.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -44,6 +46,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
 
     // Flag variables and counters
     private boolean isLoading = false;
+    private boolean isLoadMoreLocked = false;
     private int pageToDownload = 1;
     private int totalPages = 1;
 
@@ -61,7 +64,6 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     @Bind(R.id.no_results_message)  TextView noResultsMessage;
     @Bind(R.id.progress_circle)     View progressCircle;
     @Bind(R.id.loading_more)        View loadingMore;
-    @Bind(R.id.write_review_button) FloatingActionButton writeReviewButton;
 
     // Activity lifecycle methods
     @Override
@@ -92,8 +94,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 // Load more data if reached the end of the list
-                if (layoutManager.findLastVisibleItemPosition() == adapter.reviewList.size() - 1 && !isLoading) {
-                    isLoading = true;
+                if (layoutManager.findLastVisibleItemPosition() == adapter.reviewList.size() - 1 && !isLoadMoreLocked) {
                     if (pageToDownload < totalPages) {
                         loadingMore.setVisibility(View.VISIBLE);
                         downloadMovieReviews();
@@ -103,13 +104,55 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         });
 
         // Download reviews
-        downloadMovieReviews();
+        if (savedInstanceState == null || !savedInstanceState.containsKey("review_list")) {
+            downloadMovieReviews();
+        }
     }
     @Override
     protected void onStop() {
         super.onStop();
         // Cancel any pending network requests
         VolleySingleton.getInstance(this).requestQueue.cancelAll(this.getClass().getName());
+    }
+
+    // Save and restore layout state
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (layoutManager != null && adapter != null) {
+            // Put movie and reviews
+            outState.putString("movie_id", movieId);
+            outState.putString("movie_name", movieName);
+            outState.putParcelableArrayList("review_list", adapter.reviewList);
+            // Put layout manager state
+            outState.putParcelable("layout_manager_state", layoutManager.onSaveInstanceState());
+            // Put counters and flags
+            outState.putBoolean("is_loading", isLoading);
+            outState.putBoolean("is_more_locked", isLoadMoreLocked);
+            outState.putInt("page_to_download", pageToDownload);
+            outState.putInt("total_pages", totalPages);
+        }
+        super.onSaveInstanceState(outState);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Get movie and reviews
+        movieId = savedInstanceState.getString("movie_id");
+        movieName = savedInstanceState.getString("movie_name");
+        adapter.reviewList = savedInstanceState.getParcelableArrayList("review_list");
+        // Get layout manager state
+        layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layout_manager_state"));
+        // Get flag counters and flags
+        totalPages = savedInstanceState.getInt("total_pages");
+        pageToDownload = savedInstanceState.getInt("page_to_download");
+        isLoadMoreLocked = savedInstanceState.getBoolean("is_more_locked");
+        isLoading = savedInstanceState.getBoolean("is_loading");
+        // If activity was previously downloading and it stopped, download again
+        if (isLoading) {
+            downloadMovieReviews();
+        } else {
+            onDownloadSuccessful();
+        }
     }
 
     // Toolbar actions
@@ -130,6 +173,8 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
             adapter = new ReviewListAdapter(new ArrayList<Review>(), this);
             reviewList.setAdapter(adapter);
         }
+        // Set flag
+        isLoading = true;
         // Download reviews
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, TMDBHelper.getMovieReviewsLink(this, movieId, pageToDownload), null,
@@ -169,6 +214,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         VolleySingleton.getInstance(this).requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
+        isLoading = false;
         if (adapter.reviewList.size() == 0) {
             // Set text message for no reviews
             noResultsMessage.setText(R.string.review_no_results);
@@ -179,8 +225,6 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
             loadingMore.setVisibility(View.GONE);
             reviewList.setVisibility(View.GONE);
         } else {
-            // Update flag
-            isLoading = false;
             // Toggle visibility
             errorMessage.setVisibility(View.GONE);
             progressCircle.setVisibility(View.GONE);
@@ -191,13 +235,14 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         }
     }
     private void onDownloadFailed() {
+        isLoading = false;
         if (pageToDownload == 1) {
-            isLoading = false;
             errorMessage.setVisibility(View.VISIBLE);
             reviewList.setVisibility(View.GONE);
         } else {
             errorMessage.setVisibility(View.GONE);
             reviewList.setVisibility(View.VISIBLE);
+            isLoadMoreLocked = true;
         }
         progressCircle.setVisibility(View.GONE);
         loadingMore.setVisibility(View.GONE);
@@ -222,8 +267,6 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         Intent writeReview = new Intent(Intent.ACTION_VIEW, Uri.parse(TMDBHelper.getWriteReviewLink(movieId)));
         startActivity(writeReview);
     }
-
-    // Respond to clicks of review item
     @Override
     public void onReviewClicked(int position) {
         Review review = adapter.reviewList.get(position);

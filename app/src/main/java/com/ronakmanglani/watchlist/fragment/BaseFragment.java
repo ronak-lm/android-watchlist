@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -133,12 +134,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
                 pageToDownload = savedInstanceState.getInt("pageToDownload");
                 layoutManager.onRestoreInstanceState(savedInstanceState.getParcelable("layoutManagerState"));
                 // Update UI
-                errorMessage.setVisibility(View.GONE);
-                progressCircle.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
-                swipeRefreshLayout.setVisibility(View.VISIBLE);
-                swipeRefreshLayout.setRefreshing(false);
-                swipeRefreshLayout.setEnabled(true);
+                onDownloadSuccessful();
             } else {
                 // Data not found, download from TMDB
                 downloadMoviesList();
