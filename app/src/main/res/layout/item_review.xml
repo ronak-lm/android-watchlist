@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/review_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/medium_margin"
-    android:orientation="vertical"
-    android:padding="@dimen/large_margin"
     android:background="@color/text_secondary">
 
-    <!-- Icon and Username -->
-    <LinearLayout android:id="@+id/review_header"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/review_open"
-        android:layout_toStartOf="@+id/review_open"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-        <ImageView style="@style/ReviewIconStyle"
-            android:src="@drawable/icon_user"
-            tools:ignore="ContentDescription" />
-        <TextView android:id="@+id/review_author"
-            style="@style/ReviewAuthorStyle"
-            tools:text="User Name"/>
-    </LinearLayout>
-
-    <!-- Review open icon -->
-    <ImageView android:id="@+id/review_open"
-        android:layout_width="@dimen/review_open_icon_size"
-        android:layout_height="@dimen/review_open_icon_size"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:padding="@dimen/very_small_margin"
-        android:src="@drawable/icon_open"
+        android:padding="@dimen/large_margin"
+        android:orientation="vertical"
         android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        tools:ignore="contentDescription"/>
+        android:clickable="true">
 
-    <!-- Review Body -->
-    <TextView android:id="@+id/review_body"
-        style="@style/ReviewBodyStyle"
-        android:layout_below="@+id/review_header"
-        tools:text="The movie's review goes here..."/>
+        <!-- Icon and Username -->
+        <LinearLayout android:id="@+id/review_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/review_open"
+            android:layout_toStartOf="@+id/review_open"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView style="@style/ReviewIconStyle"
+                android:src="@drawable/icon_user"
+                tools:ignore="ContentDescription" />
+            <TextView android:id="@+id/review_author"
+                style="@style/ReviewAuthorStyle"
+                tools:text="User Name"/>
+        </LinearLayout>
 
-</RelativeLayout>
+        <!-- Review open icon -->
+        <ImageView android:id="@+id/review_open"
+            android:layout_width="@dimen/review_open_icon_size"
+            android:layout_height="@dimen/review_open_icon_size"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/very_small_margin"
+            android:src="@drawable/icon_open"
+            tools:ignore="contentDescription"/>
+
+        <!-- Review Body -->
+        <TextView android:id="@+id/review_body"
+            style="@style/ReviewBodyStyle"
+            android:layout_below="@+id/review_header"
+            tools:text="The movie's review goes here..."/>
+
+    </RelativeLayout>
+
+</FrameLayout>
