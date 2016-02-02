@@ -42,6 +42,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     // Layout views
     @Bind(R.id.error_message) View errorMessage;
     @Bind(R.id.progress_circle) View progressCircle;
+    @Bind(R.id.loading_more) View loadingMore;
     @Bind(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.movie_grid) RecyclerView recyclerView;
 
@@ -91,8 +92,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
                 // Check if RecyclerView has reached the end and isn't already loading
                 if (layoutManager.findLastVisibleItemPosition() == adapter.movieList.size() - 1 && !isLoadingLocked && !isLoading) {
                     if (pageToDownload < TOTAL_PAGES) {
-                        swipeRefreshLayout.setRefreshing(true);
-                        swipeRefreshLayout.setEnabled(false);
+                        loadingMore.setVisibility(View.VISIBLE);
                         downloadMoviesList();
                     }
                 }
@@ -130,11 +130,17 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
                 isLoading = savedInstanceState.getBoolean("is_loading");
                 // Continue download if stopped, else show list
                 if (isLoading) {
-                    progressCircle.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    swipeRefreshLayout.setVisibility(View.VISIBLE);
-                    swipeRefreshLayout.setRefreshing(true);
-                    swipeRefreshLayout.setEnabled(false);
+                    if (pageToDownload == 1) {
+                        progressCircle.setVisibility(View.VISIBLE);
+                        loadingMore.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.GONE);
+                        swipeRefreshLayout.setVisibility(View.GONE);
+                    } else {
+                        progressCircle.setVisibility(View.GONE);
+                        loadingMore.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                    }
                     downloadMoviesList();
                 } else {
                     onDownloadSuccessful();
@@ -235,6 +241,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         isLoading = false;
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
+        loadingMore.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(false);
@@ -245,12 +252,14 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         isLoading = false;
         if (pageToDownload == 1) {
             progressCircle.setVisibility(View.GONE);
+            loadingMore.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);
             swipeRefreshLayout.setRefreshing(false);
             swipeRefreshLayout.setVisibility(View.GONE);
             errorMessage.setVisibility(View.VISIBLE);
         } else {
             progressCircle.setVisibility(View.GONE);
+            loadingMore.setVisibility(View.GONE);
             errorMessage.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setVisibility(View.VISIBLE);
