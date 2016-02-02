@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import butterknife.Bind;
+import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -38,6 +39,9 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     private int pageToDownload;                     // Page number to download
     private boolean isLoading;                      // Flag for loading
     private boolean isLoadingLocked;                // Flag to lock loading more data
+
+    // Flag for two pane mode
+    @BindBool(R.bool.is_tablet) boolean isTablet;
 
     // Layout views
     @Bind(R.id.error_message) View errorMessage;
@@ -273,6 +277,9 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     public int getNumberOfColumns() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float widthPx = displayMetrics.widthPixels;
+        if (isTablet) {
+            widthPx = widthPx / 3;
+        }
         float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
         int columns = Math.round(widthPx / desiredPx);
         return columns > 2 ? columns : 2;
