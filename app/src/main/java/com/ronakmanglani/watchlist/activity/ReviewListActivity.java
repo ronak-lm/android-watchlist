@@ -94,7 +94,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 // Load more data if reached the end of the list
-                if (layoutManager.findLastVisibleItemPosition() == adapter.reviewList.size() - 1 && !isLoadMoreLocked) {
+                if (layoutManager.findLastVisibleItemPosition() == adapter.reviewList.size() - 1 && !isLoadMoreLocked && !isLoading) {
                     if (pageToDownload < totalPages) {
                         loadingMore.setVisibility(View.VISIBLE);
                         downloadMovieReviews();
