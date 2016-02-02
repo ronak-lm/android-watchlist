@@ -3,8 +3,6 @@ package com.ronakmanglani.watchlist.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -46,7 +43,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
 
     // Flag variables and counters
     private boolean isLoading = false;
-    private boolean isLoadMoreLocked = false;
+    private boolean isLoadingLocked = false;
     private int pageToDownload = 1;
     private int totalPages = 1;
 
@@ -94,7 +91,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 // Load more data if reached the end of the list
-                if (layoutManager.findLastVisibleItemPosition() == adapter.reviewList.size() - 1 && !isLoadMoreLocked && !isLoading) {
+                if (layoutManager.findLastVisibleItemPosition() == adapter.reviewList.size() - 1 && !isLoadingLocked && !isLoading) {
                     if (pageToDownload < totalPages) {
                         loadingMore.setVisibility(View.VISIBLE);
                         downloadMovieReviews();
@@ -121,7 +118,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         if (layoutManager != null && adapter != null) {
             outState.putParcelableArrayList("review_list", adapter.reviewList);
             outState.putBoolean("is_loading", isLoading);
-            outState.putBoolean("is_locked", isLoadMoreLocked);
+            outState.putBoolean("is_locked", isLoadingLocked);
             outState.putInt("page_to_download", pageToDownload);
             outState.putInt("total_pages", totalPages);
         }
@@ -133,7 +130,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         adapter.reviewList = savedInstanceState.getParcelableArrayList("review_list");
         totalPages = savedInstanceState.getInt("total_pages");
         pageToDownload = savedInstanceState.getInt("page_to_download");
-        isLoadMoreLocked = savedInstanceState.getBoolean("is_locked");
+        isLoadingLocked = savedInstanceState.getBoolean("is_locked");
         isLoading = savedInstanceState.getBoolean("is_loading");
         // If activity was previously downloading and it stopped, download again
         if (isLoading) {
@@ -235,7 +232,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         } else {
             errorMessage.setVisibility(View.GONE);
             reviewList.setVisibility(View.VISIBLE);
-            isLoadMoreLocked = true;
+            isLoadingLocked = true;
         }
         progressCircle.setVisibility(View.GONE);
         loadingMore.setVisibility(View.GONE);
