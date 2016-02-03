@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -49,7 +50,8 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     private String id;
     private MovieDetail movie;
 
-    // Flag for trailers
+    // Flags
+    @BindBool(R.bool.is_tablet) boolean isTablet;
     private boolean isVideoAvailable = false;
 
     // Toolbar
@@ -102,14 +104,16 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
 
         // Setup toolbar
         toolbar.setTitle(R.string.loading);
-        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().finish();
-            }
-        });
         toolbar.setOnMenuItemClickListener(this);
+        if (!isTablet) {
+            toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+        }
 
         // Download movie details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey("movie_id") && savedInstanceState.containsKey("movie_object"))) {
