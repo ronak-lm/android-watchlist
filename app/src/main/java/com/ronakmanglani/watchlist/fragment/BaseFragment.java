@@ -306,8 +306,12 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     }
     @Override
     public void onMovieClicked(int position) {
-        Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(DetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
-        startActivity(intent);
+        if (isTablet) {
+            ((MainActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(position).id);
+        } else {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra(DetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
+            startActivity(intent);
+        }
     }
 }
