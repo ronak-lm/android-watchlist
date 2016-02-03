@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.DetailActivity;
+import com.ronakmanglani.watchlist.activity.MainActivity;
 import com.ronakmanglani.watchlist.adapter.BaseMovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -216,6 +217,10 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
                                 // Create MovieThumb object and add to list
                                 Movie thumb = new Movie(id, title, year, overview, rating, poster, backdrop);
                                 adapter.movieList.add(thumb);
+                            }
+                            // Load first movie in fragment if in two-pane mode
+                            if (pageToDownload == 1 && adapter.movieList.size() > 0 && isTablet) {
+                                ((MainActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(0).id);
                             }
                             // Set next page for download
                             pageToDownload++;

@@ -114,7 +114,9 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         // Download movie details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey("movie_id") && savedInstanceState.containsKey("movie_object"))) {
             id = getArguments().getString(DetailActivity.MOVIE_ID);
-            downloadMovieDetails(id);
+            if (id.length() > 0) {
+                downloadMovieDetails(id);
+            }
         } else {
             id = savedInstanceState.getString(MOVIE_ID_KEY);
             movie = savedInstanceState.getParcelable(MOVIE_OBJECTS_KEY);
