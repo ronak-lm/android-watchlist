@@ -1,5 +1,6 @@
 package com.ronakmanglani.watchlist.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         if (isTablet && savedInstanceState == null) {
             loadDetailFragmentWith("");
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }
 
