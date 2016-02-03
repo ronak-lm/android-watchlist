@@ -85,9 +85,6 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
             case R.id.action_search:
                 Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.action_about:
-                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
-                return true;
             default: return false;
         }
     }

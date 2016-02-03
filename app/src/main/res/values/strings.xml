@@ -16,7 +16,6 @@
 
     <!-- Toolbar actions -->
     <string name="action_search">Search</string>
-    <string name="action_about">About</string>
     <string name="action_share">Share</string>
     <string name="action_share_text">Check out</string>
     <string name="action_share_using">Share using&#8230;</string>
