@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_main" />
 
-    <include layout="@layout/content_empty" />
+    <include android:id="@+id/detail_fragment"
+        layout="@layout/content_empty" />
 
 </LinearLayout>
