@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,4 +8,34 @@
     tools:context=".activity.VideosActivity"
     tools:showIn="@layout/activity_videos">
 
-</RelativeLayout>
+    <!-- Videos -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:listitem="@layout/item_video" />
+
+    <!-- Network Error Message -->
+    <include android:id="@+id/error_message"
+        layout="@layout/view_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Progress Circle -->
+    <include android:id="@+id/progress_circle"
+        layout="@layout/view_progress_circle"
+        android:layout_width="@dimen/progress_circle_width"
+        android:layout_height="@dimen/progress_circle_height"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        tools:visibility="gone" />
+
+    <!-- No Results Error Message -->
+    <include layout="@layout/view_no_results"
+        android:visibility="gone"/>
+
+</FrameLayout>
