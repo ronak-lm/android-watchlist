@@ -37,4 +37,7 @@
     <!-- Reviews Activity -->
     <string name="review_no_results">We don\'t have any reviews for\nthis movie!</string>
 
+    <!-- Videos Activity -->
+    <string name="videos_title">Videos</string>
+
 </resources>
