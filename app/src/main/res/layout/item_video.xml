@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_item"
+    android:padding="@dimen/large_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/video_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/video_image_height"
+        android:background="@color/default_image_background"/>
+
+    <TextView android:id="@+id/video_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/video_image"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="@dimen/video_title_textSize"
+        android:textColor="@color/text_primary"
+        tools:text="The Martian | Official Trailer [HD]"/>
+
+    <TextView android:id="@+id/video_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/video_name"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/video_author_textSize"
+        tools:text="20th Century Fox"/>
+
+</RelativeLayout>

@@ -78,4 +78,10 @@
     <dimen name="review_username_textSize">18sp</dimen>
     <dimen name="review_detail_textSize">16sp</dimen>
 
+    <!-- Video Item -->
+    <dimen name="video_image_width">300dp</dimen>
+    <dimen name="video_image_height">225dp</dimen>
+    <dimen name="video_title_textSize">20sp</dimen>
+    <dimen name="video_author_textSize">16sp</dimen>
+
 </resources>
