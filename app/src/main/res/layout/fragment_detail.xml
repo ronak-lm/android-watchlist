@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/large_margin"
-        android:src="@drawable/fab_favorite" />
+        android:src="@drawable/fab_favorite"
+        app:layout_behavior="com.ronakmanglani.watchlist.widget.ScrollAwareFABBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>
