@@ -23,6 +23,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.DetailActivity;
 import com.ronakmanglani.watchlist.activity.ReviewListActivity;
+import com.ronakmanglani.watchlist.activity.VideosActivity;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
@@ -427,6 +428,13 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         Intent intent = new Intent(getContext(), ReviewListActivity.class);
         intent.putExtra(ReviewListActivity.MOVIE_ID_KEY, movie.id);
         intent.putExtra(ReviewListActivity.MOVIE_NAME_KEY, movie.title);
+        startActivity(intent);
+    }
+    @OnClick(R.id.button_videos)
+    public void onVideosButtonClicked() {
+        Intent intent = new Intent(getContext(), VideosActivity.class);
+        intent.putExtra(VideosActivity.MOVIE_ID_KEY, movie.id);
+        intent.putExtra(VideosActivity.MOVIE_NAME_KEY, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.try_again)
