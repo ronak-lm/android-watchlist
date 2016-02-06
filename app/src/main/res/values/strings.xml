@@ -39,5 +39,6 @@
 
     <!-- Videos Activity -->
     <string name="videos_title">Videos</string>
+    <string name="videos_no_results">We don\'t have any videos for\nthis movie!</string>
 
 </resources>
