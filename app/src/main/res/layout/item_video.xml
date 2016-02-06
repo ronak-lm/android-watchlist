@@ -21,15 +21,15 @@
         android:ellipsize="end"
         android:textSize="@dimen/video_title_textSize"
         android:textColor="@color/text_primary"
-        tools:text="The Martian | Official Trailer [HD]"/>
+        tools:text="The Martian | Official Trailer"/>
 
-    <TextView android:id="@+id/video_author"
+    <TextView android:id="@+id/video_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/video_name"
         android:maxLines="1"
         android:ellipsize="end"
         android:textSize="@dimen/video_author_textSize"
-        tools:text="20th Century Fox"/>
+        tools:text="Size: 1080"/>
 
 </RelativeLayout>
