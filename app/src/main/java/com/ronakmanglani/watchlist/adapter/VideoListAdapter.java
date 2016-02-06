@@ -50,7 +50,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         VideoViewHolder holder = (VideoViewHolder) viewHolder;
         holder.videoImage.setImageUrl(video.imageURL, VolleySingleton.getInstance(context).imageLoader);
         holder.videoName.setText(video.title);
-        holder.videoAuthor.setText(video.author);
+        holder.videoSubtitle.setText(video.subtitle);
     }
 
     // ViewHolder for Videos
@@ -58,7 +58,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Bind(R.id.video_item) View videoItem;
         @Bind(R.id.video_image) NetworkImageView videoImage;
         @Bind(R.id.video_name) TextView videoName;
-        @Bind(R.id.video_author) TextView videoAuthor;
+        @Bind(R.id.video_subtitle) TextView videoSubtitle;
 
         public VideoViewHolder(final ViewGroup itemView, final OnVideoClickListener onVideoClickListener) {
             super(itemView);
