@@ -20,15 +20,14 @@ public class MovieDetail implements Parcelable {
     public String voteCount;
     public String backdropImage;
     public String posterImage;
-    public ArrayList<String> genre;
-    public ArrayList<String> videos;
+    public String video;
     public ArrayList<Credit> cast;
     public ArrayList<Credit> crew;
 
     // Constructors
-    public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime, String overview,
-                       String voteAverage, String voteCount, ArrayList<String> genre, String backdropImage,
-                       String posterImage, ArrayList<String> videos, ArrayList<Credit> cast, ArrayList<Credit> crew) {
+    public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime,
+                       String overview, String voteAverage, String voteCount, String backdropImage,
+                       String posterImage, String video, ArrayList<Credit> cast, ArrayList<Credit> crew) {
         this.id = id;
         this.title = title;
         this.tagline = tagline;
@@ -37,10 +36,9 @@ public class MovieDetail implements Parcelable {
         this.overview = overview;
         this.voteAverage = voteAverage;
         this.voteCount = voteCount;
-        this.genre = genre;
         this.backdropImage = backdropImage;
         this.posterImage = posterImage;
-        this.videos = videos;
+        this.video = video;
         this.cast = cast;
         this.crew = crew;
     }
@@ -55,8 +53,7 @@ public class MovieDetail implements Parcelable {
         this.voteCount = in.readString();
         this.backdropImage = in.readString();
         this.posterImage = in.readString();
-        in.readStringList(genre);
-        in.readStringList(videos);
+        this.video = in.readString();
         in.readList(cast, Credit.class.getClassLoader());
         in.readList(crew, Credit.class.getClassLoader());
     }
@@ -95,7 +92,7 @@ public class MovieDetail implements Parcelable {
         Date date = null;
         try {
             date = oldFormat.parse(releaseDate);
-        } catch (Exception ex) { }
+        } catch (Exception ignored) { }
         SimpleDateFormat newFormat = new SimpleDateFormat("dd MMMM yyyy");
         return newFormat.format(date);
     }
@@ -113,8 +110,7 @@ public class MovieDetail implements Parcelable {
         out.writeString(voteCount);
         out.writeString(backdropImage);
         out.writeString(posterImage);
-        out.writeStringList(genre);
-        out.writeStringList(videos);
+        out.writeString(video);
         out.writeList(cast);
         out.writeList(crew);
     }

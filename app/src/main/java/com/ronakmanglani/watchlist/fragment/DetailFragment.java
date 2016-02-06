@@ -154,10 +154,10 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         if (item.getItemId() == R.id.action_share) {
             if (movie != null) {
                 String shareText;
-                if (movie.videos.size() == 0) {
+                if (movie.video.length() == 0) {
                     shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
                 } else {
-                    shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + YoutubeHelper.getVideoURL(movie.videos.get(0));
+                    shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + YoutubeHelper.getVideoURL(movie.video);
                 }
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
@@ -184,11 +184,6 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
                         try {
                             // Parse JSON object to Movie
                             String backdropImage = jsonObject.getString("backdrop_path");
-                            ArrayList<String> genre = new ArrayList<>();
-                            JSONArray genreArray = jsonObject.getJSONArray("genres");
-                            for (int i = 0; i < genreArray.length(); i++) {
-                                genre.add(((JSONObject) genreArray.get(i)).getString("name"));
-                            }
                             String id = jsonObject.getString("id");
                             String overview = jsonObject.getString("overview");
                             String posterImage = jsonObject.getString("poster_path");
@@ -218,17 +213,15 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
                                 String profileImage = object.getString("profile_path");
                                 crew.add(new Credit(person_id, name, role, profileImage));
                             }
-                            ArrayList<String> videos = new ArrayList<>();
+                            String video = "";
                             JSONArray videoArray = jsonObject.getJSONObject("trailers").getJSONArray("youtube");
-                            for (int i = 0; i < videoArray.length(); i++) {
-                                JSONObject object = (JSONObject) videoArray.get(i);
-                                String videoID = object.getString("source");
-                                videos.add(videoID);
+                            if (videoArray.length() > 0) {
+                                video = videoArray.getJSONObject(0).getString("source");
                             }
 
                             // Create movie object
                             movie = new MovieDetail(id, title, tagline, releaseDate, runtime, overview, voteAverage,
-                                    voteCount, genre, backdropImage, posterImage, videos, cast, crew);
+                                    voteCount, backdropImage, posterImage, video, cast, crew);
 
                             // Bind class to layout views
                             onDownloadSuccessful();
@@ -280,19 +273,19 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
             int headerImageWidth = (int) getResources().getDimension(R.dimen.detail_backdrop_width);
             backdropImage.setImageUrl(TMDBHelper.getImageURL(movie.backdropImage, headerImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
-            if (movie.videos.size() == 0) {
+            if (movie.video.length() == 0) {
                 isVideoAvailable = false;
             } else {
                 backdropPlayButton.setVisibility(View.VISIBLE);
                 isVideoAvailable = true;
             }
         } else {
-            if (movie.videos.size() == 0) {
+            if (movie.video.length() == 0) {
                 backdropImage.setVisibility(View.GONE);
                 backdropImageDefault.setVisibility(View.VISIBLE);
                 isVideoAvailable = false;
             } else {
-                backdropImage.setImageUrl(YoutubeHelper.getThumbnailURL(movie.videos.get(0)),
+                backdropImage.setImageUrl(YoutubeHelper.getThumbnailURL(movie.video),
                         VolleySingleton.getInstance(getActivity()).imageLoader);
                 backdropPlayButton.setVisibility(View.VISIBLE);
                 isVideoAvailable = true;
@@ -447,10 +440,10 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     public void onTrailedPlayClicked() {
         if (isVideoAvailable) {
             try{
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + movie.videos.get(0)));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + movie.video));
                 startActivity(intent);
             } catch (ActivityNotFoundException ex) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + movie.videos.get(0)));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + movie.video));
                 startActivity(intent);
             }
         }
