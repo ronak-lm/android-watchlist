@@ -83,5 +83,6 @@
     <dimen name="video_image_height">225dp</dimen>
     <dimen name="video_title_textSize">20sp</dimen>
     <dimen name="video_author_textSize">16sp</dimen>
+    <dimen name="video_play_button_size">50dp</dimen>
 
 </resources>

@@ -2,21 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/video_item"
-    android:padding="@dimen/large_margin"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/large_margin"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
 
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/video_image"
+    <FrameLayout android:id="@+id/video_image_holder"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/video_image_height"
-        android:background="@color/default_image_background"/>
+        android:layout_height="@dimen/video_image_height">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/video_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@color/default_image_background"/>
+
+        <ImageView android:src="@drawable/button_play"
+            android:layout_width="@dimen/video_play_button_size"
+            android:layout_height="@dimen/video_play_button_size"
+            android:layout_gravity="center"
+            tools:ignore="contentDescription"/>
+
+    </FrameLayout>
 
     <TextView android:id="@+id/video_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/video_image"
-        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_below="@+id/video_image_holder"
+        android:layout_marginTop="@dimen/small_margin"
         android:maxLines="2"
         android:ellipsize="end"
         android:textSize="@dimen/video_title_textSize"
