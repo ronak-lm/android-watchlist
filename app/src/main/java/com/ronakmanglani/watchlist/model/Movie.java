@@ -3,7 +3,11 @@ package com.ronakmanglani.watchlist.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Movie implements Parcelable {
+import com.google.gson.Gson;
+
+import java.io.Serializable;
+
+public class Movie implements Parcelable, Serializable {
 
     // Attributes
     public String id;
@@ -58,5 +62,13 @@ public class Movie implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    // Serialization methods
+    public static String toJsonString(Movie movie) {
+        return new Gson().toJson(movie);
+    }
+    public static Movie fromJsonString(String JSON) {
+        return new Gson().fromJson(JSON, Movie.class);
     }
 }
