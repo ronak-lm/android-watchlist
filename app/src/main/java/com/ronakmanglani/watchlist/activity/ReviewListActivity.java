@@ -77,7 +77,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-        toolbarTitle.setText(R.string.title_reviews);
+        toolbarTitle.setText(R.string.reviews_title);
         toolbarSubtitle.setText(movieName);
 
         // Setup RecyclerView
@@ -207,7 +207,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         isLoading = false;
         if (adapter.reviewList.size() == 0) {
             // Set text message for no reviews
-            noResultsMessage.setText(R.string.review_no_results);
+            noResultsMessage.setText(R.string.reviews_no_results);
             // Toggle visibility
             noResults.setVisibility(View.VISIBLE);
             errorMessage.setVisibility(View.GONE);

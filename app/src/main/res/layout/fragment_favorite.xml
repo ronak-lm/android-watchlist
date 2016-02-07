@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Progress Circle -->
+    <include android:id="@+id/progress_circle"
+        layout="@layout/view_progress_circle"
+        android:layout_width="@dimen/progress_circle_width"
+        android:layout_height="@dimen/progress_circle_height"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        tools:visiblity="gone" />
+
+    <!-- Recycler View -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movie_grid"
+        android:name="com.ronakmanglani.watchlist.MovieGridFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/recycler_view_padding"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:listitem="@layout/item_movie_basic" />
+
+    <!-- No Results -->
+    <TextView android:id="@+id/no_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="@dimen/message_textSize_medium"
+        android:text="@string/favorite_no_movies"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,7 +26,9 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.DetailActivity;
 import com.ronakmanglani.watchlist.activity.ReviewListActivity;
 import com.ronakmanglani.watchlist.activity.VideosActivity;
+import com.ronakmanglani.watchlist.database.MovieDB;
 import com.ronakmanglani.watchlist.model.Credit;
+import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -50,6 +54,9 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     // Movie associated with the fragment
     private String id;
     private MovieDetail movie;
+
+    // Database object
+    private MovieDB database;
 
     // Flags
     @BindBool(R.bool.is_tablet) boolean isTablet;
@@ -97,11 +104,17 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
     @Bind(R.id.movie_cast_see_all) View movieCastSeeAllButton;
 
+    // FAB - Favorites
+    @Bind(R.id.button_favorite) FloatingActionButton favoriteButton;
+
     // Fragment lifecycle methods
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, v);
+
+        // Initialize database
+        database = MovieDB.getInstance(getContext());
 
         // Setup toolbar
         toolbar.setTitle(R.string.loading);
@@ -119,7 +132,11 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         // Download movie details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey("movie_id") && savedInstanceState.containsKey("movie_object"))) {
             id = getArguments().getString(DetailActivity.MOVIE_ID);
-            if (id.length() > 0) {
+            if (id.equals("null")) {
+                progressCircle.setVisibility(View.GONE);
+                toolbarTextHolder.setVisibility(View.GONE);
+                toolbar.setTitle(R.string.app_name);
+            } else {
                 downloadMovieDetails(id);
             }
         } else {
@@ -406,6 +423,14 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
                 movieCastSeeAllButton.setVisibility(View.GONE);
             }
         }
+
+        // Set FAB icon
+        if (database.containsMovie(movie.id)) {
+            favoriteButton.setImageResource(R.drawable.fab_favorite_selected);
+        } else {
+            favoriteButton.setImageResource(R.drawable.fab_favorite_unselected);
+        }
+        favoriteButton.setVisibility(View.VISIBLE);
     }
     private void onDownloadFailed() {
         errorMessage.setVisibility(View.VISIBLE);
@@ -467,5 +492,20 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     @OnClick(R.id.movie_cast_item3)
     public void onThirdCastItemClicked() {
         // TODO
+    }
+    @OnClick(R.id.button_favorite)
+    public void onFavoriteButtonClicked() {
+        if (database.containsMovie(movie.id)) {
+            favoriteButton.setImageResource(R.drawable.fab_favorite_unselected);
+            database.removeMovie(movie.id);
+            database.commit();
+            Toast.makeText(getContext(), R.string.favorite_removed, Toast.LENGTH_SHORT).show();
+        } else {
+            favoriteButton.setImageResource(R.drawable.fab_favorite_selected);
+            database.movieList.add(new Movie(movie.id, movie.title, movie.getYear(),
+                    movie.overview, movie.voteAverage, movie.posterImage, movie.backdropImage));
+            database.commit();
+            Toast.makeText(getContext(), R.string.favorite_added, Toast.LENGTH_SHORT).show();
+        }
     }
 }

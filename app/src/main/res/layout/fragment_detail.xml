@@ -25,12 +25,13 @@
     <include layout="@layout/content_detail" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/button_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/large_margin"
-        android:src="@drawable/fab_favorite"
+        android:src="@drawable/fab_favorite_selected"
+        android:visibility="gone"
         app:layout_behavior="com.ronakmanglani.watchlist.widget.ScrollAwareFABBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>
