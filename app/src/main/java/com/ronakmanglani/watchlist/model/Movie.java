@@ -63,12 +63,4 @@ public class Movie implements Parcelable, Serializable {
     public int describeContents() {
         return 0;
     }
-
-    // Serialization methods
-    public static String toJsonString(Movie movie) {
-        return new Gson().toJson(movie);
-    }
-    public static Movie fromJsonString(String JSON) {
-        return new Gson().fromJson(JSON, Movie.class);
-    }
 }
