@@ -24,6 +24,15 @@ public class MovieDetail implements Parcelable {
     public ArrayList<Credit> cast;
     public ArrayList<Credit> crew;
 
+    // Getters
+    public String getYear() {
+        String year = "";
+        if (releaseDate != null && !releaseDate.equals("null")) {
+            year = releaseDate.substring(0, 4);
+        }
+        return year;
+    }
+
     // Constructors
     public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime,
                        String overview, String voteAverage, String voteCount, String backdropImage,
