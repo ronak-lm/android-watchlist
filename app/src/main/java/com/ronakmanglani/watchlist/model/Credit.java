@@ -3,7 +3,11 @@ package com.ronakmanglani.watchlist.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Credit implements Parcelable {
+import com.google.gson.Gson;
+
+import java.io.Serializable;
+
+public class Credit implements Parcelable, Serializable {
 
     // Attributes
     public String id;
@@ -46,5 +50,13 @@ public class Credit implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    // Serialization and Deserialization
+    public static String toJSONString(Credit credit) {
+        return (new Gson().toJson(credit));
+    }
+    public static Credit fromJSONString(String json) {
+        return (new Gson().fromJson(json, Credit.class));
     }
 }
