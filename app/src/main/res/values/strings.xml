@@ -1,7 +1,6 @@
 <resources>
     <!-- App Title -->
     <string name="app_name">Watchlist</string>
-    <string name="title_reviews">Reviews</string>
 
     <!-- SharedPreference Keys -->
     <string name="settings_last_selection">drawer_last_page</string>
@@ -35,10 +34,16 @@
     <string name="detail_button_see_all">SEE ALL</string>
 
     <!-- Reviews Activity -->
-    <string name="review_no_results">We don\'t have any reviews for\nthis movie!</string>
+    <string name="reviews_title">Reviews</string>
+    <string name="reviews_no_results">We don\'t have any reviews for\nthis movie!</string>
 
     <!-- Videos Activity -->
     <string name="videos_title">Videos</string>
     <string name="videos_no_results">We don\'t have any videos for\nthis movie!</string>
+
+    <!-- Favorites -->
+    <string name="favorite_added">Added to favorites</string>
+    <string name="favorite_removed">Removed from favorites</string>
+    <string name="favorite_no_movies">No Favorite Movies</string>
 
 </resources>
