@@ -7,6 +7,7 @@
     <dimen name="small_margin">4dp</dimen>
     <dimen name="very_small_margin">2dp</dimen>
     <dimen name="message_textSize">20sp</dimen>
+    <dimen name="message_textSize_medium">18sp</dimen>
 
     <!-- App Drawer -->
     <dimen name="drawer_header_height">165dp</dimen>
