@@ -40,12 +40,6 @@
             android:label="@string/videos_title"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <!-- Content Provider -->
-        <provider
-            android:authorities="com.ronakmanglani.watchlist.movieprovider"
-            android:name=".database.MovieProvider"
-            android:exported="false" />
-
     </application>
 
 </manifest>

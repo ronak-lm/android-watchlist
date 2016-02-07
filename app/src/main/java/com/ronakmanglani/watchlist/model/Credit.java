@@ -51,12 +51,4 @@ public class Credit implements Parcelable, Serializable {
     public int describeContents() {
         return 0;
     }
-
-    // Serialization and Deserialization
-    public static String toJSONString(Credit credit) {
-        return (new Gson().toJson(credit));
-    }
-    public static Credit fromJSONString(String json) {
-        return (new Gson().fromJson(json, Credit.class));
-    }
 }
