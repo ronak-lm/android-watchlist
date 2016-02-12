@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.fragment.DetailFragment;
+import com.ronakmanglani.watchlist.fragment.MovieDetailFragment;
 
-public class DetailActivity extends AppCompatActivity {
+public class MovieDetailActivity extends AppCompatActivity {
 
     // Key for intent extra
     public static final String MOVIE_ID = "movie_id";
@@ -14,10 +14,10 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_movie_detail);
 
         if (savedInstanceState == null) {
-            DetailFragment fragment = new DetailFragment();
+            MovieDetailFragment fragment = new MovieDetailFragment();
 
             Bundle args = new Bundle();
             args.putString(MOVIE_ID, getIntent().getStringExtra(MOVIE_ID));

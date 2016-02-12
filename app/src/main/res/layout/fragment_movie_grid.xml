@@ -6,14 +6,14 @@
 
     <!-- To show when unable to load data -->
     <include android:id="@+id/error_message"
-        layout="@layout/view_error_message"
+        layout="@layout/layout_error_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>
 
     <!-- Progress Circle -->
     <include android:id="@+id/progress_circle"
-        layout="@layout/view_progress_circle"
+        layout="@layout/layout_progress_circle"
         android:layout_width="@dimen/progress_circle_width"
         android:layout_height="@dimen/progress_circle_height"
         android:layout_centerInParent="true"
@@ -41,7 +41,7 @@
 
     <!-- Indicator for loading more -->
     <include android:id="@+id/loading_more"
-        layout="@layout/view_progress_circle_white"
+        layout="@layout/layout_progress_circle_white"
         android:layout_width="@dimen/progress_circle_small_width"
         android:layout_height="@dimen/progress_circle_small_height"
         android:layout_marginBottom="@dimen/very_large_margin"

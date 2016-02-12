@@ -19,7 +19,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <include layout="@layout/view_separator" />
+    <include layout="@layout/layout_separator" />
 
     <!-- Videos Button -->
     <RelativeLayout android:id="@+id/button_videos"
@@ -33,7 +33,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <include layout="@layout/view_separator" />
+    <include layout="@layout/layout_separator" />
 
     <!-- Reviews Button -->
     <RelativeLayout android:id="@+id/button_reviews"

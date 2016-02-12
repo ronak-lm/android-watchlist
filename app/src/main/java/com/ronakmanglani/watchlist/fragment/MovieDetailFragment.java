@@ -23,9 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.activity.DetailActivity;
-import com.ronakmanglani.watchlist.activity.ReviewListActivity;
-import com.ronakmanglani.watchlist.activity.VideosActivity;
+import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
+import com.ronakmanglani.watchlist.activity.ReviewActivity;
+import com.ronakmanglani.watchlist.activity.VideoActivity;
 import com.ronakmanglani.watchlist.database.MovieDB;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.Movie;
@@ -45,7 +45,7 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
+public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
 
     // Keys for savedInstanceState
     private static final String MOVIE_ID_KEY = "movie_id";
@@ -110,7 +110,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     // Fragment lifecycle methods
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_detail, container, false);
+        View v = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, v);
 
         // Initialize database
@@ -131,7 +131,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
 
         // Download movie details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey("movie_id") && savedInstanceState.containsKey("movie_object"))) {
-            id = getArguments().getString(DetailActivity.MOVIE_ID);
+            id = getArguments().getString(MovieDetailActivity.MOVIE_ID);
             if (id.equals("null")) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
@@ -283,7 +283,7 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
         }
 
         // Add share button to toolbar
-        toolbar.inflateMenu(R.menu.menu_detail);
+        toolbar.inflateMenu(R.menu.menu_movie_detail);
 
         // Backdrop image
         if (movie.backdropImage != null && !movie.backdropImage.equals("null") && !movie.backdropImage.equals("")) {
@@ -443,16 +443,16 @@ public class DetailFragment extends Fragment implements Toolbar.OnMenuItemClickL
     // Click events
     @OnClick(R.id.button_reviews)
     public void onReviewsButtonClicked() {
-        Intent intent = new Intent(getContext(), ReviewListActivity.class);
-        intent.putExtra(ReviewListActivity.MOVIE_ID_KEY, movie.id);
-        intent.putExtra(ReviewListActivity.MOVIE_NAME_KEY, movie.title);
+        Intent intent = new Intent(getContext(), ReviewActivity.class);
+        intent.putExtra(ReviewActivity.MOVIE_ID_KEY, movie.id);
+        intent.putExtra(ReviewActivity.MOVIE_NAME_KEY, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.button_videos)
     public void onVideosButtonClicked() {
-        Intent intent = new Intent(getContext(), VideosActivity.class);
-        intent.putExtra(VideosActivity.MOVIE_ID_KEY, movie.id);
-        intent.putExtra(VideosActivity.MOVIE_NAME_KEY, movie.title);
+        Intent intent = new Intent(getContext(), VideoActivity.class);
+        intent.putExtra(VideoActivity.MOVIE_ID_KEY, movie.id);
+        intent.putExtra(VideoActivity.MOVIE_NAME_KEY, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.try_again)

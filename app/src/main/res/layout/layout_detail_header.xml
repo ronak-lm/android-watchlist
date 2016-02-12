@@ -4,10 +4,10 @@
     android:layout_height="@dimen/detail_backdrop_height">
 
     <!-- Backdrop Image -->
-    <include layout="@layout/view_detail_backdrop" />
+    <include layout="@layout/layout_detail_backdrop" />
 
     <!-- Buttons -->
-    <include layout="@layout/view_detail_buttons"
+    <include layout="@layout/layout_detail_buttons"
         android:layout_width="match_parent"
         android:layout_height="@dimen/detail_button_height"
         android:layout_alignParentBottom="true" />

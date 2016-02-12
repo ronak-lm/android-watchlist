@@ -18,9 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.activity.DetailActivity;
-import com.ronakmanglani.watchlist.activity.MainActivity;
-import com.ronakmanglani.watchlist.adapter.BaseMovieAdapter;
+import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
+import com.ronakmanglani.watchlist.activity.MovieActivity;
+import com.ronakmanglani.watchlist.adapter.MovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -33,7 +33,7 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieClickListener {
+public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
 
     // Constants for bundle arguments
     public static final String VIEW_TYPE_KEY = "view_type";
@@ -62,7 +62,7 @@ public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieCl
     @Bind(R.id.movie_grid) RecyclerView recyclerView;
 
     // Adapter and layout manager for RecyclerView
-    private BaseMovieAdapter adapter;
+    private MovieAdapter adapter;
     private GridLayoutManager layoutManager;
 
     // Abstract methods
@@ -83,7 +83,7 @@ public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieCl
     // Fragment lifecycle methods
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_base,container,false);
+        View v = inflater.inflate(R.layout.fragment_movie_grid,container,false);
         context = getContext();
         ButterKnife.bind(this, v);
 
@@ -92,7 +92,7 @@ public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieCl
         viewType = getArguments().getInt(VIEW_TYPE_KEY);
 
         // Setup RecyclerView
-        adapter = new BaseMovieAdapter(context, this);
+        adapter = new MovieAdapter(context, this);
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -191,7 +191,7 @@ public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieCl
         String urlToDownload = getUrlToDownload(pageToDownload);
         // Create new adapter if it's null
         if (adapter == null) {
-            adapter = new BaseMovieAdapter(context, this);
+            adapter = new MovieAdapter(context, this);
             recyclerView.setAdapter(adapter);
         }
         // Set flag
@@ -227,7 +227,7 @@ public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieCl
                             }
                             // Load first movie in fragment if in two-pane mode
                             if (pageToDownload == 1 && adapter.movieList.size() > 0 && isTablet) {
-                                ((MainActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(0).id);
+                                ((MovieActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(0).id);
                             }
                             // Set next page for download
                             pageToDownload++;
@@ -314,10 +314,10 @@ public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieCl
     @Override
     public void onMovieClicked(int position) {
         if (isTablet) {
-            ((MainActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(position).id);
+            ((MovieActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(position).id);
         } else {
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra(DetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
+            Intent intent = new Intent(context, MovieDetailActivity.class);
+            intent.putExtra(MovieDetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
             startActivity(intent);
         }
     }

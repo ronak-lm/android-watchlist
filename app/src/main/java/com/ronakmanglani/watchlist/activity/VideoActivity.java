@@ -4,8 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,8 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.adapter.VideoListAdapter;
-import com.ronakmanglani.watchlist.adapter.VideoListAdapter.OnVideoClickListener;
+import com.ronakmanglani.watchlist.adapter.VideoAdapter;
+import com.ronakmanglani.watchlist.adapter.VideoAdapter.OnVideoClickListener;
 import com.ronakmanglani.watchlist.model.Video;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -36,7 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VideosActivity extends AppCompatActivity implements OnVideoClickListener {
+public class VideoActivity extends AppCompatActivity implements OnVideoClickListener {
 
     // Key for intent extra
     public static final String MOVIE_ID_KEY = "movie_id";
@@ -48,7 +46,7 @@ public class VideosActivity extends AppCompatActivity implements OnVideoClickLis
     // Flag
     private boolean isLoading = false;
     // Adapter for RecyclerView
-    private VideoListAdapter adapter;
+    private VideoAdapter adapter;
 
     // Layout Views
     @Bind(R.id.toolbar)             Toolbar toolbar;
@@ -64,7 +62,7 @@ public class VideosActivity extends AppCompatActivity implements OnVideoClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_videos);
+        setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
 
         // Get intent extras
@@ -80,7 +78,7 @@ public class VideosActivity extends AppCompatActivity implements OnVideoClickLis
 
         // Setup RecyclerView
         GridLayoutManager layoutManager = new GridLayoutManager(this,getNumberOfColumns());
-        adapter = new VideoListAdapter(this, new ArrayList<Video>(), this);
+        adapter = new VideoAdapter(this, new ArrayList<Video>(), this);
         videoList.setHasFixedSize(true);
         videoList.setLayoutManager(layoutManager);
         videoList.setAdapter(adapter);
@@ -133,7 +131,7 @@ public class VideosActivity extends AppCompatActivity implements OnVideoClickLis
     private void downloadVideosList() {
         isLoading = true;
         if (adapter == null) {
-            adapter = new VideoListAdapter(this, new ArrayList<Video>(), this);
+            adapter = new VideoAdapter(this, new ArrayList<Video>(), this);
             videoList.setAdapter(adapter);
         }
         JsonObjectRequest request = new JsonObjectRequest(

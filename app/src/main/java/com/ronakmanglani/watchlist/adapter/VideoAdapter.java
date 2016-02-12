@@ -17,16 +17,16 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class VideoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     public ArrayList<Video> videoList;
     private final OnVideoClickListener onVideoClickListener;
 
     // Constructor
-    public VideoListAdapter(Context context,
-                            ArrayList<Video> videoList,
-                            OnVideoClickListener onVideoClickListener) {
+    public VideoAdapter(Context context,
+                        ArrayList<Video> videoList,
+                        OnVideoClickListener onVideoClickListener) {
         this.context = context;
         this.videoList = videoList;
         this.onVideoClickListener = onVideoClickListener;

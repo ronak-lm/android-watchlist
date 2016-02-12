@@ -22,7 +22,7 @@ import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 
-public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     // Key for SharedPreferences
     @BindString(R.string.settings_last_selection) String LAST_SELECTION_KEY;
@@ -35,11 +35,11 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
     // Fragment Initialization
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
+        View v = inflater.inflate(R.layout.fragment_movie_drawer, container, false);
         ButterKnife.bind(this, v);
 
         // Initialize options menu
-        toolbar.inflateMenu(R.menu.menu_main);
+        toolbar.inflateMenu(R.menu.menu_movie);
         toolbar.setOnMenuItemClickListener(this);
 
         // Respond to clicks of NavigationView
@@ -131,16 +131,16 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
         // Set selection in drawer
         item.setChecked(true);
         // Change the fragment
-        BaseFragment fragment = new BaseFragment();
+        MovieGridFragment fragment = new MovieGridFragment();
         Bundle args = new Bundle();
         if (position == 0) {
-            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_POPULAR);
+            args.putInt(MovieGridFragment.VIEW_TYPE_KEY, MovieGridFragment.VIEW_TYPE_POPULAR);
         } else if (position == 1) {
-            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_RATED);
+            args.putInt(MovieGridFragment.VIEW_TYPE_KEY, MovieGridFragment.VIEW_TYPE_RATED);
         } else if (position == 2) {
-            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_UPCOMING);
+            args.putInt(MovieGridFragment.VIEW_TYPE_KEY, MovieGridFragment.VIEW_TYPE_UPCOMING);
         } else if (position == 3) {
-            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_PLAYING);
+            args.putInt(MovieGridFragment.VIEW_TYPE_KEY, MovieGridFragment.VIEW_TYPE_PLAYING);
         }
         fragment.setArguments(args);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();

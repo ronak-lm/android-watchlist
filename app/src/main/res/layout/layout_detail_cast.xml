@@ -90,7 +90,7 @@
 
     <!-- See All Button -->
     <include android:id="@+id/movie_cast_see_all"
-        layout="@layout/view_detail_see_all"/>
+        layout="@layout/layout_detail_see_all"/>
 
 
 </LinearLayout>

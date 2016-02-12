@@ -16,8 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.adapter.ReviewListAdapter;
-import com.ronakmanglani.watchlist.adapter.ReviewListAdapter.OnReviewClickListener;
+import com.ronakmanglani.watchlist.adapter.ReviewAdapter;
+import com.ronakmanglani.watchlist.adapter.ReviewAdapter.OnReviewClickListener;
 import com.ronakmanglani.watchlist.model.Review;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -31,7 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReviewListActivity extends AppCompatActivity implements OnReviewClickListener {
+public class ReviewActivity extends AppCompatActivity implements OnReviewClickListener {
 
     // Key for intent extra
     public static final String MOVIE_ID_KEY = "movie_id";
@@ -48,7 +48,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     private int totalPages = 1;
 
     // RecyclerView objects
-    private ReviewListAdapter adapter;
+    private ReviewAdapter adapter;
     private LinearLayoutManager layoutManager;
 
     // Layout Views
@@ -66,7 +66,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review_list);
+        setContentView(R.layout.activity_review);
         ButterKnife.bind(this);
 
         // Get intent extras
@@ -81,7 +81,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
         toolbarSubtitle.setText(movieName);
 
         // Setup RecyclerView
-        adapter = new ReviewListAdapter(new ArrayList<Review>(), this);
+        adapter = new ReviewAdapter(new ArrayList<Review>(), this);
         layoutManager = new LinearLayoutManager(this);
         reviewList.setHasFixedSize(true);
         reviewList.setLayoutManager(layoutManager);
@@ -160,7 +160,7 @@ public class ReviewListActivity extends AppCompatActivity implements OnReviewCli
     private void downloadMovieReviews() {
         // Initialize adapter if null
         if (adapter == null) {
-            adapter = new ReviewListAdapter(new ArrayList<Review>(), this);
+            adapter = new ReviewAdapter(new ArrayList<Review>(), this);
             reviewList.setAdapter(adapter);
         }
         // Set flag

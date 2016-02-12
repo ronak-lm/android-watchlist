@@ -27,7 +27,7 @@
         </android.support.design.widget.AppBarLayout>
 
         <!-- Activity content -->
-        <include layout="@layout/content_main" />
+        <include layout="@layout/content_movie" />
 
     </LinearLayout>
 
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/view_drawer_header"
-        app:menu="@menu/menu_drawer"/>
+        app:headerLayout="@layout/layout_drawer_header"
+        app:menu="@menu/menu_movie_drawer"/>
 
 </android.support.v4.widget.DrawerLayout>

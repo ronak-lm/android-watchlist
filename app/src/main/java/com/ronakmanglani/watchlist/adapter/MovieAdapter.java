@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;                                    // Context of calling activity
     private int imageWidth;                                     // Width of the CardView (in pixels)
@@ -35,7 +35,7 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final OnMovieClickListener onMovieClickListener;      // Click listener for movie item
 
     // Constructor
-    public BaseMovieAdapter(Context context, OnMovieClickListener onMovieClickListener) {
+    public MovieAdapter(Context context, OnMovieClickListener onMovieClickListener) {
         // Initialize members
         this.context = context;
         this.movieList = new ArrayList<>();

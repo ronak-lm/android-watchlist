@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_fragment"
-    android:name="com.ronakmanglani.watchlist.fragment.MainFragment"
+    android:name="com.ronakmanglani.watchlist.fragment.MovieDrawerFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:layout="@layout/fragment_main" />
+    tools:layout="@layout/fragment_movie_drawer" />

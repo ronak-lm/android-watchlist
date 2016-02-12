@@ -10,11 +10,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <fragment android:id="@+id/main_fragment"
-        android:name="com.ronakmanglani.watchlist.fragment.MainFragment"
+        android:name="com.ronakmanglani.watchlist.fragment.MovieDrawerFragment"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_movie_drawer" />
 
     <FrameLayout android:id="@+id/detail_fragment"
         android:layout_width="0dp"

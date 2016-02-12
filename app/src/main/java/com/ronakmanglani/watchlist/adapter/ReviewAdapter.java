@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ReviewListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public ArrayList<Review> reviewList;                         // List of movies to be displayed
     private final OnReviewClickListener onReviewClickListener;   // Click listener for movie item
 
     // Constructor
-    public ReviewListAdapter(ArrayList<Review> reviewList, OnReviewClickListener onReviewClickListener) {
+    public ReviewAdapter(ArrayList<Review> reviewList, OnReviewClickListener onReviewClickListener) {
         this.reviewList = reviewList;
         this.onReviewClickListener = onReviewClickListener;
     }

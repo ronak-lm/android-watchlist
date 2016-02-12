@@ -5,37 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.VideosActivity"
-    tools:showIn="@layout/activity_videos">
+    tools:context=".activity.ReviewActivity"
+    tools:showIn="@layout/activity_review">
 
-    <!-- Videos -->
+    <!-- Reviews -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/video_list"
+        android:id="@+id/review_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/review_list_paddingBottom"
+        android:clipToPadding="false"
         android:visibility="gone"
         tools:visibility="visible"
-        tools:listitem="@layout/item_video" />
+        tools:listitem="@layout/item_review" />
 
     <!-- Network Error Message -->
     <include android:id="@+id/error_message"
-        layout="@layout/view_error_message"
+        layout="@layout/layout_error_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:visibility="gone" />
 
+    <!-- No Results Error Message -->
+    <include layout="@layout/layout_no_results"
+        android:visibility="gone"/>
+
     <!-- Progress Circle -->
     <include android:id="@+id/progress_circle"
-        layout="@layout/view_progress_circle"
+        layout="@layout/layout_progress_circle"
         android:layout_width="@dimen/progress_circle_width"
         android:layout_height="@dimen/progress_circle_height"
         android:layout_gravity="center"
         android:visibility="visible"
         tools:visibility="gone" />
 
-    <!-- No Results Error Message -->
-    <include layout="@layout/view_no_results"
-        android:visibility="gone"/>
+    <!-- Indicator for loading more -->
+    <include android:id="@+id/loading_more"
+        layout="@layout/layout_progress_circle_white"
+        android:layout_width="@dimen/progress_circle_small_width"
+        android:layout_height="@dimen/progress_circle_small_height"
+        android:layout_marginBottom="@dimen/very_large_margin"
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="gone" />
 
 </FrameLayout>

@@ -50,7 +50,7 @@ public class ReviewDetailActivity extends AppCompatActivity {
     // Toolbar options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        getMenuInflater().inflate(R.menu.menu_movie_detail, menu);
         return true;
     }
     @Override

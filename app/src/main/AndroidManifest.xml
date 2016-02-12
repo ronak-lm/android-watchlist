@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.MovieActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,17 +27,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.DetailActivity"
+            android:name=".activity.MovieDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.ReviewListActivity"
+            android:name=".activity.ReviewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ReviewDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.VideosActivity"
-            android:label="@string/videos_title"
+            android:name=".activity.VideoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
