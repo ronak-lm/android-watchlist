@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:ellipsize="end"
+        android:textStyle="bold"
         android:textSize="@dimen/text_xlarge"
         android:textColor="@android:color/white"
         tools:text="Movie Name"/>
