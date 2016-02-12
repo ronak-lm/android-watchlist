@@ -55,8 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_primary"
-                android:textSize="@dimen/movie_title_fontSize"
-                android:maxLines="@integer/movie_title_maxLines"
+                android:textSize="@dimen/text_large"
+                android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="My Awesome Movie Title"/>
 
@@ -65,8 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_chrome"
-                android:textSize="@dimen/movie_year_fontSize"
-                android:maxLines="@integer/movie_year_maxLines"
+                android:textSize="@dimen/text_medium"
+                android:maxLines="1"
                 tools:text="2015"/>
 
         </LinearLayout>
@@ -84,19 +84,19 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/rating_icon"
                 android:layout_toStartOf="@+id/rating_icon"
-                android:layout_marginRight="@dimen/small_margin"
-                android:layout_marginEnd="@dimen/small_margin"
+                android:layout_marginRight="@dimen/dist_small"
+                android:layout_marginEnd="@dimen/dist_small"
                 android:textColor="@color/text_primary"
-                android:textSize="@dimen/movie_year_fontSize"
-                android:maxLines="@integer/movie_year_maxLines"
+                android:textSize="@dimen/text_medium"
+                android:maxLines="1"
                 tools:text="8.76"/>
 
             <ImageView android:id="@+id/rating_icon"
                 android:layout_width="@dimen/movie_rating_icon_size"
                 android:layout_height="@dimen/movie_rating_icon_size"
-                android:layout_marginEnd="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/medium_margin"
-                android:layout_marginBottom="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/dist_medium"
+                android:layout_marginRight="@dimen/dist_medium"
+                android:layout_marginBottom="@dimen/dist_medium"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/icon_star"

@@ -45,7 +45,7 @@
         layout="@layout/layout_progress_circle_white"
         android:layout_width="@dimen/progress_circle_small_width"
         android:layout_height="@dimen/progress_circle_small_height"
-        android:layout_marginBottom="@dimen/very_large_margin"
+        android:layout_marginBottom="@dimen/dist_xlarge"
         android:layout_gravity="center_horizontal|bottom"
         android:visibility="gone" />
 

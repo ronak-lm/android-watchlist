@@ -9,10 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/large_margin"
-        android:layout_marginRight="@dimen/large_margin"
+        android:layout_marginLeft="@dimen/dist_large"
+        android:layout_marginRight="@dimen/dist_large"
         android:gravity="center"
-        android:textSize="@dimen/message_textSize"
+        android:textSize="@dimen/text_xxlarge"
         tools:text="No Results"/>
 
 </RelativeLayout>

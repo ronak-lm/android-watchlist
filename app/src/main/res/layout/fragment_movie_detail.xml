@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/large_margin"
+        android:layout_margin="@dimen/dist_large"
         android:src="@drawable/fab_favorite_selected"
         android:visibility="gone"
         app:layout_behavior="com.ronakmanglani.watchlist.widget.ScrollAwareFABBehavior"/>

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- General - For all activities -->
-    <dimen name="very_large_margin">32dp</dimen>
-    <dimen name="large_margin">16dp</dimen>
-    <dimen name="medium_margin">8dp</dimen>
-    <dimen name="small_margin">4dp</dimen>
-    <dimen name="very_small_margin">2dp</dimen>
-    <dimen name="message_textSize">20sp</dimen>
-    <dimen name="message_textSize_medium">18sp</dimen>
+
+    <!-- General Margin/Padding -->
+    <dimen name="dist_xlarge">32dp</dimen>
+    <dimen name="dist_large">16dp</dimen>
+    <dimen name="dist_medium">8dp</dimen>
+    <dimen name="dist_small">4dp</dimen>
+    <dimen name="dist_xsmall">2dp</dimen>
+
+    <!-- General Text Sizes -->
+    <dimen name="text_xxlarge">20sp</dimen>
+    <dimen name="text_xlarge">18sp</dimen>
+    <dimen name="text_large">16sp</dimen>
+    <dimen name="text_medium">14sp</dimen>
+    <dimen name="text_small">12sp</dimen>
 
     <!-- App Drawer -->
     <dimen name="drawer_header_height">165dp</dimen>
@@ -24,9 +30,7 @@
     <!-- Error Message -->
     <dimen name="error_icon_width">120dp</dimen>
     <dimen name="error_icon_height">120dp</dimen>
-    <dimen name="error_message_fontSize">16sp</dimen>
     <dimen name="error_message_marginTop">15dp</dimen>
-    <dimen name="error_try_again_fontSize">20sp</dimen>
     <dimen name="error_try_again_padding">8dp</dimen>
 
     <!-- RecyclerView Dimensions -->
@@ -39,33 +43,20 @@
     <dimen name="movie_image_height">135dp</dimen>
     <dimen name="movie_info_height">65dp</dimen>
     <dimen name="movie_info_padding">5dp</dimen>
-    <dimen name="movie_title_fontSize">16sp</dimen>
-    <dimen name="movie_year_fontSize">14sp</dimen>
     <dimen name="movie_rating_icon_size">16dp</dimen>
-    <integer name="movie_title_maxLines">2</integer>
-    <integer name="movie_year_maxLines">1</integer>
 
     <!-- Movie Detail Item in RecyclerView -->
-    <dimen name="movie_detail_title_textSize">20sp</dimen>
     <dimen name="movie_detail_card_height">200dp</dimen>
     <dimen name="movie_detail_poster_width">120dp</dimen>
-    <dimen name="movie_detail_year_textSize">14sp</dimen>
-    <dimen name="movie_detail_overview_textSize">15sp</dimen>
 
     <!-- Detail Activity -->
-    <dimen name="detail_toolbar_title_textSize">18sp</dimen>
-    <dimen name="detail_toolbar_subtitle_textSize">12sp</dimen>
     <dimen name="detail_backdrop_width">444dp</dimen>
     <dimen name="detail_backdrop_height">250dp</dimen>
     <dimen name="detail_play_button_size">50dp</dimen>
     <dimen name="detail_poster_width">100dp</dimen>
     <dimen name="detail_poster_height">150dp</dimen>
-    <dimen name="detail_title_textSize">20sp</dimen>
-    <dimen name="detail_vote_textSize">12sp</dimen>
     <dimen name="detail_button_height">65dp</dimen>
     <dimen name="detail_button_icon_size">22dp</dimen>
-    <dimen name="detail_button_textSize">12sp</dimen>
-    <dimen name="detail_item_textSize">14sp</dimen>
     <dimen name="detail_icon_size">16dp</dimen>
     <dimen name="detail_see_all_height">40dp</dimen>
     <dimen name="detail_arrow_size">12dp</dimen>
@@ -76,14 +67,10 @@
     <dimen name="review_list_paddingBottom">88dp</dimen>
     <dimen name="review_user_icon_size">25dp</dimen>
     <dimen name="review_open_icon_size">24dp</dimen>
-    <dimen name="review_username_textSize">18sp</dimen>
-    <dimen name="review_detail_textSize">16sp</dimen>
 
     <!-- Video Item -->
     <dimen name="video_image_width">300dp</dimen>
     <dimen name="video_image_height">225dp</dimen>
-    <dimen name="video_title_textSize">20sp</dimen>
-    <dimen name="video_author_textSize">16sp</dimen>
     <dimen name="video_play_button_size">50dp</dimen>
 
 </resources>

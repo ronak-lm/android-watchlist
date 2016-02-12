@@ -4,9 +4,9 @@
     android:id="@+id/movie_overview_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/medium_margin"
+    android:layout_marginTop="@dimen/dist_medium"
     android:orientation="vertical"
-    android:padding="@dimen/large_margin"
+    android:padding="@dimen/dist_large"
     android:background="@color/text_secondary">
 
     <!-- Header -->

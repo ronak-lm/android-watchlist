@@ -4,8 +4,8 @@
     android:id="@+id/toolbar_text_holder"
     android:layout_width="wrap_content"
     android:layout_height="?attr/actionBarSize"
-    android:layout_marginRight="@dimen/large_margin"
-    android:layout_marginEnd="@dimen/large_margin"
+    android:layout_marginRight="@dimen/dist_large"
+    android:layout_marginEnd="@dimen/dist_large"
     android:gravity="center_vertical"
     android:orientation="vertical">
 
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="@dimen/detail_toolbar_title_textSize"
+        android:textSize="@dimen/text_xlarge"
         android:textColor="@android:color/white"
         tools:text="Movie Name"/>
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="@dimen/detail_toolbar_subtitle_textSize"
+        android:textSize="@dimen/text_small"
         android:textColor="@android:color/white"
         tools:text="Tagline"/>
 

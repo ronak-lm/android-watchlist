@@ -4,7 +4,7 @@
     android:id="@+id/video_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/large_margin"
+    android:padding="@dimen/dist_large"
     android:background="?attr/selectableItemBackground"
     android:clickable="true">
 
@@ -31,10 +31,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/video_image_holder"
-        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginTop="@dimen/dist_small"
         android:maxLines="2"
         android:ellipsize="end"
-        android:textSize="@dimen/video_title_textSize"
+        android:textSize="@dimen/text_xxlarge"
         android:textColor="@color/text_primary"
         tools:text="The Martian | Official Trailer"/>
 
@@ -44,7 +44,7 @@
         android:layout_below="@+id/video_name"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="@dimen/video_author_textSize"
+        android:textSize="@dimen/text_large"
         tools:text="Size: 1080"/>
 
 </RelativeLayout>

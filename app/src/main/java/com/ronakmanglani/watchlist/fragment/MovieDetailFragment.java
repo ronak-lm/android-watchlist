@@ -344,7 +344,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieCrewValues.get(1).setVisibility(View.GONE);
             movieCrewSeeAllButton.setVisibility(View.GONE);
             // Fix padding
-            int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+            int padding = getResources().getDimensionPixelSize(R.dimen.dist_large);
             movieCrewHolder.setPadding(padding, padding, padding, padding);
         } else if (movie.crew.size() >= 2) {
             // Set values
@@ -352,7 +352,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieCrewValues.get(1).setText(movie.crew.get(1).role + ": " + movie.crew.get(1).name);
             // Hide views
             if (movie.crew.size() == 2) {
-                int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+                int padding = getResources().getDimensionPixelSize(R.dimen.dist_large);
                 movieCrewHolder.setPadding(padding, padding, padding, padding);
                 movieCrewSeeAllButton.setVisibility(View.GONE);
             }
@@ -374,7 +374,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieCastItems.get(2).setVisibility(View.GONE);
             movieCastItems.get(1).setVisibility(View.GONE);
             // Fix padding
-            int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+            int padding = getResources().getDimensionPixelSize(R.dimen.dist_large);
             movieCastHolder.setPadding(padding, padding, padding, padding);
         } else if (movie.cast.size() == 2) {
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
@@ -394,7 +394,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieCastSeeAllButton.setVisibility(View.GONE);
             movieCastItems.get(2).setVisibility(View.GONE);
             // Fix padding
-            int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+            int padding = getResources().getDimensionPixelSize(R.dimen.dist_large);
             movieCastHolder.setPadding(padding, padding, padding, padding);
         } else if (movie.cast.size() >= 3) {
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
@@ -418,7 +418,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide show all button
             if (movie.cast.size() == 3) {
-                int padding = getResources().getDimensionPixelSize(R.dimen.large_margin);
+                int padding = getResources().getDimensionPixelSize(R.dimen.dist_large);
                 movieCastHolder.setPadding(padding, padding, padding, padding);
                 movieCastSeeAllButton.setVisibility(View.GONE);
             }

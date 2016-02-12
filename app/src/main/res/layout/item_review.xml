@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/medium_margin"
+    android:layout_marginTop="@dimen/dist_medium"
     android:background="@color/text_secondary">
 
     <RelativeLayout android:id="@+id/review_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/large_margin"
+        android:padding="@dimen/dist_large"
         android:orientation="vertical"
         android:background="?attr/selectableItemBackground"
         android:clickable="true">
@@ -38,7 +38,7 @@
             android:layout_height="@dimen/review_open_icon_size"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:padding="@dimen/very_small_margin"
+            android:padding="@dimen/dist_xsmall"
             android:src="@drawable/icon_open"
             tools:ignore="contentDescription"/>
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/very_large_margin"
+    android:paddingBottom="@dimen/dist_xlarge"
     android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.ReviewDetailActivity"
@@ -14,9 +14,9 @@
     <TextView android:id="@+id/review_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/large_margin"
+        android:layout_margin="@dimen/dist_large"
         android:textColor="@color/text_primary"
-        android:textSize="@dimen/review_detail_textSize"
+        android:textSize="@dimen/text_large"
         tools:text="Movie review goes here..."/>
 
 </android.support.v4.widget.NestedScrollView>

@@ -4,11 +4,11 @@
     android:id="@+id/movie_cast_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/medium_margin"
-    android:paddingTop="@dimen/large_margin"
-    android:paddingLeft="@dimen/large_margin"
-    android:paddingRight="@dimen/large_margin"
-    android:paddingBottom="@dimen/small_margin"
+    android:layout_marginTop="@dimen/dist_medium"
+    android:paddingTop="@dimen/dist_large"
+    android:paddingLeft="@dimen/dist_large"
+    android:paddingRight="@dimen/dist_large"
+    android:paddingBottom="@dimen/dist_small"
     android:orientation="vertical"
     android:background="@color/text_secondary">
 

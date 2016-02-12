@@ -4,7 +4,7 @@
     android:id="@+id/basic_info_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/large_margin"
+    android:padding="@dimen/dist_large"
     android:background="@color/text_secondary"
     android:orientation="horizontal">
 
@@ -36,8 +36,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/large_margin"
-        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginLeft="@dimen/dist_large"
+        android:layout_marginStart="@dimen/dist_large"
         android:orientation="vertical">
 
         <!-- Title -->
@@ -47,7 +47,7 @@
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/text_primary"
-            android:textSize="@dimen/detail_title_textSize"
+            android:textSize="@dimen/text_xxlarge"
             tools:text="My Awesome Movie Title"/>
 
         <!-- Release date and runtime -->
@@ -61,7 +61,7 @@
         <LinearLayout android:id="@+id/movie_rating_holder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginTop="@dimen/dist_large"
             android:orientation="horizontal">
 
             <!-- Average Rating -->
@@ -77,14 +77,14 @@
             <TextView android:id="@+id/movie_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/medium_margin"
-                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/dist_medium"
+                android:layout_marginStart="@dimen/dist_medium"
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
                 android:textColor="@color/text_primary"
                 android:drawableLeft="@drawable/icon_votes"
                 android:drawableStart="@drawable/icon_votes"
-                android:drawablePadding="@dimen/small_margin"
+                android:drawablePadding="@dimen/dist_small"
                 tools:text="256 votes"/>
 
         </LinearLayout>

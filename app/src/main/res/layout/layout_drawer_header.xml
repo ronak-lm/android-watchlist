@@ -17,9 +17,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="@dimen/large_margin"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginBottom="@dimen/large_margin"
+        android:layout_marginLeft="@dimen/dist_large"
+        android:layout_marginStart="@dimen/dist_large"
+        android:layout_marginBottom="@dimen/dist_large"
         tools:ignore="contentDescription"/>
 
 </RelativeLayout>
