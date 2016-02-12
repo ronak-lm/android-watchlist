@@ -28,12 +28,4 @@
 
     <include layout="@layout/content_review" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/write_review_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/dist_large"
-        android:src="@drawable/fab_write" />
-
 </android.support.design.widget.CoordinatorLayout>

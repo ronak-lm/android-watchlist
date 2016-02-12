@@ -64,8 +64,7 @@
     <dimen name="detail_cast_image_width">40dp</dimen>
 
     <!-- Review Activity -->
-    <dimen name="review_list_paddingBottom">88dp</dimen>
-    <dimen name="review_user_icon_size">25dp</dimen>
+    <dimen name="review_user_icon_size">26dp</dimen>
     <dimen name="review_open_icon_size">24dp</dimen>
 
     <!-- Video Item -->

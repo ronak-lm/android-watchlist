@@ -13,7 +13,7 @@
         android:id="@+id/review_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/review_list_paddingBottom"
+        android:paddingBottom="@dimen/dist_medium"
         android:clipToPadding="false"
         android:visibility="gone"
         tools:visibility="visible"

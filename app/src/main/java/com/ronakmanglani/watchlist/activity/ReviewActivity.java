@@ -252,11 +252,6 @@ public class ReviewActivity extends AppCompatActivity implements OnReviewClickLi
         adapter = null;
         downloadMovieReviews();
     }
-    @OnClick(R.id.write_review_button)
-    public void onWriteReviewButtonClicked() {
-        Intent writeReview = new Intent(Intent.ACTION_VIEW, Uri.parse(TMDBHelper.getWriteReviewLink(movieId)));
-        startActivity(writeReview);
-    }
     @Override
     public void onReviewClicked(int position) {
         Review review = adapter.reviewList.get(position);
