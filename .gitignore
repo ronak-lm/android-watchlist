@@ -6,4 +6,4 @@
 .DS_Store
 /build
 /captures
-/app/src/main/res/values/tmdb.xml
+/app/src/main/res/values/keys.xml
