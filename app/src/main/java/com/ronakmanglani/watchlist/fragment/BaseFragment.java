@@ -22,6 +22,7 @@ import com.ronakmanglani.watchlist.activity.DetailActivity;
 import com.ronakmanglani.watchlist.activity.MainActivity;
 import com.ronakmanglani.watchlist.adapter.BaseMovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
+import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import org.json.JSONArray;
@@ -32,12 +33,21 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieClickListener {
+public class BaseFragment extends Fragment implements BaseMovieAdapter.OnMovieClickListener {
 
+    // Constants for bundle arguments
+    public static final String VIEW_TYPE_KEY = "view_type";
+    public static final int VIEW_TYPE_POPULAR = 1;
+    public static final int VIEW_TYPE_RATED = 2;
+    public static final int VIEW_TYPE_UPCOMING = 3;
+    public static final int VIEW_TYPE_PLAYING = 4;
+
+    // Page counters
+    private int pageToDownload;                     // Page number to download
     private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
 
     private Context context;                        // Activity context
-    private int pageToDownload;                     // Page number to download
+    private int viewType;                           // Type of movies to show
     private boolean isLoading;                      // Flag for loading
     private boolean isLoadingLocked;                // Flag to lock loading more data
 
@@ -56,9 +66,19 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
     private GridLayoutManager layoutManager;
 
     // Abstract methods
-    public abstract String getUrlToDownload(int page);
-    public abstract boolean isDetailedViewEnabled();
-    public abstract int getSpanLocation();
+    public String getUrlToDownload(int page) {
+        if (viewType == VIEW_TYPE_POPULAR) {
+            return TMDBHelper.getMostPopularMoviesLink(getActivity(), page);
+        } else if (viewType == VIEW_TYPE_RATED) {
+            return TMDBHelper.getHighestRatedMoviesLink(getActivity(), page);
+        } else if (viewType == VIEW_TYPE_UPCOMING) {
+            return TMDBHelper.getUpcomingMoviesLink(getActivity(), page);
+        } else if (viewType == VIEW_TYPE_PLAYING) {
+            return TMDBHelper.getNowPlayingMoviesLink(getActivity(), page);
+        } else {
+            return "";
+        }
+    }
 
     // Fragment lifecycle methods
     @Override
@@ -67,26 +87,13 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         context = getContext();
         ButterKnife.bind(this, v);
 
-        // Initialize count
+        // Initialize variables
         pageToDownload = 1;
-
-        // Setup layout manager and adapter
-        adapter = new BaseMovieAdapter(context, this, isDetailedViewEnabled(), getSpanLocation());
-        layoutManager = new GridLayoutManager(context, getNumberOfColumns());
-        if (isDetailedViewEnabled()) {
-            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    if ((position + 1) % 7 == getSpanLocation()) {
-                        return 2;
-                    } else {
-                        return 1;
-                    }
-                }
-            });
-        }
+        viewType = getArguments().getInt(VIEW_TYPE_KEY);
 
         // Setup RecyclerView
+        adapter = new BaseMovieAdapter(context, this);
+        layoutManager = new GridLayoutManager(context, getNumberOfColumns());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -184,7 +191,7 @@ public abstract class BaseFragment extends Fragment implements BaseMovieAdapter.
         String urlToDownload = getUrlToDownload(pageToDownload);
         // Create new adapter if it's null
         if (adapter == null) {
-            adapter = new BaseMovieAdapter(context, this, isDetailedViewEnabled(), getSpanLocation());
+            adapter = new BaseMovieAdapter(context, this);
             recyclerView.setAdapter(adapter);
         }
         // Set flag

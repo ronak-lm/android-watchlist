@@ -131,18 +131,18 @@ public class MainFragment extends Fragment implements Toolbar.OnMenuItemClickLis
         // Set selection in drawer
         item.setChecked(true);
         // Change the fragment
-        Fragment fragment;
+        BaseFragment fragment = new BaseFragment();
+        Bundle args = new Bundle();
         if (position == 0) {
-            fragment = new MostPopularFragment();
+            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_POPULAR);
         } else if (position == 1) {
-            fragment = new TopRatedFragment();
+            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_RATED);
         } else if (position == 2) {
-            fragment = new UpcomingFragment();
+            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_UPCOMING);
         } else if (position == 3) {
-            fragment = new NowPlayingFragment();
-        } else {
-            fragment = new FavoriteFragment();
+            args.putInt(BaseFragment.VIEW_TYPE_KEY, BaseFragment.VIEW_TYPE_PLAYING);
         }
+        fragment.setArguments(args);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, fragment);
         transaction.commit();

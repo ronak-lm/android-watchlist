@@ -28,24 +28,18 @@ import butterknife.ButterKnife;
 public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;                                    // Context of calling activity
+    private int imageWidth;                                     // Width of the CardView (in pixels)
     private SharedPreferences sharedPref;                       // Application's SharedPreferences
 
     public ArrayList<Movie> movieList;                          // List of movies to be displayed
     private final OnMovieClickListener onMovieClickListener;      // Click listener for movie item
 
-    private int imageWidth;                                     // Width of the CardView (in pixels)
-    private int spanLocation;                                   // Flag to decide which view's to be detailed
-    private boolean isDetailedViewEnabled;                      // Flag to enable/disable detailed layout
-
     // Constructor
-    public BaseMovieAdapter(Context context, OnMovieClickListener onMovieClickListener,
-                            boolean isDetailedViewEnabled, int spanLocation) {
+    public BaseMovieAdapter(Context context, OnMovieClickListener onMovieClickListener) {
         // Initialize members
         this.context = context;
         this.movieList = new ArrayList<>();
         this.onMovieClickListener = onMovieClickListener;
-        this.isDetailedViewEnabled = isDetailedViewEnabled;
-        this.spanLocation = spanLocation;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         // Load CardView image width
         imageWidth = sharedPref.getInt(context.getString(R.string.settings_thumbnail_image_width), 0);
@@ -57,59 +51,78 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return movieList.size();
     }
 
-    // Return type of item (Detail or basic)
-    @Override
-    public int getItemViewType(int position) {
-        if ((position + 1) % 7 == spanLocation && isDetailedViewEnabled) {
-            return 1;       // Detail item
-        } else {
-            return 0;       // Basic item
-        }
-    }
-
     // Inflate layout and fill data
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == 1) {
-            // Inflate detailed layout
+        // ---- Modify this to enable detailed mode ----
+        /*if (viewType == 1) {
+            // DETAILED LAYOUT
             ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_detail, parent, false);
             return new MovieDetailViewHolder(v, onMovieClickListener);
         } else {
-            // Inflate basic layout
-            final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_basic, parent, false);
-            // To measure and save width of ImageView (if API >= 11)
-            ViewTreeObserver viewTreeObserver = v.getViewTreeObserver();
-            if (viewTreeObserver.isAlive()) {
-                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        // Update width integer and save to storage for next use
-                        int width = v.findViewById(R.id.movie_poster).getWidth();
-                        if (width > imageWidth) {
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putInt(context.getString(R.string.settings_thumbnail_image_width), width);
-                            editor.apply();
-                        }
-                        // Unregister LayoutListener
-                        if (Build.VERSION.SDK_INT >= 16) {
-                            v.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        } else {
-                            v.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        }
+            // BASIC LAYOUT
+        }*/
+        // Inflate basic layout
+        final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_basic, parent, false);
+        // To measure and save width of ImageView (if API >= 11)
+        ViewTreeObserver viewTreeObserver = v.getViewTreeObserver();
+        if (viewTreeObserver.isAlive()) {
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    // Update width integer and save to storage for next use
+                    int width = v.findViewById(R.id.movie_poster).getWidth();
+                    if (width > imageWidth) {
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putInt(context.getString(R.string.settings_thumbnail_image_width), width);
+                        editor.apply();
                     }
-                });
-            }
-            // Return ViewHolder
-            return new MovieBasicViewHolder(v, onMovieClickListener);
+                    // Unregister LayoutListener
+                    if (Build.VERSION.SDK_INT >= 16) {
+                        v.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    } else {
+                        v.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    }
+                }
+            });
         }
+        // Return ViewHolder
+        return new MovieBasicViewHolder(v, onMovieClickListener);
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         // Get Movie object
         Movie movie = movieList.get(position);
-        // Set attributes to ViewHolder objects
-        if (getItemViewType(position) == 1) {
-            // Detailed view
+        // Basic view
+        MovieBasicViewHolder movieViewHolder = (MovieBasicViewHolder) viewHolder;
+        if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
+            String imageUrl = TMDBHelper.getImageURL(movie.backdropImage, imageWidth);
+            movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+            movieViewHolder.imageView.setVisibility(View.VISIBLE);
+            movieViewHolder.defaultImageView.setVisibility(View.GONE);
+        } else if (movie.posterImage != null && !movie.posterImage.equals("null")) {
+            String imageUrl = TMDBHelper.getImageURL(movie.posterImage, imageWidth);
+            movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+            movieViewHolder.imageView.setVisibility(View.VISIBLE);
+            movieViewHolder.defaultImageView.setVisibility(View.GONE);
+        } else {
+            movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
+            movieViewHolder.imageView.setVisibility(View.GONE);
+        }
+        movieViewHolder.movieName.setText(movie.title);
+        movieViewHolder.releaseYear.setText(movie.year);
+        if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
+            movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
+            movieViewHolder.movieRating.setVisibility(View.GONE);
+        } else {
+            movieViewHolder.movieRatingIcon.setVisibility(View.VISIBLE);
+            movieViewHolder.movieRating.setVisibility(View.VISIBLE);
+            movieViewHolder.movieRating.setText(movie.rating);
+        }
+
+        // ---- Modify this to enable detailed mode ----
+        /*if (getItemViewType(position) == 1) {
+            // DETAILED LAYOUT
             MovieDetailViewHolder movieViewHolder = (MovieDetailViewHolder) viewHolder;
             if (movie.posterImage == null || movie.posterImage.equals("null")) {
                 movieViewHolder.imageView.setVisibility(View.GONE);
@@ -133,33 +146,8 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 movieViewHolder.movieRating.setText(movie.rating);
             }
         } else {
-            // Basic view
-            MovieBasicViewHolder movieViewHolder = (MovieBasicViewHolder) viewHolder;
-            if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
-                String imageUrl = TMDBHelper.getImageURL(movie.backdropImage, imageWidth);
-                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
-                movieViewHolder.imageView.setVisibility(View.VISIBLE);
-                movieViewHolder.defaultImageView.setVisibility(View.GONE);
-            } else if (movie.posterImage != null && !movie.posterImage.equals("null")) {
-                String imageUrl = TMDBHelper.getImageURL(movie.posterImage, imageWidth);
-                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
-                movieViewHolder.imageView.setVisibility(View.VISIBLE);
-                movieViewHolder.defaultImageView.setVisibility(View.GONE);
-            } else {
-                movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
-                movieViewHolder.imageView.setVisibility(View.GONE);
-            }
-            movieViewHolder.movieName.setText(movie.title);
-            movieViewHolder.releaseYear.setText(movie.year);
-            if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
-                movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
-                movieViewHolder.movieRating.setVisibility(View.GONE);
-            } else {
-                movieViewHolder.movieRatingIcon.setVisibility(View.VISIBLE);
-                movieViewHolder.movieRating.setVisibility(View.VISIBLE);
-                movieViewHolder.movieRating.setText(movie.rating);
-            }
-        }
+            // BASIC LAYOUT
+        }*/
     }
 
     // ViewHolders
@@ -184,7 +172,7 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             });
         }
     }
-    public class MovieDetailViewHolder extends RecyclerView.ViewHolder {
+    /*public class MovieDetailViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.movie_card) CardView cardView;
         @Bind(R.id.movie_poster_default) ImageView defaultImageView;
         @Bind(R.id.movie_poster) NetworkImageView imageView;
@@ -205,7 +193,7 @@ public class BaseMovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
             });
         }
-    }
+    }*/
 
     // Interface to respond to clicks
     public interface OnMovieClickListener {

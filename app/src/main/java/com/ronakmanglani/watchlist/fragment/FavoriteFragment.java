@@ -58,7 +58,7 @@ public class FavoriteFragment extends Fragment implements BaseMovieAdapter.OnMov
             }
         } else {
             // Setup RecyclerView
-            adapter = new BaseMovieAdapter(context, this, false, 0);
+            adapter = new BaseMovieAdapter(context, this);
             adapter.movieList = database.movieList;
             GridLayoutManager layoutManager = new GridLayoutManager(context, getNumberOfColumns());
             recyclerView.setHasFixedSize(true);
