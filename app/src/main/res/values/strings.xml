@@ -11,7 +11,6 @@
     <string name="drawer_rated">Top Rated</string>
     <string name="drawer_upcoming">Upcoming</string>
     <string name="drawer_playing">Now Playing</string>
-    <string name="drawer_favorite">Favorites</string>
 
     <!-- Toolbar actions -->
     <string name="action_search">Search</string>
@@ -40,10 +39,5 @@
     <!-- Videos Activity -->
     <string name="videos_title">Videos</string>
     <string name="videos_no_results">We don\'t have any videos for\nthis movie!</string>
-
-    <!-- Favorites -->
-    <string name="favorite_added">Added to favorites</string>
-    <string name="favorite_removed">Removed from favorites</string>
-    <string name="favorite_no_movies">No Favorite Movies</string>
 
 </resources>

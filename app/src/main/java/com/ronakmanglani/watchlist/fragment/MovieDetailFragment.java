@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,9 +25,7 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.VideoActivity;
-import com.ronakmanglani.watchlist.database.MovieDB;
 import com.ronakmanglani.watchlist.model.Credit;
-import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -54,9 +51,6 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     // Movie associated with the fragment
     private String id;
     private MovieDetail movie;
-
-    // Database object
-    private MovieDB database;
 
     // Flags
     @BindBool(R.bool.is_tablet) boolean isTablet;
@@ -104,17 +98,11 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
     @Bind(R.id.movie_cast_see_all) View movieCastSeeAllButton;
 
-    // FAB - Favorites
-    @Bind(R.id.button_favorite) FloatingActionButton favoriteButton;
-
     // Fragment lifecycle methods
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         ButterKnife.bind(this, v);
-
-        // Initialize database
-        database = MovieDB.getInstance(getContext());
 
         // Setup toolbar
         toolbar.setTitle(R.string.loading);
@@ -423,14 +411,6 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                 movieCastSeeAllButton.setVisibility(View.GONE);
             }
         }
-
-        // Set FAB icon
-        if (database.containsMovie(movie.id)) {
-            favoriteButton.setImageResource(R.drawable.fab_favorite_selected);
-        } else {
-            favoriteButton.setImageResource(R.drawable.fab_favorite_unselected);
-        }
-        favoriteButton.setVisibility(View.VISIBLE);
     }
     private void onDownloadFailed() {
         errorMessage.setVisibility(View.VISIBLE);
@@ -492,20 +472,5 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @OnClick(R.id.movie_cast_item3)
     public void onThirdCastItemClicked() {
         // TODO
-    }
-    @OnClick(R.id.button_favorite)
-    public void onFavoriteButtonClicked() {
-        if (database.containsMovie(movie.id)) {
-            favoriteButton.setImageResource(R.drawable.fab_favorite_unselected);
-            database.removeMovie(movie.id);
-            database.commit();
-            Toast.makeText(getContext(), R.string.favorite_removed, Toast.LENGTH_SHORT).show();
-        } else {
-            favoriteButton.setImageResource(R.drawable.fab_favorite_selected);
-            database.movieList.add(new Movie(movie.id, movie.title, movie.getYear(),
-                    movie.overview, movie.voteAverage, movie.posterImage, movie.backdropImage));
-            database.commit();
-            Toast.makeText(getContext(), R.string.favorite_added, Toast.LENGTH_SHORT).show();
-        }
     }
 }

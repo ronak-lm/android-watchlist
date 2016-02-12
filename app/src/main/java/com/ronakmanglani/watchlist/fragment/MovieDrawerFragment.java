@@ -116,9 +116,6 @@ public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemC
             case R.id.drawer_playing:
                 setSelectedDrawerItem(3);
                 return true;
-            case R.id.drawer_favorite:
-                setSelectedDrawerItem(4);
-                return true;
             default:
                 return false;
         }
