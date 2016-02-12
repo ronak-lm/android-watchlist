@@ -24,6 +24,7 @@ import com.ronakmanglani.watchlist.adapter.MovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
+import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -96,6 +97,7 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new ItemPaddingDecoration(context, R.dimen.recycler_item_padding));
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

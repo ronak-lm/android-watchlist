@@ -6,11 +6,11 @@
     android:minHeight="@dimen/movie_card_height"
     android:layout_height="wrap_content"
     android:layout_width="@dimen/movie_card_width"
-    android:layout_margin="@dimen/movie_card_margin"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
     cardview:cardBackgroundColor="@color/card_background"
-    cardview:cardPreventCornerOverlap="false">
+    cardview:cardPreventCornerOverlap="false"
+    cardview:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,18 +72,17 @@
         </LinearLayout>
 
         <!-- Movie Rating -->
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
 
             <TextView android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/rating_icon"
-                android:layout_toStartOf="@+id/rating_icon"
                 android:layout_marginRight="@dimen/dist_small"
                 android:layout_marginEnd="@dimen/dist_small"
                 android:textColor="@color/text_primary"
@@ -97,13 +96,11 @@
                 android:layout_marginEnd="@dimen/dist_medium"
                 android:layout_marginRight="@dimen/dist_medium"
                 android:layout_marginBottom="@dimen/dist_medium"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
                 android:src="@drawable/icon_star"
                 android:scaleType="fitCenter"
                 tools:ignore="contentDescription"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 
