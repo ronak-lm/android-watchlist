@@ -4,11 +4,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
+import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.VideoActivity;
 import com.ronakmanglani.watchlist.model.Credit;
@@ -43,10 +41,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
-
-    // Keys for savedInstanceState
-    private static final String MOVIE_ID_KEY = "movie_id";
-    private static final String MOVIE_OBJECTS_KEY = "movie_object";
 
     // Movie associated with the fragment
     private String id;
@@ -98,7 +92,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
     @Bind(R.id.movie_cast_see_all) View movieCastSeeAllButton;
 
-    // Fragment lifecycle methods
+    // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_detail, container, false);
@@ -118,8 +112,9 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
         }
 
         // Download movie details if new instance, else restore from saved instance
-        if (savedInstanceState == null || !(savedInstanceState.containsKey("movie_id") && savedInstanceState.containsKey("movie_object"))) {
-            id = getArguments().getString(MovieDetailActivity.MOVIE_ID);
+        if (savedInstanceState == null || !(savedInstanceState.containsKey(Watchlist.MOVIE_ID)
+                && savedInstanceState.containsKey(Watchlist.MOVIE_OBJECT))) {
+            id = getArguments().getString(Watchlist.MOVIE_ID);
             if (id.equals("null")) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
@@ -128,8 +123,8 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                 downloadMovieDetails(id);
             }
         } else {
-            id = savedInstanceState.getString(MOVIE_ID_KEY);
-            movie = savedInstanceState.getParcelable(MOVIE_OBJECTS_KEY);
+            id = savedInstanceState.getString(Watchlist.MOVIE_ID);
+            movie = savedInstanceState.getParcelable(Watchlist.MOVIE_OBJECT);
             onDownloadSuccessful();
         }
 
@@ -138,18 +133,15 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Persist changes when fragment is destroyed
         if (movie != null && id != null) {
-            outState.putString(MOVIE_ID_KEY, id);
-            outState.putParcelable(MOVIE_OBJECTS_KEY, movie);
+            outState.putString(Watchlist.MOVIE_ID, id);
+            outState.putParcelable(Watchlist.MOVIE_OBJECT, movie);
         }
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Cancel any pending network requests
         VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
-        // Unbind layout views
         ButterKnife.unbind(this);
     }
 
@@ -176,13 +168,11 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
         }
     }
 
-    // Network related methods
+    // JSON parsing and display
     private void downloadMovieDetails(String id) {
         String urlToDownload = TMDBHelper.getMovieDetailLink(getActivity(), id);
         JsonObjectRequest request = new JsonObjectRequest(
-                // Request method and URL to be downloaded
                 Request.Method.GET, urlToDownload, null,
-                // To respond when JSON gets downloaded
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -223,33 +213,25 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                             if (videoArray.length() > 0) {
                                 video = videoArray.getJSONObject(0).getString("source");
                             }
-
                             // Create movie object
                             movie = new MovieDetail(id, title, tagline, releaseDate, runtime, overview, voteAverage,
                                     voteCount, backdropImage, posterImage, video, cast, crew);
-
                             // Bind class to layout views
                             onDownloadSuccessful();
-
                         } catch (Exception ex) {
                             // Show error message on parsing errors
                             onDownloadFailed();
-                            Log.d("ParseError", ex.getMessage(), ex);
                         }
                     }
                 },
-                // Show error message on network errors
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        // Show error message on network errors
                         onDownloadFailed();
                     }
                 });
-
-        // Set thread tags for reference
         request.setTag(this.getClass().getName());
-
-        // Add download request to queue
         VolleySingleton.getInstance(getActivity()).requestQueue.add(request);
     }
     private void onDownloadSuccessful() {

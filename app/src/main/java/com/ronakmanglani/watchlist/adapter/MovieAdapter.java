@@ -3,7 +3,6 @@ package com.ronakmanglani.watchlist.adapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,37 +27,31 @@ import butterknife.ButterKnife;
 
 public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;                                    // Context of calling activity
-    private int imageWidth;                                     // Width of the CardView (in pixels)
-    private SharedPreferences sharedPref;                       // Application's SharedPreferences
+    private Context context;
+    private int imageWidth;
+    private SharedPreferences sharedPref;
 
-    public ArrayList<Movie> movieList;                          // List of movies to be displayed
-    private final OnMovieClickListener onMovieClickListener;      // Click listener for movie item
+    public ArrayList<Movie> movieList;
+    private final OnMovieClickListener onMovieClickListener;
 
     // Constructor
     public MovieAdapter(Context context, OnMovieClickListener onMovieClickListener) {
-        // Initialize members
         this.context = context;
         this.movieList = new ArrayList<>();
         this.onMovieClickListener = onMovieClickListener;
         sharedPref = context.getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
-        // Load CardView image width
-        imageWidth = sharedPref.getInt(Watchlist.KEY_THUMBNAIL_SIZE, 0);
+        imageWidth = sharedPref.getInt(Watchlist.THUMBNAIL_SIZE, 0);   // Load image width for grid view
     }
 
-    // Return size of ArrayList
+    // RecyclerView methods
     @Override
     public int getItemCount() {
         return movieList.size();
     }
-
-    // View type
     @Override
     public int getItemViewType(int position) {
-        return (sharedPref.getInt(Watchlist.KEY_VIEW_MODE, Watchlist.VIEW_MODE_GRID));
+        return (sharedPref.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID));
     }
-
-    // Inflate layout and fill data
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == Watchlist.VIEW_MODE_GRID) {
@@ -73,7 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                         int width = v.findViewById(R.id.movie_poster).getWidth();
                         if (width > imageWidth) {
                             SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putInt(Watchlist.KEY_THUMBNAIL_SIZE, width);
+                            editor.putInt(Watchlist.THUMBNAIL_SIZE, width);
                             editor.apply();
                         }
                         // Unregister LayoutListener
@@ -85,11 +78,11 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     }
                 });
             }
-            return new MovieBasicViewHolder(v, onMovieClickListener);
+            return new MovieGridViewHolder(v, onMovieClickListener);
         } else {
             // LIST MODE
             ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_detail, parent, false);
-            return new MovieDetailViewHolder(v, onMovieClickListener);
+            return new MovieListViewHolder(v, onMovieClickListener);
         }
 
     }
@@ -98,7 +91,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         Movie movie = movieList.get(position);
         if (getItemViewType(position) == Watchlist.VIEW_MODE_GRID) {
             // GRID MODE
-            MovieBasicViewHolder movieViewHolder = (MovieBasicViewHolder) viewHolder;
+            MovieGridViewHolder movieViewHolder = (MovieGridViewHolder) viewHolder;
             if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
                 String imageUrl = TMDBHelper.getImageURL(movie.backdropImage, imageWidth);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
@@ -125,7 +118,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
         } else {
             // LIST MODE
-            MovieDetailViewHolder movieViewHolder = (MovieDetailViewHolder) viewHolder;
+            MovieListViewHolder movieViewHolder = (MovieListViewHolder) viewHolder;
             if (movie.posterImage == null || movie.posterImage.equals("null")) {
                 movieViewHolder.imageView.setVisibility(View.GONE);
                 movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
@@ -151,7 +144,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     // ViewHolders
-    public class MovieBasicViewHolder extends RecyclerView.ViewHolder {
+    public class MovieGridViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.movie_card) CardView cardView;
         @Bind(R.id.movie_poster_default) ImageView defaultImageView;
         @Bind(R.id.movie_poster) NetworkImageView imageView;
@@ -160,7 +153,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @Bind(R.id.movie_rating) TextView movieRating;
         @Bind(R.id.rating_icon) ImageView movieRatingIcon;
 
-        public MovieBasicViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
+        public MovieGridViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -172,7 +165,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             });
         }
     }
-    public class MovieDetailViewHolder extends RecyclerView.ViewHolder {
+    public class MovieListViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.movie_card) CardView cardView;
         @Bind(R.id.movie_poster_default) ImageView defaultImageView;
         @Bind(R.id.movie_poster) NetworkImageView imageView;
@@ -182,7 +175,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @Bind(R.id.movie_rating) TextView movieRating;
         @Bind(R.id.rating_icon) ImageView movieRatingIcon;
 
-        public MovieDetailViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
+        public MovieListViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -195,7 +188,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    // Interface to respond to clicks
+    // Click listener interface
     public interface OnMovieClickListener {
         void onMovieClicked(final int position);
     }

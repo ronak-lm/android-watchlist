@@ -39,52 +39,25 @@ import butterknife.OnClick;
 
 public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
 
-    // Constants for bundle arguments
-    public static final String VIEW_TYPE_KEY = "view_type";
-    public static final int VIEW_TYPE_POPULAR = 1;
-    public static final int VIEW_TYPE_RATED = 2;
-    public static final int VIEW_TYPE_UPCOMING = 3;
-    public static final int VIEW_TYPE_PLAYING = 4;
+    private Context context;
+    private int viewType;
+    private boolean isLoading;
+    private boolean isLoadingLocked;
 
-    // Page counters
-    private int pageToDownload;                     // Page number to download
-    private static final int TOTAL_PAGES = 999;     // Total pages that can be downloaded
+    private int pageToDownload;
+    private static final int TOTAL_PAGES = 999;
 
-    private Context context;                        // Activity context
-    private int viewType;                           // Type of movies to show
-    private boolean isLoading;                      // Flag for loading
-    private boolean isLoadingLocked;                // Flag to lock loading more data
+    private MovieAdapter adapter;
+    private GridLayoutManager layoutManager;
 
-    // Flag for two pane mode
     @BindBool(R.bool.is_tablet) boolean isTablet;
-
-    // Layout views
     @Bind(R.id.error_message) View errorMessage;
     @Bind(R.id.progress_circle) View progressCircle;
     @Bind(R.id.loading_more) View loadingMore;
     @Bind(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.movie_grid) RecyclerView recyclerView;
 
-    // Adapter and layout manager for RecyclerView
-    private MovieAdapter adapter;
-    private GridLayoutManager layoutManager;
-
-    // Abstract methods
-    public String getUrlToDownload(int page) {
-        if (viewType == VIEW_TYPE_POPULAR) {
-            return TMDBHelper.getMostPopularMoviesLink(getActivity(), page);
-        } else if (viewType == VIEW_TYPE_RATED) {
-            return TMDBHelper.getHighestRatedMoviesLink(getActivity(), page);
-        } else if (viewType == VIEW_TYPE_UPCOMING) {
-            return TMDBHelper.getUpcomingMoviesLink(getActivity(), page);
-        } else if (viewType == VIEW_TYPE_PLAYING) {
-            return TMDBHelper.getNowPlayingMoviesLink(getActivity(), page);
-        } else {
-            return "";
-        }
-    }
-
-    // Fragment lifecycle methods
+    // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_grid,container,false);
@@ -93,13 +66,11 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
 
         // Initialize variables
         pageToDownload = 1;
-        viewType = getArguments().getInt(VIEW_TYPE_KEY);
-
-
-        adapter = new MovieAdapter(context, this);
-        layoutManager = new GridLayoutManager(context, getNumberOfColumns());
+        viewType = getArguments().getInt(Watchlist.VIEW_TYPE);
 
         // Setup RecyclerView
+        adapter = new MovieAdapter(context, this);
+        layoutManager = new GridLayoutManager(context, getNumberOfColumns());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new ItemPaddingDecoration(context, R.dimen.recycler_item_padding));
@@ -108,7 +79,7 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                // Check if RecyclerView has reached the end and isn't already loading
+                // Load more if RecyclerView has reached the end and isn't already loading
                 if (layoutManager.findLastVisibleItemPosition() == adapter.movieList.size() - 1 && !isLoadingLocked && !isLoading) {
                     if (pageToDownload < TOTAL_PAGES) {
                         loadingMore.setVisibility(View.VISIBLE);
@@ -118,55 +89,48 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
             }
         });
 
-        // Setup swipe to refresh
+        // Setup swipe refresh
         swipeRefreshLayout.setColorSchemeResources(R.color.accent);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Hide all views
+                // Toggle visibility
                 errorMessage.setVisibility(View.GONE);
                 progressCircle.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
-                // Invalidate current adapter
-                adapter = null;
-                // Invalidate cache
+                // Remove cache
                 VolleySingleton.getInstance(context).requestQueue.getCache().remove(getUrlToDownload(1));
-                // Download refreshed data
+                // Download again
                 pageToDownload = 1;
+                adapter = null;
                 downloadMoviesList();
             }
         });
 
         // Get the movies list
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null || !savedInstanceState.containsKey(Watchlist.MOVIE_LIST)) {
             downloadMoviesList();
         } else {
-            if (savedInstanceState.containsKey("movie_list")) {
-                // Restore data from bundle
-                adapter.movieList = savedInstanceState.getParcelableArrayList("movie_list");
-                pageToDownload = savedInstanceState.getInt("page_to_download");
-                isLoadingLocked = savedInstanceState.getBoolean("is_locked");
-                isLoading = savedInstanceState.getBoolean("is_loading");
-                // Continue download if stopped, else show list
-                if (isLoading) {
-                    if (pageToDownload == 1) {
-                        progressCircle.setVisibility(View.VISIBLE);
-                        loadingMore.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.GONE);
-                        swipeRefreshLayout.setVisibility(View.GONE);
-                    } else {
-                        progressCircle.setVisibility(View.GONE);
-                        loadingMore.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        swipeRefreshLayout.setVisibility(View.VISIBLE);
-                    }
-                    downloadMoviesList();
+            adapter.movieList = savedInstanceState.getParcelableArrayList(Watchlist.MOVIE_LIST);
+            pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
+            isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
+            isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
+            // Continue download if stopped, else show list
+            if (isLoading) {
+                if (pageToDownload == 1) {
+                    progressCircle.setVisibility(View.VISIBLE);
+                    loadingMore.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    swipeRefreshLayout.setVisibility(View.GONE);
                 } else {
-                    onDownloadSuccessful();
+                    progressCircle.setVisibility(View.GONE);
+                    loadingMore.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    swipeRefreshLayout.setVisibility(View.VISIBLE);
                 }
-            } else {
-                // Data not found, download from TMDB
                 downloadMoviesList();
+            } else {
+                onDownloadSuccessful();
             }
         }
 
@@ -175,24 +139,33 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Persist changes when fragment is destroyed
         if (layoutManager != null && adapter != null) {
-            outState.putBoolean("is_loading", isLoading);
-            outState.putBoolean("is_locked", isLoadingLocked);
-            outState.putInt("page_to_download", pageToDownload);
-            outState.putParcelableArrayList("movie_list", adapter.movieList);
+            outState.putBoolean(Watchlist.IS_LOADING, isLoading);
+            outState.putBoolean(Watchlist.IS_LOCKED, isLoadingLocked);
+            outState.putInt(Watchlist.PAGE_TO_DOWNLOAD, pageToDownload);
+            outState.putParcelableArrayList(Watchlist.MOVIE_LIST, adapter.movieList);
         }
     }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // Cancel any pending network requests
         VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
-        // Unbind layout views
         ButterKnife.unbind(this);
     }
 
-    // Network related methods
+    // JSON parsing and display
+    public String getUrlToDownload(int page) {
+        if (viewType == Watchlist.VIEW_TYPE_POPULAR) {
+            return TMDBHelper.getMostPopularMoviesLink(getActivity(), page);
+        } else if (viewType == Watchlist.VIEW_TYPE_RATED) {
+            return TMDBHelper.getHighestRatedMoviesLink(getActivity(), page);
+        } else if (viewType == Watchlist.VIEW_TYPE_UPCOMING) {
+            return TMDBHelper.getUpcomingMoviesLink(getActivity(), page);
+        } else if (viewType == Watchlist.VIEW_TYPE_PLAYING) {
+            return TMDBHelper.getNowPlayingMoviesLink(getActivity(), page);
+        }
+        return null;
+    }
     private void downloadMoviesList() {
         // Select which URL to download
         String urlToDownload = getUrlToDownload(pageToDownload);
@@ -307,9 +280,8 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
             widthPx = widthPx / 3;
         }
         // Get desired width
-
         SharedPreferences preferences = context.getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
-        if (preferences.getInt(Watchlist.KEY_VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
+        if (preferences.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
             float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
             int columns = Math.round(widthPx / desiredPx);
             return columns > 2 ? columns : 2;
@@ -318,7 +290,6 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
             int columns = Math.round(widthPx / desiredPx);
             return columns > 1 ? columns : 1;
         }
-        // Calculate
     }
 
     // Click events
@@ -333,6 +304,7 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
         progressCircle.setVisibility(View.VISIBLE);
         // Try to download the data again
         pageToDownload = 1;
+        adapter = null;
         downloadMoviesList();
     }
     @Override
@@ -341,7 +313,7 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
             ((MovieActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(position).id);
         } else {
             Intent intent = new Intent(context, MovieDetailActivity.class);
-            intent.putExtra(MovieDetailActivity.MOVIE_ID, adapter.movieList.get(position).id);
+            intent.putExtra(Watchlist.MOVIE_ID, adapter.movieList.get(position).id);
             startActivity(intent);
         }
     }
