@@ -10,22 +10,28 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.Watchlist;
 
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 
-public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
+import static android.support.design.widget.NavigationView.*;
 
-    // Key for SharedPreferences
-    @BindString(R.string.settings_last_selection) String LAST_SELECTION_KEY;
+public class MovieDrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener {
+
+    private MovieGridFragment fragment;
+    private SharedPreferences preferences;
 
     // Layout Views
     @Bind(R.id.toolbar)         Toolbar toolbar;
@@ -37,10 +43,12 @@ public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemC
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_drawer, container, false);
         ButterKnife.bind(this, v);
+        preferences = getContext().getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
 
         // Initialize options menu
         toolbar.inflateMenu(R.menu.menu_movie);
         toolbar.setOnMenuItemClickListener(this);
+        initializeMenu();
 
         // Respond to clicks of NavigationView
         navigationView.setNavigationItemSelectedListener(this);
@@ -63,8 +71,7 @@ public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemC
         actionBarDrawerToggle.syncState();
 
         // Load the last selected item from drawer
-        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        int lastPosition = preferences.getInt(LAST_SELECTION_KEY, 0);
+        int lastPosition = preferences.getInt(Watchlist.KEY_LAST_SELECTED, 0);
         if (savedInstanceState == null) {
             setSelectedDrawerItem(lastPosition);
         } else {
@@ -78,12 +85,39 @@ public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemC
     }
 
     // Respond to clicks of toolbar menu
+    private void initializeMenu() {
+       if (preferences.getInt(Watchlist.KEY_VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
+            // Grid mode
+            Menu menu = toolbar.getMenu();
+            menu.findItem(R.id.action_grid).setVisible(false);
+            menu.findItem(R.id.action_list).setVisible(true);
+        } else {
+            // List mode
+            Menu menu = toolbar.getMenu();
+            menu.findItem(R.id.action_grid).setVisible(true);
+            menu.findItem(R.id.action_list).setVisible(false);
+        }
+    }
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
                 Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_list:
+                SharedPreferences.Editor editor1 = preferences.edit();
+                editor1.putInt(Watchlist.KEY_VIEW_MODE, Watchlist.VIEW_MODE_LIST);
+                editor1.apply();
+                initializeMenu();
+                fragment.refreshLayout();
+                return true;
+            case R.id.action_grid:
+                SharedPreferences.Editor editor2 = preferences.edit();
+                editor2.putInt(Watchlist.KEY_VIEW_MODE, Watchlist.VIEW_MODE_GRID);
+                editor2.apply();
+                initializeMenu();
+                fragment.refreshLayout();
                 return true;
             default: return false;
         }
@@ -128,7 +162,7 @@ public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemC
         // Set selection in drawer
         item.setChecked(true);
         // Change the fragment
-        MovieGridFragment fragment = new MovieGridFragment();
+        fragment = new MovieGridFragment();
         Bundle args = new Bundle();
         if (position == 0) {
             args.putInt(MovieGridFragment.VIEW_TYPE_KEY, MovieGridFragment.VIEW_TYPE_POPULAR);
@@ -144,9 +178,8 @@ public class MovieDrawerFragment extends Fragment implements Toolbar.OnMenuItemC
         transaction.replace(R.id.content_frame, fragment);
         transaction.commit();
         // Save selected position to preference
-        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(LAST_SELECTION_KEY, position);
+        editor.putInt(Watchlist.KEY_LAST_SELECTED, position);
         editor.apply();
     }
 }

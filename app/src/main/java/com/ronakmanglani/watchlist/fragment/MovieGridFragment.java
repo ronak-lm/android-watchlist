@@ -2,7 +2,9 @@ package com.ronakmanglani.watchlist.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.adapter.MovieAdapter;
@@ -92,9 +95,11 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
         pageToDownload = 1;
         viewType = getArguments().getInt(VIEW_TYPE_KEY);
 
-        // Setup RecyclerView
+
         adapter = new MovieAdapter(context, this);
         layoutManager = new GridLayoutManager(context, getNumberOfColumns());
+
+        // Setup RecyclerView
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new ItemPaddingDecoration(context, R.dimen.recycler_item_padding));
@@ -288,15 +293,32 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
     }
 
     // Helper methods
+    public void refreshLayout() {
+        Parcelable state = layoutManager.onSaveInstanceState();
+        layoutManager = new GridLayoutManager(getContext(), getNumberOfColumns());
+        recyclerView.setLayoutManager(layoutManager);
+        layoutManager.onRestoreInstanceState(state);
+    }
     public int getNumberOfColumns() {
+        // Get screen width
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float widthPx = displayMetrics.widthPixels;
         if (isTablet) {
             widthPx = widthPx / 3;
         }
-        float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
-        int columns = Math.round(widthPx / desiredPx);
-        return columns > 2 ? columns : 2;
+        // Get desired width
+
+        SharedPreferences preferences = context.getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
+        if (preferences.getInt(Watchlist.KEY_VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
+            float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
+            int columns = Math.round(widthPx / desiredPx);
+            return columns > 2 ? columns : 2;
+        } else {
+            float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_detail_card_width);
+            int columns = Math.round(widthPx / desiredPx);
+            return columns > 1 ? columns : 1;
+        }
+        // Calculate
     }
 
     // Click events

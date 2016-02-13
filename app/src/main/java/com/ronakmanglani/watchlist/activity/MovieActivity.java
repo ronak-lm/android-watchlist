@@ -20,7 +20,7 @@ public class MovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie);
         ButterKnife.bind(this);
         if (isTablet && savedInstanceState == null) {
-            loadDetailFragmentWith("");
+            loadDetailFragmentWith("null");
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }
