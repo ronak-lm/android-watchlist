@@ -16,8 +16,8 @@ import butterknife.ButterKnife;
 
 public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public ArrayList<Review> reviewList;                         // List of movies to be displayed
-    private final OnReviewClickListener onReviewClickListener;   // Click listener for movie item
+    public ArrayList<Review> reviewList;
+    private final OnReviewClickListener onReviewClickListener;
 
     // Constructor
     public ReviewAdapter(ArrayList<Review> reviewList, OnReviewClickListener onReviewClickListener) {
@@ -25,13 +25,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.onReviewClickListener = onReviewClickListener;
     }
 
-    // Return size of ArrayList
+    // RecyclerView methods
     @Override
     public int getItemCount() {
         return reviewList.size();
     }
-
-    // Inflate layout and fill data
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_review, parent, false);
@@ -39,15 +37,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        // Get review
         Review review = reviewList.get(position);
-        // Set attributes to ViewHolder
         ReviewViewHolder holder = (ReviewViewHolder) viewHolder;
         holder.reviewAuthor.setText(review.author);
         holder.reviewBody.setText(review.body);
     }
 
-    // ViewHolder for Reviews
+    // ViewHolder
     public class ReviewViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.review_item) View reviewItem;
         @Bind(R.id.review_author) TextView reviewAuthor;
@@ -66,7 +62,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    // Interface to respond to clicks
+    // Click listener interface
     public interface OnReviewClickListener {
         void onReviewClicked(final int position);
     }

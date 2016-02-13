@@ -20,9 +20,12 @@ public class Watchlist extends Application {
     // Intent Extra + Bundle Argument + Saved Instance State
     public static final String TOOLBAR_TITLE = "toolbar_title";
     public static final String MOVIE_ID = "movie_id";
+    public static final String MOVIE_NAME = "movie_name";
     public static final String MOVIE_OBJECT = "movie_object";
     public static final String MOVIE_LIST = "movie_list";
+    public static final String REVIEW_LIST = "review_list";
     public static final String PAGE_TO_DOWNLOAD = "page_to_download";
+    public static final String TOTAL_PAGES = "total_pages";
     public static final String IS_LOADING = "is_loading";
     public static final String IS_LOCKED = "is_locked";
 
