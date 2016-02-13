@@ -115,7 +115,7 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
             pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
             isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
             isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
-            // Continue download if stopped, else show list
+            // Download again if stopped, else show list
             if (isLoading) {
                 if (pageToDownload == 1) {
                     progressCircle.setVisibility(View.VISIBLE);
@@ -149,8 +149,8 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
         ButterKnife.unbind(this);
+        VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
     }
 
     // JSON parsing and display
@@ -167,30 +167,20 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
         return null;
     }
     private void downloadMoviesList() {
-        // Select which URL to download
-        String urlToDownload = getUrlToDownload(pageToDownload);
-        // Create new adapter if it's null
         if (adapter == null) {
             adapter = new MovieAdapter(context, this);
             recyclerView.setAdapter(adapter);
         }
-        // Set flag
-        isLoading = true;
-        // Make JSON Request
+        String urlToDownload = getUrlToDownload(pageToDownload);
         final JsonObjectRequest request = new JsonObjectRequest (
-                // Request method and URL to be downloaded
                 Request.Method.GET, urlToDownload, null,
-                // To respond when JSON gets downloaded
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         try {
-                            // Get the result and loop through it
                             JSONArray result = jsonObject.getJSONArray("results");
                             for (int i = 0; i < result.length(); i++) {
-                                // Get movie object
                                 JSONObject movie = (JSONObject) result.get(i);
-                                // Get info from object
                                 String poster = movie.getString("poster_path");
                                 String overview = movie.getString("overview");
                                 String year = movie.getString("release_date");
@@ -201,36 +191,34 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
                                 String title = movie.getString("title");
                                 String backdrop = movie.getString("backdrop_path");
                                 String rating = movie.getString("vote_average");
-                                // Create MovieThumb object and add to list
+
                                 Movie thumb = new Movie(id, title, year, overview, rating, poster, backdrop);
                                 adapter.movieList.add(thumb);
                             }
-                            // Load first movie in fragment if in two-pane mode
-                            if (pageToDownload == 1 && adapter.movieList.size() > 0 && isTablet) {
+
+                            // Load detail fragment if in tablet mode
+                            if (isTablet && pageToDownload == 1 && adapter.movieList.size() > 0) {
                                 ((MovieActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(0).id);
                             }
-                            // Set next page for download
+
                             pageToDownload++;
-                            // Update UI
                             onDownloadSuccessful();
+
                         } catch (Exception ex) {
-                            // To show error message on parsing errors
+                            // JSON parsing error
                             onDownloadFailed();
                         }
                     }
                 },
-                // To show error message on network errors
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        // Network error
                         onDownloadFailed();
                     }
                 });
-
-        // Set thread tags for reference
+        isLoading = true;
         request.setTag(this.getClass().getName());
-
-        // Add download request to queue
         VolleySingleton.getInstance(context).requestQueue.add(request);
     }
     private void onDownloadSuccessful() {

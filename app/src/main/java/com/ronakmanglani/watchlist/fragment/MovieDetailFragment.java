@@ -177,7 +177,6 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         try {
-                            // Parse JSON object to Movie
                             String backdropImage = jsonObject.getString("backdrop_path");
                             String id = jsonObject.getString("id");
                             String overview = jsonObject.getString("overview");
@@ -213,13 +212,14 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                             if (videoArray.length() > 0) {
                                 video = videoArray.getJSONObject(0).getString("source");
                             }
-                            // Create movie object
+
                             movie = new MovieDetail(id, title, tagline, releaseDate, runtime, overview, voteAverage,
                                     voteCount, backdropImage, posterImage, video, cast, crew);
-                            // Bind class to layout views
+
                             onDownloadSuccessful();
+
                         } catch (Exception ex) {
-                            // Show error message on parsing errors
+                            // Parsing error
                             onDownloadFailed();
                         }
                     }
@@ -227,7 +227,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        // Show error message on network errors
+                        // Network error
                         onDownloadFailed();
                     }
                 });

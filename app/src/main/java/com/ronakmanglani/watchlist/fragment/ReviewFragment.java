@@ -38,20 +38,16 @@ import butterknife.OnClick;
 
 public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewClickListener {
 
-    // Movie associated with the fragment
     private String movieId;
     private String movieName;
 
-    // Flags
     @BindBool(R.bool.is_tablet) boolean isTablet;
     private boolean isLoading = false;
     private boolean isLoadingLocked = false;
 
-    // Counters
     private int pageToDownload = 1;
     private int totalPages = 1;
 
-    // RecyclerView adapter and layout manager
     private ReviewAdapter adapter;
     private LinearLayoutManager layoutManager;
 
@@ -119,7 +115,7 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
             pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
             isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
             isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
-            // If activity was previously downloading and it stopped, download again
+            // If download stopped, download again, else display list
             if (isLoading) {
                 if (pageToDownload > 1) {
                     progressCircle.setVisibility(View.GONE);
@@ -154,14 +150,10 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
 
     // JSON parsing and display
     private void downloadMovieReviews() {
-        // Initialize adapter if null
         if (adapter == null) {
             adapter = new ReviewAdapter(new ArrayList<Review>(), this);
             reviewList.setAdapter(adapter);
         }
-        // Set flag
-        isLoading = true;
-        // Download reviews
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, TMDBHelper.getMovieReviewsLink(getContext(), movieId, pageToDownload), null,
                 new Response.Listener<JSONObject>() {
@@ -177,13 +169,14 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
                                 String url = review.getString("url");
                                 adapter.reviewList.add(new Review(id, author, body, url));
                             }
-                            // Update counters
+
                             pageToDownload++;
                             totalPages = object.getInt("total_pages");
-                            // Update UI
+
                             onDownloadSuccessful();
+
                         } catch (Exception ex) {
-                            // Show error message on parsing errors
+                            // Parsing error
                             onDownloadFailed();
                         }
                     }
@@ -191,10 +184,11 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        // Show error message on network errors
+                        // Network error
                         onDownloadFailed();
                     }
                 });
+        isLoading = true;
         request.setTag(getClass().getName());
         VolleySingleton.getInstance(getContext()).requestQueue.add(request);
     }
