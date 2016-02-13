@@ -6,7 +6,6 @@
     android:id="@+id/movie_card"
     android:layout_width="match_parent"
     android:layout_height="@dimen/movie_detail_card_height"
-    android:layout_margin="@dimen/movie_card_margin"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     cardview:cardBackgroundColor="@color/card_background"
