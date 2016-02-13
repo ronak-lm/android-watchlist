@@ -34,8 +34,7 @@
             android:layout_height="match_parent"
             android:padding="@dimen/recycler_view_padding"
             android:clipToPadding="false"
-            android:visibility="gone"
-            tools:listitem="@layout/item_movie_basic" />
+            android:visibility="gone"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
