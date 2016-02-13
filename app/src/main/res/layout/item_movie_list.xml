@@ -9,7 +9,8 @@
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     cardview:cardBackgroundColor="@color/card_background"
-    cardview:cardPreventCornerOverlap="false">
+    cardview:cardPreventCornerOverlap="false"
+    cardview:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
