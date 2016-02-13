@@ -48,6 +48,7 @@
 
     <!-- Movie Detail Item in RecyclerView -->
     <dimen name="movie_detail_card_height">200dp</dimen>
+    <dimen name="movie_detail_card_width">400dp</dimen>
     <dimen name="movie_detail_poster_width">120dp</dimen>
 
     <!-- Detail Activity -->
