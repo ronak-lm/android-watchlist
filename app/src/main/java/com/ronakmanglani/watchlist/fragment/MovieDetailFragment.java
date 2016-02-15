@@ -253,7 +253,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
         }
 
         // Add share button to toolbar
-        toolbar.inflateMenu(R.menu.menu_movie_detail);
+        toolbar.inflateMenu(R.menu.menu_share);
 
         // Backdrop image
         if (movie.backdropImage != null && !movie.backdropImage.equals("null") && !movie.backdropImage.equals("")) {

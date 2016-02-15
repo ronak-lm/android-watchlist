@@ -44,7 +44,7 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
 
         // Setup toolbar
         toolbar.setTitle("Review by " + review.author);
-        toolbar.inflateMenu(R.menu.menu_movie_detail);
+        toolbar.inflateMenu(R.menu.menu_share);
         toolbar.setOnMenuItemClickListener(this);
         if (!isTablet) {
             toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
