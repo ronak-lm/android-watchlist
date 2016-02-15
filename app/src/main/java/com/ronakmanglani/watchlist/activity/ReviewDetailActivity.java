@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.fragment.ReviewDetailFragment;
+import com.ronakmanglani.watchlist.fragment.ReviewFragment;
 import com.ronakmanglani.watchlist.model.Review;
 
 import butterknife.Bind;
@@ -16,59 +19,20 @@ import butterknife.ButterKnife;
 
 public class ReviewDetailActivity extends AppCompatActivity {
 
-    // Key for intent extra
-    public static final String REVIEW_KEY = "movie_review";
-    public static final String MOVIE_NAME_KEY = "movie_name";
-
-    // Review associated with the activity
-    private String movieName;
-    private Review review;
-
-    // Layout Views
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.review_body) TextView reviewBody;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_detail);
-        ButterKnife.bind(this);
 
-        // Get intent extra
-        movieName = getIntent().getStringExtra(MOVIE_NAME_KEY);
-        review = getIntent().getParcelableExtra(REVIEW_KEY);
+        if (savedInstanceState == null) {
+            ReviewDetailFragment fragment = new ReviewDetailFragment();
 
-        // Setup toolbar
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Review by " + review.author);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Bundle args = new Bundle();
+            args.putString(Watchlist.MOVIE_NAME, getIntent().getStringExtra(Watchlist.MOVIE_NAME));
+            args.putParcelable(Watchlist.REVIEW_OBJECT, getIntent().getParcelableExtra(Watchlist.REVIEW_OBJECT));
+            fragment.setArguments(args);
 
-        // Set review body
-        reviewBody.setText(review.body);
-    }
-
-    // Toolbar options menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_movie_detail, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        } else if (id == R.id.action_share) {
-            String shareText = "A review of " + movieName + " by " + review.author + " - " + review.url;
-            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-            sharingIntent.setType("text/plain");
-            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movieName + " - Review");
-            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
-            startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.action_share_using)));
-            return true;
-        } else {
-            return false;
+            getSupportFragmentManager().beginTransaction().replace(R.id.review_detail_container, fragment).commit();
         }
     }
 }

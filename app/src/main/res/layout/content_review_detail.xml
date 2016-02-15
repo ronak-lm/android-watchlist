@@ -3,13 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/review_body_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/dist_xlarge"
     android:clipToPadding="false"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.ReviewDetailActivity"
-    tools:showIn="@layout/activity_review_detail">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
     <TextView android:id="@+id/review_body"
         android:layout_width="match_parent"

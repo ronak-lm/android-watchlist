@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
-import com.ronakmanglani.watchlist.fragment.MovieDetailFragment;
 import com.ronakmanglani.watchlist.fragment.ReviewFragment;
 
 public class ReviewActivity extends AppCompatActivity {

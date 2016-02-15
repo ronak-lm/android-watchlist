@@ -41,17 +41,16 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
     private String movieId;
     private String movieName;
 
-    @BindBool(R.bool.is_tablet) boolean isTablet;
-    private boolean isLoading = false;
-    private boolean isLoadingLocked = false;
+    private ReviewAdapter adapter;
+    private LinearLayoutManager layoutManager;
 
     private int pageToDownload = 1;
     private int totalPages = 1;
 
-    private ReviewAdapter adapter;
-    private LinearLayoutManager layoutManager;
+    private boolean isLoading = false;
+    private boolean isLoadingLocked = false;
+    @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    // Layout Views
     @Bind(R.id.toolbar)             Toolbar toolbar;
     @Bind(R.id.toolbar_title)       TextView toolbarTitle;
     @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
@@ -195,21 +194,17 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
     private void onDownloadSuccessful() {
         isLoading = false;
         if (adapter.reviewList.size() == 0) {
-            // Set text message for no reviews
             noResultsMessage.setText(R.string.reviews_no_results);
-            // Toggle visibility
             noResults.setVisibility(View.VISIBLE);
             errorMessage.setVisibility(View.GONE);
             progressCircle.setVisibility(View.GONE);
             loadingMore.setVisibility(View.GONE);
             reviewList.setVisibility(View.GONE);
         } else {
-            // Toggle visibility
             errorMessage.setVisibility(View.GONE);
             progressCircle.setVisibility(View.GONE);
             loadingMore.setVisibility(View.GONE);
             reviewList.setVisibility(View.VISIBLE);
-            // Notify adapter of change
             adapter.notifyDataSetChanged();
         }
     }
@@ -245,8 +240,8 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
     public void onReviewClicked(int position) {
         Review review = adapter.reviewList.get(position);
         Intent intent = new Intent(getContext(), ReviewDetailActivity.class);
-        intent.putExtra(ReviewDetailActivity.REVIEW_KEY, review);
-        intent.putExtra(ReviewDetailActivity.MOVIE_NAME_KEY, movieName);
+        intent.putExtra(Watchlist.MOVIE_NAME, movieName);
+        intent.putExtra(Watchlist.REVIEW_OBJECT, review);
         startActivity(intent);
     }
 }
