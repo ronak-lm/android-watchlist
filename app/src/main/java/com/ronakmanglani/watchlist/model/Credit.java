@@ -3,8 +3,6 @@ package com.ronakmanglani.watchlist.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.Gson;
-
 import java.io.Serializable;
 
 public class Credit implements Parcelable, Serializable {

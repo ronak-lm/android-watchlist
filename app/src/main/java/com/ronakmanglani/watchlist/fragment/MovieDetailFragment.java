@@ -51,46 +51,46 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     private boolean isVideoAvailable = false;
 
     // Toolbar
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.toolbar_text_holder) View toolbarTextHolder;
-    @Bind(R.id.toolbar_title) TextView toolbarTitle;
-    @Bind(R.id.toolbar_subtitle) TextView toolbarSubtitle;
+    @Bind(R.id.toolbar)                 Toolbar toolbar;
+    @Bind(R.id.toolbar_text_holder)     View toolbarTextHolder;
+    @Bind(R.id.toolbar_title)           TextView toolbarTitle;
+    @Bind(R.id.toolbar_subtitle)        TextView toolbarSubtitle;
 
     // Main views
-    @Bind(R.id.progress_circle) View progressCircle;
-    @Bind(R.id.error_message) View errorMessage;
-    @Bind(R.id.movie_detail_holder) View movieHolder;
+    @Bind(R.id.progress_circle)         View progressCircle;
+    @Bind(R.id.error_message)           View errorMessage;
+    @Bind(R.id.movie_detail_holder)     View movieHolder;
 
     // Image views
-    @Bind(R.id.backdrop_image) NetworkImageView backdropImage;
-    @Bind(R.id.backdrop_image_default) ImageView backdropImageDefault;
-    @Bind(R.id.backdrop_play_button) View backdropPlayButton;
-    @Bind(R.id.poster_image) NetworkImageView posterImage;
-    @Bind(R.id.poster_image_default) ImageView posterImageDefault;
+    @Bind(R.id.backdrop_image)          NetworkImageView backdropImage;
+    @Bind(R.id.backdrop_image_default)  ImageView backdropImageDefault;
+    @Bind(R.id.backdrop_play_button)    View backdropPlayButton;
+    @Bind(R.id.poster_image)            NetworkImageView posterImage;
+    @Bind(R.id.poster_image_default)    ImageView posterImageDefault;
 
     // Basic info
-    @Bind(R.id.movie_title) TextView movieTitle;
-    @Bind(R.id.movie_subtitle) TextView movieSubtitle;
-    @Bind(R.id.movie_rating_holder) View movieRatingHolder;
-    @Bind(R.id.movie_rating) TextView movieRating;
-    @Bind(R.id.movie_vote_count) TextView movieVoteCount;
+    @Bind(R.id.movie_title)             TextView movieTitle;
+    @Bind(R.id.movie_subtitle)          TextView movieSubtitle;
+    @Bind(R.id.movie_rating_holder)     View movieRatingHolder;
+    @Bind(R.id.movie_rating)            TextView movieRating;
+    @Bind(R.id.movie_vote_count)        TextView movieVoteCount;
 
     // Overview
-    @Bind(R.id.movie_overview_holder) View movieOverviewHolder;
-    @Bind(R.id.movie_overview_value) TextView movieOverviewValue;
+    @Bind(R.id.movie_overview_holder)   View movieOverviewHolder;
+    @Bind(R.id.movie_overview_value)    TextView movieOverviewValue;
 
     // Crew
-    @Bind(R.id.movie_crew_holder) View movieCrewHolder;
+    @Bind(R.id.movie_crew_holder)       View movieCrewHolder;
+    @Bind(R.id.movie_crew_see_all)      View movieCrewSeeAllButton;
     @Bind({R.id.movie_crew_value1, R.id.movie_crew_value2}) List<TextView> movieCrewValues;
-    @Bind(R.id.movie_crew_see_all) View movieCrewSeeAllButton;
 
     // Cast
-    @Bind(R.id.movie_cast_holder) View movieCastHolder;
+    @Bind(R.id.movie_cast_holder)       View movieCastHolder;
+    @Bind(R.id.movie_cast_see_all)      View movieCastSeeAllButton;
     @Bind({R.id.movie_cast_item1, R.id.movie_cast_item2, R.id.movie_cast_item3}) List<View> movieCastItems;
     @Bind({R.id.movie_cast_image1, R.id.movie_cast_image2, R.id.movie_cast_image3}) List<NetworkImageView> movieCastImages;
     @Bind({R.id.movie_cast_name1, R.id.movie_cast_name2, R.id.movie_cast_name3}) List<TextView> movieCastNames;
     @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
-    @Bind(R.id.movie_cast_see_all) View movieCastSeeAllButton;
 
     // Fragment lifecycle
     @Override
@@ -115,7 +115,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
         if (savedInstanceState == null || !(savedInstanceState.containsKey(Watchlist.MOVIE_ID)
                 && savedInstanceState.containsKey(Watchlist.MOVIE_OBJECT))) {
             id = getArguments().getString(Watchlist.MOVIE_ID);
-            if (id.equals("null")) {
+            if (id == null || id.equals("null")) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
                 toolbar.setTitle(R.string.app_name);
@@ -141,8 +141,8 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
         ButterKnife.unbind(this);
+        VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
     }
 
     // Toolbar menu click

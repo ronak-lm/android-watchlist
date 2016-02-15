@@ -25,8 +25,8 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
 
     @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    @Bind(R.id.toolbar) Toolbar toolbar;
-    @Bind(R.id.review_body) TextView reviewBody;
+    @Bind(R.id.toolbar)         Toolbar toolbar;
+    @Bind(R.id.review_body)     TextView reviewBody;
 
     private String movieName;
     private Review review;
@@ -37,9 +37,11 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
         super.onCreate(savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_review_detail,container,false);
         ButterKnife.bind(this, v);
+
         // Get arguments
         movieName = getArguments().getString(Watchlist.MOVIE_NAME);
         review = getArguments().getParcelable(Watchlist.REVIEW_OBJECT);
+
         // Setup toolbar
         toolbar.setTitle("Review by " + review.author);
         toolbar.inflateMenu(R.menu.menu_movie_detail);
@@ -53,8 +55,10 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
                 }
             });
         }
+
         // Set review body
         reviewBody.setText(review.body);
+
         return v;
     }
     @Override

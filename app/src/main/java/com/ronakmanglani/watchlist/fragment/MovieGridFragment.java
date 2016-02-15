@@ -40,22 +40,23 @@ import butterknife.OnClick;
 public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
 
     private Context context;
-    private int viewType;
-    private boolean isLoading;
-    private boolean isLoadingLocked;
-
-    private int pageToDownload;
-    private static final int TOTAL_PAGES = 999;
 
     private MovieAdapter adapter;
     private GridLayoutManager layoutManager;
 
+    private int pageToDownload;
+    private static final int TOTAL_PAGES = 999;
+
+    private int viewType;
+    private boolean isLoading;
+    private boolean isLoadingLocked;
     @BindBool(R.bool.is_tablet) boolean isTablet;
-    @Bind(R.id.error_message) View errorMessage;
-    @Bind(R.id.progress_circle) View progressCircle;
-    @Bind(R.id.loading_more) View loadingMore;
-    @Bind(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
-    @Bind(R.id.movie_grid) RecyclerView recyclerView;
+
+    @Bind(R.id.error_message)       View errorMessage;
+    @Bind(R.id.progress_circle)     View progressCircle;
+    @Bind(R.id.loading_more)        View loadingMore;
+    @Bind(R.id.swipe_refresh)       SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.movie_grid)          RecyclerView recyclerView;
 
     // Fragment lifecycle
     @Override
@@ -267,7 +268,7 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
         if (isTablet) {
             widthPx = widthPx / 3;
         }
-        // Get desired width
+        // Calculate desired width
         SharedPreferences preferences = context.getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
         if (preferences.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
             float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);

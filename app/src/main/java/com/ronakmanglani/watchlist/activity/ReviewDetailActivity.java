@@ -1,21 +1,11 @@
 package com.ronakmanglani.watchlist.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.fragment.ReviewDetailFragment;
-import com.ronakmanglani.watchlist.fragment.ReviewFragment;
-import com.ronakmanglani.watchlist.model.Review;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class ReviewDetailActivity extends AppCompatActivity {
 

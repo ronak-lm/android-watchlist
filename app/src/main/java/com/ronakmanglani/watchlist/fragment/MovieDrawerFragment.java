@@ -31,9 +31,9 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
     private MovieGridFragment fragment;
     private SharedPreferences preferences;
 
-    @Bind(R.id.toolbar)         Toolbar toolbar;
-    @Bind(R.id.drawer_layout)   DrawerLayout drawerLayout;
-    @Bind(R.id.navigation_view) NavigationView navigationView;
+    @Bind(R.id.toolbar)             Toolbar toolbar;
+    @Bind(R.id.drawer_layout)       DrawerLayout drawerLayout;
+    @Bind(R.id.navigation_view)     NavigationView navigationView;
 
     // Fragment lifecycle
     @Override
