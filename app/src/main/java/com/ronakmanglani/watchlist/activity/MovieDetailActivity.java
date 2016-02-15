@@ -12,7 +12,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.activity_frame);
 
         if (savedInstanceState == null) {
             MovieDetailFragment fragment = new MovieDetailFragment();
@@ -21,7 +21,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             args.putString(Watchlist.MOVIE_ID, getIntent().getStringExtra(Watchlist.MOVIE_ID));
             fragment.setArguments(args);
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.detail_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
     }
 

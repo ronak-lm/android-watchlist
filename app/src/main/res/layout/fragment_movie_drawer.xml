@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- App Bar -->
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,12 +25,12 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <!-- Activity content -->
-        <include layout="@layout/content_movie" />
+        <FrameLayout android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
-    <!-- The navigation drawer -->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"

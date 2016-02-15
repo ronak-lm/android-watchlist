@@ -12,7 +12,7 @@ public class ReviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+        setContentView(R.layout.activity_frame);
 
         if (savedInstanceState == null) {
             ReviewFragment fragment = new ReviewFragment();
@@ -22,7 +22,7 @@ public class ReviewActivity extends AppCompatActivity {
             args.putString(Watchlist.MOVIE_NAME, getIntent().getStringExtra(Watchlist.MOVIE_NAME));
             fragment.setArguments(args);
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.review_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
     }
 }

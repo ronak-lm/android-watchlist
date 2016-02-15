@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <!-- Details Area -->
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/movie_detail_holder"
         android:layout_width="match_parent"
@@ -45,14 +44,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- To show when unable to load data -->
         <include android:id="@+id/error_message"
             layout="@layout/layout_error_message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"/>
 
-        <!-- Progress Circle -->
         <include android:id="@+id/progress_circle"
             layout="@layout/layout_progress_circle"
             android:layout_width="@dimen/progress_circle_width"
