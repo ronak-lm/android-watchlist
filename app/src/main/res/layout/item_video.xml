@@ -1,50 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/video_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/dist_large"
-    android:background="?attr/selectableItemBackground"
+    android:layout_height="@dimen/video_item_height"
+    android:foreground="?attr/selectableItemBackground"
     android:clickable="true">
 
-    <FrameLayout android:id="@+id/video_image_holder"
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/video_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/video_image_height">
-
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/video_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:background="@color/default_image_background"/>
-
-        <ImageView android:src="@drawable/button_play"
-            android:layout_width="@dimen/video_play_button_size"
-            android:layout_height="@dimen/video_play_button_size"
-            android:layout_gravity="center"
-            tools:ignore="contentDescription"/>
-
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/default_image_background"/>
 
     <TextView android:id="@+id/video_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/video_image_holder"
-        android:layout_marginTop="@dimen/dist_small"
+        android:layout_gravity="bottom|start"
+        android:padding="@dimen/dist_large"
+        android:background="@drawable/gradient_bottom"
         android:maxLines="2"
         android:ellipsize="end"
         android:textSize="@dimen/text_xxlarge"
-        android:textColor="@color/text_primary"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         tools:text="The Martian | Official Trailer"/>
 
     <TextView android:id="@+id/video_subtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/video_name"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/dist_medium"
+        android:layout_marginRight="@dimen/dist_medium"
+        android:layout_marginEnd="@dimen/dist_medium"
+        android:background="@drawable/background_rating"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="@dimen/text_large"
-        tools:text="Size: 1080"/>
+        android:textSize="@dimen/text_small"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        tools:text="1080p"/>
 
-</RelativeLayout>
+</FrameLayout>

@@ -24,6 +24,7 @@ import com.ronakmanglani.watchlist.model.Video;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.util.YoutubeHelper;
+import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,6 +82,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         adapter = new VideoAdapter(this, new ArrayList<Video>(), this);
         videoList.setHasFixedSize(true);
         videoList.setLayoutManager(layoutManager);
+        videoList.addItemDecoration(new ItemPaddingDecoration(this, R.dimen.video_item_padding));
         videoList.setAdapter(adapter);
 
         // Download videos
@@ -146,7 +148,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
                                 if (vid.getString("site").equals("YouTube")) {
                                     String title = vid.getString("name");
                                     String key = vid.getString("key");
-                                    String subtitle = "Size: " + vid.getString("size") + "p";
+                                    String subtitle = vid.getString("size") + "p";
                                     Video video = new Video(title, subtitle, key, YoutubeHelper.getThumbnailURL(key), YoutubeHelper.getVideoURL(key));
                                     adapter.videoList.add(video);
                                 }
@@ -192,7 +194,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
     public int getNumberOfColumns() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float widthPx = displayMetrics.widthPixels;
-        float desiredPx = getResources().getDimensionPixelSize(R.dimen.video_image_width);
+        float desiredPx = getResources().getDimensionPixelSize(R.dimen.video_item_width);
         int columns = Math.round(widthPx / desiredPx);
         if (columns <= 1) {
             return 1;

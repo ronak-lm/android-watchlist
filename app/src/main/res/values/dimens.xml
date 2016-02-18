@@ -70,8 +70,9 @@
     <dimen name="review_open_icon_size">24dp</dimen>
 
     <!-- Video Item -->
-    <dimen name="video_image_width">300dp</dimen>
-    <dimen name="video_image_height">225dp</dimen>
+    <dimen name="video_item_width">380dp</dimen>
+    <dimen name="video_item_height">225dp</dimen>
+    <dimen name="video_item_padding">1dp</dimen>
     <dimen name="video_play_button_size">50dp</dimen>
 
 </resources>
