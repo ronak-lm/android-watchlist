@@ -28,7 +28,7 @@ import static android.support.design.widget.NavigationView.*;
 
 public class MovieDrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener {
 
-    private MovieGridFragment fragment;
+    private MovieListFragment fragment;
     private SharedPreferences preferences;
 
     @Bind(R.id.toolbar)             Toolbar toolbar;
@@ -67,7 +67,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         if (savedInstanceState == null) {
             setSelectedDrawerItem(lastPosition);
         } else {
-            fragment = (MovieGridFragment) getActivity().getSupportFragmentManager().findFragmentByTag(Watchlist.TAG_GRID_FRAGMENT);
+            fragment = (MovieListFragment) getActivity().getSupportFragmentManager().findFragmentByTag(Watchlist.TAG_GRID_FRAGMENT);
             if (savedInstanceState.containsKey(Watchlist.TOOLBAR_TITLE)) {
                 toolbar.setTitle(savedInstanceState.getString(Watchlist.TOOLBAR_TITLE));
             } else {
@@ -153,7 +153,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         item.setChecked(true);
         toolbar.setTitle(item.getTitle());
         // Create and replace fragment
-        fragment = new MovieGridFragment();
+        fragment = new MovieListFragment();
         Bundle args = new Bundle();
         if (position == 0) {
             args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_POPULAR);

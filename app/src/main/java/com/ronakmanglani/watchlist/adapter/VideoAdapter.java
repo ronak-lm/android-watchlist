@@ -24,21 +24,17 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final OnVideoClickListener onVideoClickListener;
 
     // Constructor
-    public VideoAdapter(Context context,
-                        ArrayList<Video> videoList,
-                        OnVideoClickListener onVideoClickListener) {
+    public VideoAdapter(Context context, ArrayList<Video> videoList, OnVideoClickListener onVideoClickListener) {
         this.context = context;
         this.videoList = videoList;
         this.onVideoClickListener = onVideoClickListener;
     }
 
-    // Return size of ArrayList
+    // RecyclerView methods
     @Override
     public int getItemCount() {
         return videoList.size();
     }
-
-    // Inflate layout and fill data
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video, parent, false);
@@ -53,7 +49,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         holder.videoSubtitle.setText(video.subtitle);
     }
 
-    // ViewHolder for Videos
+    // ViewHolder
     public class VideoViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.video_item) View videoItem;
         @Bind(R.id.video_image) NetworkImageView videoImage;
@@ -73,7 +69,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    // Interface to respond to clicks
+    // Click listener interface
     public interface OnVideoClickListener {
         void onVideoClicked(final int position);
     }

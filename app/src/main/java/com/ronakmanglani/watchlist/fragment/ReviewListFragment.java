@@ -36,7 +36,7 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewClickListener {
+public class ReviewListFragment extends Fragment implements ReviewAdapter.OnReviewClickListener {
 
     private String movieId;
     private String movieName;

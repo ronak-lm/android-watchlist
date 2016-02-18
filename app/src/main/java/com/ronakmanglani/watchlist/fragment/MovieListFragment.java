@@ -37,7 +37,7 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
+public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
 
     private Context context;
 
@@ -61,7 +61,7 @@ public class MovieGridFragment extends Fragment implements MovieAdapter.OnMovieC
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_movie_grid,container,false);
+        View v = inflater.inflate(R.layout.fragment_movie_list,container,false);
         context = getContext();
         ButterKnife.bind(this, v);
 

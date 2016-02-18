@@ -413,8 +413,8 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @OnClick(R.id.button_videos)
     public void onVideosButtonClicked() {
         Intent intent = new Intent(getContext(), VideoActivity.class);
-        intent.putExtra(VideoActivity.MOVIE_ID_KEY, movie.id);
-        intent.putExtra(VideoActivity.MOVIE_NAME_KEY, movie.title);
+        intent.putExtra(Watchlist.MOVIE_ID, movie.id);
+        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.try_again)

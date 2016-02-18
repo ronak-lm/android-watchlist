@@ -3,12 +3,11 @@ package com.ronakmanglani.watchlist.activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.fragment.ReviewDetailFragment;
-import com.ronakmanglani.watchlist.fragment.ReviewFragment;
+import com.ronakmanglani.watchlist.fragment.ReviewListFragment;
 import com.ronakmanglani.watchlist.model.Review;
 
 import butterknife.BindBool;
@@ -25,7 +24,7 @@ public class ReviewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
-            ReviewFragment fragment = new ReviewFragment();
+            ReviewListFragment fragment = new ReviewListFragment();
 
             Bundle args = new Bundle();
             args.putString(Watchlist.MOVIE_ID, getIntent().getStringExtra(Watchlist.MOVIE_ID));

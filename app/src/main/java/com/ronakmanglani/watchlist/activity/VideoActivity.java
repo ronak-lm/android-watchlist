@@ -2,6 +2,7 @@ package com.ronakmanglani.watchlist.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
+import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.adapter.VideoAdapter;
 import com.ronakmanglani.watchlist.adapter.VideoAdapter.OnVideoClickListener;
 import com.ronakmanglani.watchlist.model.Video;
@@ -32,24 +34,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class VideoActivity extends AppCompatActivity implements OnVideoClickListener {
 
-    // Key for intent extra
-    public static final String MOVIE_ID_KEY = "movie_id";
-    public static final String MOVIE_NAME_KEY = "movie_name";
-
-    // Movie associated with the activity
     private String movieId;
-
-    // Flag
-    private boolean isLoading = false;
-    // Adapter for RecyclerView
     private VideoAdapter adapter;
 
-    // Layout Views
+    private boolean isLoading = false;
+    @BindBool(R.bool.is_tablet) boolean isTablet;
+
     @Bind(R.id.toolbar)             Toolbar toolbar;
     @Bind(R.id.toolbar_title)       TextView toolbarTitle;
     @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
@@ -66,18 +62,15 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
 
-        // Get intent extras
-        movieId = getIntent().getStringExtra(MOVIE_ID_KEY);
-        String movieName = getIntent().getStringExtra(MOVIE_NAME_KEY);
+        movieId = getIntent().getStringExtra(Watchlist.MOVIE_ID);
+        String movieName = getIntent().getStringExtra(Watchlist.MOVIE_NAME);
 
-        // Setup toolbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         toolbarTitle.setText(R.string.videos_title);
         toolbarSubtitle.setText(movieName);
 
-        // Setup RecyclerView
         GridLayoutManager layoutManager = new GridLayoutManager(this,getNumberOfColumns());
         adapter = new VideoAdapter(this, new ArrayList<Video>(), this);
         videoList.setHasFixedSize(true);
@@ -85,9 +78,13 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         videoList.addItemDecoration(new ItemPaddingDecoration(this, R.dimen.video_item_padding));
         videoList.setAdapter(adapter);
 
-        // Download videos
         if (savedInstanceState == null) {
             downloadVideosList();
+        }
+
+        // Lock orientation for tablets
+        if (isTablet) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
     }
     @Override
@@ -100,21 +97,34 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (adapter != null) {
-            outState.putParcelableArrayList("videos_list", adapter.videoList);
-            outState.putBoolean("is_loading", isLoading);
+            outState.putParcelableArrayList(Watchlist.VIDEO_LIST, adapter.videoList);
+            outState.putBoolean(Watchlist.IS_LOADING, isLoading);
         }
         super.onSaveInstanceState(outState);
     }
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        adapter.videoList = savedInstanceState.getParcelableArrayList("videos_list");
-        isLoading = savedInstanceState.getBoolean("is_loading");
+        adapter.videoList = savedInstanceState.getParcelableArrayList(Watchlist.VIDEO_LIST);
+        isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
         // If activity was previously downloading and it stopped, download again
         if (isLoading) {
             downloadVideosList();
         } else {
             onDownloadSuccessful();
+        }
+    }
+
+    // Helper methods
+    public int getNumberOfColumns() {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float widthPx = displayMetrics.widthPixels;
+        float desiredPx = getResources().getDimensionPixelSize(R.dimen.video_item_width);
+        int columns = Math.round(widthPx / desiredPx);
+        if (columns <= 1) {
+            return 1;
+        } else {
+            return columns;
         }
     }
 
@@ -129,7 +139,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         }
     }
 
-    // Network and parsing methods
+    // JSON parsing and display
     private void downloadVideosList() {
         isLoading = true;
         if (adapter == null) {
@@ -188,19 +198,6 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         errorMessage.setVisibility(View.VISIBLE);
         progressCircle.setVisibility(View.GONE);
         videoList.setVisibility(View.GONE);
-    }
-
-    // Helper methods
-    public int getNumberOfColumns() {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float widthPx = displayMetrics.widthPixels;
-        float desiredPx = getResources().getDimensionPixelSize(R.dimen.video_item_width);
-        int columns = Math.round(widthPx / desiredPx);
-        if (columns <= 1) {
-            return 1;
-        } else {
-            return columns;
-        }
     }
 
     // Click events
