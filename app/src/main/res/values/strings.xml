@@ -40,4 +40,8 @@
     <string name="videos_title">Videos</string>
     <string name="videos_no_results">We don\'t have any videos for\nthis movie!</string>
 
+    <!-- Photos Activity -->
+    <string name="photos_title">Photos</string>
+    <string name="photos_no_results">We don\'t have any photos for\nthis movie!</string>
+
 </resources>
