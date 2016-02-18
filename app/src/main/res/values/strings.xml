@@ -29,8 +29,8 @@
     <string name="detail_header_crew">CREW</string>
     <string name="detail_header_cast">CAST</string>
     <string name="detail_button_see_all">SEE ALL</string>
-    <string name="detail_vote_count">%d votes</string>
-    <string name="detail_crew_format">%s : %s</string>
+    <string name="detail_vote_count">%1$d votes</string>
+    <string name="detail_crew_format">%1$s : %2$s</string>
 
     <!-- Reviews Activity -->
     <string name="reviews_title">Reviews</string>
