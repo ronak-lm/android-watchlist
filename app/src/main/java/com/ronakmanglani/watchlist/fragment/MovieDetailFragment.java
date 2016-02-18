@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.activity.PhotoActivity;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.VideoActivity;
 import com.ronakmanglani.watchlist.model.Credit;
@@ -400,6 +401,13 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     }
 
     // Click events
+    @OnClick(R.id.button_photos)
+    public void onPhotosButtonClicked() {
+        Intent intent = new Intent(getContext(), PhotoActivity.class);
+        intent.putExtra(Watchlist.MOVIE_ID, movie.id);
+        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
+        startActivity(intent);
+    }
     @OnClick(R.id.button_reviews)
     public void onReviewsButtonClicked() {
         Intent intent = new Intent(getContext(), ReviewActivity.class);

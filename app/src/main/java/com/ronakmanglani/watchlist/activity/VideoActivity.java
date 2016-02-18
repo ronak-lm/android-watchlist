@@ -115,7 +115,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         }
     }
 
-    // Helper methods
+    // Helper method
     public int getNumberOfColumns() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float widthPx = displayMetrics.widthPixels;

@@ -33,6 +33,9 @@ public class TMDBHelper {
     public static String getVideosLink(Context context, String id) {
         return "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + getApiKey(context);
     }
+    public static String getPhotosLink(Context context, String id) {
+        return "http://api.themoviedb.org/3/movie/" + id + "/images?api_key=" + getApiKey(context);
+    }
 
     // Get image of the given pixel size
     public static String getImageURL(String baseURL, int widthPx) {

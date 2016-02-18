@@ -26,6 +26,7 @@ public class Watchlist extends Application {
     public static final String REVIEW_OBJECT = "review_object";
     public static final String REVIEW_LIST = "review_list";
     public static final String VIDEO_LIST = "video_list";
+    public static final String PHOTO_LIST = "photo_list";
     public static final String PAGE_TO_DOWNLOAD = "page_to_download";
     public static final String TOTAL_PAGES = "total_pages";
     public static final String IS_LOADING = "is_loading";

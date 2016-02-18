@@ -48,8 +48,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     // ViewHolder
     public class PhotoViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.video_item) View photoItem;
-        @Bind(R.id.video_image) NetworkImageView photoImage;
+        @Bind(R.id.photo_item) View photoItem;
+        @Bind(R.id.photo_image) NetworkImageView photoImage;
 
         public PhotoViewHolder(final ViewGroup itemView, final OnPhotoClickListener onPhotoClickListener) {
             super(itemView);
