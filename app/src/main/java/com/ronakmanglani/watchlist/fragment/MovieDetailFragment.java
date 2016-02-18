@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -150,12 +151,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.action_share) {
             if (movie != null) {
-                String shareText;
-                if (movie.video.length() == 0) {
-                    shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + TMDBHelper.getMovieShareURL(movie.id);
-                } else {
-                    shareText = getString(R.string.action_share_text) + " " + movie.title + " - " + YoutubeHelper.getVideoURL(movie.video);
-                }
+                String shareText = getString(R.string.action_share_text, movie.title, TMDBHelper.getMovieShareURL(movie.id));
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
@@ -221,6 +217,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                         } catch (Exception ex) {
                             // Parsing error
                             onDownloadFailed();
+                            Log.d("Parse Error", ex.getMessage(), ex);
                         }
                     }
                 },

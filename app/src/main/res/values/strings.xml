@@ -13,7 +13,7 @@
     <string name="action_list">List View</string>
     <string name="action_search">Search</string>
     <string name="action_share">Share</string>
-    <string name="action_share_text">Check out</string>
+    <string name="action_share_text">Check out %1$s - %2$s</string>
     <string name="action_share_using">Share using&#8230;</string>
 
     <!-- Loading and Error Message -->
@@ -29,7 +29,7 @@
     <string name="detail_header_crew">CREW</string>
     <string name="detail_header_cast">CAST</string>
     <string name="detail_button_see_all">SEE ALL</string>
-    <string name="detail_vote_count">%1$d votes</string>
+    <string name="detail_vote_count">%1$s votes</string>
     <string name="detail_crew_format">%1$s : %2$s</string>
 
     <!-- Reviews Activity -->
