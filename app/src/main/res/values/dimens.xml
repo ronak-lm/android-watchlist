@@ -7,6 +7,7 @@
     <dimen name="dist_medium">8dp</dimen>
     <dimen name="dist_small">4dp</dimen>
     <dimen name="dist_xsmall">2dp</dimen>
+    <dimen name="dist_xxsmall">1dp</dimen>
 
     <!-- General Text Sizes -->
     <dimen name="text_xxlarge">20sp</dimen>
@@ -65,14 +66,15 @@
     <dimen name="detail_cast_image_height">60dp</dimen>
     <dimen name="detail_cast_image_width">40dp</dimen>
 
-    <!-- Review Activity -->
+    <!-- Review Item -->
     <dimen name="review_user_icon_size">26dp</dimen>
     <dimen name="review_open_icon_size">24dp</dimen>
+
+    <!-- Photo Item -->
+    <dimen name="photo_item_size">180dp</dimen>
 
     <!-- Video Item -->
     <dimen name="video_item_width">380dp</dimen>
     <dimen name="video_item_height">225dp</dimen>
-    <dimen name="video_item_padding">1dp</dimen>
-    <dimen name="video_play_button_size">50dp</dimen>
 
 </resources>
