@@ -12,7 +12,7 @@ public class ReviewDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_frame);
+        setContentView(R.layout.activity_review_detail);
 
         if (savedInstanceState == null) {
             ReviewDetailFragment fragment = new ReviewDetailFragment();
@@ -22,7 +22,7 @@ public class ReviewDetailActivity extends AppCompatActivity {
             args.putParcelable(Watchlist.REVIEW_OBJECT, getIntent().getParcelableExtra(Watchlist.REVIEW_OBJECT));
             fragment.setArguments(args);
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.review_detail_container, fragment).commit();
         }
     }
 }

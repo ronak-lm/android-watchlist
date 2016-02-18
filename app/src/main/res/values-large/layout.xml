@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="activity_movie" type="layout">@layout/activity_movie_twopane</item>
     <bool name="is_tablet">true</bool>
+    <item name="activity_movie" type="layout">@layout/activity_movie_twopane</item>
+    <item name="activity_review" type="layout">@layout/activity_review_twopane</item>
+    <dimen name="review_detail_padding" type="layout">8dp</dimen>
 </resources>

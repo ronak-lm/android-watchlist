@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.ReviewDetailActivity;
 import com.ronakmanglani.watchlist.adapter.ReviewAdapter;
 import com.ronakmanglani.watchlist.model.Review;
@@ -74,15 +75,13 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
         toolbar.setTitle("");
         toolbarTitle.setText(R.string.reviews_title);
         toolbarSubtitle.setText(movieName);
-        if (!isTablet) {
-            toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getActivity().finish();
-                }
-            });
-        }
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
 
         // Setup RecyclerView
         adapter = new ReviewAdapter(new ArrayList<Review>(), this);
@@ -199,12 +198,18 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
             progressCircle.setVisibility(View.GONE);
             loadingMore.setVisibility(View.GONE);
             reviewList.setVisibility(View.GONE);
+            if (isTablet) {
+                ((ReviewActivity) getActivity()).loadDetailFragmentWith("null", null);
+            }
         } else {
             errorMessage.setVisibility(View.GONE);
             progressCircle.setVisibility(View.GONE);
             loadingMore.setVisibility(View.GONE);
             reviewList.setVisibility(View.VISIBLE);
             adapter.notifyDataSetChanged();
+            if (isTablet) {
+                ((ReviewActivity) getActivity()).loadDetailFragmentWith(movieName, adapter.reviewList.get(0));
+            }
         }
     }
     private void onDownloadFailed() {
@@ -238,9 +243,13 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
     @Override
     public void onReviewClicked(int position) {
         Review review = adapter.reviewList.get(position);
-        Intent intent = new Intent(getContext(), ReviewDetailActivity.class);
-        intent.putExtra(Watchlist.MOVIE_NAME, movieName);
-        intent.putExtra(Watchlist.REVIEW_OBJECT, review);
-        startActivity(intent);
+        if (isTablet) {
+            ((ReviewActivity) getActivity()).loadDetailFragmentWith(movieName, review);
+        } else {
+            Intent intent = new Intent(getContext(), ReviewDetailActivity.class);
+            intent.putExtra(Watchlist.MOVIE_NAME, movieName);
+            intent.putExtra(Watchlist.REVIEW_OBJECT, review);
+            startActivity(intent);
+        }
     }
 }

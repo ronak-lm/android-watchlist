@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/review_body_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/dist_xlarge"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:layout_marginLeft="@dimen/review_detail_padding"
+    android:layout_marginRight="@dimen/review_detail_padding"
     android:clipToPadding="false"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+    android:background="@color/text_secondary" >
 
-    <TextView android:id="@+id/review_body"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/dist_large"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_large"
-        tools:text="Movie review goes here..."/>
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/review_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dist_large"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_large"
+            tools:text="Movie review goes here..."/>
+
+    </FrameLayout>
 
 </android.support.v4.widget.NestedScrollView>
