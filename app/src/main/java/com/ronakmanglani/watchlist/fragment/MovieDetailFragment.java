@@ -294,7 +294,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieRatingHolder.setVisibility(View.GONE);
         } else {
             movieRating.setText(movie.voteAverage);
-            movieVoteCount.setText(movie.voteCount + " votes");
+            movieVoteCount.setText(getString(R.string.detail_vote_count, movie.voteCount));
         }
 
         // Overview
@@ -309,7 +309,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieCrewHolder.setVisibility(View.GONE);
         } else if (movie.crew.size() == 1) {
             // Set value
-            movieCrewValues.get(0).setText(movie.crew.get(0).role + ": " + movie.crew.get(0).name);
+            movieCrewValues.get(0).setText(getString(R.string.detail_crew_format, movie.crew.get(0).role, movie.crew.get(0).name));
             // Hide views
             movieCrewValues.get(1).setVisibility(View.GONE);
             movieCrewSeeAllButton.setVisibility(View.GONE);
@@ -318,8 +318,8 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movieCrewHolder.setPadding(padding, padding, padding, padding);
         } else if (movie.crew.size() >= 2) {
             // Set values
-            movieCrewValues.get(0).setText(movie.crew.get(0).role + ": " + movie.crew.get(0).name);
-            movieCrewValues.get(1).setText(movie.crew.get(1).role + ": " + movie.crew.get(1).name);
+            movieCrewValues.get(0).setText(getString(R.string.detail_crew_format, movie.crew.get(0).role, movie.crew.get(0).name));
+            movieCrewValues.get(1).setText(getString(R.string.detail_crew_format, movie.crew.get(1).role, movie.crew.get(1).name));
             // Hide views
             if (movie.crew.size() == 2) {
                 int padding = getResources().getDimensionPixelSize(R.dimen.dist_large);
