@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/photo_item"
     android:orientation="vertical"
-    android:layout_width="@dimen/photo_item_size"
-    android:layout_height="@dimen/photo_item_size"
+    android:layout_width="@dimen/photo_item_width"
+    android:layout_height="@dimen/photo_item_height"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true">
 

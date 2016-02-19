@@ -19,11 +19,8 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.adapter.PhotoAdapter;
 import com.ronakmanglani.watchlist.adapter.PhotoAdapter.OnPhotoClickListener;
-import com.ronakmanglani.watchlist.adapter.VideoAdapter;
-import com.ronakmanglani.watchlist.model.Video;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
-import com.ronakmanglani.watchlist.util.YoutubeHelper;
 import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
 import org.json.JSONArray;
@@ -128,7 +125,7 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
     public int getNumberOfColumns() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float widthPx = displayMetrics.widthPixels;
-        float desiredPx = getResources().getDimensionPixelSize(R.dimen.photo_item_size);
+        float desiredPx = getResources().getDimensionPixelSize(R.dimen.photo_item_width);
         int columns = Math.round(widthPx / desiredPx);
         if (columns <= 1) {
             return 1;

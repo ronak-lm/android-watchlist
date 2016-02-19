@@ -42,7 +42,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         PhotoViewHolder holder = (PhotoViewHolder) viewHolder;
-        int imageSize = (int) context.getResources().getDimension(R.dimen.photo_item_size);
+        int imageSize = (int) context.getResources().getDimension(R.dimen.photo_item_width);
         holder.photoImage.setImageUrl(TMDBHelper.getImageURL(photoList.get(position), imageSize), VolleySingleton.getInstance(context).imageLoader);
     }
 

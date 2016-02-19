@@ -24,7 +24,7 @@ import com.ronakmanglani.watchlist.Watchlist;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static android.support.design.widget.NavigationView.*;
+import static android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 
 public class MovieDrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener {
 

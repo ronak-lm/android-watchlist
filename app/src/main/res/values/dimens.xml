@@ -71,7 +71,8 @@
     <dimen name="review_open_icon_size">24dp</dimen>
 
     <!-- Photo Item -->
-    <dimen name="photo_item_size">180dp</dimen>
+    <dimen name="photo_item_width">180dp</dimen>
+    <dimen name="photo_item_height">120dp</dimen>
 
     <!-- Video Item -->
     <dimen name="video_item_width">380dp</dimen>
