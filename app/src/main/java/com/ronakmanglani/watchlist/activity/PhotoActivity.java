@@ -1,6 +1,8 @@
 package com.ronakmanglani.watchlist.activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -199,6 +201,8 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
     }
     @Override
     public void onPhotoClicked(int position) {
-
+        String url = TMDBHelper.getOriginalImageURL(adapter.photoList.get(position));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 }
