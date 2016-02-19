@@ -55,6 +55,9 @@ public class TMDBHelper {
             return "http://image.tmdb.org/t/p/w185/" + baseURL;     // Default Value
         }
     }
+    public static String getOriginalImageURL(String baseURL) {
+        return "http://image.tmdb.org/t/p/original/" + baseURL;
+    }
 
     // URL to share the movie
     public static String getMovieShareURL(String id) {
