@@ -27,10 +27,14 @@ public class Watchlist extends Application {
     public static final String REVIEW_LIST = "review_list";
     public static final String VIDEO_LIST = "video_list";
     public static final String PHOTO_LIST = "photo_list";
+    public static final String CREDIT_TYPE = "credit_type";
+    public static final String CREDIT_LIST = "credit_list";
     public static final String PAGE_TO_DOWNLOAD = "page_to_download";
     public static final String TOTAL_PAGES = "total_pages";
     public static final String IS_LOADING = "is_loading";
     public static final String IS_LOCKED = "is_locked";
+    public static final int CREDIT_TYPE_CAST = 1;
+    public static final int CREDIT_TYPE_CREW = 2;
 
     // Tag for fragment manager
     public static final String TAG_GRID_FRAGMENT = "movie_grid_fragment";
