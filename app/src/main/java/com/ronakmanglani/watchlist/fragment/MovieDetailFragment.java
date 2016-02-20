@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.activity.CreditActivity;
 import com.ronakmanglani.watchlist.activity.PhotoActivity;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.VideoActivity;
@@ -442,11 +443,19 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     }
     @OnClick(R.id.movie_crew_see_all)
     public void onSeeAllCrewClicked() {
-        // TODO
+        Intent intent = new Intent(getContext(), CreditActivity.class);
+        intent.putExtra(Watchlist.CREDIT_TYPE, Watchlist.CREDIT_TYPE_CREW);
+        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
+        intent.putExtra(Watchlist.CREDIT_LIST, movie.crew);
+        startActivity(intent);
     }
     @OnClick(R.id.movie_cast_see_all)
     public void onSeeAllCastClicked() {
-        // TODO
+        Intent intent = new Intent(getContext(), CreditActivity.class);
+        intent.putExtra(Watchlist.CREDIT_TYPE, Watchlist.CREDIT_TYPE_CAST);
+        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
+        intent.putExtra(Watchlist.CREDIT_LIST, movie.cast);
+        startActivity(intent);
     }
     @OnClick(R.id.movie_cast_item1)
     public void onFirstCastItemClicked() {
