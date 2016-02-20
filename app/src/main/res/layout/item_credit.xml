@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/credit_item"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="@dimen/dist_medium"
+    style="@style/MovieCastHolderStyle">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/credit_image"
+        style="@style/MovieCastImageStyle"/>
+
+    <LinearLayout style="@style/MovieCastTextHolderStyle">
+
+        <TextView android:id="@+id/credit_name"
+            style="@style/MovieCastNameStyle"
+            tools:text="Bruce Wayne"/>
+
+        <TextView android:id="@+id/credit_role"
+            style="@style/MovieCastRoleStyle"
+            tools:text="Batman"/>
+
+    </LinearLayout>
+
+</LinearLayout>
