@@ -32,6 +32,10 @@
     <string name="detail_vote_count">%1$s votes</string>
     <string name="detail_crew_format">%1$s : %2$s</string>
 
+    <!-- Credit Activity -->
+    <string name="crew_title">Crew</string>
+    <string name="cast_title">Cast</string>
+
     <!-- Reviews Activity -->
     <string name="reviews_title">Reviews</string>
     <string name="reviews_no_results">We don\'t have any reviews for\nthis movie!</string>
