@@ -6,8 +6,6 @@
     android:id="@+id/credit_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dist_medium"
-    android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:listitem="@layout/item_credit"
     tools:showIn="@layout/fragment_credit" />

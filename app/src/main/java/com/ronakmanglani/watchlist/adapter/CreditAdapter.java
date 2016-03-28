@@ -49,17 +49,21 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         final CreditViewHolder holder = (CreditViewHolder) viewHolder;
         int imageSize = (int) context.getResources().getDimension(R.dimen.detail_cast_image_width);
 
-        VolleySingleton.getInstance(context).imageLoader.get(TMDBHelper.getImageURL(credit.imagePath, imageSize),
-                new ImageLoader.ImageListener() {
-                    @Override
-                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                        holder.creditImage.setImageBitmap(imageContainer.getBitmap());
-                    }
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        holder.creditImage.setImageResource(R.drawable.default_cast_square);
-                    }
-                });
+        if (credit.imagePath == null || credit.imagePath.equals("null")) {
+            holder.creditImage.setImageResource(R.drawable.default_cast_square);
+        } else {
+            VolleySingleton.getInstance(context).imageLoader.get(TMDBHelper.getImageURL(credit.imagePath, imageSize),
+                    new ImageLoader.ImageListener() {
+                        @Override
+                        public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                            holder.creditImage.setImageBitmap(imageContainer.getBitmap());
+                        }
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            holder.creditImage.setImageResource(R.drawable.default_cast_square);
+                        }
+                    });
+        }
 
         holder.creditName.setText(credit.name);
         holder.creditRole.setText(credit.role);

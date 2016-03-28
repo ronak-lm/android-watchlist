@@ -78,4 +78,7 @@
     <dimen name="video_item_width">380dp</dimen>
     <dimen name="video_item_height">225dp</dimen>
 
+    <dimen name="credit_item_padding">12dp</dimen>
+    <dimen name="credit_image_size">55dp</dimen>
+
 </resources>
