@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -44,10 +46,21 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         Credit credit = creditList.get(position);
-        CreditViewHolder holder = (CreditViewHolder) viewHolder;
+        final CreditViewHolder holder = (CreditViewHolder) viewHolder;
         int imageSize = (int) context.getResources().getDimension(R.dimen.detail_cast_image_width);
-        holder.creditImage.setImageUrl(TMDBHelper.getImageURL(credit.imagePath, imageSize),
-                VolleySingleton.getInstance(context).imageLoader);
+
+        VolleySingleton.getInstance(context).imageLoader.get(TMDBHelper.getImageURL(credit.imagePath, imageSize),
+                new ImageLoader.ImageListener() {
+                    @Override
+                    public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                        holder.creditImage.setImageBitmap(imageContainer.getBitmap());
+                    }
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        holder.creditImage.setImageResource(R.drawable.default_cast_square);
+                    }
+                });
+
         holder.creditName.setText(credit.name);
         holder.creditRole.setText(credit.role);
     }
@@ -55,7 +68,7 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     // ViewHolder
     public class CreditViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.credit_item)     View creditItem;
-        @Bind(R.id.credit_image)    NetworkImageView creditImage;
+        @Bind(R.id.credit_image)    CircleImageView creditImage;
         @Bind(R.id.credit_name)     TextView creditName;
         @Bind(R.id.credit_role)     TextView creditRole;
 
