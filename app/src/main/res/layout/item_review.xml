@@ -27,7 +27,8 @@
             <ImageView style="@style/ReviewIconStyle"
                 android:src="@drawable/icon_user"
                 tools:ignore="ContentDescription" />
-            <TextView android:id="@+id/review_author"
+            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+                android:id="@+id/review_author"
                 style="@style/ReviewAuthorStyle"
                 tools:text="User Name"/>
         </LinearLayout>
@@ -43,7 +44,8 @@
             tools:ignore="contentDescription"/>
 
         <!-- Review Body -->
-        <TextView android:id="@+id/review_body"
+        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            android:id="@+id/review_body"
             style="@style/ReviewBodyStyle"
             android:layout_below="@+id/review_header"
             tools:text="The movie's review goes here..."/>

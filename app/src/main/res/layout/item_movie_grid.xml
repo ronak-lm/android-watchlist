@@ -51,7 +51,8 @@
             android:padding="@dimen/movie_info_padding">
 
             <!-- Movie Title -->
-            <TextView android:id="@+id/movie_title"
+            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+                android:id="@+id/movie_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_primary"
@@ -61,10 +62,11 @@
                 tools:text="My Awesome Movie Title"/>
 
             <!-- Movie Year -->
-            <TextView android:id="@+id/movie_year"
+            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+                android:id="@+id/movie_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_chrome"
+                android:textColor="@color/text_primary"
                 android:textSize="@dimen/text_medium"
                 android:maxLines="1"
                 tools:text="2015"/>
@@ -80,7 +82,8 @@
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
-            <TextView android:id="@+id/movie_rating"
+            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+                android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dist_small"

@@ -14,7 +14,8 @@
         android:scaleType="centerCrop"
         android:background="@color/default_image_background"/>
 
-    <TextView android:id="@+id/video_name"
+    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        android:id="@+id/video_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
@@ -24,10 +25,10 @@
         android:ellipsize="end"
         android:textSize="@dimen/text_xxlarge"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
         tools:text="The Martian | Official Trailer"/>
 
-    <TextView android:id="@+id/video_subtitle"
+    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        android:id="@+id/video_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
@@ -39,7 +40,6 @@
         android:ellipsize="end"
         android:textSize="@dimen/text_small"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
         tools:text="1080p"/>
 
 </FrameLayout>

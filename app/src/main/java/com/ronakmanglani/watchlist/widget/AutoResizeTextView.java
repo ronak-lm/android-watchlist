@@ -13,7 +13,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-public class AutoResizeTextView  extends TextView {
+public class AutoResizeTextView  extends RobotoLightTextView {
 
     /** Our ellipsis string. */
     private static final String mEllipsis = "\u2026";

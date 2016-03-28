@@ -18,7 +18,7 @@
 
     <!-- Loading and Error Message -->
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
-    <string name="try_again">Try again?</string>
+    <string name="try_again">Try Again?</string>
     <string name="loading">Loading&#8230;</string>
 
     <!-- Movie Detail Activity -->

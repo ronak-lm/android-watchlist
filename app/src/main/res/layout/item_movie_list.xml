@@ -43,7 +43,8 @@
         </FrameLayout>
 
         <!-- Movie title and rating -->
-        <TextView android:id="@+id/movie_title"
+        <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            android:id="@+id/movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dist_medium"
@@ -70,7 +71,8 @@
             android:layout_marginBottom="@dimen/dist_medium"
             android:orientation="vertical">
 
-            <TextView android:id="@id/movie_year"
+            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+                android:id="@id/movie_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"

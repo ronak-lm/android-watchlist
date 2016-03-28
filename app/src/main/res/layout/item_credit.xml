@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/credit_item"
     android:layout_marginTop="0dp"
-    android:layout_marginBottom="@dimen/dist_medium"
+    android:layout_marginBottom="@dimen/dist_large"
     style="@style/MovieCastHolderStyle">
 
     <com.android.volley.toolbox.NetworkImageView
@@ -12,11 +12,13 @@
 
     <LinearLayout style="@style/MovieCastTextHolderStyle">
 
-        <TextView android:id="@+id/credit_name"
+        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            android:id="@+id/credit_name"
             style="@style/MovieCastNameStyle"
             tools:text="Bruce Wayne"/>
 
-        <TextView android:id="@+id/credit_role"
+        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            android:id="@+id/credit_role"
             style="@style/MovieCastRoleStyle"
             tools:text="Batman"/>
 

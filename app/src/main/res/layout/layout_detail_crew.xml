@@ -23,18 +23,21 @@
             android:src="@drawable/icon_crew"
             tools:ignore="ContentDescription" />
 
-        <TextView style="@style/MovieItemHeaderStyle"
+        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            style="@style/MovieItemHeaderStyle"
             android:text="@string/detail_header_crew" />
 
     </LinearLayout>
 
     <!-- Crew Value 1 -->
-    <TextView android:id="@+id/movie_crew_value1"
+    <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        android:id="@+id/movie_crew_value1"
         style="@style/MovieCrewItemValueStyle"
         tools:text="Director: Christopher Nolan" />
 
     <!-- Crew Value 2 -->
-    <TextView android:id="@+id/movie_crew_value2"
+    <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        android:id="@+id/movie_crew_value2"
         style="@style/MovieCrewItemValueStyle"
         tools:text="Writer: Christopher Nolan" />
 

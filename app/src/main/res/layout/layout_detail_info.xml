@@ -41,7 +41,8 @@
         android:orientation="vertical">
 
         <!-- Title -->
-        <TextView android:id="@+id/movie_title"
+        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            android:id="@+id/movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
@@ -51,10 +52,12 @@
             tools:text="My Awesome Movie Title"/>
 
         <!-- Release date and runtime -->
-        <TextView android:id="@+id/movie_subtitle"
+        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            android:id="@+id/movie_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_chrome"
+            android:layout_marginTop="@dimen/dist_small"
+            android:textColor="@color/text_primary"
             tools:text="01 January 2016\n120 mins"/>
 
         <!-- Rating Area -->
@@ -65,7 +68,8 @@
             android:orientation="horizontal">
 
             <!-- Average Rating -->
-            <TextView android:id="@+id/movie_rating"
+            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+                android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_rating"
@@ -74,7 +78,8 @@
                 tools:text="8.6"/>
 
             <!-- Vote Count -->
-            <TextView android:id="@+id/movie_vote_count"
+            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+                android:id="@+id/movie_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dist_medium"

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:tools="http://schemas.android.com/tools"
     style="@style/MovieSeeAllHolderStyle">
-    <TextView style="@style/MovieSeeAllTextStyle" />
+    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        style="@style/MovieSeeAllTextStyle" />
     <ImageView style="@style/MovieSeeAllArrowStyle"
         tools:ignore="contentDescription"/>
 </LinearLayout>

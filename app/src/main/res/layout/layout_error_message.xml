@@ -14,7 +14,8 @@
         tools:ignore="ContentDescription"/>
 
     <!-- Unable to connect -->
-    <TextView android:text="@string/server_unreachable"
+    <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        android:text="@string/server_unreachable"
         android:textSize="@dimen/text_large"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
@@ -22,7 +23,8 @@
         android:layout_marginTop="@dimen/error_message_marginTop"/>
 
     <!-- Try again -->
-    <TextView android:id="@+id/try_again"
+    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        android:id="@+id/try_again"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
