@@ -1,6 +1,7 @@
 package com.ronakmanglani.watchlist.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.activity.SearchActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -93,7 +95,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
-                Toast.makeText(getActivity(), "¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), SearchActivity.class));
                 return true;
             case R.id.action_list:
                 SharedPreferences.Editor editor1 = preferences.edit();
