@@ -48,4 +48,7 @@
     <string name="photos_title">Photos</string>
     <string name="photos_no_results">We don\'t have any photos for\nthis movie!</string>
 
+    <!-- Search Activity -->
+    <string name="search_title">Search</string>
+
 </resources>

@@ -45,6 +45,10 @@
         <activity
             android:name=".activity.CreditActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:label="@string/search_title"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 
