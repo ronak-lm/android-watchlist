@@ -35,8 +35,6 @@
         android:name="com.ronakmanglani.watchlist.MovieGridFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/recycler_view_padding"
-        android:clipToPadding="false"
         android:visibility="gone"
         tools:visibility="visible"
         tools:listitem="@layout/item_movie_list"/>
