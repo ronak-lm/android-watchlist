@@ -28,9 +28,9 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private final OnMovieClickListener onMovieClickListener;
 
     // Constructor
-    public SearchAdapter(Context context, ArrayList<Movie> movieList, OnMovieClickListener onMovieClickListener) {
+    public SearchAdapter(Context context, OnMovieClickListener onMovieClickListener) {
         this.context = context;
-        this.movieList = movieList;
+        this.movieList = new ArrayList<>();
         this.onMovieClickListener = onMovieClickListener;
     }
 
