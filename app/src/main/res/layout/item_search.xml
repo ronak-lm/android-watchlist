@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_item_height"
+        android:paddingLeft="@dimen/dist_large"
+        android:paddingRight="@dimen/dist_large"
+        android:paddingTop="@dimen/search_item_padding"
+        android:paddingBottom="@dimen/search_item_padding"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/movie_image"
+            android:layout_height="@dimen/search_image_size"
+            android:layout_width="@dimen/search_image_size"
+            android:background="@drawable/default_circle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/movie_image"
+            android:layout_toEndOf="@+id/movie_image"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dist_large"
+            android:layout_marginStart="@dimen/dist_large"
+            android:orientation="vertical">
+
+            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+                android:id="@+id/movie_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_large"
+                android:textColor="@color/text_primary"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="My Awesome Movie Title"/>
+
+            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+                android:id="@+id/movie_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/text_primary"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="2015"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <TextView android:id="@+id/movie_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dist_small"
+                android:layout_marginEnd="@dimen/dist_small"
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_medium"
+                android:maxLines="1"
+                tools:text="8.76"/>
+
+            <ImageView android:id="@+id/rating_icon"
+                android:layout_width="@dimen/movie_rating_icon_size"
+                android:layout_height="@dimen/movie_rating_icon_size"
+                android:src="@drawable/icon_star"
+                android:scaleType="fitCenter"
+                tools:ignore="contentDescription"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:background="@color/default_image_background"/>
+
+</FrameLayout>

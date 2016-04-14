@@ -82,4 +82,9 @@
     <dimen name="credit_item_padding">12dp</dimen>
     <dimen name="credit_image_size">55dp</dimen>
 
+    <!-- Search Item -->
+    <dimen name="search_item_height">80dp</dimen>
+    <dimen name="search_item_padding">12dp</dimen>
+    <dimen name="search_image_size">55dp</dimen>
+
 </resources>
