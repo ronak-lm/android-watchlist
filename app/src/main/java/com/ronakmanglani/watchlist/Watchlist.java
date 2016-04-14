@@ -29,6 +29,7 @@ public class Watchlist extends Application {
     public static final String PHOTO_LIST = "photo_list";
     public static final String CREDIT_TYPE = "credit_type";
     public static final String CREDIT_LIST = "credit_list";
+    public static final String SEARCH_QUERY = "search_query";
     public static final String PAGE_TO_DOWNLOAD = "page_to_download";
     public static final String TOTAL_PAGES = "total_pages";
     public static final String IS_LOADING = "is_loading";
