@@ -1,6 +1,7 @@
 package com.ronakmanglani.watchlist.util;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.ronakmanglani.watchlist.R;
 
@@ -23,6 +24,14 @@ public class TMDBHelper {
     }
     public static String getNowPlayingMoviesLink(Context context, int page) {
         return "http://api.themoviedb.org/3/movie/now_playing?&page=" + page + "&api_key=" + getApiKey(context);
+    }
+    public static String getSearchMoviesLink(Context context, String query, int page) {
+        return Uri.parse("http://api.themoviedb.org/3/search/movie")
+                .buildUpon()
+                .appendQueryParameter("api_key", getApiKey(context))
+                .appendQueryParameter("query", query)
+                .appendQueryParameter("page", page + "")
+                .build().toString();
     }
     public static String getMovieDetailLink(Context context, String id) {
         return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getApiKey(context) + "&append_to_response=credits,trailers";
