@@ -32,6 +32,18 @@
         android:layout_alignParentBottom="true"
         android:visibility="gone"/>
 
+    <!-- To show when no results are found -->
+    <TextView android:id="@+id/no_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dist_large"
+        android:layout_marginRight="@dimen/dist_large"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/search_no_results"
+        android:textSize="@dimen/text_large"
+        android:visibility="gone"/>
+
     <!-- Recycler View -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list"

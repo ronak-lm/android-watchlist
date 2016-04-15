@@ -57,6 +57,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     @Bind(R.id.error_message)       View errorMessage;
     @Bind(R.id.progress_circle)     View progressCircle;
     @Bind(R.id.loading_more)        View loadingMore;
+    @Bind(R.id.no_results)          View noResults;
     @Bind(R.id.search_list)         RecyclerView recyclerView;
 
     // Fragment lifecycle
@@ -86,6 +87,8 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
                         // Toggle visibility
                         recyclerView.setVisibility(View.GONE);
                         errorMessage.setVisibility(View.GONE);
+                        loadingMore.setVisibility(View.GONE);
+                        noResults.setVisibility(View.GONE);
                         progressCircle.setVisibility(View.VISIBLE);
 
                         // Set counters
@@ -231,7 +234,13 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         loadingMore.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
+        if (adapter.movieList.size() == 0) {
+            noResults.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            noResults.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
         adapter.notifyDataSetChanged();
     }
     private void onDownloadFailed() {
@@ -239,12 +248,14 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
         if (pageToDownload == 1) {
             progressCircle.setVisibility(View.GONE);
             loadingMore.setVisibility(View.GONE);
+            noResults.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);
             errorMessage.setVisibility(View.VISIBLE);
         } else {
             progressCircle.setVisibility(View.GONE);
             loadingMore.setVisibility(View.GONE);
             errorMessage.setVisibility(View.GONE);
+            noResults.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
             isLoadingLocked = true;
         }
@@ -255,6 +266,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     public void onTryAgainClicked() {
         // Hide all views
         errorMessage.setVisibility(View.GONE);
+        noResults.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         // Show progress circle
         progressCircle.setVisibility(View.VISIBLE);

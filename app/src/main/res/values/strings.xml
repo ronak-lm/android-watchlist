@@ -50,5 +50,6 @@
 
     <!-- Search Activity -->
     <string name="search_title">Search</string>
+    <string name="search_no_results">Your search did not match any results</string>
 
 </resources>
