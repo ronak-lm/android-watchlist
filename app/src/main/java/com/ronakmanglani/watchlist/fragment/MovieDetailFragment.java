@@ -121,7 +121,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             if (id == null || id.equals("null")) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
-                toolbar.setTitle(R.string.app_name);
+                toolbar.setTitle("");
             } else {
                 downloadMovieDetails(id);
             }

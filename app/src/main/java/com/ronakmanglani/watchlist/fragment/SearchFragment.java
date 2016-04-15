@@ -25,6 +25,7 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
+import com.ronakmanglani.watchlist.activity.SearchActivity;
 import com.ronakmanglani.watchlist.adapter.MovieAdapter;
 import com.ronakmanglani.watchlist.adapter.SearchAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
@@ -35,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import butterknife.Bind;
+import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -52,10 +54,10 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     private int totalPages;
     private boolean isLoading;
     private boolean isLoadingLocked;
+    @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    @Bind(R.id.toolbar)         Toolbar toolbar;
-    @Bind(R.id.search_bar)      EditText searchBar;
-
+    @Bind(R.id.toolbar)             Toolbar toolbar;
+    @Bind(R.id.search_bar)          EditText searchBar;
     @Bind(R.id.error_message)       View errorMessage;
     @Bind(R.id.progress_circle)     View progressCircle;
     @Bind(R.id.loading_more)        View loadingMore;
@@ -205,10 +207,10 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
                                 adapter.movieList.add(thumb);
                             }
 
-                            // TODO: Load detail fragment if in tablet mode
-                            /*if (isTablet && pageToDownload == 1 && adapter.movieList.size() > 0) {
-                                ((MovieActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(0).id);
-                            }*/
+                            // Load detail fragment if in tablet mode
+                            if (isTablet && pageToDownload == 1 && adapter.movieList.size() > 0) {
+                                ((SearchActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(0).id);
+                            }
 
                             pageToDownload = jsonObject.getInt("page") + 1;
                             totalPages = jsonObject.getInt("total_pages");
@@ -217,7 +219,6 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
                         } catch (Exception ex) {
                             // JSON parsing error
                             onDownloadFailed();
-                            ex.printStackTrace();
                         }
                     }
                 },
@@ -226,7 +227,6 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
                     public void onErrorResponse(VolleyError volleyError) {
                         // Network error
                         onDownloadFailed();
-                        volleyError.printStackTrace();
                     }
                 });
         isLoading = true;
@@ -282,8 +282,12 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     }
     @Override
     public void onMovieClicked(int position) {
-        Intent intent = new Intent(context, MovieDetailActivity.class);
-        intent.putExtra(Watchlist.MOVIE_ID, adapter.movieList.get(position).id);
-        startActivity(intent);
+        if (isTablet) {
+            ((SearchActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(position).id);
+        } else {
+            Intent intent = new Intent(context, MovieDetailActivity.class);
+            intent.putExtra(Watchlist.MOVIE_ID, adapter.movieList.get(position).id);
+            startActivity(intent);
+        }
     }
 }
