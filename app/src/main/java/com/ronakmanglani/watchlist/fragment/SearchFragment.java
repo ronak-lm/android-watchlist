@@ -4,13 +4,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -47,6 +51,9 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     private boolean isLoading;
     private boolean isLoadingLocked;
 
+    @Bind(R.id.toolbar)         Toolbar toolbar;
+    @Bind(R.id.search_bar)      EditText searchBar;
+
     @Bind(R.id.error_message)       View errorMessage;
     @Bind(R.id.progress_circle)     View progressCircle;
     @Bind(R.id.loading_more)        View loadingMore;
@@ -59,17 +66,47 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
         context = getContext();
         ButterKnife.bind(this, v);
 
-        // Initialize variables
-        searchQuery = getArguments().getString(Watchlist.SEARCH_QUERY);
-        pageToDownload = 1;
-        totalPages = 1;
+        // Setup toolbar
+        toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+        searchBar.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    String query = searchBar.getText().toString().trim();
+                    if (query.length() > 0) {
+                        // Set query string
+                        searchQuery = query;
+
+                        // Toggle visibility
+                        recyclerView.setVisibility(View.GONE);
+                        errorMessage.setVisibility(View.GONE);
+                        progressCircle.setVisibility(View.VISIBLE);
+
+                        // Set counters
+                        pageToDownload = 1;
+                        totalPages = 1;
+
+                        // Download list
+                        adapter = null;
+                        searchMoviesList();
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         // Setup RecyclerView
-        adapter = new SearchAdapter(context, this);
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -85,10 +122,11 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
         });
 
         // Get the movies list
-        if (savedInstanceState == null || !savedInstanceState.containsKey(Watchlist.MOVIE_LIST)) {
-            searchMoviesList();
-        } else {
+        if (savedInstanceState != null && savedInstanceState.containsKey(Watchlist.MOVIE_LIST)) {
+            adapter = new SearchAdapter(context, this);
             adapter.movieList = savedInstanceState.getParcelableArrayList(Watchlist.MOVIE_LIST);
+            recyclerView.setAdapter(adapter);
+            searchQuery = savedInstanceState.getString(Watchlist.SEARCH_QUERY);
             pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
             isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
             isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
@@ -118,6 +156,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
             outState.putBoolean(Watchlist.IS_LOADING, isLoading);
             outState.putBoolean(Watchlist.IS_LOCKED, isLoadingLocked);
             outState.putInt(Watchlist.PAGE_TO_DOWNLOAD, pageToDownload);
+            outState.putString(Watchlist.SEARCH_QUERY, searchQuery);
             outState.putParcelableArrayList(Watchlist.MOVIE_LIST, adapter.movieList);
         }
     }
@@ -132,7 +171,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     private void searchMoviesList() {
         if (adapter == null) {
             adapter = new SearchAdapter(context, this);
-            recyclerView.setAdapter(adapter);
+            recyclerView.swapAdapter(adapter, true);
         }
         String urlToDownload = TMDBHelper.getSearchMoviesLink(context, searchQuery, pageToDownload);
         final JsonObjectRequest request = new JsonObjectRequest (

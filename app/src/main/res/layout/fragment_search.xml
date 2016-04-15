@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- To show when unable to load data -->
-    <include android:id="@+id/error_message"
-        layout="@layout/layout_error_message"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <!-- Progress Circle -->
-    <include android:id="@+id/progress_circle"
-        layout="@layout/layout_progress_circle"
-        android:layout_width="@dimen/progress_circle_width"
-        android:layout_height="@dimen/progress_circle_height"
-        android:layout_centerInParent="true"
-        android:visibility="visible"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-    <!-- Indicator for loading more -->
-    <include android:id="@+id/loading_more"
-        layout="@layout/layout_progress_circle_white"
-        android:layout_width="@dimen/progress_circle_small_width"
-        android:layout_height="@dimen/progress_circle_small_height"
-        android:layout_marginBottom="@dimen/dist_xlarge"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"/>
+            <EditText android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:imeOptions="actionSearch"
+                android:background="@null"
+                android:singleLine="true"
+                android:textSize="@dimen/text_xlarge"
+                android:hint="@string/search_title"/>
 
-    <!-- Recycler View -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/search_list"
-        android:name="com.ronakmanglani.watchlist.MovieGridFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:listitem="@layout/item_movie_list"/>
+        </android.support.v7.widget.Toolbar>
 
-</RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_search" />
+
+</android.support.design.widget.CoordinatorLayout>
