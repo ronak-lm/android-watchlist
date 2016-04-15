@@ -15,23 +15,20 @@
 
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/dist_large"
-        android:paddingRight="@dimen/dist_large"
-        android:paddingTop="@dimen/search_item_padding"
-        android:paddingBottom="@dimen/search_item_padding">
+        android:padding="@dimen/dist_medium">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/movie_image"
             android:layout_height="@dimen/search_image_size"
             android:layout_width="@dimen/search_image_size"
-            android:background="@drawable/default_circle"/>
+            android:scaleType="centerCrop"
+            android:background="@color/default_image_background"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/movie_image"
             android:layout_toEndOf="@+id/movie_image"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dist_large"
             android:layout_marginStart="@dimen/dist_large"
             android:orientation="vertical">
@@ -46,15 +43,40 @@
                 android:ellipsize="end"
                 tools:text="My Awesome Movie Title"/>
 
-            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
                 android:id="@+id/movie_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_small"
-                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_medium"
                 android:maxLines="1"
                 android:ellipsize="end"
-                tools:text="2015"/>
+                tools:text="2016"/>
+
+            <LinearLayout android:id="@+id/movie_rating_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dist_small"
+                android:orientation="horizontal">
+
+                <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+                    android:id="@+id/movie_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dist_small"
+                    android:layout_marginEnd="@dimen/dist_small"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_medium"
+                    android:maxLines="1"
+                    tools:text="8.76"/>
+
+                <ImageView android:id="@+id/rating_icon"
+                    android:layout_width="@dimen/search_rating_icon_size"
+                    android:layout_height="@dimen/search_rating_icon_size"
+                    android:src="@drawable/icon_star"
+                    android:scaleType="fitCenter"
+                    tools:ignore="contentDescription"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
