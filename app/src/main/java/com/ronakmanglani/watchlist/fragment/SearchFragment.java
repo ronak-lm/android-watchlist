@@ -120,6 +120,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
                         loadingMore.setVisibility(View.VISIBLE);
                         searchMoviesList();
                     }
+                    Log.d("LOAD_MORE", "Page: " + pageToDownload + "\nTotal: " + totalPages);
                 }
             }
         });
@@ -131,6 +132,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
             recyclerView.setAdapter(adapter);
             searchQuery = savedInstanceState.getString(Watchlist.SEARCH_QUERY);
             pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
+            totalPages = savedInstanceState.getInt(Watchlist.TOTAL_PAGES);
             isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
             isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
             // Download again if stopped, else show list
@@ -159,6 +161,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
             outState.putBoolean(Watchlist.IS_LOADING, isLoading);
             outState.putBoolean(Watchlist.IS_LOCKED, isLoadingLocked);
             outState.putInt(Watchlist.PAGE_TO_DOWNLOAD, pageToDownload);
+            outState.putInt(Watchlist.TOTAL_PAGES, totalPages);
             outState.putString(Watchlist.SEARCH_QUERY, searchQuery);
             outState.putParcelableArrayList(Watchlist.MOVIE_LIST, adapter.movieList);
         }
