@@ -64,12 +64,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         // Set text
         holder.movieName.setText(movie.title);
         holder.movieYear.setText(movie.year);
-        if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
-            holder.movieRatingHolder.setVisibility(View.GONE);
-        } else {
-            holder.movieRating.setText(movie.rating);
-            holder.movieRatingHolder.setVisibility(View.VISIBLE);
-        }
     }
 
     // ViewHolder
@@ -78,8 +72,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @Bind(R.id.movie_image)             CircleImageView movieImage;
         @Bind(R.id.movie_name)              TextView movieName;
         @Bind(R.id.movie_year)              TextView movieYear;
-        @Bind(R.id.movie_rating_holder)     View movieRatingHolder;
-        @Bind(R.id.movie_rating)            TextView movieRating;
 
         public SearchViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);
