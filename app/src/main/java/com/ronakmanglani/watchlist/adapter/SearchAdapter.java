@@ -49,18 +49,22 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Movie movie = movieList.get(position);
         final SearchViewHolder holder = (SearchViewHolder) viewHolder;
         // Load image
-        int imageSize = (int) context.getResources().getDimension(R.dimen.search_image_size);
-        String imageUrl = TMDBHelper.getImageURL(movie.backdropImage, imageSize);
-        VolleySingleton.getInstance(context).imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
-            @Override
-            public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-                holder.movieImage.setImageBitmap(imageContainer.getBitmap());
-            }
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                // Do nothing
-            }
-        });
+        if (movie.backdropImage == null || movie.backdropImage.equals("null") || movie.backdropImage.length() == 0) {
+            holder.movieImage.setImageResource(R.drawable.default_backdrop_circle);
+        } else {
+            int imageSize = (int) context.getResources().getDimension(R.dimen.search_image_size);
+            String imageUrl = TMDBHelper.getImageURL(movie.backdropImage, imageSize);
+            VolleySingleton.getInstance(context).imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
+                @Override
+                public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                    holder.movieImage.setImageBitmap(imageContainer.getBitmap());
+                }
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    holder.movieImage.setImageResource(R.drawable.default_backdrop_circle);
+                }
+            });
+        }
         // Set text
         holder.movieName.setText(movie.title);
         holder.movieYear.setText(movie.year);
