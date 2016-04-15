@@ -66,7 +66,12 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         holder.creditName.setText(credit.name);
-        holder.creditRole.setText(credit.role);
+        if (credit.role == null || credit.role.equals("null") || credit.role.length() == 0) {
+            holder.creditRole.setVisibility(View.GONE);
+        } else {
+            holder.creditRole.setText(credit.role);
+            holder.creditRole.setText(View.VISIBLE);
+        }
     }
 
     // ViewHolder
