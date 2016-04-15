@@ -1,6 +1,7 @@
 package com.ronakmanglani.watchlist.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
+import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.adapter.MovieAdapter;
 import com.ronakmanglani.watchlist.adapter.SearchAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
@@ -120,7 +122,6 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
                         loadingMore.setVisibility(View.VISIBLE);
                         searchMoviesList();
                     }
-                    Log.d("LOAD_MORE", "Page: " + pageToDownload + "\nTotal: " + totalPages);
                 }
             }
         });
@@ -281,6 +282,8 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     }
     @Override
     public void onMovieClicked(int position) {
-        // TODO
+        Intent intent = new Intent(context, MovieDetailActivity.class);
+        intent.putExtra(Watchlist.MOVIE_ID, adapter.movieList.get(position).id);
+        startActivity(intent);
     }
 }
