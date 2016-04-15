@@ -17,12 +17,12 @@
         android:layout_height="match_parent"
         android:padding="@dimen/dist_medium">
 
-        <ImageView
-            android:id="@+id/movie_image"
+        <ImageView android:id="@+id/movie_image"
             android:layout_height="@dimen/search_image_size"
             android:layout_width="@dimen/search_image_size"
             android:scaleType="centerCrop"
-            android:background="@color/default_image_background"/>
+            android:background="@color/default_image_background"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:layout_width="match_parent"
