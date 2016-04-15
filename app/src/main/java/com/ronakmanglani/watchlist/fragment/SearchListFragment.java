@@ -6,11 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
-import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
-import com.ronakmanglani.watchlist.adapter.MovieAdapter;
 import com.ronakmanglani.watchlist.adapter.SearchAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
@@ -42,7 +38,7 @@ import butterknife.OnClick;
 
 import static com.ronakmanglani.watchlist.adapter.SearchAdapter.*;
 
-public class SearchFragment extends Fragment implements OnMovieClickListener {
+public class SearchListFragment extends Fragment implements OnMovieClickListener {
 
     private Context context;
 
@@ -67,7 +63,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_search, container, false);
+        View v = inflater.inflate(R.layout.fragment_search_list, container, false);
         context = getContext();
         ButterKnife.bind(this, v);
 

@@ -8,11 +8,11 @@
     android:baselineAligned="false">
 
     <fragment android:id="@+id/search_fragment"
-        android:name="com.ronakmanglani.watchlist.fragment.SearchFragment"
+        android:name="com.ronakmanglani.watchlist.fragment.SearchListFragment"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search_list" />
 
     <FrameLayout android:id="@+id/detail_fragment"
         android:layout_width="0dp"
