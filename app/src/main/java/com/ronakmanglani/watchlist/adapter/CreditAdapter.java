@@ -70,7 +70,7 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.creditRole.setVisibility(View.GONE);
         } else {
             holder.creditRole.setText(credit.role);
-            holder.creditRole.setText(View.VISIBLE);
+            holder.creditRole.setVisibility(View.VISIBLE);
         }
     }
 
