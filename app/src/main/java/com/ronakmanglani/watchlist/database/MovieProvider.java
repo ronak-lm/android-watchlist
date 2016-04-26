@@ -1,4 +1,4 @@
-package com.ronakmanglani.watchlist.data;
+package com.ronakmanglani.watchlist.database;
 
 import android.net.Uri;
 
