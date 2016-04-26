@@ -9,7 +9,7 @@ import net.simonvt.schematic.annotation.TableEndpoint;
 @ContentProvider(authority = MovieProvider.AUTHORITY, database = MovieDatabase.class)
 public class MovieProvider {
 
-    public static final String AUTHORITY = "com.ronakmanglani.watchlist.data.MovieProvider";
+    public static final String AUTHORITY = "com.ronakmanglani.watchlist.database.MovieProvider";
 
     // Table for movies seen
     @TableEndpoint(table = MovieDatabase.WATCHED) public static class Watched {

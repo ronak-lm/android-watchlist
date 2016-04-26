@@ -51,6 +51,12 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
+        <!-- Content Provider -->
+        <provider
+            android:authorities="com.ronakmanglani.watchlist.database.MovieProvider"
+            android:name="com.ronakmanglani.watchlist.database.generated.MovieProvider"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
