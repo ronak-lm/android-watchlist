@@ -17,7 +17,7 @@ public class MovieProvider {
                 path = "watched",
                 type = "vnd.android.cursor.dir/list",
                 defaultSort = MovieColumns.TITLE + " ASC")
-        public static final Uri WATCHED = Uri.parse("content://" + AUTHORITY + "/watched");
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/watched");
     }
 
     // Table for movies to see
@@ -26,6 +26,6 @@ public class MovieProvider {
                 path = "to_see",
                 type = "vnd.android.cursor.dir/list",
                 defaultSort = MovieColumns.TITLE + " ASC")
-        public static final Uri TO_SEE = Uri.parse("content://" + AUTHORITY + "/to_see");
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/to_see");
     }
 }
