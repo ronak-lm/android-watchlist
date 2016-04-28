@@ -6,10 +6,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -45,7 +47,7 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
+public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener, FloatingActionsMenu.OnFloatingActionsMenuUpdateListener {
 
     // Movie associated with the fragment
     private String id;
@@ -54,6 +56,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     // Flags
     @BindBool(R.bool.is_tablet) boolean isTablet;
     private boolean isVideoAvailable = false;
+    private boolean isFabMenuOpened = false;
 
     // Toolbar
     @Bind(R.id.toolbar)                 Toolbar toolbar;
@@ -116,6 +119,19 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
                 }
             });
         }
+
+        // Setup FAB
+        floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(this);
+        movieHolder.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (isFabMenuOpened) {
+                    floatingActionsMenu.collapse();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         // Download movie details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey(Watchlist.MOVIE_ID)
@@ -472,5 +488,14 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @OnClick(R.id.movie_cast_item3)
     public void onThirdCastItemClicked() {
         // TODO
+    }
+
+    @Override
+    public void onMenuExpanded() {
+        isFabMenuOpened = true;
+    }
+    @Override
+    public void onMenuCollapsed() {
+        isFabMenuOpened = false;
     }
 }
