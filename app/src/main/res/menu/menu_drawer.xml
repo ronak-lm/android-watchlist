@@ -22,4 +22,17 @@
 
     </group>
 
+    <group android:id="@+id/group_movies"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/drawer_watched"
+            android:title="@string/drawer_watched"
+            android:icon="@drawable/drawer_watched"/>
+
+        <item android:id="@+id/drawer_to_see"
+            android:title="@string/drawer_to_see"
+            android:icon="@drawable/drawer_to_see"/>
+
+    </group>
+
 </menu>
