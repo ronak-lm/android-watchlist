@@ -16,6 +16,8 @@ public class Watchlist extends Application {
     public static final int VIEW_TYPE_RATED = 2;
     public static final int VIEW_TYPE_UPCOMING = 3;
     public static final int VIEW_TYPE_PLAYING = 4;
+    public static final int VIEW_TYPE_WATCHED = 5;
+    public static final int VIEW_TYPE_TO_SEE = 6;
 
     // Intent Extra + Bundle Argument + Saved Instance State
     public static final String TOOLBAR_TITLE = "toolbar_title";
