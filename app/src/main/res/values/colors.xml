@@ -5,6 +5,7 @@
     <color name="primary">#ED1C24</color>
     <color name="primary_dark">#D21822</color>
     <color name="accent">#4CAF50</color>
+    <color name="accent_dark">#388E3C</color>
     <color name="background">#eeeeee</color>
     <color name="foreground">#616161</color>
 
@@ -12,6 +13,12 @@
     <color name="text_primary">#000000</color>
     <color name="text_secondary">#FFFFFF</color>
     <color name="text_chrome">@color/foreground</color>
+
+    <!-- FAB Colors -->
+    <color name="fab_yellow">#eeaf4b</color>
+    <color name="fab_yellow_dark">#d68f1d</color>
+    <color name="fab_blue">#48a0dc</color>
+    <color name="fab_blue_dark">#1687d5</color>
 
     <!-- Other Colors -->
     <color name="default_image_background">#d8d8d8</color>
