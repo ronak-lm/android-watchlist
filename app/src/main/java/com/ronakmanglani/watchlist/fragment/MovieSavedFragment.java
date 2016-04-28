@@ -1,6 +1,7 @@
 package com.ronakmanglani.watchlist.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
+import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.adapter.MovieCursorAdapter;
 import com.ronakmanglani.watchlist.adapter.MovieCursorAdapter.OnMovieClickListener;
 import com.ronakmanglani.watchlist.database.MovieColumns;
@@ -165,6 +167,14 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
     // Click events
     @Override
     public void onMovieClicked(int position) {
-        // TODO: Handle clicks
+        Cursor cursor = adapter.getCursor();
+        cursor.moveToPosition(position);
+        if (isTablet) {
+            loadDetailFragmentWith(cursor.getString(cursor.getColumnIndex(MovieColumns.TMDB_ID)));
+        } else {
+            Intent intent = new Intent(context, MovieDetailActivity.class);
+            intent.putExtra(Watchlist.MOVIE_ID, cursor.getString(cursor.getColumnIndex(MovieColumns.TMDB_ID)));
+            startActivity(intent);
+        }
     }
 }
