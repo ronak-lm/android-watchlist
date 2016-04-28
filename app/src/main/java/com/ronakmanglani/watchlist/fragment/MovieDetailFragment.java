@@ -1,6 +1,7 @@
 package com.ronakmanglani.watchlist.fragment;
 
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,6 +30,8 @@ import com.ronakmanglani.watchlist.activity.CreditActivity;
 import com.ronakmanglani.watchlist.activity.PhotoActivity;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.VideoActivity;
+import com.ronakmanglani.watchlist.database.MovieColumns;
+import com.ronakmanglani.watchlist.database.MovieProvider;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.TMDBHelper;
@@ -490,6 +494,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
         // TODO
     }
 
+    // FAB Menu
     @Override
     public void onMenuExpanded() {
         isFabMenuOpened = true;
@@ -497,5 +502,31 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @Override
     public void onMenuCollapsed() {
         isFabMenuOpened = false;
+    }
+    @OnClick(R.id.fab_watched)
+    public void onWatchedButtonClicked() {
+        ContentValues values = new ContentValues();
+        values.put(MovieColumns.TMDB_ID, movie.id);
+        values.put(MovieColumns.TITLE, movie.title);
+        values.put(MovieColumns.YEAR, movie.getYear());
+        values.put(MovieColumns.OVERVIEW, movie.overview);
+        values.put(MovieColumns.RATING, movie.voteAverage);
+        values.put(MovieColumns.POSTER, movie.posterImage);
+        values.put(MovieColumns.BACKDROP, movie.backdropImage);
+        getContext().getContentResolver().insert(MovieProvider.Watched.CONTENT_URI, values);
+        Toast.makeText(getContext(), R.string.detail_watched_added, Toast.LENGTH_SHORT).show();
+    }
+    @OnClick(R.id.fab_to_see)
+    public void onToWatchButtonClicked() {
+        ContentValues values = new ContentValues();
+        values.put(MovieColumns.TMDB_ID, movie.id);
+        values.put(MovieColumns.TITLE, movie.title);
+        values.put(MovieColumns.YEAR, movie.getYear());
+        values.put(MovieColumns.OVERVIEW, movie.overview);
+        values.put(MovieColumns.RATING, movie.voteAverage);
+        values.put(MovieColumns.POSTER, movie.posterImage);
+        values.put(MovieColumns.BACKDROP, movie.backdropImage);
+        getContext().getContentResolver().insert(MovieProvider.ToSee.CONTENT_URI, values);
+        Toast.makeText(getContext(), R.string.detail_to_watch_added, Toast.LENGTH_SHORT).show();
     }
 }

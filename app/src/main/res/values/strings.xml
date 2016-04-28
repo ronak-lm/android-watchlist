@@ -38,6 +38,10 @@
     <string name="detail_fab_watched_remove">Remove from Watched</string>
     <string name="detail_fab_to_watch_add">Want to Watch</string>
     <string name="detail_fab_to_watch_remove">Remove from "To Watch"</string>
+    <string name="detail_watched_added">Movie marked as watched</string>
+    <string name="detail_watched_removed">Movie removed from watched</string>
+    <string name="detail_to_watch_added">Movie marked as \"To Watch\"</string>
+    <string name="detail_to_watch_removed">Movie removed from \"To Watch\"</string>
 
     <!-- Credit Activity -->
     <string name="crew_title">Crew</string>
