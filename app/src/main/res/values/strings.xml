@@ -34,6 +34,10 @@
     <string name="detail_button_see_all">SEE ALL</string>
     <string name="detail_vote_count">%1$s votes</string>
     <string name="detail_crew_format">%1$s : %2$s</string>
+    <string name="detail_fab_watched_add">Mark as Watched</string>
+    <string name="detail_fab_watched_remove">Remove from Watched</string>
+    <string name="detail_fab_to_watch_add">Want to Watch</string>
+    <string name="detail_fab_to_watch_remove">Remove from "To Watch"</string>
 
     <!-- Credit Activity -->
     <string name="crew_title">Crew</string>
