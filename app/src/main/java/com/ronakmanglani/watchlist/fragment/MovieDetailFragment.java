@@ -3,12 +3,16 @@ package com.ronakmanglani.watchlist.fragment;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.NestedScrollView;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -38,7 +42,9 @@ import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.util.YoutubeHelper;
 
+import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
 import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
+import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu.OnFloatingActionsMenuUpdateListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -51,11 +57,14 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemClickListener, FloatingActionsMenu.OnFloatingActionsMenuUpdateListener {
+public class MovieDetailFragment extends Fragment implements
+        OnMenuItemClickListener, OnFloatingActionsMenuUpdateListener {
 
     // Movie associated with the fragment
     private String id;
     private MovieDetail movie;
+    private boolean isMovieWatched;
+    private boolean isMovieToWatch;
 
     // Flags
     @BindBool(R.bool.is_tablet) boolean isTablet;
@@ -73,6 +82,8 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @Bind(R.id.error_message)           View errorMessage;
     @Bind(R.id.movie_detail_holder)     View movieHolder;
     @Bind(R.id.fab_menu)                FloatingActionsMenu floatingActionsMenu;
+    @Bind(R.id.fab_watched)             FloatingActionButton watchedButton;
+    @Bind(R.id.fab_to_see)              FloatingActionButton toWatchButton;
 
     // Image views
     @Bind(R.id.backdrop_image)          NetworkImageView backdropImage;
@@ -124,19 +135,6 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             });
         }
 
-        // Setup FAB
-        floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(this);
-        movieHolder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (isFabMenuOpened) {
-                    floatingActionsMenu.collapse();
-                    return true;
-                }
-                return false;
-            }
-        });
-
         // Download movie details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey(Watchlist.MOVIE_ID)
                 && savedInstanceState.containsKey(Watchlist.MOVIE_OBJECT))) {
@@ -153,6 +151,20 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
             movie = savedInstanceState.getParcelable(Watchlist.MOVIE_OBJECT);
             onDownloadSuccessful();
         }
+
+        // Setup FAB
+        floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(this);
+        movieHolder.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (isFabMenuOpened) {
+                    floatingActionsMenu.collapse();
+                    return true;
+                }
+                return false;
+            }
+        });
+        updateFabLabels(id);
 
         return v;
     }
@@ -494,7 +506,51 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
         // TODO
     }
 
-    // FAB Menu
+    // FAB related functions
+    private void updateFabLabels(final String movieId) {
+        // Look in WATCHED table
+        getLoaderManager().initLoader(42, null, new LoaderCallbacks<Cursor>() {
+            @Override
+            public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+                return new CursorLoader(getContext(),
+                        MovieProvider.Watched.CONTENT_URI,
+                        new String[]{ },
+                        MovieColumns.TMDB_ID + " = '" + movieId + "'",
+                        null, null);
+            }
+            @Override
+            public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+                if (data.getCount() > 0) {
+                    isMovieWatched = true;
+                    watchedButton.setTitle(getString(R.string.detail_fab_watched_remove));
+                }
+            }
+            @Override
+            public void onLoaderReset(Loader<Cursor> loader) {
+            }
+        });
+        // Look in TO_SEE table
+        getLoaderManager().initLoader(43, null, new LoaderCallbacks<Cursor>() {
+            @Override
+            public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+                return new CursorLoader(getContext(),
+                        MovieProvider.ToSee.CONTENT_URI,
+                        new String[]{ },
+                        MovieColumns.TMDB_ID + " = '" + movieId + "'",
+                        null, null);
+            }
+            @Override
+            public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+                if (data.getCount() > 0) {
+                    isMovieToWatch = true;
+                    toWatchButton.setTitle(getString(R.string.detail_fab_to_watch_remove));
+                }
+            }
+            @Override
+            public void onLoaderReset(Loader<Cursor> loader) {
+            }
+        });
+    }
     @Override
     public void onMenuExpanded() {
         isFabMenuOpened = true;
@@ -505,28 +561,36 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     }
     @OnClick(R.id.fab_watched)
     public void onWatchedButtonClicked() {
-        ContentValues values = new ContentValues();
-        values.put(MovieColumns.TMDB_ID, movie.id);
-        values.put(MovieColumns.TITLE, movie.title);
-        values.put(MovieColumns.YEAR, movie.getYear());
-        values.put(MovieColumns.OVERVIEW, movie.overview);
-        values.put(MovieColumns.RATING, movie.voteAverage);
-        values.put(MovieColumns.POSTER, movie.posterImage);
-        values.put(MovieColumns.BACKDROP, movie.backdropImage);
-        getContext().getContentResolver().insert(MovieProvider.Watched.CONTENT_URI, values);
-        Toast.makeText(getContext(), R.string.detail_watched_added, Toast.LENGTH_SHORT).show();
+        if (!isMovieWatched) {
+            ContentValues values = new ContentValues();
+            values.put(MovieColumns.TMDB_ID, movie.id);
+            values.put(MovieColumns.TITLE, movie.title);
+            values.put(MovieColumns.YEAR, movie.getYear());
+            values.put(MovieColumns.OVERVIEW, movie.overview);
+            values.put(MovieColumns.RATING, movie.voteAverage);
+            values.put(MovieColumns.POSTER, movie.posterImage);
+            values.put(MovieColumns.BACKDROP, movie.backdropImage);
+            getContext().getContentResolver().insert(MovieProvider.Watched.CONTENT_URI, values);
+            Toast.makeText(getContext(), R.string.detail_watched_added, Toast.LENGTH_SHORT).show();
+        } else {
+            // TODO: Remove from database
+        }
     }
     @OnClick(R.id.fab_to_see)
     public void onToWatchButtonClicked() {
-        ContentValues values = new ContentValues();
-        values.put(MovieColumns.TMDB_ID, movie.id);
-        values.put(MovieColumns.TITLE, movie.title);
-        values.put(MovieColumns.YEAR, movie.getYear());
-        values.put(MovieColumns.OVERVIEW, movie.overview);
-        values.put(MovieColumns.RATING, movie.voteAverage);
-        values.put(MovieColumns.POSTER, movie.posterImage);
-        values.put(MovieColumns.BACKDROP, movie.backdropImage);
-        getContext().getContentResolver().insert(MovieProvider.ToSee.CONTENT_URI, values);
-        Toast.makeText(getContext(), R.string.detail_to_watch_added, Toast.LENGTH_SHORT).show();
+        if (!isMovieToWatch) {
+            ContentValues values = new ContentValues();
+            values.put(MovieColumns.TMDB_ID, movie.id);
+            values.put(MovieColumns.TITLE, movie.title);
+            values.put(MovieColumns.YEAR, movie.getYear());
+            values.put(MovieColumns.OVERVIEW, movie.overview);
+            values.put(MovieColumns.RATING, movie.voteAverage);
+            values.put(MovieColumns.POSTER, movie.posterImage);
+            values.put(MovieColumns.BACKDROP, movie.backdropImage);
+            getContext().getContentResolver().insert(MovieProvider.ToSee.CONTENT_URI, values);
+            Toast.makeText(getContext(), R.string.detail_to_watch_added, Toast.LENGTH_SHORT).show();
+        } else {
+            // TODO: Remove from database
+        }
     }
 }
