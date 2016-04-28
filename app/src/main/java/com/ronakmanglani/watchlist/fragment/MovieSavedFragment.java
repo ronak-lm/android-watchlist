@@ -48,6 +48,7 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
     @Bind(R.id.progress_circle)         View progressCircle;
     @Bind(R.id.movie_grid)              RecyclerView recyclerView;
 
+    // Fragment life cycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_saved, container, false);
