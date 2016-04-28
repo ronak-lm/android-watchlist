@@ -5,10 +5,10 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.adapter.MovieCursorAdapter;
 import com.ronakmanglani.watchlist.adapter.MovieCursorAdapter.OnMovieClickListener;
 import com.ronakmanglani.watchlist.database.MovieColumns;
@@ -111,6 +112,14 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
             recyclerView.setVisibility(View.VISIBLE);
             adapter.swapCursor(data);
         }
+        // Load detail fragment if in tablet mode
+        if (isTablet) {
+            if (data.getCount() == 0) {
+                loadDetailFragmentWith("null");
+            } else {
+                loadDetailFragmentWith(data.getString(data.getColumnIndex(MovieColumns.TMDB_ID)));
+            }
+        }
     }
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
@@ -118,12 +127,6 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
     }
 
     // Helper methods
-    public void refreshLayout() {
-        Parcelable state = layoutManager.onSaveInstanceState();
-        layoutManager = new GridLayoutManager(getContext(), getNumberOfColumns());
-        recyclerView.setLayoutManager(layoutManager);
-        layoutManager.onRestoreInstanceState(state);
-    }
     public int getNumberOfColumns() {
         // Get screen width
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
@@ -142,6 +145,20 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
             int columns = Math.round(widthPx / desiredPx);
             return columns > 1 ? columns : 1;
         }
+    }
+    public void refreshLayout() {
+        Parcelable state = layoutManager.onSaveInstanceState();
+        layoutManager = new GridLayoutManager(getContext(), getNumberOfColumns());
+        recyclerView.setLayoutManager(layoutManager);
+        layoutManager.onRestoreInstanceState(state);
+    }
+    public void loadDetailFragmentWith(final String id) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                ((MovieActivity)getActivity()).loadDetailFragmentWith(id);
+            }
+        });
     }
 
     // Click events
