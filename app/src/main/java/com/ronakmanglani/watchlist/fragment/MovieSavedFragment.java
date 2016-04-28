@@ -114,9 +114,6 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         adapter.swapCursor(null);
-        noResults.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.GONE);
-        progressCircle.setVisibility(View.VISIBLE);
     }
 
     // Helper methods
