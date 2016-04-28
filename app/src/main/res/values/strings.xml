@@ -22,7 +22,7 @@
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
     <string name="try_again">Try Again?</string>
     <string name="loading">Loading&#8230;</string>
-    <string name="saved_empty">You haven\'t added any movies to this list</string>
+    <string name="saved_empty">You haven\'t added any movies\nto this list</string>
 
     <!-- Movie Detail Activity -->
     <string name="detail_header_overview">OVERVIEW</string>
