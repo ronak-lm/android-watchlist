@@ -30,7 +30,7 @@ import static android.support.design.widget.NavigationView.OnNavigationItemSelec
 
 public class MovieDrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener {
 
-    private MovieListFragment fragment;
+    private Fragment fragment;
     private SharedPreferences preferences;
 
     @Bind(R.id.toolbar)             Toolbar toolbar;
@@ -69,7 +69,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         if (savedInstanceState == null) {
             setSelectedDrawerItem(lastPosition);
         } else {
-            fragment = (MovieListFragment) getActivity().getSupportFragmentManager().findFragmentByTag(Watchlist.TAG_GRID_FRAGMENT);
+            fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Watchlist.TAG_GRID_FRAGMENT);
             if (savedInstanceState.containsKey(Watchlist.TOOLBAR_TITLE)) {
                 toolbar.setTitle(savedInstanceState.getString(Watchlist.TOOLBAR_TITLE));
             } else {
@@ -102,14 +102,14 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
                 editor1.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_LIST);
                 editor1.apply();
                 onRefreshToolbarMenu();
-                fragment.refreshLayout();
+                onRefreshFragmentLayout();
                 return true;
             case R.id.action_grid:
                 SharedPreferences.Editor editor2 = preferences.edit();
                 editor2.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID);
                 editor2.apply();
                 onRefreshToolbarMenu();
-                fragment.refreshLayout();
+                onRefreshFragmentLayout();
                 return true;
             default: return false;
         }
@@ -125,6 +125,13 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
             Menu menu = toolbar.getMenu();
             menu.findItem(R.id.action_grid).setVisible(true);
             menu.findItem(R.id.action_list).setVisible(false);
+        }
+    }
+    private void onRefreshFragmentLayout() {
+        if (fragment instanceof MovieListFragment) {
+            ((MovieListFragment) fragment).refreshLayout();
+        } else if (fragment instanceof MovieSavedFragment) {
+            ((MovieSavedFragment) fragment).refreshLayout();
         }
     }
 
@@ -146,6 +153,12 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
             case R.id.drawer_playing:
                 setSelectedDrawerItem(3);
                 return true;
+            case R.id.drawer_watched:
+                setSelectedDrawerItem(4);
+                return true;
+            case R.id.drawer_to_see:
+                setSelectedDrawerItem(5);
+                return true;
             default:
                 return false;
         }
@@ -155,7 +168,6 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         item.setChecked(true);
         toolbar.setTitle(item.getTitle());
         // Create and replace fragment
-        fragment = new MovieListFragment();
         Bundle args = new Bundle();
         if (position == 0) {
             args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_POPULAR);
@@ -165,6 +177,16 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
             args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_UPCOMING);
         } else if (position == 3) {
             args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_PLAYING);
+        } else if (position == 4) {
+            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_WATCHED);
+        } else if (position == 5) {
+            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_TO_SEE);
+        }
+        //
+        if (position <= 3) {
+            fragment = new MovieListFragment();
+        } else {
+            fragment = new MovieSavedFragment();
         }
         fragment.setArguments(args);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
