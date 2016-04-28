@@ -37,6 +37,7 @@
     <!-- RecyclerView Dimensions -->
     <dimen name="recycler_item_padding">3dp</dimen>
     <dimen name="recycler_view_padding">6dp</dimen>
+    <dimen name="recycler_view_bottom_padding">80dp</dimen>
 
     <!-- Movie Simple Item in RecyclerView -->
     <dimen name="movie_card_margin">4dp</dimen>
