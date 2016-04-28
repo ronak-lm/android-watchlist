@@ -62,7 +62,10 @@
             android:layout_width="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dist_medium"
+            android:layout_marginEnd="@dimen/dist_medium"
+            android:layout_marginBottom="@dimen/dist_medium" />
 
     </RelativeLayout>
 

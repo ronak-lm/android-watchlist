@@ -2,19 +2,18 @@
 <net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fab_menu"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:layout_marginRight="@dimen/dist_large"
-    android:layout_marginEnd="@dimen/dist_large"
-    android:layout_marginBottom="@dimen/dist_large"
     android:visibility="gone"
     app:fab_addButtonColorNormal="@color/accent"
     app:fab_addButtonColorPressed="@color/accent_dark"
     app:fab_addButtonPlusIconColor="@android:color/white"
     app:fab_addButtonSize="normal"
     app:fab_labelStyle="@style/FabMenuStyle"
-    app:fab_labelsPosition="left">
+    app:fab_labelsPosition="left"
+    tools:visibility="visible">
 
     <net.i2p.android.ext.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_watched"
