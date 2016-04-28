@@ -32,6 +32,8 @@ import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.util.YoutubeHelper;
 
+import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -63,6 +65,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
     @Bind(R.id.progress_circle)         View progressCircle;
     @Bind(R.id.error_message)           View errorMessage;
     @Bind(R.id.movie_detail_holder)     View movieHolder;
+    @Bind(R.id.fab_menu)                FloatingActionsMenu floatingActionsMenu;
 
     // Image views
     @Bind(R.id.backdrop_image)          NetworkImageView backdropImage;
@@ -239,6 +242,7 @@ public class MovieDetailFragment extends Fragment implements Toolbar.OnMenuItemC
         progressCircle.setVisibility(View.GONE);
         errorMessage.setVisibility(View.GONE);
         movieHolder.setVisibility(View.VISIBLE);
+        floatingActionsMenu.setVisibility(View.VISIBLE);
 
         // Set title and tagline
         if (movie.tagline == null || movie.tagline.equals("null") || movie.tagline.equals("")) {

@@ -39,7 +39,7 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <!-- Error message and loading circle -->
+    <!-- Error message, loading circle and FAB -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -56,6 +56,13 @@
             android:layout_height="@dimen/progress_circle_height"
             android:layout_centerInParent="true"
             android:visibility="visible"/>
+
+        <include layout="@layout/layout_floating_menu"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 
