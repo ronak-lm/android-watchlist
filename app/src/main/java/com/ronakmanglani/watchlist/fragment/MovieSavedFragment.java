@@ -114,10 +114,11 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
         }
         // Load detail fragment if in tablet mode
         if (isTablet) {
-            if (data.getCount() == 0) {
-                loadDetailFragmentWith("null");
-            } else {
+            if (data.getCount() > 0) {
+                data.moveToFirst();
                 loadDetailFragmentWith(data.getString(data.getColumnIndex(MovieColumns.TMDB_ID)));
+            } else {
+                loadDetailFragmentWith("null");
             }
         }
     }
