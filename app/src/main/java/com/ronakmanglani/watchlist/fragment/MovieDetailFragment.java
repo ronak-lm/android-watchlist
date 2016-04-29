@@ -164,7 +164,7 @@ public class MovieDetailFragment extends Fragment implements
                 return false;
             }
         });
-        updateFabLabels(id);
+        updateFABs();
 
         return v;
     }
@@ -507,7 +507,8 @@ public class MovieDetailFragment extends Fragment implements
     }
 
     // FAB related functions
-    private void updateFabLabels(final String movieId) {
+    private void updateFABs() {
+        final String movieId = id;
         // Look in WATCHED table
         getLoaderManager().initLoader(42, null, new LoaderCallbacks<Cursor>() {
             @Override
@@ -523,6 +524,11 @@ public class MovieDetailFragment extends Fragment implements
                 if (data.getCount() > 0) {
                     isMovieWatched = true;
                     watchedButton.setTitle(getString(R.string.detail_fab_watched_remove));
+                    toWatchButton.setVisibility(View.GONE);
+                } else {
+                    isMovieWatched = false;
+                    watchedButton.setTitle(getString(R.string.detail_fab_watched_add));
+                    toWatchButton.setVisibility(View.VISIBLE);
                 }
             }
             @Override
@@ -544,6 +550,9 @@ public class MovieDetailFragment extends Fragment implements
                 if (data.getCount() > 0) {
                     isMovieToWatch = true;
                     toWatchButton.setTitle(getString(R.string.detail_fab_to_watch_remove));
+                } else {
+                    isMovieToWatch = false;
+                    toWatchButton.setTitle(getString(R.string.detail_fab_to_watch_add));
                 }
             }
             @Override
@@ -562,6 +571,7 @@ public class MovieDetailFragment extends Fragment implements
     @OnClick(R.id.fab_watched)
     public void onWatchedButtonClicked() {
         if (!isMovieWatched) {
+            // Add movie to WATCHED table
             ContentValues values = new ContentValues();
             values.put(MovieColumns.TMDB_ID, movie.id);
             values.put(MovieColumns.TITLE, movie.title);
@@ -572,13 +582,28 @@ public class MovieDetailFragment extends Fragment implements
             values.put(MovieColumns.BACKDROP, movie.backdropImage);
             getContext().getContentResolver().insert(MovieProvider.Watched.CONTENT_URI, values);
             Toast.makeText(getContext(), R.string.detail_watched_added, Toast.LENGTH_SHORT).show();
+            // Remove from "TO_SEE" table
+            if (isMovieToWatch) {
+                getContext().getContentResolver().
+                        delete(MovieProvider.ToSee.CONTENT_URI,
+                        MovieColumns.TMDB_ID + " = '" + id + "'",
+                        null);
+            }
         } else {
-            // TODO: Remove from database
+            // Remove from WATCHED table
+            getContext().getContentResolver().
+                    delete(MovieProvider.Watched.CONTENT_URI,
+                            MovieColumns.TMDB_ID + " = '" + id + "'",
+                            null);
+            Toast.makeText(getContext(), R.string.detail_watched_removed, Toast.LENGTH_SHORT).show();
         }
+        // Update FABs
+        updateFABs();
     }
     @OnClick(R.id.fab_to_see)
     public void onToWatchButtonClicked() {
         if (!isMovieToWatch) {
+            // Add movie to "TO SEE" table
             ContentValues values = new ContentValues();
             values.put(MovieColumns.TMDB_ID, movie.id);
             values.put(MovieColumns.TITLE, movie.title);
@@ -590,7 +615,14 @@ public class MovieDetailFragment extends Fragment implements
             getContext().getContentResolver().insert(MovieProvider.ToSee.CONTENT_URI, values);
             Toast.makeText(getContext(), R.string.detail_to_watch_added, Toast.LENGTH_SHORT).show();
         } else {
-            // TODO: Remove from database
+            // Remove from "TO SEE" table
+            getContext().getContentResolver().
+                    delete(MovieProvider.ToSee.CONTENT_URI,
+                            MovieColumns.TMDB_ID + " = '" + id + "'",
+                            null);
+            Toast.makeText(getContext(), R.string.detail_to_watch_removed, Toast.LENGTH_SHORT).show();
         }
+        // Update FABs
+        updateFABs();
     }
 }
