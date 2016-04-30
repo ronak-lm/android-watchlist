@@ -1,6 +1,6 @@
 # Watchlist
 
-Udacity - Android Developer Nanodegree - Projects 1 & 2: Popular Movies
+This repository hosts the source code for the Android app Watchlist that helps you keep track of movies which you have watched and view trailers, reviews, photos, etc
 
 ![screen](../master/art/screenshot.jpg)
 
@@ -14,11 +14,6 @@ Udacity - Android Developer Nanodegree - Projects 1 & 2: Popular Movies
 * [Schematic](https://github.com/SimonVT/schematic)
 * [Volley](http://developer.android.com/training/volley/index.html)
 
-## Android Developer Nanodegree
-[![udacity][1]][2]
-
-[1]: ../master/art/nanodegree-logo.png
-[2]: https://www.udacity.com/course/android-developer-nanodegree--nd801
 
 ## License
 
