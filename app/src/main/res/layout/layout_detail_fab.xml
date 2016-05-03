@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.clans.fab.FloatingActionMenu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fab_menu"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:menu_colorNormal="@color/accent"
+    app:menu_colorPressed="@color/accent_dark"
+    app:menu_icon="@drawable/fab_add"
+    tools:visibility="visible">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_watched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drawer_watched"
+        app:fab_size="mini"
+        app:fab_label="@string/detail_fab_watched_add"
+        app:fab_colorNormal="@color/fab_yellow"
+        app:fab_colorPressed="@color/fab_yellow_dark" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_to_see"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/drawer_to_see"
+        app:fab_size="mini"
+        app:fab_label="@string/detail_fab_to_watch_add"
+        app:fab_colorNormal="@color/fab_blue"
+        app:fab_colorPressed="@color/fab_blue_dark" />
+
+</com.github.clans.fab.FloatingActionMenu>

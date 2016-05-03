@@ -11,6 +11,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Log;
@@ -28,6 +29,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+import com.github.clans.fab.FloatingActionMenu.OnMenuToggleListener;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -46,10 +50,6 @@ import com.ronakmanglani.watchlist.util.TMDBHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.util.YoutubeHelper;
 
-import net.i2p.android.ext.floatingactionbutton.FloatingActionButton;
-import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu;
-import net.i2p.android.ext.floatingactionbutton.FloatingActionsMenu.OnFloatingActionsMenuUpdateListener;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -61,8 +61,7 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MovieDetailFragment extends Fragment implements
-        OnMenuItemClickListener, OnFloatingActionsMenuUpdateListener {
+public class MovieDetailFragment extends Fragment implements OnMenuItemClickListener, OnMenuToggleListener {
 
     // Movie associated with the fragment
     private String id;
@@ -84,9 +83,9 @@ public class MovieDetailFragment extends Fragment implements
     // Main views
     @Bind(R.id.progress_circle)         View progressCircle;
     @Bind(R.id.error_message)           View errorMessage;
-    @Bind(R.id.movie_detail_holder)     View movieHolder;
+    @Bind(R.id.movie_detail_holder)     NestedScrollView movieHolder;
     @Bind(R.id.detail_banner_ad)        AdView bannerAdView;
-    @Bind(R.id.fab_menu)                FloatingActionsMenu floatingActionsMenu;
+    @Bind(R.id.fab_menu)                FloatingActionMenu floatingActionsMenu;
     @Bind(R.id.fab_watched)             FloatingActionButton watchedButton;
     @Bind(R.id.fab_to_see)              FloatingActionButton toWatchButton;
 
@@ -158,17 +157,7 @@ public class MovieDetailFragment extends Fragment implements
         }
 
         // Setup FAB
-        floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(this);
-        movieHolder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (isFabMenuOpened) {
-                    floatingActionsMenu.collapse();
-                    return true;
-                }
-                return false;
-            }
-        });
+        floatingActionsMenu.setOnMenuToggleListener(this);
         updateFABs();
 
         // Load Banner Ad
@@ -543,11 +532,11 @@ public class MovieDetailFragment extends Fragment implements
             public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
                 if (data.getCount() > 0) {
                     isMovieWatched = true;
-                    watchedButton.setTitle(getString(R.string.detail_fab_watched_remove));
+                    watchedButton.setLabelText(getString(R.string.detail_fab_watched_remove));
                     toWatchButton.setVisibility(View.GONE);
                 } else {
                     isMovieWatched = false;
-                    watchedButton.setTitle(getString(R.string.detail_fab_watched_add));
+                    watchedButton.setLabelText(getString(R.string.detail_fab_watched_add));
                     toWatchButton.setVisibility(View.VISIBLE);
                 }
             }
@@ -569,10 +558,10 @@ public class MovieDetailFragment extends Fragment implements
             public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
                 if (data.getCount() > 0) {
                     isMovieToWatch = true;
-                    toWatchButton.setTitle(getString(R.string.detail_fab_to_watch_remove));
+                    toWatchButton.setLabelText(getString(R.string.detail_fab_to_watch_remove));
                 } else {
                     isMovieToWatch = false;
-                    toWatchButton.setTitle(getString(R.string.detail_fab_to_watch_add));
+                    toWatchButton.setLabelText(getString(R.string.detail_fab_to_watch_add));
                 }
             }
             @Override
@@ -581,12 +570,8 @@ public class MovieDetailFragment extends Fragment implements
         });
     }
     @Override
-    public void onMenuExpanded() {
-        isFabMenuOpened = true;
-    }
-    @Override
-    public void onMenuCollapsed() {
-        isFabMenuOpened = false;
+    public void onMenuToggle(boolean isOpened) {
+        isFabMenuOpened = isOpened;
     }
     @OnClick(R.id.fab_watched)
     public void onWatchedButtonClicked() {

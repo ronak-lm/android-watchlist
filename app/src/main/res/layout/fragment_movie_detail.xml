@@ -25,4 +25,12 @@
 
     <include layout="@layout/content_movie_detail" />
 
+    <include layout="@layout/layout_detail_fab"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="@dimen/dist_medium"
+        android:layout_marginEnd="@dimen/dist_medium"
+        android:layout_marginBottom="@dimen/dist_medium" />
+
 </android.support.design.widget.CoordinatorLayout>
