@@ -173,7 +173,11 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         // Load Banner Ad
         AdRequest.Builder adBuilder = new AdRequest.Builder();
         if (BuildConfig.DEBUG) {
-            adBuilder.addTestDevice("3FF5F3A364D20A6FEED523C87AE59F26");
+            adBuilder
+                    // My Phone
+                    .addTestDevice("3FF5F3A364D20A6FEED523C87AE59F26")
+                    // Genymotion Emulator (Tablet)
+                    .addTestDevice("EEC4BCA939D8E55B0EAF91E8F1134848");
         }
         AdRequest adRequest = adBuilder.build();
         bannerAdView.loadAd(adRequest);
