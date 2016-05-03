@@ -28,6 +28,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.CreditActivity;
@@ -81,6 +85,7 @@ public class MovieDetailFragment extends Fragment implements
     @Bind(R.id.progress_circle)         View progressCircle;
     @Bind(R.id.error_message)           View errorMessage;
     @Bind(R.id.movie_detail_holder)     View movieHolder;
+    @Bind(R.id.detail_banner_ad)        AdView bannerAdView;
     @Bind(R.id.fab_menu)                FloatingActionsMenu floatingActionsMenu;
     @Bind(R.id.fab_watched)             FloatingActionButton watchedButton;
     @Bind(R.id.fab_to_see)              FloatingActionButton toWatchButton;
@@ -165,6 +170,21 @@ public class MovieDetailFragment extends Fragment implements
             }
         });
         updateFABs();
+
+        // Load Banner Ad
+        AdRequest.Builder adBuilder = new AdRequest.Builder();
+        if (BuildConfig.DEBUG) {
+            adBuilder.addTestDevice("3FF5F3A364D20A6FEED523C87AE59F26");
+        }
+        AdRequest adRequest = adBuilder.build();
+        bannerAdView.loadAd(adRequest);
+        bannerAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+                bannerAdView.setVisibility(View.GONE);
+            }
+        });
 
         return v;
     }
