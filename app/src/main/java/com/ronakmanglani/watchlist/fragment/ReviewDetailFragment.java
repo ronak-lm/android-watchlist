@@ -13,6 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.model.Review;
@@ -28,6 +32,7 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
     @Bind(R.id.toolbar)             Toolbar toolbar;
     @Bind(R.id.review_body)         TextView reviewBody;
     @Bind(R.id.review_body_holder)  View reviewBodyHolder;
+    @Bind(R.id.review_large_ad)     AdView reviewAdView;
 
     private String movieName;
     private Review review;
@@ -66,6 +71,25 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
             // Set review body
             reviewBody.setText(review.body);
         }
+
+        // Load Ad
+        AdRequest.Builder adBuilder = new AdRequest.Builder();
+        if (BuildConfig.DEBUG) {
+            adBuilder
+                    // My Phone
+                    .addTestDevice("3FF5F3A364D20A6FEED523C87AE59F26")
+                    // Genymotion Emulator (Tablet)
+                    .addTestDevice("EEC4BCA939D8E55B0EAF91E8F1134848");
+        }
+        AdRequest adRequest = adBuilder.build();
+        reviewAdView.loadAd(adRequest);
+        reviewAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+                reviewAdView.setVisibility(View.GONE);
+            }
+        });
 
         return v;
     }
