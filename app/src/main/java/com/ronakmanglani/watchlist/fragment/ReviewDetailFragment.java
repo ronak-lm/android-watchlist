@@ -75,11 +75,8 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
         // Load Ad
         AdRequest.Builder adBuilder = new AdRequest.Builder();
         if (BuildConfig.DEBUG) {
-            adBuilder
-                    // My Phone
-                    .addTestDevice("3FF5F3A364D20A6FEED523C87AE59F26")
-                    // Genymotion Emulator (Tablet)
-                    .addTestDevice("EEC4BCA939D8E55B0EAF91E8F1134848");
+            adBuilder.addTestDevice(getString(R.string.yu_yuphoria_id))
+                     .addTestDevice(getString(R.string.genymotion_tablet_id));
         }
         AdRequest adRequest = adBuilder.build();
         reviewAdView.loadAd(adRequest);
