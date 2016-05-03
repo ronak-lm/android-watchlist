@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:adSize="SMART_BANNER"
-            app:adUnitId="@string/videos_page_banner_key" />
+            app:adUnitId="@string/videos_list_ad_id" />
 
     </RelativeLayout>
 

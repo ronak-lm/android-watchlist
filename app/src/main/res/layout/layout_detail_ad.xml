@@ -8,4 +8,4 @@
     android:layout_marginTop="@dimen/dist_large"
     android:layout_marginBottom="@dimen/dist_medium"
     ads:adSize="BANNER"
-    ads:adUnitId="@string/detail_page_banner_key" />
+    ads:adUnitId="@string/movie_detail_ad_id" />

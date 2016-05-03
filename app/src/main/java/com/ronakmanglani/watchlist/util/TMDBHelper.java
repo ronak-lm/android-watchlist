@@ -9,7 +9,7 @@ public class TMDBHelper {
 
     // API key for TMDB
     private static String getApiKey(Context context) {
-        return context.getString(R.string.api_key);
+        return context.getString(R.string.tmdb_api_key);
     }
 
     // API Endpoints
