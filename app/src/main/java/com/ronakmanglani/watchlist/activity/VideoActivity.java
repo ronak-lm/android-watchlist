@@ -18,6 +18,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.adapter.VideoAdapter;
@@ -50,6 +54,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
     @Bind(R.id.toolbar_title)       TextView toolbarTitle;
     @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
     @Bind(R.id.video_list)          RecyclerView videoList;
+    @Bind(R.id.video_banner_ad)     AdView videoAdView;
     @Bind(R.id.error_message)       View errorMessage;
     @Bind(R.id.progress_circle)     View progressCircle;
     @Bind(R.id.no_results)          View noResults;
@@ -86,6 +91,22 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         if (isTablet) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
+
+        // Load Ads
+        AdRequest.Builder adBuilder = new AdRequest.Builder();
+        if (BuildConfig.DEBUG) {
+            adBuilder.addTestDevice(getString(R.string.yu_yuphoria_id))
+                    .addTestDevice(getString(R.string.genymotion_tablet_id));
+        }
+        AdRequest adRequest = adBuilder.build();
+        videoAdView.loadAd(adRequest);
+        videoAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+                videoAdView.setVisibility(View.GONE);
+            }
+        });
     }
     @Override
     protected void onStop() {
