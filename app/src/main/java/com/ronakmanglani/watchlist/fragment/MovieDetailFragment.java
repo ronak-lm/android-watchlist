@@ -159,6 +159,16 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         // Setup FAB
         floatingActionsMenu.setOnMenuToggleListener(this);
         updateFABs();
+        movieHolder.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (oldScrollY < scrollY) {
+                    floatingActionsMenu.hideMenuButton(true);
+                } else {
+                    floatingActionsMenu.showMenuButton(true);
+                }
+            }
+        });
 
         // Load Banner Ad
         AdRequest.Builder adBuilder = new AdRequest.Builder();
