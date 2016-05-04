@@ -49,8 +49,13 @@ public class Watchlist extends Application {
     private Tracker mTracker;
     synchronized public Tracker getTracker() {
         if (mTracker == null) {
+            // Initialize tracker
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
             mTracker = analytics.newTracker(R.xml.global_tracker);
+            // Prevent data from being sent when debugging
+            if (BuildConfig.DEBUG) {
+                analytics.setDryRun(true);
+            }
         }
         return mTracker;
     }
