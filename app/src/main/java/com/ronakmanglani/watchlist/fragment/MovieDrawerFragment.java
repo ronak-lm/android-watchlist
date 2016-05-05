@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.activity.AboutActivity;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
 
 import butterknife.Bind;
@@ -158,6 +159,9 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
                 return true;
             case R.id.drawer_to_see:
                 setSelectedDrawerItem(5);
+                return true;
+            case R.id.drawer_about:
+                startActivity(new Intent(getContext(), AboutActivity.class));
                 return true;
             default:
                 return false;
