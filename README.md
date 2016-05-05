@@ -9,7 +9,7 @@ This repository hosts the source code for the Android app Watchlist that helps y
 
 * [Butter Knife](https://github.com/JakeWharton/butterknife)
 * [CircleImageView](https://github.com/hdodenhof/CircleImageView)
-* [FloatingActionButton](https://github.com/str4d/android-floating-action-button)
+* [FloatingActionButton](https://github.com/Clans/FloatingActionButton)
 * [MaterialLoadingProgressBar](https://github.com/lsjwzh/MaterialLoadingProgressBar)
 * [Schematic](https://github.com/SimonVT/schematic)
 * [Volley](http://developer.android.com/training/volley/index.html)
