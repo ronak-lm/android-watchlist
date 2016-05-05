@@ -70,7 +70,9 @@
     <string name="about_made_by">Made By</string>
     <string name="about_name">Ronak Manglani</string>
     <string name="about_rate">Rate App</string>
-    <string name="about_email">Send Email</string>
     <string name="about_twitter">Follow Me</string>
+    <string name="about_email">Send Email</string>
+    <string name="about_email_using">Send using&#8230;</string>
+    <string name="about_email_error">There are no email clients installed!</string>
 
 </resources>
