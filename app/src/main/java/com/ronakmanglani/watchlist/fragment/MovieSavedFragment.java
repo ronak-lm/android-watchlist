@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
@@ -40,6 +42,8 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
     private static final int CURSOR_LOADER_ID = 42;
 
     private Context context;
+    private Tracker tracker;
+
     private MovieCursorAdapter adapter;
     private GridLayoutManager layoutManager;
 
@@ -61,6 +65,7 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
         // Initialize variable
         context = getContext();
         viewType = getArguments().getInt(Watchlist.VIEW_TYPE);
+        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
 
         // Setup RecyclerView
         adapter = new MovieCursorAdapter(context, this, null);
@@ -74,6 +79,28 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
         getLoaderManager().initLoader(CURSOR_LOADER_ID, null, this);
 
         return v;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Determine screen name
+        String screenName;
+        switch (viewType) {
+            case Watchlist.VIEW_TYPE_WATCHED:
+                screenName = getString(R.string.screen_watched);
+                break;
+
+            case Watchlist.VIEW_TYPE_TO_SEE:
+                screenName = getString(R.string.screen_to_watch);
+                break;
+
+            default:
+                screenName = getString(R.string.screen_movie_saved);
+                break;
+        }
+        // Send screen name to analytics
+        tracker.setScreenName(screenName);
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onDestroyView() {

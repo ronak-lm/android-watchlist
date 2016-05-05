@@ -35,6 +35,8 @@ import com.github.clans.fab.FloatingActionMenu.OnMenuToggleListener;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
@@ -61,7 +63,10 @@ import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MovieDetailFragment extends Fragment implements OnMenuItemClickListener, OnMenuToggleListener {
+public class MovieDetailFragment extends Fragment implements OnMenuItemClickListener {
+
+    // Google Analytics Tracker
+    private Tracker tracker;
 
     // Movie associated with the fragment
     private String id;
@@ -72,7 +77,6 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     // Flags
     @BindBool(R.bool.is_tablet) boolean isTablet;
     private boolean isVideoAvailable = false;
-    private boolean isFabMenuOpened = false;
 
     // Toolbar
     @Bind(R.id.toolbar)                 Toolbar toolbar;
@@ -157,7 +161,6 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         }
 
         // Setup FAB
-        floatingActionsMenu.setOnMenuToggleListener(this);
         updateFABs();
         movieHolder.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
@@ -186,7 +189,17 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             }
         });
 
+        // Load Analytics Tracker
+        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
+
         return v;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Send screen name to analytics
+        tracker.setScreenName(getString(R.string.screen_movie_detail));
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -579,10 +592,6 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             public void onLoaderReset(Loader<Cursor> loader) {
             }
         });
-    }
-    @Override
-    public void onMenuToggle(boolean isOpened) {
-        isFabMenuOpened = isOpened;
     }
     @OnClick(R.id.fab_watched)
     public void onWatchedButtonClicked() {

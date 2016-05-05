@@ -19,6 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
@@ -41,6 +43,7 @@ import static com.ronakmanglani.watchlist.adapter.SearchAdapter.*;
 public class SearchListFragment extends Fragment implements OnMovieClickListener {
 
     private Context context;
+    private Tracker tracker;
 
     private String searchQuery;
     private SearchAdapter adapter;
@@ -151,7 +154,17 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
             }
         }
 
+        // Load Analytics Tracker
+        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
+
         return v;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Send screen name to analytics
+        tracker.setScreenName(getString(R.string.screen_movie_search));
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {

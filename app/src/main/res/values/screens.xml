@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Screen Names for Google Analytics -->
 <resources>
-    <!-- Screen Names for Google Analytics -->
+
     <string name="screen_movie_list">Movie List</string>
     <string name="screen_movie_search">Search Movies</string>
     <string name="screen_popular">Most Popular Movies</string>
     <string name="screen_rated">Top Rated Movies</string>
     <string name="screen_upcoming">Upcoming Movies</string>
     <string name="screen_playing">Now Playing Movies</string>
+
+    <string name="screen_movie_saved">Saved Movies</string>
     <string name="screen_watched">Watched Movies</string>
     <string name="screen_to_watch">To Watch Movies</string>
+
     <string name="screen_movie_detail">Movie Details</string>
     <string name="screen_photo_list">Movie Photos</string>
     <string name="screen_movie_videos">Movie Videos</string>
     <string name="screen_review_list">Movie Reviews</string>
     <string name="screen_review_detail">Review Detail</string>
+
     <string name="screen_cast_list">Cast List</string>
     <string name="screen_crew_list">Crew List</string>
+
     <string name="screen_about">About Page</string>
+
 </resources>
