@@ -17,6 +17,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.adapter.PhotoAdapter;
@@ -36,6 +38,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class PhotoActivity extends AppCompatActivity implements OnPhotoClickListener {
+
+    private Tracker tracker;
 
     private String movieId;
     private PhotoAdapter adapter;
@@ -83,6 +87,16 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
         if (isTablet) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
+
+        // Load Analytics Tracker
+        tracker = ((Watchlist) getApplication()).getTracker();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Send screen name to analytics
+        tracker.setScreenName(getString(R.string.screen_movie_photos));
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     protected void onStop() {

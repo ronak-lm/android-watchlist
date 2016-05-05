@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Screen Names for Google Analytics -->
 <resources>
-
     <string name="screen_movie_list">Movie List</string>
     <string name="screen_movie_search">Search Movies</string>
     <string name="screen_popular">Most Popular Movies</string>
@@ -14,7 +13,7 @@
     <string name="screen_to_watch">To Watch Movies</string>
 
     <string name="screen_movie_detail">Movie Details</string>
-    <string name="screen_photo_list">Movie Photos</string>
+    <string name="screen_movie_photos">Movie Photos</string>
     <string name="screen_movie_videos">Movie Videos</string>
     <string name="screen_review_list">Movie Reviews</string>
     <string name="screen_review_detail">Review Detail</string>
@@ -23,5 +22,4 @@
     <string name="screen_crew_list">Crew List</string>
 
     <string name="screen_about">About Page</string>
-
 </resources>

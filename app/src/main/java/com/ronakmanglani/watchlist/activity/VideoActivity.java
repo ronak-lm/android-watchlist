@@ -21,6 +21,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
@@ -43,6 +45,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class VideoActivity extends AppCompatActivity implements OnVideoClickListener {
+
+    private Tracker tracker;
 
     private String movieId;
     private VideoAdapter adapter;
@@ -107,6 +111,16 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
                 videoAdView.setVisibility(View.GONE);
             }
         });
+
+        // Load Analytics Tracker
+        tracker = ((Watchlist) getApplication()).getTracker();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Send screen name to analytics
+        tracker.setScreenName(getString(R.string.screen_movie_videos));
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     protected void onStop() {
