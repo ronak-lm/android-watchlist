@@ -13,9 +13,9 @@
     <string name="screen_to_watch">To Watch Movies</string>
 
     <string name="screen_movie_detail">Movie Details</string>
-    <string name="screen_movie_photos">Movie Photos</string>
-    <string name="screen_movie_videos">Movie Videos</string>
-    <string name="screen_review_list">Movie Reviews</string>
+    <string name="screen_movie_photos">Photo List</string>
+    <string name="screen_movie_videos">Trailer List</string>
+    <string name="screen_review_list">Review List</string>
     <string name="screen_review_detail">Review Detail</string>
 
     <string name="screen_credit_list">Credit List</string>
