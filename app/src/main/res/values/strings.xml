@@ -65,5 +65,11 @@
 
     <!-- About Activity -->
     <string name="about_title">About</string>
+    <string name="about_version">Version 1.0</string>
+    <string name="about_made_by">Made By</string>
+    <string name="about_name">Ronak Manglani</string>
+    <string name="about_rate">Rate App</string>
+    <string name="about_email">Send Email</string>
+    <string name="about_twitter">Follow Me</string>
 
 </resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:showIn="@layout/content_about">
+
+    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/text_xxlarge"/>
+
+    <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_version"
+        android:textSize="@dimen/text_large"/>
+
+    <ImageView android:src="@drawable/app_icon"
+        android:layout_width="@dimen/about_icon_size"
+        android:layout_height="@dimen/about_icon_size"
+        android:layout_margin="@dimen/dist_medium"
+        tools:ignore="ContentDescription" />
+
+    <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_made_by"
+        android:textSize="@dimen/text_large"/>
+
+    <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_name"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/text_large"/>
+
+</LinearLayout>

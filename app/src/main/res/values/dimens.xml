@@ -87,4 +87,7 @@
     <dimen name="search_image_size">80dp</dimen>
     <dimen name="search_rating_icon_size">14dp</dimen>
 
+    <!-- About Page -->
+    <dimen name="about_icon_size">120dp</dimen>
+
 </resources>

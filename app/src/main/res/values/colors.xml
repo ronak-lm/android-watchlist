@@ -17,8 +17,10 @@
     <!-- FAB Colors -->
     <color name="fab_yellow">#eeaf4b</color>
     <color name="fab_yellow_dark">#d68f1d</color>
-    <color name="fab_blue">#48a0dc</color>
-    <color name="fab_blue_dark">#1687d5</color>
+    <color name="fab_blue">#55acee</color>
+    <color name="fab_blue_dark">#4791c9</color>
+    <color name="fab_purple">#9777a8</color>
+    <color name="fab_purple_dark">#8b6d9b</color>
 
     <!-- Other Colors -->
     <color name="default_image_background">#d8d8d8</color>
