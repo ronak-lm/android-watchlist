@@ -18,6 +18,7 @@
     <string name="screen_review_list">Movie Reviews</string>
     <string name="screen_review_detail">Review Detail</string>
 
+    <string name="screen_credit_list">Credit List</string>
     <string name="screen_cast_list">Cast List</string>
     <string name="screen_crew_list">Crew List</string>
 
