@@ -24,6 +24,7 @@
     <string name="ga_category_search">Search</string>
     <string name="ga_category_share">Share</string>
     <string name="ga_category_add">Add to List</string>
+    <string name="ga_category_remove">Remove from List</string>
     <string name="ga_action_movie">Movie</string>
     <string name="ga_action_review">Review</string>
     <string name="ga_action_watched">Watched</string>

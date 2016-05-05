@@ -614,12 +614,24 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             values.put(MovieColumns.BACKDROP, movie.backdropImage);
             getContext().getContentResolver().insert(MovieProvider.Watched.CONTENT_URI, values);
             Toast.makeText(getContext(), R.string.detail_watched_added, Toast.LENGTH_SHORT).show();
+            // Send added event to Google Analytics
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(getString(R.string.ga_category_add))
+                    .setAction(getString(R.string.ga_action_watched))
+                    .setLabel(movie.title)
+                    .build());
             // Remove from "TO_SEE" table
             if (isMovieToWatch) {
                 getContext().getContentResolver().
                         delete(MovieProvider.ToSee.CONTENT_URI,
                         MovieColumns.TMDB_ID + " = '" + id + "'",
                         null);
+                // Send removed event to Google Analytics
+                tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory(getString(R.string.ga_category_remove))
+                        .setAction(getString(R.string.ga_action_to_watch))
+                        .setLabel(movie.title)
+                        .build());
             }
         } else {
             // Remove from WATCHED table
@@ -628,6 +640,12 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                             MovieColumns.TMDB_ID + " = '" + id + "'",
                             null);
             Toast.makeText(getContext(), R.string.detail_watched_removed, Toast.LENGTH_SHORT).show();
+            // Send removed event to Google Analytics
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(getString(R.string.ga_category_remove))
+                    .setAction(getString(R.string.ga_action_watched))
+                    .setLabel(movie.title)
+                    .build());
         }
         // Update FABs
         updateFABs();
@@ -646,6 +664,12 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             values.put(MovieColumns.BACKDROP, movie.backdropImage);
             getContext().getContentResolver().insert(MovieProvider.ToSee.CONTENT_URI, values);
             Toast.makeText(getContext(), R.string.detail_to_watch_added, Toast.LENGTH_SHORT).show();
+            // Send added event to Google Analytics
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(getString(R.string.ga_category_add))
+                    .setAction(getString(R.string.ga_action_to_watch))
+                    .setLabel(movie.title)
+                    .build());
         } else {
             // Remove from "TO SEE" table
             getContext().getContentResolver().
@@ -653,6 +677,12 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                             MovieColumns.TMDB_ID + " = '" + id + "'",
                             null);
             Toast.makeText(getContext(), R.string.detail_to_watch_removed, Toast.LENGTH_SHORT).show();
+            // Send removed event to Google Analytics
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(getString(R.string.ga_category_remove))
+                    .setAction(getString(R.string.ga_action_to_watch))
+                    .setLabel(movie.title)
+                    .build());
         }
         // Update FABs
         updateFABs();
