@@ -221,12 +221,19 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.action_share) {
             if (movie != null) {
+                // Share the movie
                 String shareText = getString(R.string.action_share_text, movie.title, TMDBHelper.getMovieShareURL(movie.id));
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
                 startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.action_share_using)));
+                // Send event to Google Analytics
+                tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory(getString(R.string.ga_category_share))
+                        .setAction(getString(R.string.ga_action_movie))
+                        .setLabel(movie.title)
+                        .build());
             }
             return true;
         } else {

@@ -114,12 +114,19 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_share) {
+            // Share the review
             String shareText = "A review of " + movieName + " by " + review.author + " - " + review.url;
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movieName + " - Review");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
             startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.action_share_using)));
+            // Send event to Google Analytics
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(getString(R.string.ga_category_share))
+                    .setAction(getString(R.string.ga_action_review))
+                    .setLabel(review.url)
+                    .build());
             return true;
         } else {
             return false;
