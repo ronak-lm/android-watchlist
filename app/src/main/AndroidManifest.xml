@@ -4,7 +4,7 @@
 
     <!-- User Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Set screen size support -->
     <supports-screens
@@ -51,12 +51,16 @@
             android:label="@string/search_title"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/about_title"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Content Provider -->
         <provider
+            android:name=".database.generated.MovieProvider"
             android:authorities="com.ronakmanglani.watchlist.database.MovieProvider"
-            android:name="com.ronakmanglani.watchlist.database.generated.MovieProvider"
-            android:exported="false"/>
+            android:exported="false" />
 
     </application>
 

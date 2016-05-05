@@ -24,6 +24,10 @@
     <string name="loading">Loading&#8230;</string>
     <string name="saved_empty">You haven\'t added any movies\nto this list</string>
 
+    <!-- Search Activity -->
+    <string name="search_title">Search</string>
+    <string name="search_no_results">Your search did not match any results</string>
+
     <!-- Movie Detail Activity -->
     <string name="detail_header_overview">OVERVIEW</string>
     <string name="detail_button_photos">PHOTOS</string>
@@ -43,10 +47,6 @@
     <string name="detail_to_watch_added">Movie marked as \"To Watch\"</string>
     <string name="detail_to_watch_removed">Movie removed from \"To Watch\"</string>
 
-    <!-- Credit Activity -->
-    <string name="crew_title">Crew</string>
-    <string name="cast_title">Cast</string>
-
     <!-- Reviews Activity -->
     <string name="reviews_title">Reviews</string>
     <string name="reviews_no_results">We don\'t have any reviews for\nthis movie!</string>
@@ -59,8 +59,11 @@
     <string name="photos_title">Photos</string>
     <string name="photos_no_results">We don\'t have any photos for\nthis movie!</string>
 
-    <!-- Search Activity -->
-    <string name="search_title">Search</string>
-    <string name="search_no_results">Your search did not match any results</string>
+    <!-- Credit Activity -->
+    <string name="crew_title">Crew</string>
+    <string name="cast_title">Cast</string>
+
+    <!-- About Activity -->
+    <string name="about_title">About</string>
 
 </resources>
