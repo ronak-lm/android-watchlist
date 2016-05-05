@@ -221,8 +221,20 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
                                 ((SearchActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(0).id);
                             }
 
+                            // Send event to Google Analytics
+                            if (pageToDownload == 1) {
+                                tracker.send(new HitBuilders.EventBuilder()
+                                        .setCategory(getString(R.string.ga_category_search))
+                                        .setAction(getString(R.string.ga_action_movie))
+                                        .setLabel(searchQuery)
+                                        .build());
+                            }
+
+                            // Update counters
                             pageToDownload = jsonObject.getInt("page") + 1;
                             totalPages = jsonObject.getInt("total_pages");
+
+                            // Display search results
                             onDownloadSuccessful();
 
                         } catch (Exception ex) {
