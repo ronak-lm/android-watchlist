@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
@@ -27,15 +29,16 @@ import butterknife.ButterKnife;
 
 public class ReviewDetailFragment extends Fragment implements OnMenuItemClickListener  {
 
-    @BindBool(R.bool.is_tablet) boolean isTablet;
+    private Tracker tracker;
 
+    private String movieName;
+    private Review review;
+
+    @BindBool(R.bool.is_tablet)     boolean isTablet;
     @Bind(R.id.toolbar)             Toolbar toolbar;
     @Bind(R.id.review_body)         TextView reviewBody;
     @Bind(R.id.review_body_holder)  View reviewBodyHolder;
     @Bind(R.id.review_large_ad)     AdView reviewAdView;
-
-    private String movieName;
-    private Review review;
 
     // Fragment lifecycle
     @Override
@@ -88,7 +91,17 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
             }
         });
 
+        // Load Analytics Tracker
+        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
+
         return v;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Send screen name to analytics
+        tracker.setScreenName(getString(R.string.screen_review_detail));
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onDestroyView() {

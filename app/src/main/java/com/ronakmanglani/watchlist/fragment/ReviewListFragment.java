@@ -17,6 +17,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
@@ -37,6 +39,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ReviewListFragment extends Fragment implements ReviewAdapter.OnReviewClickListener {
+
+    private Tracker tracker;
 
     private String movieId;
     private String movieName;
@@ -67,9 +71,10 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
         View v = inflater.inflate(R.layout.fragment_review,container,false);
         ButterKnife.bind(this, v);
 
-        // Get arguments
+        // Initialize variables
         movieId = getArguments().getString(Watchlist.MOVIE_ID);
         movieName = getArguments().getString(Watchlist.MOVIE_NAME);
+        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
 
         // Setup toolbar
         toolbar.setTitle("");
@@ -126,6 +131,13 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
         }
 
         return v;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Send screen name to analytics
+        tracker.setScreenName(getString(R.string.screen_review_list));
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {
