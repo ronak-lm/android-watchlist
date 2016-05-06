@@ -9,7 +9,6 @@
     <string name="drawer_playing">Now Playing</string>
     <string name="drawer_watched">Watched</string>
     <string name="drawer_to_see">To Watch</string>
-    <string name="drawer_about">About</string>
 
     <!-- Toolbar actions -->
     <string name="action_grid">Grid View</string>

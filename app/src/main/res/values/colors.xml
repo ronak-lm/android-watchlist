@@ -12,7 +12,6 @@
     <!-- Text Colors -->
     <color name="text_primary">#000000</color>
     <color name="text_secondary">#FFFFFF</color>
-    <color name="text_chrome">@color/foreground</color>
 
     <!-- FAB Colors -->
     <color name="fab_yellow">#eeaf4b</color>

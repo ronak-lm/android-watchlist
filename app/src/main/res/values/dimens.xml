@@ -39,7 +39,6 @@
     <dimen name="recycler_view_padding">6dp</dimen>
 
     <!-- Movie Simple Item in RecyclerView -->
-    <dimen name="movie_card_margin">4dp</dimen>
     <dimen name="movie_card_width">180dp</dimen>
     <dimen name="movie_card_height">200dp</dimen>
     <dimen name="movie_image_height">135dp</dimen>
@@ -83,7 +82,6 @@
     <dimen name="credit_image_size">55dp</dimen>
 
     <!-- Search Item -->
-    <dimen name="search_item_padding">10dp</dimen>
     <dimen name="search_image_size">80dp</dimen>
     <dimen name="search_rating_icon_size">14dp</dimen>
 
