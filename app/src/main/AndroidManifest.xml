@@ -51,10 +51,6 @@
             android:label="@string/search_title"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity
-            android:name=".activity.AboutActivity"
-            android:label="@string/about_title"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Content Provider -->
         <provider

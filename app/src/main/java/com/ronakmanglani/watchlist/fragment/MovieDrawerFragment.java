@@ -3,6 +3,7 @@ package com.ronakmanglani.watchlist.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.LayoutInflater;
@@ -21,7 +23,6 @@ import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
-import com.ronakmanglani.watchlist.activity.AboutActivity;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
 
 import butterknife.Bind;
@@ -95,9 +96,11 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
     public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+
             case R.id.action_search:
                 startActivity(new Intent(getContext(), SearchActivity.class));
                 return true;
+
             case R.id.action_list:
                 SharedPreferences.Editor editor1 = preferences.edit();
                 editor1.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_LIST);
@@ -105,6 +108,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
                 return true;
+
             case R.id.action_grid:
                 SharedPreferences.Editor editor2 = preferences.edit();
                 editor2.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID);
@@ -112,6 +116,33 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
                 return true;
+
+            case R.id.action_rate:
+                Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getContext().getPackageName()));
+                startActivity(rateIntent);
+                return true;
+
+            case R.id.action_twitter:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/Ronak_LM"));
+                startActivity(browserIntent);
+                return true;
+
+            case R.id.action_email:
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","ronak_lm@outlook.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                try {
+                    startActivity(Intent.createChooser(emailIntent, getString(R.string.action_email_using)));
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), R.string.action_email_error, Toast.LENGTH_SHORT).show();
+                }
+                return true;
+
+            case R.id.action_about:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setView(R.layout.dialog_about);
+                builder.show();
+                return true;
+
             default: return false;
         }
     }
@@ -159,9 +190,6 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
                 return true;
             case R.id.drawer_to_see:
                 setSelectedDrawerItem(5);
-                return true;
-            case R.id.drawer_about:
-                startActivity(new Intent(getContext(), AboutActivity.class));
                 return true;
             default:
                 return false;

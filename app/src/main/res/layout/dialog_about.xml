@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
+    android:padding="@dimen/dist_large"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:showIn="@layout/content_about">
+    android:orientation="vertical">
 
     <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
         android:layout_width="wrap_content"
@@ -27,13 +26,13 @@
         android:layout_margin="@dimen/dist_medium"
         tools:ignore="ContentDescription" />
 
-    <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+    <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_made_by"
         android:textSize="@dimen/text_large"/>
 
-    <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_name"

@@ -21,4 +21,20 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
 
+    <item android:id="@+id/action_rate"
+        android:title="@string/action_rate"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_twitter"
+        android:title="@string/action_twitter"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_email"
+        android:title="@string/action_email"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/action_about"
+        android:title="@string/action_about"
+        app:showAsAction="never" />
+
 </menu>

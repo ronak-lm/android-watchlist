@@ -18,6 +18,12 @@
     <string name="action_share">Share</string>
     <string name="action_share_text">Check out %1$s - %2$s</string>
     <string name="action_share_using">Share using&#8230;</string>
+    <string name="action_rate">Rate on Google Play</string>
+    <string name="action_twitter">Follow on Twitter</string>
+    <string name="action_email">Send Feedback</string>
+    <string name="action_about">About</string>
+    <string name="action_email_using">Send email&#8230;</string>
+    <string name="action_email_error">There are no email clients installed!</string>
 
     <!-- Loading and Error Message -->
     <string name="server_unreachable">Oops! Something went wrong.\nPlease check your internet connection.</string>
@@ -64,15 +70,9 @@
     <string name="crew_title">Crew</string>
     <string name="cast_title">Cast</string>
 
-    <!-- About Activity -->
-    <string name="about_title">About</string>
+    <!-- About Dialog -->
     <string name="about_version">Version 1.0</string>
     <string name="about_made_by">Made By</string>
     <string name="about_name">Ronak Manglani</string>
-    <string name="about_rate">Rate App</string>
-    <string name="about_twitter">Follow Me</string>
-    <string name="about_email">Send Email</string>
-    <string name="about_email_using">Send using&#8230;</string>
-    <string name="about_email_error">There are no email clients installed!</string>
 
 </resources>

@@ -35,13 +35,4 @@
 
     </group>
 
-    <group android:id="@+id/group_about"
-        android:checkableBehavior="none">
-
-        <item android:id="@+id/drawer_about"
-            android:title="@string/drawer_about"
-            android:icon="@drawable/drawer_about"/>
-
-    </group>
-
 </menu>
