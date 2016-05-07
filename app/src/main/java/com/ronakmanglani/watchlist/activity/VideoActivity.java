@@ -98,10 +98,8 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
 
         // Load Ads
         AdRequest.Builder adBuilder = new AdRequest.Builder();
-        if (BuildConfig.DEBUG) {
-            adBuilder.addTestDevice(getString(R.string.yu_yuphoria_id))
-                    .addTestDevice(getString(R.string.genymotion_tablet_id));
-        }
+        adBuilder.addTestDevice(getString(R.string.yu_yuphoria_id))
+                 .addTestDevice(getString(R.string.genymotion_tablet_id));
         AdRequest adRequest = adBuilder.build();
         videoAdView.loadAd(adRequest);
         videoAdView.setAdListener(new AdListener() {
