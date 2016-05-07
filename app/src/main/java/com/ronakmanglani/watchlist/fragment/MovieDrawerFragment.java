@@ -139,7 +139,15 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
 
             case R.id.action_about:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setView(R.layout.dialog_about);
+                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_about, null);
+                view.findViewById(R.id.tmdb_link).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://themoviedb.org"));
+                        startActivity(browserIntent);
+                    }
+                });
+                builder.setView(view);
                 builder.show();
                 return true;
 
