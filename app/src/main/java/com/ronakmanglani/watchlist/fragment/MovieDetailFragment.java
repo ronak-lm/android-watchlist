@@ -179,13 +179,6 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                  .addTestDevice(getString(R.string.genymotion_tablet_id));
         AdRequest adRequest = adBuilder.build();
         bannerAdView.loadAd(adRequest);
-        bannerAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                super.onAdFailedToLoad(errorCode);
-                bannerAdView.setVisibility(View.GONE);
-            }
-        });
 
         // Load Analytics Tracker
         tracker = ((Watchlist) getActivity().getApplication()).getTracker();

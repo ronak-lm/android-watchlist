@@ -81,13 +81,6 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
                  .addTestDevice(getString(R.string.genymotion_tablet_id));
         AdRequest adRequest = adBuilder.build();
         reviewAdView.loadAd(adRequest);
-        reviewAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                super.onAdFailedToLoad(errorCode);
-                reviewAdView.setVisibility(View.GONE);
-            }
-        });
 
         // Load Analytics Tracker
         tracker = ((Watchlist) getActivity().getApplication()).getTracker();
