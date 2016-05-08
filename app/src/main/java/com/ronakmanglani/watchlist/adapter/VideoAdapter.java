@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Video;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
@@ -18,6 +20,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int VIEW_TYPE_VIDEO = 1;
+    private static final int VIEW_TYPE_AD = 2;
 
     private Context context;
     public ArrayList<Video> videoList;
@@ -31,22 +36,43 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     // RecyclerView methods
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position < videoList.size()) {
+            return VIEW_TYPE_VIDEO;
+        } else {
+            return VIEW_TYPE_AD;
+        }
+    }
     @Override
     public int getItemCount() {
-        return videoList.size();
+        return videoList.size() + 1;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video, parent, false);
-        return new VideoViewHolder(v, onVideoClickListener);
+        if (viewType == VIEW_TYPE_VIDEO) {
+            ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video, parent, false);
+            return new VideoViewHolder(v, onVideoClickListener);
+        } else {
+            ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video_ad, parent, false);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(context.getString(R.string.yu_yuphoria_id))
+                    .addTestDevice(context.getString(R.string.genymotion_tablet_id))
+                    .build();
+            ((AdView) v.findViewById(R.id.video_banner_ad)).loadAd(adRequest);
+            return new EmptyViewHolder(v);
+        }
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        Video video = videoList.get(position);
-        VideoViewHolder holder = (VideoViewHolder) viewHolder;
-        holder.videoImage.setImageUrl(video.imageURL, VolleySingleton.getInstance(context).imageLoader);
-        holder.videoName.setText(video.title);
-        holder.videoSubtitle.setText(video.subtitle);
+        if (viewHolder instanceof VideoViewHolder) {
+            Video video = videoList.get(position);
+            VideoViewHolder holder = (VideoViewHolder) viewHolder;
+            holder.videoImage.setImageUrl(video.imageURL, VolleySingleton.getInstance(context).imageLoader);
+            holder.videoName.setText(video.title);
+            holder.videoSubtitle.setText(video.subtitle);
+        }
     }
 
     // ViewHolder
@@ -66,6 +92,11 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     onVideoClickListener.onVideoClicked(getAdapterPosition());
                 }
             });
+        }
+    }
+    public class EmptyViewHolder extends RecyclerView.ViewHolder {
+        public EmptyViewHolder(final ViewGroup itemView) {
+            super(itemView);
         }
     }
 

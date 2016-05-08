@@ -58,7 +58,6 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
     @Bind(R.id.toolbar_title)       TextView toolbarTitle;
     @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
     @Bind(R.id.video_list)          RecyclerView videoList;
-    @Bind(R.id.video_banner_ad)     AdView videoAdView;
     @Bind(R.id.error_message)       View errorMessage;
     @Bind(R.id.progress_circle)     View progressCircle;
     @Bind(R.id.no_results)          View noResults;
@@ -80,7 +79,18 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         toolbarTitle.setText(R.string.videos_title);
         toolbarSubtitle.setText(movieName);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this,getNumberOfColumns());
+        final int numOfColumns = getNumberOfColumns();
+        GridLayoutManager layoutManager = new GridLayoutManager(this, numOfColumns);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (position == adapter.videoList.size()) {
+                    return numOfColumns;
+                } else {
+                    return 1;
+                }
+            }
+        });
         adapter = new VideoAdapter(this, new ArrayList<Video>(), this);
         videoList.setHasFixedSize(true);
         videoList.setLayoutManager(layoutManager);
@@ -95,13 +105,6 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         if (isTablet) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
-
-        // Load Ads
-        AdRequest.Builder adBuilder = new AdRequest.Builder();
-        adBuilder.addTestDevice(getString(R.string.yu_yuphoria_id))
-                 .addTestDevice(getString(R.string.genymotion_tablet_id));
-        AdRequest adRequest = adBuilder.build();
-        videoAdView.loadAd(adRequest);
 
         // Load Analytics Tracker
         tracker = ((Watchlist) getApplication()).getTracker();

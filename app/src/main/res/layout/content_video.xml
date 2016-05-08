@@ -8,32 +8,16 @@
     tools:context=".activity.VideoActivity"
     tools:showIn="@layout/activity_video">
 
-    <RelativeLayout
+    <!-- Videos List -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/video_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!-- Videos List -->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/video_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/video_banner_ad"
-            android:padding="@dimen/dist_xxsmall"
-            android:clipToPadding="false"
-            android:visibility="gone"
-            tools:visibility="visible"
-            tools:listitem="@layout/item_video" />
-
-        <!-- AdView -->
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/video_banner_ad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:adSize="SMART_BANNER"
-            app:adUnitId="@string/videos_list_ad_id" />
-
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:padding="@dimen/dist_xxsmall"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:listitem="@layout/item_video" />
 
     <!-- Network Error Message -->
     <include android:id="@+id/error_message"
