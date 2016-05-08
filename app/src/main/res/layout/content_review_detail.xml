@@ -15,6 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
 
         <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
@@ -22,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/dist_large"
-            android:textIsSelectable="true"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="Movie review goes here..."/>
