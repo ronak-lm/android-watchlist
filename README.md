@@ -2,6 +2,11 @@
 
 This repository hosts the source code for the Android app Watchlist that helps you keep track of movies which you have watched and view trailers, reviews, photos, etc
 
+[![Download][1]][2]
+
+[1]: ../master/art/google-play-badge.png
+[2]: https://play.google.com/store/apps/details?id=com.ronakmanglani.watchlist
+
 ![screen](../master/art/screenshot.jpg)
 
 
