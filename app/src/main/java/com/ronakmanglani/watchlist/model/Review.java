@@ -7,22 +7,25 @@ public class Review implements Parcelable {
 
     // Attributes
     public String id;
-    public String author;
-    public String body;
-    public String url;
+    public String userName;
+    public String comment;
+    public String createdAt;
+    public boolean hasSpoiler;
 
     // Constructors
-    public Review(String id, String author, String body, String url) {
+    public Review(String id, String userName, String comment, String createdAt, boolean hasSpoiler) {
         this.id = id;
-        this.author = author;
-        this.body = body;
-        this.url = url;
+        this.userName = userName;
+        this.comment = comment;
+        this.createdAt = createdAt;
+        this.hasSpoiler = hasSpoiler;
     }
     public Review(Parcel in) {
         this.id = in.readString();
-        this.author = in.readString();
-        this.body = in.readString();
-        this.url = in.readString();
+        this.userName = in.readString();
+        this.comment = in.readString();
+        this.createdAt = in.readString();
+        this.hasSpoiler = (in.readInt() == 1);
     }
 
     // Parcelable Creator
@@ -39,9 +42,14 @@ public class Review implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int i) {
         out.writeString(id);
-        out.writeString(author);
-        out.writeString(body);
-        out.writeString(url);
+        out.writeString(userName);
+        out.writeString(comment);
+        out.writeString(createdAt);
+        if (hasSpoiler) {
+            out.writeInt(1);
+        } else {
+            out.writeInt(0);
+        }
     }
     @Override
     public int describeContents() {
