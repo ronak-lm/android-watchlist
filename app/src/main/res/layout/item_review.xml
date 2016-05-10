@@ -44,11 +44,37 @@
             tools:ignore="contentDescription"/>
 
         <!-- Review Body -->
-        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
-            android:id="@+id/review_body"
-            style="@style/ReviewBodyStyle"
-            android:layout_below="@+id/review_header"
-            tools:text="The movie's review goes here..."/>
+        <FrameLayout android:id="@+id/review_body_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/review_header">
+
+            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+                android:id="@+id/review_body"
+                style="@style/ReviewBodyStyle"
+                tools:text="The movie's review goes here..."/>
+
+            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+                android:id="@+id/review_spoiler"
+                style="@style/ReviewBodyStyle"
+                android:textColor="@color/primary"
+                tools:text="SPOILER ALERT!"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+        <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            android:id="@+id/review_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/review_body_holder"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dist_small"
+            android:layout_marginRight="@dimen/dist_small"
+            android:layout_marginEnd="@dimen/dist_small"
+            android:textSize="@dimen/text_small"
+            tools:text="01 Jan 2016"/>
 
     </RelativeLayout>
 
