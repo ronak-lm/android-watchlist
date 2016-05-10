@@ -243,6 +243,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                         try {
                             String backdropImage = jsonObject.getString("backdrop_path");
                             String id = jsonObject.getString("id");
+                            String imdbId = jsonObject.getString("imdb_id");
                             String overview = jsonObject.getString("overview");
                             String posterImage = jsonObject.getString("poster_path");
                             String releaseDate = jsonObject.getString("release_date");
@@ -277,7 +278,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                                 video = videoArray.getJSONObject(0).getString("source");
                             }
 
-                            movie = new MovieDetail(id, title, tagline, releaseDate, runtime, overview, voteAverage,
+                            movie = new MovieDetail(id, imdbId, title, tagline, releaseDate, runtime, overview, voteAverage,
                                     voteCount, backdropImage, posterImage, video, cast, crew);
 
                             onDownloadSuccessful();

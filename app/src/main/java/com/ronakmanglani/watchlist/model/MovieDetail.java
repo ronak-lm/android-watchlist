@@ -11,6 +11,7 @@ public class MovieDetail implements Parcelable {
 
     // Attributes
     public String id;
+    public String imdbId;
     public String title;
     public String tagline;
     public String releaseDate;
@@ -34,10 +35,11 @@ public class MovieDetail implements Parcelable {
     }
 
     // Constructors
-    public MovieDetail(String id, String title, String tagline, String releaseDate, String runtime,
-                       String overview, String voteAverage, String voteCount, String backdropImage,
-                       String posterImage, String video, ArrayList<Credit> cast, ArrayList<Credit> crew) {
+    public MovieDetail(String id, String imdbId, String title, String tagline, String releaseDate, String runtime,
+                       String overview, String voteAverage, String voteCount, String backdropImage, String posterImage,
+                       String video, ArrayList<Credit> cast, ArrayList<Credit> crew) {
         this.id = id;
+        this.imdbId = imdbId;
         this.title = title;
         this.tagline = tagline;
         this.releaseDate = releaseDate;
@@ -53,6 +55,7 @@ public class MovieDetail implements Parcelable {
     }
     public MovieDetail(Parcel in) {
         this.id = in.readString();
+        this.imdbId = in.readString();
         this.title = in.readString();
         this.tagline = in.readString();
         this.releaseDate = in.readString();
@@ -110,6 +113,7 @@ public class MovieDetail implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int i) {
         out.writeString(id);
+        out.writeString(imdbId);
         out.writeString(title);
         out.writeString(tagline);
         out.writeString(releaseDate);
