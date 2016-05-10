@@ -18,18 +18,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.adapter.VideoAdapter;
 import com.ronakmanglani.watchlist.adapter.VideoAdapter.OnVideoClickListener;
 import com.ronakmanglani.watchlist.model.Video;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.util.YoutubeHelper;
 import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
@@ -176,7 +172,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
             videoList.setAdapter(adapter);
         }
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, TMDBHelper.getVideosLink(this, movieId), null,
+                Request.Method.GET, ApiHelper.getVideosLink(this, movieId), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject object) {

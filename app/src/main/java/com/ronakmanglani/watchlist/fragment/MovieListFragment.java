@@ -27,7 +27,7 @@ import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.adapter.MovieAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
@@ -191,13 +191,13 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
     // JSON parsing and display
     public String getUrlToDownload(int page) {
         if (viewType == Watchlist.VIEW_TYPE_POPULAR) {
-            return TMDBHelper.getMostPopularMoviesLink(getActivity(), page);
+            return ApiHelper.getMostPopularMoviesLink(getActivity(), page);
         } else if (viewType == Watchlist.VIEW_TYPE_RATED) {
-            return TMDBHelper.getHighestRatedMoviesLink(getActivity(), page);
+            return ApiHelper.getHighestRatedMoviesLink(getActivity(), page);
         } else if (viewType == Watchlist.VIEW_TYPE_UPCOMING) {
-            return TMDBHelper.getUpcomingMoviesLink(getActivity(), page);
+            return ApiHelper.getUpcomingMoviesLink(getActivity(), page);
         } else if (viewType == Watchlist.VIEW_TYPE_PLAYING) {
-            return TMDBHelper.getNowPlayingMoviesLink(getActivity(), page);
+            return ApiHelper.getNowPlayingMoviesLink(getActivity(), page);
         }
         return null;
     }

@@ -16,7 +16,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.model.Movie;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.widget.AutoResizeTextView;
 
@@ -93,12 +93,12 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             // GRID MODE
             MovieGridViewHolder movieViewHolder = (MovieGridViewHolder) viewHolder;
             if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
-                String imageUrl = TMDBHelper.getImageURL(movie.backdropImage, imageWidth);
+                String imageUrl = ApiHelper.getImageURL(movie.backdropImage, imageWidth);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
             } else if (movie.posterImage != null && !movie.posterImage.equals("null")) {
-                String imageUrl = TMDBHelper.getImageURL(movie.posterImage, imageWidth);
+                String imageUrl = ApiHelper.getImageURL(movie.posterImage, imageWidth);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
@@ -124,7 +124,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
             } else {
                 int imageSize = (int) context.getResources().getDimension(R.dimen.movie_detail_poster_width);
-                String imageUrl = TMDBHelper.getImageURL(movie.posterImage, imageSize);
+                String imageUrl = ApiHelper.getImageURL(movie.posterImage, imageSize);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);

@@ -12,15 +12,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Movie;
-import com.ronakmanglani.watchlist.model.Review;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -54,7 +52,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.movieImage.setImageResource(R.drawable.default_backdrop_circle);
         } else {
             int imageSize = (int) context.getResources().getDimension(R.dimen.search_image_size);
-            String imageUrl = TMDBHelper.getImageURL(movie.backdropImage, imageSize);
+            String imageUrl = ApiHelper.getImageURL(movie.backdropImage, imageSize);
             VolleySingleton.getInstance(context).imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {

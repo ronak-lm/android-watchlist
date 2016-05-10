@@ -27,7 +27,7 @@ import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
 import com.ronakmanglani.watchlist.adapter.SearchAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import org.json.JSONArray;
@@ -191,7 +191,7 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
             adapter = new SearchAdapter(context, this);
             recyclerView.swapAdapter(adapter, true);
         }
-        String urlToDownload = TMDBHelper.getSearchMoviesLink(context, searchQuery, pageToDownload);
+        String urlToDownload = ApiHelper.getSearchMoviesLink(context, searchQuery, pageToDownload);
         final JsonObjectRequest request = new JsonObjectRequest (
                 Request.Method.GET, urlToDownload, null,
                 new Response.Listener<JSONObject>() {

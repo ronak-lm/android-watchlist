@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,13 +30,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.github.clans.fab.FloatingActionMenu.OnMenuToggleListener;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.CreditActivity;
@@ -48,7 +44,7 @@ import com.ronakmanglani.watchlist.database.MovieColumns;
 import com.ronakmanglani.watchlist.database.MovieProvider;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.util.YoutubeHelper;
 
@@ -213,7 +209,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         if (item.getItemId() == R.id.action_share) {
             if (movie != null) {
                 // Share the movie
-                String shareText = getString(R.string.action_share_text, movie.title, TMDBHelper.getMovieShareURL(movie.id));
+                String shareText = getString(R.string.action_share_text, movie.title, ApiHelper.getMovieShareURL(movie.id));
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movie.title);
@@ -234,7 +230,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
 
     // JSON parsing and display
     private void downloadMovieDetails(String id) {
-        String urlToDownload = TMDBHelper.getMovieDetailLink(getActivity(), id);
+        String urlToDownload = ApiHelper.getMovieDetailLink(getActivity(), id);
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET, urlToDownload, null,
                 new Response.Listener<JSONObject>() {
@@ -325,7 +321,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         // Backdrop image
         if (movie.backdropImage != null && !movie.backdropImage.equals("null") && !movie.backdropImage.equals("")) {
             int headerImageWidth = (int) getResources().getDimension(R.dimen.detail_backdrop_width);
-            backdropImage.setImageUrl(TMDBHelper.getImageURL(movie.backdropImage, headerImageWidth),
+            backdropImage.setImageUrl(ApiHelper.getImageURL(movie.backdropImage, headerImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             if (movie.video.length() == 0) {
                 isVideoAvailable = false;
@@ -349,7 +345,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         // Basic info
         if (movie.posterImage != null && !movie.posterImage.equals("null")) {
             int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_detail_poster_width);
-            posterImage.setImageUrl(TMDBHelper.getImageURL(movie.posterImage, posterImageWidth),
+            posterImage.setImageUrl(ApiHelper.getImageURL(movie.posterImage, posterImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
         } else {
             posterImageDefault.setVisibility(View.VISIBLE);
@@ -402,7 +398,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
-            movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
+            movieCastImages.get(0).setImageUrl(ApiHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
@@ -417,13 +413,13 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 1
             movieCastImages.get(1).setDefaultImageResId(R.drawable.default_cast);
-            movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
+            movieCastImages.get(1).setImageUrl(ApiHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
             movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
-            movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
+            movieCastImages.get(0).setImageUrl(ApiHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
@@ -437,19 +433,19 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             int castImageWidth = (int) getResources().getDimension(R.dimen.detail_cast_image_width);
             // 2
             movieCastImages.get(2).setDefaultImageResId(R.drawable.default_cast);
-            movieCastImages.get(2).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(2).imagePath, castImageWidth),
+            movieCastImages.get(2).setImageUrl(ApiHelper.getImageURL(movie.cast.get(2).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(2).setText(movie.cast.get(2).name);
             movieCastRoles.get(2).setText(movie.cast.get(2).role);
             // 1
             movieCastImages.get(1).setDefaultImageResId(R.drawable.default_cast);
-            movieCastImages.get(1).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
+            movieCastImages.get(1).setImageUrl(ApiHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
             movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
-            movieCastImages.get(0).setImageUrl(TMDBHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
+            movieCastImages.get(0).setImageUrl(ApiHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);

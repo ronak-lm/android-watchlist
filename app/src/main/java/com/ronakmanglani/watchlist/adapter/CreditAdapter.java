@@ -11,7 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Credit;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (credit.imagePath == null || credit.imagePath.equals("null")) {
             holder.creditImage.setImageResource(R.drawable.default_cast_square);
         } else {
-            VolleySingleton.getInstance(context).imageLoader.get(TMDBHelper.getImageURL(credit.imagePath, imageSize),
+            VolleySingleton.getInstance(context).imageLoader.get(ApiHelper.getImageURL(credit.imagePath, imageSize),
                     new ImageLoader.ImageListener() {
                         @Override
                         public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {

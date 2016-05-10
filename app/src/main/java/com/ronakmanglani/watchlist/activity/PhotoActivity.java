@@ -23,7 +23,7 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.adapter.PhotoAdapter;
 import com.ronakmanglani.watchlist.adapter.PhotoAdapter.OnPhotoClickListener;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
@@ -158,7 +158,7 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
             photoList.setAdapter(adapter);
         }
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, TMDBHelper.getPhotosLink(this, movieId), null,
+                Request.Method.GET, ApiHelper.getPhotosLink(this, movieId), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject object) {
@@ -215,7 +215,7 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
     }
     @Override
     public void onPhotoClicked(int position) {
-        String url = TMDBHelper.getOriginalImageURL(adapter.photoList.get(position));
+        String url = ApiHelper.getOriginalImageURL(adapter.photoList.get(position));
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
     }

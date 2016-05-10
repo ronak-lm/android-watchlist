@@ -25,7 +25,7 @@ import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.ReviewDetailActivity;
 import com.ronakmanglani.watchlist.adapter.ReviewAdapter;
 import com.ronakmanglani.watchlist.model.Review;
-import com.ronakmanglani.watchlist.util.TMDBHelper;
+import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import org.json.JSONArray;
@@ -164,7 +164,7 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
             reviewList.setAdapter(adapter);
         }
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, TMDBHelper.getMovieReviewsLink(getContext(), movieId, pageToDownload), null,
+                Request.Method.GET, ApiHelper.getMovieReviewsLink(getContext(), movieId, pageToDownload), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject object) {
