@@ -59,7 +59,7 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
             reviewBodyHolder.setVisibility(View.GONE);
         } else {
             // Setup toolbar
-            toolbar.setTitle("Review by " + review.author);
+            toolbar.setTitle("Review by " + review.userName);
             toolbar.inflateMenu(R.menu.menu_share);
             toolbar.setOnMenuItemClickListener(this);
             if (!isTablet) {
@@ -72,7 +72,7 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
                 });
             }
             // Set review body
-            reviewBody.setText(review.body);
+            reviewBody.setText(review.comment);
         }
 
         // Load Ad
@@ -106,7 +106,8 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
         int id = item.getItemId();
         if (id == R.id.action_share) {
             // Share the review
-            String shareText = "A review of " + movieName + " by " + review.author + " - " + review.url;
+            String url = "https://trakt.tv/comments/" + review.id;
+            String shareText = "A review of " + movieName + " by " + review.userName + " - " + url;
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movieName + " - Review");
@@ -116,7 +117,7 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
             tracker.send(new HitBuilders.EventBuilder()
                     .setCategory(getString(R.string.ga_category_share))
                     .setAction(getString(R.string.ga_action_review))
-                    .setLabel(review.url)
+                    .setLabel(url)
                     .build());
             return true;
         } else {

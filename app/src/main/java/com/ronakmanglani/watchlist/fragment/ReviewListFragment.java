@@ -13,12 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.common.api.Api;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
@@ -31,7 +35,12 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.BindBool;
@@ -163,30 +172,45 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
             adapter = new ReviewAdapter(new ArrayList<Review>(), this);
             reviewList.setAdapter(adapter);
         }
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET, ApiHelper.getMovieReviewsLink(getContext(), movieId, pageToDownload), null,
-                new Response.Listener<JSONObject>() {
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET, ApiHelper.getMovieReviewsLink(movieId, pageToDownload), null,
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject object) {
+                    public void onResponse(JSONArray array) {
                         try {
-                            JSONArray reviewsArray = object.getJSONArray("results");
-                            for (int i = 0; i < reviewsArray.length(); i++) {
-                                JSONObject review = reviewsArray.getJSONObject(i);
-                                String id = review.getString("id");
-                                String author = review.getString("author");
-                                String body = review.getString("content");
-                                String url = review.getString("url");
-                                adapter.reviewList.add(new Review(id, author, body, url));
-                            }
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject review = array.getJSONObject(i);
 
-                            pageToDownload++;
-                            totalPages = object.getInt("total_pages");
+                                String id = review.getString("id");
+                                String comment = review.getString("comment");
+                                boolean hasSpoiler = review.getBoolean("spoiler");
+
+                                // Get date and format it
+                                String inputTime = review.getString("created_at").substring(0, 10);
+                                DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date = inputFormat.parse(inputTime);
+                                DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+                                String createdAt = outputFormat.format(date);
+
+                                // Get user name
+                                JSONObject user = review.getJSONObject("user");
+                                String userName = user.getString("username");
+                                if (!user.getBoolean("private")) {
+                                    String name = user.getString("name");
+                                    if (name.length() > 0 && !name.equals("null")) {
+                                        userName = name;
+                                    }
+                                }
+
+                                adapter.reviewList.add(new Review(id, userName, comment, createdAt, hasSpoiler));
+                            }
 
                             onDownloadSuccessful();
 
                         } catch (Exception ex) {
                             // Parsing error
                             onDownloadFailed();
+                            ex.printStackTrace();
                         }
                     }
                 },
@@ -195,8 +219,26 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
                     public void onErrorResponse(VolleyError volleyError) {
                         // Network error
                         onDownloadFailed();
+                        volleyError.printStackTrace();
                     }
-                });
+                }) {
+                    // Add Request Headers
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String>  params = new HashMap<>();
+                        params.put("Content-type", "application/json");
+                        params.put("trakt-api-key", ApiHelper.getTraktKey(getContext()));
+                        params.put("trakt-api-version", "2");
+                        return params;
+                    }
+                    // Get Response Headers
+                    @Override
+                    protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
+                        pageToDownload = Integer.parseInt(response.headers.get("X-Pagination-Page")) + 1;
+                        totalPages = Integer.parseInt(response.headers.get("X-Pagination-Page-Count"));
+                        return super.parseNetworkResponse(response);
+                    }
+                };
         isLoading = true;
         request.setTag(getClass().getName());
         VolleySingleton.getInstance(getContext()).requestQueue.add(request);

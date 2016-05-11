@@ -476,7 +476,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     @OnClick(R.id.button_reviews)
     public void onReviewsButtonClicked() {
         Intent intent = new Intent(getContext(), ReviewActivity.class);
-        intent.putExtra(Watchlist.MOVIE_ID, movie.id);
+        intent.putExtra(Watchlist.MOVIE_ID, movie.imdbId);
         intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
         startActivity(intent);
     }
