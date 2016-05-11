@@ -53,11 +53,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     // ViewHolder
     public class ReviewViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.review_item) View reviewItem;
-        @Bind(R.id.review_author) TextView reviewAuthor;
-        @Bind(R.id.review_body) TextView reviewBody;
-        @Bind(R.id.review_spoiler) TextView reviewSpoiler;
-        @Bind(R.id.review_time) TextView reviewTime;
+        @Bind(R.id.review_item)         View reviewItem;
+        @Bind(R.id.review_author)       TextView reviewAuthor;
+        @Bind(R.id.review_body)         TextView reviewBody;
+        @Bind(R.id.review_spoiler)      TextView reviewSpoiler;
+        @Bind(R.id.review_time)         TextView reviewTime;
 
         public ReviewViewHolder(final ViewGroup itemView, final OnReviewClickListener onReviewClickListener) {
             super(itemView);
