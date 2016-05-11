@@ -39,8 +39,16 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         Review review = reviewList.get(position);
         ReviewViewHolder holder = (ReviewViewHolder) viewHolder;
-        holder.reviewAuthor.setText(review.author);
-        holder.reviewBody.setText(review.body);
+        holder.reviewAuthor.setText(review.userName);
+        if (review.hasSpoiler) {
+            holder.reviewBody.setVisibility(View.GONE);
+            holder.reviewSpoiler.setVisibility(View.VISIBLE);
+        } else {
+            holder.reviewBody.setText(review.comment);
+            holder.reviewBody.setVisibility(View.VISIBLE);
+            holder.reviewSpoiler.setVisibility(View.GONE);
+        }
+        holder.reviewTime.setText(review.createdAt);
     }
 
     // ViewHolder
@@ -48,6 +56,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @Bind(R.id.review_item) View reviewItem;
         @Bind(R.id.review_author) TextView reviewAuthor;
         @Bind(R.id.review_body) TextView reviewBody;
+        @Bind(R.id.review_spoiler) TextView reviewSpoiler;
+        @Bind(R.id.review_time) TextView reviewTime;
 
         public ReviewViewHolder(final ViewGroup itemView, final OnReviewClickListener onReviewClickListener) {
             super(itemView);
