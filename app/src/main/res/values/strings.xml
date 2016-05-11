@@ -55,6 +55,7 @@
 
     <!-- Reviews Activity -->
     <string name="reviews_title">Reviews</string>
+    <string name="reviews_alert">SPOILER ALERT!</string>
     <string name="reviews_no_results">We don\'t have any reviews for\nthis movie!</string>
 
     <!-- Videos Activity -->

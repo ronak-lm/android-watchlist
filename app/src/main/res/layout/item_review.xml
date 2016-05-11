@@ -52,14 +52,14 @@
             <com.ronakmanglani.watchlist.widget.RobotoLightTextView
                 android:id="@+id/review_body"
                 style="@style/ReviewBodyStyle"
-                tools:text="The movie's review goes here..."/>
+                tools:text="The movie's review goes here..."
+                android:visibility="gone"/>
 
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
                 android:id="@+id/review_spoiler"
                 style="@style/ReviewBodyStyle"
-                android:textColor="@color/primary"
-                tools:text="SPOILER ALERT!"
-                android:visibility="gone"/>
+                android:text="@string/reviews_alert"
+                android:textColor="@color/primary"/>
 
         </FrameLayout>
 
