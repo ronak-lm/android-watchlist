@@ -8,10 +8,10 @@ import com.ronakmanglani.watchlist.R;
 public class ApiHelper {
 
     // API key for TMDB
-    private static String getTMDBKey(Context context) {
+    public static String getTMDBKey(Context context) {
         return context.getString(R.string.tmdb_api_key);
     }
-    private static String getTraktKey(Context context) {
+    public static String getTraktKey(Context context) {
         return context.getString(R.string.trakt_api_key);
     }
 
