@@ -17,7 +17,7 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -77,12 +77,12 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     // ViewHolder
     public class SearchViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.movie_item)              View movieItem;
-        @Bind(R.id.movie_image)             ImageView movieImage;
-        @Bind(R.id.movie_name)              TextView movieName;
-        @Bind(R.id.movie_year)              TextView movieYear;
-        @Bind(R.id.movie_rating_holder)     View movieRatingHolder;
-        @Bind(R.id.movie_rating)            TextView movieRating;
+        @BindView(R.id.movie_item)              View movieItem;
+        @BindView(R.id.movie_image)             ImageView movieImage;
+        @BindView(R.id.movie_name)              TextView movieName;
+        @BindView(R.id.movie_year)              TextView movieYear;
+        @BindView(R.id.movie_rating_holder)     View movieRatingHolder;
+        @BindView(R.id.movie_rating)            TextView movieRating;
 
         public SearchViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);

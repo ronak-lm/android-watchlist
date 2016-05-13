@@ -23,7 +23,7 @@ import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.widget.AutoResizeTextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
@@ -153,13 +153,13 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
 
     // ViewHolders
     public class MovieGridViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.movie_card) CardView cardView;
-        @Bind(R.id.movie_poster_default) ImageView defaultImageView;
-        @Bind(R.id.movie_poster) NetworkImageView imageView;
-        @Bind(R.id.movie_title) TextView movieName;
-        @Bind(R.id.movie_year) TextView releaseYear;
-        @Bind(R.id.movie_rating) TextView movieRating;
-        @Bind(R.id.rating_icon) ImageView movieRatingIcon;
+        @BindView(R.id.movie_card)              CardView cardView;
+        @BindView(R.id.movie_poster_default)    ImageView defaultImageView;
+        @BindView(R.id.movie_poster)            NetworkImageView imageView;
+        @BindView(R.id.movie_title)             TextView movieName;
+        @BindView(R.id.movie_year)              TextView releaseYear;
+        @BindView(R.id.movie_rating)            TextView movieRating;
+        @BindView(R.id.rating_icon)             ImageView movieRatingIcon;
 
         public MovieGridViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);
@@ -174,14 +174,14 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
         }
     }
     public class MovieListViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.movie_card) CardView cardView;
-        @Bind(R.id.movie_poster_default) ImageView defaultImageView;
-        @Bind(R.id.movie_poster) NetworkImageView imageView;
-        @Bind(R.id.movie_title) TextView movieName;
-        @Bind(R.id.movie_year) TextView releaseYear;
-        @Bind(R.id.movie_overview) AutoResizeTextView overview;
-        @Bind(R.id.movie_rating) TextView movieRating;
-        @Bind(R.id.rating_icon) ImageView movieRatingIcon;
+        @BindView(R.id.movie_card)              CardView cardView;
+        @BindView(R.id.movie_poster_default)    ImageView defaultImageView;
+        @BindView(R.id.movie_poster)            NetworkImageView imageView;
+        @BindView(R.id.movie_title)             TextView movieName;
+        @BindView(R.id.movie_year)              TextView releaseYear;
+        @BindView(R.id.movie_overview)          AutoResizeTextView overview;
+        @BindView(R.id.movie_rating)            TextView movieRating;
+        @BindView(R.id.rating_icon)             ImageView movieRatingIcon;
 
         public MovieListViewHolder(final ViewGroup itemView, final OnMovieClickListener onMovieClickListener) {
             super(itemView);

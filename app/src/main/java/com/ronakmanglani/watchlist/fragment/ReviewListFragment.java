@@ -40,14 +40,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class ReviewListFragment extends Fragment implements ReviewAdapter.OnReviewClickListener {
 
     private Tracker tracker;
+    private Unbinder unbinder;
 
     private String movieId;
     private String movieName;
@@ -62,21 +64,21 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
     private boolean isLoadingLocked = false;
     @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.toolbar_title)       TextView toolbarTitle;
-    @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
-    @Bind(R.id.review_list)         RecyclerView reviewList;
-    @Bind(R.id.error_message)       View errorMessage;
-    @Bind(R.id.no_results)          View noResults;
-    @Bind(R.id.no_results_message)  TextView noResultsMessage;
-    @Bind(R.id.progress_circle)     View progressCircle;
-    @Bind(R.id.loading_more)        View loadingMore;
+    @BindView(R.id.toolbar)             Toolbar toolbar;
+    @BindView(R.id.toolbar_title)       TextView toolbarTitle;
+    @BindView(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
+    @BindView(R.id.review_list)         RecyclerView reviewList;
+    @BindView(R.id.error_message)       View errorMessage;
+    @BindView(R.id.no_results)          View noResults;
+    @BindView(R.id.no_results_message)  TextView noResultsMessage;
+    @BindView(R.id.progress_circle)     View progressCircle;
+    @BindView(R.id.loading_more)        View loadingMore;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_review,container,false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
 
         // Initialize variables
         movieId = getArguments().getString(Watchlist.MOVIE_ID);
@@ -160,8 +162,8 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
         VolleySingleton.getInstance(getContext()).requestQueue.cancelAll(this.getClass().getName());
+        unbinder.unbind();
     }
 
     // JSON parsing and display

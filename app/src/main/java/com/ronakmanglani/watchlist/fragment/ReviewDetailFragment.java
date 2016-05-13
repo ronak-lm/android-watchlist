@@ -19,28 +19,30 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.model.Review;
 
-import butterknife.Bind;
 import butterknife.BindBool;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class ReviewDetailFragment extends Fragment implements OnMenuItemClickListener  {
 
     private Tracker tracker;
+    private Unbinder unbinder;
 
     private String movieName;
     private Review review;
 
-    @BindBool(R.bool.is_tablet)     boolean isTablet;
-    @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.review_body)         TextView reviewBody;
-    @Bind(R.id.review_body_holder)  View reviewBodyHolder;
+    @BindBool(R.bool.is_tablet)         boolean isTablet;
+    @BindView(R.id.toolbar)             Toolbar toolbar;
+    @BindView(R.id.review_body)         TextView reviewBody;
+    @BindView(R.id.review_body_holder)  View reviewBodyHolder;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View v = inflater.inflate(R.layout.fragment_review_detail,container,false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
 
         // Get arguments
         movieName = getArguments().getString(Watchlist.MOVIE_NAME);
@@ -85,7 +87,7 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     // Toolbar options menu

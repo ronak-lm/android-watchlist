@@ -34,15 +34,17 @@ import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
 
     private Context context;
     private Tracker tracker;
+    private Unbinder unbinder;
 
     private MovieAdapter adapter;
     private GridLayoutManager layoutManager;
@@ -55,18 +57,18 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
     private boolean isLoadingLocked;
     @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    @Bind(R.id.error_message)       View errorMessage;
-    @Bind(R.id.progress_circle)     View progressCircle;
-    @Bind(R.id.loading_more)        View loadingMore;
-    @Bind(R.id.swipe_refresh)       SwipeRefreshLayout swipeRefreshLayout;
-    @Bind(R.id.movie_grid)          RecyclerView recyclerView;
+    @BindView(R.id.error_message)       View errorMessage;
+    @BindView(R.id.progress_circle)     View progressCircle;
+    @BindView(R.id.loading_more)        View loadingMore;
+    @BindView(R.id.swipe_refresh)       SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.movie_grid)          RecyclerView recyclerView;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_list,container,false);
         context = getContext();
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
 
         // Initialize variables
         pageToDownload = 1;
@@ -184,8 +186,8 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
         VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
+        unbinder.unbind();
     }
 
     // JSON parsing and display

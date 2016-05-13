@@ -33,9 +33,10 @@ import com.ronakmanglani.watchlist.database.MovieColumns;
 import com.ronakmanglani.watchlist.database.MovieProvider;
 import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.BindBool;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class MovieSavedFragment extends Fragment implements OnMovieClickListener, LoaderCallbacks<Cursor> {
 
@@ -43,6 +44,7 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
 
     private Context context;
     private Tracker tracker;
+    private Unbinder unbinder;
 
     private MovieCursorAdapter adapter;
     private GridLayoutManager layoutManager;
@@ -50,16 +52,16 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
     private int viewType;
     @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    @Bind(R.id.no_results)              View noResults;
-    @Bind(R.id.no_results_message)      TextView noResultsMessage;
-    @Bind(R.id.progress_circle)         View progressCircle;
-    @Bind(R.id.movie_grid)              RecyclerView recyclerView;
+    @BindView(R.id.no_results)              View noResults;
+    @BindView(R.id.no_results_message)      TextView noResultsMessage;
+    @BindView(R.id.progress_circle)         View progressCircle;
+    @BindView(R.id.movie_grid)              RecyclerView recyclerView;
 
     // Fragment life cycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_saved, container, false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
         setRetainInstance(true);
 
         // Initialize variable
@@ -105,7 +107,7 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     // Cursor Loader

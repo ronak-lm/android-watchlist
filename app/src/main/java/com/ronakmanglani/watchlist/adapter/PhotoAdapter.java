@@ -13,7 +13,7 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -48,8 +48,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     // ViewHolder
     public class PhotoViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.photo_item) View photoItem;
-        @Bind(R.id.photo_image) NetworkImageView photoImage;
+        @BindView(R.id.photo_item)  View photoItem;
+        @BindView(R.id.photo_image) NetworkImageView photoImage;
 
         public PhotoViewHolder(final ViewGroup itemView, final OnPhotoClickListener onPhotoClickListener) {
             super(itemView);

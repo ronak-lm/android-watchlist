@@ -25,25 +25,27 @@ import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 import static android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 
 public class MovieDrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener {
 
     private Fragment fragment;
+    private Unbinder unbinder;
     private SharedPreferences preferences;
 
-    @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.drawer_layout)       DrawerLayout drawerLayout;
-    @Bind(R.id.navigation_view)     NavigationView navigationView;
+    @BindView(R.id.toolbar)             Toolbar toolbar;
+    @BindView(R.id.drawer_layout)       DrawerLayout drawerLayout;
+    @BindView(R.id.navigation_view)     NavigationView navigationView;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_drawer, container, false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
         preferences = getContext().getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
 
         // Setup toolbar
@@ -88,7 +90,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     // Toolbar action menu

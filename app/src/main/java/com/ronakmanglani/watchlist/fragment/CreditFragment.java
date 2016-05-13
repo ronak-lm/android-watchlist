@@ -25,24 +25,26 @@ import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class CreditFragment extends Fragment implements OnCreditClickListener {
 
     private int creditType;
     private Tracker tracker;
+    private Unbinder unbinder;
 
-    @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.toolbar_title)       TextView toolbarTitle;
-    @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
-    @Bind(R.id.credit_list)         RecyclerView creditView;
+    @BindView(R.id.toolbar)             Toolbar toolbar;
+    @BindView(R.id.toolbar_title)       TextView toolbarTitle;
+    @BindView(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
+    @BindView(R.id.credit_list)         RecyclerView creditView;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_credit, container, false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
 
         creditType = getArguments().getInt(Watchlist.CREDIT_TYPE);
         String movieName = getArguments().getString(Watchlist.MOVIE_NAME);
@@ -99,7 +101,7 @@ public class CreditFragment extends Fragment implements OnCreditClickListener {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     // Click events

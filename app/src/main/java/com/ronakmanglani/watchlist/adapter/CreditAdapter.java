@@ -16,7 +16,7 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,10 +76,10 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     // ViewHolder
     public class CreditViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.credit_item)     View creditItem;
-        @Bind(R.id.credit_image)    CircleImageView creditImage;
-        @Bind(R.id.credit_name)     TextView creditName;
-        @Bind(R.id.credit_role)     TextView creditRole;
+        @BindView(R.id.credit_item)     View creditItem;
+        @BindView(R.id.credit_image)    CircleImageView creditImage;
+        @BindView(R.id.credit_name)     TextView creditName;
+        @BindView(R.id.credit_role)     TextView creditRole;
 
         public CreditViewHolder(final ViewGroup itemView, final OnCreditClickListener onCreditClickListener) {
             super(itemView);

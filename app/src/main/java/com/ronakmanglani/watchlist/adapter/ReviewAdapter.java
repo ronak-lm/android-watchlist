@@ -11,7 +11,7 @@ import com.ronakmanglani.watchlist.model.Review;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -53,11 +53,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     // ViewHolder
     public class ReviewViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.review_item)         View reviewItem;
-        @Bind(R.id.review_author)       TextView reviewAuthor;
-        @Bind(R.id.review_body)         TextView reviewBody;
-        @Bind(R.id.review_spoiler)      TextView reviewSpoiler;
-        @Bind(R.id.review_time)         TextView reviewTime;
+        @BindView(R.id.review_item)         View reviewItem;
+        @BindView(R.id.review_author)       TextView reviewAuthor;
+        @BindView(R.id.review_body)         TextView reviewBody;
+        @BindView(R.id.review_spoiler)      TextView reviewSpoiler;
+        @BindView(R.id.review_time)         TextView reviewTime;
 
         public ReviewViewHolder(final ViewGroup itemView, final OnReviewClickListener onReviewClickListener) {
             super(itemView);

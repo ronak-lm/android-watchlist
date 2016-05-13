@@ -14,7 +14,7 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -54,10 +54,10 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     // ViewHolder
     public class VideoViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.video_item) View videoItem;
-        @Bind(R.id.video_image) NetworkImageView videoImage;
-        @Bind(R.id.video_name) TextView videoName;
-        @Bind(R.id.video_subtitle) TextView videoSubtitle;
+        @BindView(R.id.video_item)      View videoItem;
+        @BindView(R.id.video_image)     NetworkImageView videoImage;
+        @BindView(R.id.video_name)      TextView videoName;
+        @BindView(R.id.video_subtitle)  TextView videoSubtitle;
 
         public VideoViewHolder(final ViewGroup itemView, final OnVideoClickListener onVideoClickListener) {
             super(itemView);

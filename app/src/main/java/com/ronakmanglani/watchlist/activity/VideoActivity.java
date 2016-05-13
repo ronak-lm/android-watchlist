@@ -35,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,14 +50,14 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
     private boolean isLoading = false;
     @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.toolbar_title)       TextView toolbarTitle;
-    @Bind(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
-    @Bind(R.id.video_list)          RecyclerView videoList;
-    @Bind(R.id.error_message)       View errorMessage;
-    @Bind(R.id.progress_circle)     View progressCircle;
-    @Bind(R.id.no_results)          View noResults;
-    @Bind(R.id.no_results_message)  TextView noResultsMessage;
+    @BindView(R.id.toolbar)             Toolbar toolbar;
+    @BindView(R.id.toolbar_title)       TextView toolbarTitle;
+    @BindView(R.id.toolbar_subtitle)    TextView toolbarSubtitle;
+    @BindView(R.id.video_list)          RecyclerView videoList;
+    @BindView(R.id.error_message)       View errorMessage;
+    @BindView(R.id.progress_circle)     View progressCircle;
+    @BindView(R.id.no_results)          View noResults;
+    @BindView(R.id.no_results_message)  TextView noResultsMessage;
 
     // Activity lifecycle
     @Override

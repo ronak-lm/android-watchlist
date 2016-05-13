@@ -52,76 +52,76 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.BindBool;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class MovieDetailFragment extends Fragment implements OnMenuItemClickListener {
 
-    // Google Analytics Tracker
     private Tracker tracker;
+    private Unbinder unbinder;
 
-    // Movie associated with the fragment
     private String id;
     private MovieDetail movie;
     private boolean isMovieWatched;
     private boolean isMovieToWatch;
 
-    // Flags
-    @BindBool(R.bool.is_tablet) boolean isTablet;
     private boolean isVideoAvailable = false;
+    @BindBool(R.bool.is_tablet) boolean isTablet;
 
     // Toolbar
-    @Bind(R.id.toolbar)                 Toolbar toolbar;
-    @Bind(R.id.toolbar_text_holder)     View toolbarTextHolder;
-    @Bind(R.id.toolbar_title)           TextView toolbarTitle;
-    @Bind(R.id.toolbar_subtitle)        TextView toolbarSubtitle;
+    @BindView(R.id.toolbar)                 Toolbar toolbar;
+    @BindView(R.id.toolbar_text_holder)     View toolbarTextHolder;
+    @BindView(R.id.toolbar_title)           TextView toolbarTitle;
+    @BindView(R.id.toolbar_subtitle)        TextView toolbarSubtitle;
 
     // Main views
-    @Bind(R.id.progress_circle)         View progressCircle;
-    @Bind(R.id.error_message)           View errorMessage;
-    @Bind(R.id.movie_detail_holder)     NestedScrollView movieHolder;
-    @Bind(R.id.fab_menu)                FloatingActionMenu floatingActionsMenu;
-    @Bind(R.id.fab_watched)             FloatingActionButton watchedButton;
-    @Bind(R.id.fab_to_see)              FloatingActionButton toWatchButton;
+    @BindView(R.id.progress_circle)         View progressCircle;
+    @BindView(R.id.error_message)           View errorMessage;
+    @BindView(R.id.movie_detail_holder)     NestedScrollView movieHolder;
+    @BindView(R.id.fab_menu)                FloatingActionMenu floatingActionsMenu;
+    @BindView(R.id.fab_watched)             FloatingActionButton watchedButton;
+    @BindView(R.id.fab_to_see)              FloatingActionButton toWatchButton;
 
     // Image views
-    @Bind(R.id.backdrop_image)          NetworkImageView backdropImage;
-    @Bind(R.id.backdrop_image_default)  ImageView backdropImageDefault;
-    @Bind(R.id.backdrop_play_button)    View backdropPlayButton;
-    @Bind(R.id.poster_image)            NetworkImageView posterImage;
-    @Bind(R.id.poster_image_default)    ImageView posterImageDefault;
+    @BindView(R.id.backdrop_image)          NetworkImageView backdropImage;
+    @BindView(R.id.backdrop_image_default)  ImageView backdropImageDefault;
+    @BindView(R.id.backdrop_play_button)    View backdropPlayButton;
+    @BindView(R.id.poster_image)            NetworkImageView posterImage;
+    @BindView(R.id.poster_image_default)    ImageView posterImageDefault;
 
     // Basic info
-    @Bind(R.id.movie_title)             TextView movieTitle;
-    @Bind(R.id.movie_subtitle)          TextView movieSubtitle;
-    @Bind(R.id.movie_rating_holder)     View movieRatingHolder;
-    @Bind(R.id.movie_rating)            TextView movieRating;
-    @Bind(R.id.movie_vote_count)        TextView movieVoteCount;
+    @BindView(R.id.movie_title)             TextView movieTitle;
+    @BindView(R.id.movie_subtitle)          TextView movieSubtitle;
+    @BindView(R.id.movie_rating_holder)     View movieRatingHolder;
+    @BindView(R.id.movie_rating)            TextView movieRating;
+    @BindView(R.id.movie_vote_count)        TextView movieVoteCount;
 
     // Overview
-    @Bind(R.id.movie_overview_holder)   View movieOverviewHolder;
-    @Bind(R.id.movie_overview_value)    TextView movieOverviewValue;
+    @BindView(R.id.movie_overview_holder)   View movieOverviewHolder;
+    @BindView(R.id.movie_overview_value)    TextView movieOverviewValue;
 
     // Crew
-    @Bind(R.id.movie_crew_holder)       View movieCrewHolder;
-    @Bind(R.id.movie_crew_see_all)      View movieCrewSeeAllButton;
-    @Bind({R.id.movie_crew_value1, R.id.movie_crew_value2}) List<TextView> movieCrewValues;
+    @BindView(R.id.movie_crew_holder)       View movieCrewHolder;
+    @BindView(R.id.movie_crew_see_all)      View movieCrewSeeAllButton;
+    @BindViews({R.id.movie_crew_value1, R.id.movie_crew_value2}) List<TextView> movieCrewValues;
 
     // Cast
-    @Bind(R.id.movie_cast_holder)       View movieCastHolder;
-    @Bind(R.id.movie_cast_see_all)      View movieCastSeeAllButton;
-    @Bind({R.id.movie_cast_item1, R.id.movie_cast_item2, R.id.movie_cast_item3}) List<View> movieCastItems;
-    @Bind({R.id.movie_cast_image1, R.id.movie_cast_image2, R.id.movie_cast_image3}) List<NetworkImageView> movieCastImages;
-    @Bind({R.id.movie_cast_name1, R.id.movie_cast_name2, R.id.movie_cast_name3}) List<TextView> movieCastNames;
-    @Bind({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
+    @BindView(R.id.movie_cast_holder)       View movieCastHolder;
+    @BindView(R.id.movie_cast_see_all)      View movieCastSeeAllButton;
+    @BindViews({R.id.movie_cast_item1, R.id.movie_cast_item2, R.id.movie_cast_item3}) List<View> movieCastItems;
+    @BindViews({R.id.movie_cast_image1, R.id.movie_cast_image2, R.id.movie_cast_image3}) List<NetworkImageView> movieCastImages;
+    @BindViews({R.id.movie_cast_name1, R.id.movie_cast_name2, R.id.movie_cast_name3}) List<TextView> movieCastNames;
+    @BindViews({R.id.movie_cast_role1, R.id.movie_cast_role2, R.id.movie_cast_role3}) List<TextView> movieCastRoles;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_detail, container, false);
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
 
         // Setup toolbar
         toolbar.setTitle(R.string.loading);
@@ -189,8 +189,8 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
         VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
+        unbinder.unbind();
     }
 
     // Toolbar menu click

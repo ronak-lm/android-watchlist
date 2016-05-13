@@ -33,10 +33,11 @@ import com.ronakmanglani.watchlist.util.VolleySingleton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.BindBool;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 import static com.ronakmanglani.watchlist.adapter.SearchAdapter.*;
 
@@ -44,6 +45,7 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
 
     private Context context;
     private Tracker tracker;
+    private Unbinder unbinder;
 
     private String searchQuery;
     private SearchAdapter adapter;
@@ -55,20 +57,20 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
     private boolean isLoadingLocked;
     @BindBool(R.bool.is_tablet) boolean isTablet;
 
-    @Bind(R.id.toolbar)             Toolbar toolbar;
-    @Bind(R.id.search_bar)          EditText searchBar;
-    @Bind(R.id.error_message)       View errorMessage;
-    @Bind(R.id.progress_circle)     View progressCircle;
-    @Bind(R.id.loading_more)        View loadingMore;
-    @Bind(R.id.no_results)          View noResults;
-    @Bind(R.id.search_list)         RecyclerView recyclerView;
+    @BindView(R.id.toolbar)             Toolbar toolbar;
+    @BindView(R.id.search_bar)          EditText searchBar;
+    @BindView(R.id.error_message)       View errorMessage;
+    @BindView(R.id.progress_circle)     View progressCircle;
+    @BindView(R.id.loading_more)        View loadingMore;
+    @BindView(R.id.no_results)          View noResults;
+    @BindView(R.id.search_list)         RecyclerView recyclerView;
 
     // Fragment lifecycle
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search_list, container, false);
         context = getContext();
-        ButterKnife.bind(this, v);
+        unbinder = ButterKnife.bind(this, v);
 
         // Setup toolbar
         toolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.action_home));
@@ -180,9 +182,9 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
     }
     @Override
     public void onDestroyView() {
-        VolleySingleton.getInstance(context).requestQueue.cancelAll(getClass().getName());
-        ButterKnife.unbind(this);
         super.onDestroyView();
+        VolleySingleton.getInstance(context).requestQueue.cancelAll(getClass().getName());
+        unbinder.unbind();
     }
 
     // JSON parsing and display
