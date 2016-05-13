@@ -35,7 +35,7 @@
     <dimen name="error_try_again_padding">8dp</dimen>
 
     <!-- RecyclerView Dimensions -->
-    <dimen name="recycler_item_padding">3dp</dimen>
+    <dimen name="recycler_item_padding">2dp</dimen>
     <dimen name="recycler_view_padding">6dp</dimen>
 
     <!-- Movie Simple Item in RecyclerView -->
