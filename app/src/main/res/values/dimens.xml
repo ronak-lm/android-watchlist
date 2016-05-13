@@ -87,5 +87,7 @@
 
     <!-- About Page -->
     <dimen name="about_icon_size">120dp</dimen>
+    <dimen name="tmdb_icon_width">135dp</dimen>
+    <dimen name="tmdb_icon_height">25dp</dimen>
 
 </resources>

@@ -51,13 +51,14 @@
             android:text="@string/about_powered_by"
             android:textSize="@dimen/text_large"/>
 
-        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
-            android:id="@+id/tmdb_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/about_tmdb"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/text_large"/>
+        <ImageView android:id="@+id/tmdb_link"
+            android:layout_width="@dimen/tmdb_icon_width"
+            android:layout_height="@dimen/tmdb_icon_height"
+            android:layout_marginTop="@dimen/dist_xsmall"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/tmdb"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 
