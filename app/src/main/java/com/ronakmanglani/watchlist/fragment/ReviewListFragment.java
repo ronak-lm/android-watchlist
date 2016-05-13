@@ -19,10 +19,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.common.api.Api;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
@@ -210,16 +208,19 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
                         } catch (Exception ex) {
                             // Parsing error
                             onDownloadFailed();
-                            ex.printStackTrace();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        // Network error
-                        onDownloadFailed();
-                        volleyError.printStackTrace();
+                        if (volleyError.networkResponse.statusCode == 404 || volleyError.networkResponse.statusCode == 405) {
+                            // No such movie exists
+                            onDownloadSuccessful();
+                        } else {
+                            // Network error, failed to load
+                            onDownloadFailed();
+                        }
                     }
                 }) {
                     // Add Request Headers
