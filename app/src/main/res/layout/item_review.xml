@@ -9,7 +9,10 @@
     <RelativeLayout android:id="@+id/review_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dist_large"
+        android:paddingTop="@dimen/dist_large"
+        android:paddingLeft="@dimen/dist_large"
+        android:paddingRight="@dimen/dist_large"
+        android:paddingBottom="@dimen/dist_medium"
         android:orientation="vertical"
         android:background="?attr/selectableItemBackground"
         android:clickable="true">
@@ -52,14 +55,14 @@
             <com.ronakmanglani.watchlist.widget.RobotoLightTextView
                 android:id="@+id/review_body"
                 style="@style/ReviewBodyStyle"
-                tools:text="The movie's review goes here..."
-                android:visibility="gone"/>
+                tools:text="The movie's review goes here..."/>
 
             <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
                 android:id="@+id/review_spoiler"
                 style="@style/ReviewBodyStyle"
                 android:text="@string/reviews_alert"
-                android:textColor="@color/primary"/>
+                android:textColor="@color/primary"
+                android:visibility="gone"/>
 
         </FrameLayout>
 
@@ -70,9 +73,7 @@
             android:layout_below="@+id/review_body_holder"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/dist_small"
-            android:layout_marginRight="@dimen/dist_small"
-            android:layout_marginEnd="@dimen/dist_small"
+            android:layout_margin="@dimen/dist_small"
             android:textSize="@dimen/text_small"
             tools:text="01 Jan 2016"/>
 
