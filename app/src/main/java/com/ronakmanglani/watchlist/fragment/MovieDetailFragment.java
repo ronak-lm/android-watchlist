@@ -30,8 +30,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
@@ -84,7 +82,6 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     @Bind(R.id.progress_circle)         View progressCircle;
     @Bind(R.id.error_message)           View errorMessage;
     @Bind(R.id.movie_detail_holder)     NestedScrollView movieHolder;
-    @Bind(R.id.detail_banner_ad)        AdView bannerAdView;
     @Bind(R.id.fab_menu)                FloatingActionMenu floatingActionsMenu;
     @Bind(R.id.fab_watched)             FloatingActionButton watchedButton;
     @Bind(R.id.fab_to_see)              FloatingActionButton toWatchButton;
@@ -168,13 +165,6 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                 }
             }
         });
-
-        // Load Banner Ad
-        AdRequest.Builder adBuilder = new AdRequest.Builder();
-        adBuilder.addTestDevice(getString(R.string.yu_yuphoria_id))
-                 .addTestDevice(getString(R.string.genymotion_tablet_id));
-        AdRequest adRequest = adBuilder.build();
-        bannerAdView.loadAd(adRequest);
 
         // Load Analytics Tracker
         tracker = ((Watchlist) getActivity().getApplication()).getTracker();

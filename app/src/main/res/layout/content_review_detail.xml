@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/review_body_holder"
     android:layout_width="match_parent"
@@ -12,11 +11,9 @@
     android:clipToPadding="false"
     android:background="@color/text_secondary" >
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
             android:id="@+id/review_body"
@@ -25,17 +22,10 @@
             android:layout_margin="@dimen/dist_large"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
+            android:textIsSelectable="true"
             tools:text="Movie review goes here..."/>
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/review_large_ad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/dist_large"
-            ads:adSize="MEDIUM_RECTANGLE"
-            ads:adUnitId="@string/review_detail_ad_id" />
 
-    </LinearLayout>
+    </FrameLayout>
 
 </android.support.v4.widget.NestedScrollView>

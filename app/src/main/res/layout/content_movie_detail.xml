@@ -36,9 +36,6 @@
             <!-- Section 4: Cast -->
             <include layout="@layout/layout_detail_cast" />
 
-            <!-- Section 5: Banner Ad -->
-            <include layout="@layout/layout_detail_ad" />
-
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

@@ -13,12 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.ronakmanglani.watchlist.BuildConfig;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.model.Review;
@@ -38,7 +34,6 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
     @Bind(R.id.toolbar)             Toolbar toolbar;
     @Bind(R.id.review_body)         TextView reviewBody;
     @Bind(R.id.review_body_holder)  View reviewBodyHolder;
-    @Bind(R.id.review_large_ad)     AdView reviewAdView;
 
     // Fragment lifecycle
     @Override
@@ -74,13 +69,6 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
             // Set review body
             reviewBody.setText(review.comment);
         }
-
-        // Load Ad
-        AdRequest.Builder adBuilder = new AdRequest.Builder();
-        adBuilder.addTestDevice(getString(R.string.yu_yuphoria_id))
-                 .addTestDevice(getString(R.string.genymotion_tablet_id));
-        AdRequest adRequest = adBuilder.build();
-        reviewAdView.loadAd(adRequest);
 
         // Load Analytics Tracker
         tracker = ((Watchlist) getActivity().getApplication()).getTracker();
