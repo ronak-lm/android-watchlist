@@ -6,7 +6,7 @@
     <string name="drawer_popular">Most Popular</string>
     <string name="drawer_rated">Top Rated</string>
     <string name="drawer_upcoming">Upcoming</string>
-    <string name="drawer_playing">Now Playing</string>
+    <string name="drawer_playing">In Theaters</string>
     <string name="drawer_watched">Watched</string>
     <string name="drawer_to_see">To Watch</string>
 
