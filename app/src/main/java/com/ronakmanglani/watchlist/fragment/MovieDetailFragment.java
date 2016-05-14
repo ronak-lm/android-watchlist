@@ -334,7 +334,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
 
         // Basic info
         if (movie.posterImage != null && !movie.posterImage.equals("null")) {
-            int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_detail_poster_width);
+            int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_list_poster_width);
             posterImage.setImageUrl(ApiHelper.getImageURL(movie.posterImage, posterImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
         } else {

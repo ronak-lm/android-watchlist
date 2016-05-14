@@ -47,9 +47,9 @@
     <dimen name="movie_rating_icon_size">16dp</dimen>
 
     <!-- Movie List Item -->
-    <dimen name="movie_detail_card_height">200dp</dimen>
-    <dimen name="movie_detail_card_width">400dp</dimen>
-    <dimen name="movie_detail_poster_width">120dp</dimen>
+    <dimen name="movie_list_card_height">200dp</dimen>
+    <dimen name="movie_list_card_width">400dp</dimen>
+    <dimen name="movie_list_poster_width">120dp</dimen>
 
     <!-- Movie Compact Item -->
     <dimen name="movie_compact_image_size">80dp</dimen>

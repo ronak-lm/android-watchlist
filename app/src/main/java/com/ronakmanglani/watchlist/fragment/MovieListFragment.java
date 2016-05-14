@@ -311,7 +311,7 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
             int columns = Math.round(widthPx / desiredPx);
             return columns > 2 ? columns : 2;
         } else {
-            float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_detail_card_width);
+            float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_list_card_width);
             int columns = Math.round(widthPx / desiredPx);
             return columns > 1 ? columns : 1;
         }

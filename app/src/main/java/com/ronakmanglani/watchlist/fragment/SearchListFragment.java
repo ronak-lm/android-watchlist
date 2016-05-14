@@ -2,9 +2,7 @@ package com.ronakmanglani.watchlist.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -201,7 +199,7 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
         if (isTablet) {
             widthPx = widthPx / 3;
         }
-        float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_detail_card_width);
+        float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_list_card_width);
         int columns = Math.round(widthPx / desiredPx);
         return columns > 1 ? columns : 1;
     }

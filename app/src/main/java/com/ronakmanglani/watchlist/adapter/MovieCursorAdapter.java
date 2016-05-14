@@ -131,7 +131,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
                 movieViewHolder.imageView.setVisibility(View.GONE);
                 movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
             } else {
-                int imageSize = (int) context.getResources().getDimension(R.dimen.movie_detail_poster_width);
+                int imageSize = (int) context.getResources().getDimension(R.dimen.movie_list_poster_width);
                 String imageUrl = ApiHelper.getImageURL(movie.posterImage, imageSize);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
