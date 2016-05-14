@@ -21,6 +21,12 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
 
+    <item android:id="@+id/action_compact"
+        android:title="@string/action_compact"
+        android:icon="@drawable/action_compact"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+
     <item android:id="@+id/action_rate"
         android:title="@string/action_rate"
         app:showAsAction="never" />

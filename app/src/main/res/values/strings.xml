@@ -13,6 +13,7 @@
     <!-- Toolbar actions -->
     <string name="action_grid">Grid View</string>
     <string name="action_list">List View</string>
+    <string name="action_compact">Compact View</string>
     <string name="action_search">Search</string>
     <string name="action_share">Share</string>
     <string name="action_share_text">Check out %1$s - %2$s</string>
