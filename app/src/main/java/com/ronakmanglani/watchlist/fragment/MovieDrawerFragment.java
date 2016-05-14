@@ -209,7 +209,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         MenuItem item = navigationView.getMenu().getItem(position);
         item.setChecked(true);
         toolbar.setTitle(item.getTitle());
-        // Create and replace fragment
+        // Create and setup bundle args
         Bundle args = new Bundle();
         if (position == 0) {
             args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_POPULAR);
@@ -224,7 +224,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         } else if (position == 5) {
             args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_TO_SEE);
         }
-        //
+        // Initialize fragment type
         if (position <= 3) {
             fragment = new MovieListFragment();
         } else {
