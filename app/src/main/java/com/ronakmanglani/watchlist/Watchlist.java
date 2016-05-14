@@ -15,6 +15,7 @@ public class Watchlist extends Application {
     public static final String VIEW_TYPE = "view_type";
     public static final int VIEW_MODE_GRID = 1;
     public static final int VIEW_MODE_LIST = 2;
+    public static final int VIEW_MODE_COMPACT = 3;
     public static final int VIEW_TYPE_POPULAR = 1;
     public static final int VIEW_TYPE_RATED = 2;
     public static final int VIEW_TYPE_UPCOMING = 3;
