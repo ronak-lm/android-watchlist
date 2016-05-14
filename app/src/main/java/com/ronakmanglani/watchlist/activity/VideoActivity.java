@@ -90,7 +90,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         adapter = new VideoAdapter(this, new ArrayList<Video>(), this);
         videoList.setHasFixedSize(true);
         videoList.setLayoutManager(layoutManager);
-        videoList.addItemDecoration(new ItemPaddingDecoration(this, R.dimen.dist_xxsmall));
+        videoList.addItemDecoration(new ItemPaddingDecoration(this, R.dimen.dist_xsmall));
         videoList.setAdapter(adapter);
 
         if (savedInstanceState == null) {

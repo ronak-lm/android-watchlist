@@ -19,9 +19,6 @@ import butterknife.ButterKnife;
 
 public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int VIEW_TYPE_VIDEO = 1;
-    private static final int VIEW_TYPE_AD = 2;
-
     private Context context;
     public ArrayList<Video> videoList;
     private final OnVideoClickListener onVideoClickListener;
@@ -49,7 +46,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         VideoViewHolder holder = (VideoViewHolder) viewHolder;
         holder.videoImage.setImageUrl(video.imageURL, VolleySingleton.getInstance(context).imageLoader);
         holder.videoName.setText(video.title);
-        holder.videoSubtitle.setText(video.subtitle);
+        holder.videoSize.setText(video.size);
     }
 
     // ViewHolder
@@ -57,7 +54,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @BindView(R.id.video_item)      View videoItem;
         @BindView(R.id.video_image)     NetworkImageView videoImage;
         @BindView(R.id.video_name)      TextView videoName;
-        @BindView(R.id.video_subtitle)  TextView videoSubtitle;
+        @BindView(R.id.video_size)      TextView videoSize;
 
         public VideoViewHolder(final ViewGroup itemView, final OnVideoClickListener onVideoClickListener) {
             super(itemView);

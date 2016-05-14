@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/video_item"
     android:layout_width="match_parent"
     android:layout_height="@dimen/video_item_height"
+    android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
-    android:clickable="true">
+    cardview:cardBackgroundColor="@color/card_background"
+    cardview:cardPreventCornerOverlap="false"
+    cardview:cardUseCompatPadding="true">
 
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/video_image"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:background="@color/default_image_background"/>
+        android:layout_height="match_parent">
 
-    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
-        android:id="@+id/video_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:padding="@dimen/dist_large"
-        android:background="@drawable/gradient_bottom"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:textSize="@dimen/text_xxlarge"
-        android:textColor="@android:color/white"
-        tools:text="The Martian | Official Trailer"/>
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/video_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/video_name"
+            android:scaleType="centerCrop"
+            android:background="@color/default_image_background"/>
 
-    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
-        android:id="@+id/video_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="@dimen/dist_medium"
-        android:layout_marginRight="@dimen/dist_medium"
-        android:layout_marginEnd="@dimen/dist_medium"
-        android:background="@drawable/background_rating"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textSize="@dimen/text_small"
-        android:textColor="@android:color/white"
-        tools:text="1080p"/>
+        <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            android:id="@+id/video_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="@dimen/dist_medium"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_large"
+            android:textColor="@android:color/black"
+            tools:text="The Martian | Official Trailer"/>
 
-</FrameLayout>
+        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            android:id="@+id/video_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dist_medium"
+            android:layout_marginRight="@dimen/dist_medium"
+            android:layout_marginEnd="@dimen/dist_medium"
+            android:background="@drawable/background_rating"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_small"
+            android:textColor="@android:color/white"
+            tools:text="1080p"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

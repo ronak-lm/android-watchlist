@@ -7,22 +7,22 @@ public class Video implements Parcelable {
 
     // Attributes
     public String title;
-    public String subtitle;
+    public String size;
     public String youtubeID;
     public String imageURL;
     public String videoURL;
 
     // Constructors
-    public Video(String title, String subtitle, String youtubeID, String imageURL, String videoURL) {
+    public Video(String title, String size, String youtubeID, String imageURL, String videoURL) {
         this.title = title;
-        this.subtitle = subtitle;
+        this.size = size;
         this.youtubeID = youtubeID;
         this.imageURL = imageURL;
         this.videoURL = videoURL;
     }
     public Video(Parcel in) {
         this.title = in.readString();
-        this.subtitle = in.readString();
+        this.size = in.readString();
         this.youtubeID = in.readString();
         this.imageURL = in.readString();
         this.videoURL = in.readString();
@@ -42,7 +42,7 @@ public class Video implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int i) {
         out.writeString(title);
-        out.writeString(subtitle);
+        out.writeString(size);
         out.writeString(youtubeID);
         out.writeString(imageURL);
         out.writeString(videoURL);

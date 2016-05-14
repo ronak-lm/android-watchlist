@@ -81,7 +81,7 @@
 
     <!-- Video Item -->
     <dimen name="video_item_width">380dp</dimen>
-    <dimen name="video_item_height">225dp</dimen>
+    <dimen name="video_item_height">235dp</dimen>
 
     <!-- Credit Item -->
     <dimen name="credit_item_padding">12dp</dimen>
