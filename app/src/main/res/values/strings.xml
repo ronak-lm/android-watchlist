@@ -31,7 +31,7 @@
     <string name="saved_empty">You haven\'t added any movies\nto this list</string>
 
     <!-- Search Activity -->
-    <string name="search_title">Search</string>
+    <string name="search_hint">Search all movies&#8230;</string>
     <string name="search_no_results">Your search did not match any results</string>
 
     <!-- Movie Detail Activity -->
