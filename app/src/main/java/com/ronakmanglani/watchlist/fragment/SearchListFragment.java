@@ -2,13 +2,17 @@ package com.ronakmanglani.watchlist.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,7 @@ import com.ronakmanglani.watchlist.adapter.SearchAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.ApiHelper;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
+import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -112,7 +117,8 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
         });
 
         // Setup RecyclerView
-        layoutManager = new LinearLayoutManager(context);
+        layoutManager = new GridLayoutManager(context, getNumberOfColumns());
+        recyclerView.addItemDecoration(new ItemPaddingDecoration(context, R.dimen.recycler_item_padding));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -185,6 +191,19 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
         super.onDestroyView();
         VolleySingleton.getInstance(context).requestQueue.cancelAll(getClass().getName());
         unbinder.unbind();
+    }
+
+    // Helper methods
+    public int getNumberOfColumns() {
+        // Get screen width
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float widthPx = displayMetrics.widthPixels;
+        if (isTablet) {
+            widthPx = widthPx / 3;
+        }
+        float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_detail_card_width);
+        int columns = Math.round(widthPx / desiredPx);
+        return columns > 1 ? columns : 1;
     }
 
     // JSON parsing and display

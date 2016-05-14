@@ -6,7 +6,6 @@
     android:id="@+id/movie_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dist_xsmall"
     android:clickable="true"
     android:foreground="?attr/selectableItemBackground"
     cardview:cardBackgroundColor="@color/card_background"
@@ -18,8 +17,8 @@
         android:padding="@dimen/dist_medium">
 
         <ImageView android:id="@+id/movie_image"
-            android:layout_height="@dimen/search_image_size"
-            android:layout_width="@dimen/search_image_size"
+            android:layout_height="@dimen/movie_compact_image_size"
+            android:layout_width="@dimen/movie_compact_image_size"
             android:scaleType="centerCrop"
             android:background="@color/default_image_background"
             tools:ignore="ContentDescription" />
@@ -29,11 +28,11 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/movie_image"
             android:layout_toEndOf="@+id/movie_image"
-            android:layout_marginLeft="@dimen/dist_large"
-            android:layout_marginStart="@dimen/dist_large"
+            android:layout_marginLeft="@dimen/movie_compact_text_margin"
+            android:layout_marginStart="@dimen/movie_compact_text_margin"
             android:orientation="vertical">
 
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
                 android:id="@+id/movie_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +54,7 @@
             <LinearLayout android:id="@+id/movie_rating_holder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dist_small"
+                android:layout_marginTop="@dimen/movie_compact_rating_margin"
                 android:orientation="horizontal">
 
                 <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
@@ -70,8 +69,8 @@
                     tools:text="8.76"/>
 
                 <ImageView android:id="@+id/rating_icon"
-                    android:layout_width="@dimen/search_rating_icon_size"
-                    android:layout_height="@dimen/search_rating_icon_size"
+                    android:layout_width="@dimen/movie_compact_rating_icon_size"
+                    android:layout_height="@dimen/movie_compact_rating_icon_size"
                     android:src="@drawable/icon_star"
                     android:scaleType="fitCenter"
                     tools:ignore="contentDescription"/>

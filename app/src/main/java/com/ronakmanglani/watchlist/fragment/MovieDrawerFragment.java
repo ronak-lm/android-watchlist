@@ -103,18 +103,26 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
                 startActivity(new Intent(getContext(), SearchActivity.class));
                 return true;
 
-            case R.id.action_list:
+            case R.id.action_grid:
                 SharedPreferences.Editor editor1 = preferences.edit();
-                editor1.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_LIST);
+                editor1.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID);
                 editor1.apply();
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
                 return true;
 
-            case R.id.action_grid:
+            case R.id.action_list:
                 SharedPreferences.Editor editor2 = preferences.edit();
-                editor2.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID);
+                editor2.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_LIST);
                 editor2.apply();
+                onRefreshToolbarMenu();
+                onRefreshFragmentLayout();
+                return true;
+
+            case R.id.action_compact:
+                SharedPreferences.Editor editor3 = preferences.edit();
+                editor3.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_COMPACT);
+                editor3.apply();
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
                 return true;
@@ -157,16 +165,25 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         }
     }
     private void onRefreshToolbarMenu() {
-        if (preferences.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
-            // Grid mode
+        int viewMode = preferences.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID);
+        if (viewMode == Watchlist.VIEW_MODE_GRID) {
+            // Change from grid to list
             Menu menu = toolbar.getMenu();
             menu.findItem(R.id.action_grid).setVisible(false);
             menu.findItem(R.id.action_list).setVisible(true);
+            menu.findItem(R.id.action_compact).setVisible(false);
+        } else if (viewMode == Watchlist.VIEW_MODE_LIST) {
+            // Change from list to compact
+            Menu menu = toolbar.getMenu();
+            menu.findItem(R.id.action_grid).setVisible(false);
+            menu.findItem(R.id.action_list).setVisible(false);
+            menu.findItem(R.id.action_compact).setVisible(true);
         } else {
-            // List mode
+            // Change from compact to grid
             Menu menu = toolbar.getMenu();
             menu.findItem(R.id.action_grid).setVisible(true);
             menu.findItem(R.id.action_list).setVisible(false);
+            menu.findItem(R.id.action_compact).setVisible(false);
         }
     }
     private void onRefreshFragmentLayout() {

@@ -40,7 +40,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent, false);
+        ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_compact, parent, false);
         return new SearchViewHolder(v, onMovieClickListener);
     }
     @Override
@@ -51,7 +51,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (movie.backdropImage == null || movie.backdropImage.equals("null") || movie.backdropImage.length() == 0) {
             holder.movieImage.setImageResource(R.drawable.default_backdrop_circle);
         } else {
-            int imageSize = (int) context.getResources().getDimension(R.dimen.search_image_size);
+            int imageSize = (int) context.getResources().getDimension(R.dimen.movie_compact_image_size);
             String imageUrl = ApiHelper.getImageURL(movie.backdropImage, imageSize);
             VolleySingleton.getInstance(context).imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
                 @Override

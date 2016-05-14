@@ -38,7 +38,7 @@
     <dimen name="recycler_item_padding">2dp</dimen>
     <dimen name="recycler_view_padding">6dp</dimen>
 
-    <!-- Movie Simple Item in RecyclerView -->
+    <!-- Movie Grid Item -->
     <dimen name="movie_card_width">180dp</dimen>
     <dimen name="movie_card_height">200dp</dimen>
     <dimen name="movie_image_height">135dp</dimen>
@@ -46,10 +46,16 @@
     <dimen name="movie_info_padding">5dp</dimen>
     <dimen name="movie_rating_icon_size">16dp</dimen>
 
-    <!-- Movie Detail Item in RecyclerView -->
+    <!-- Movie List Item -->
     <dimen name="movie_detail_card_height">200dp</dimen>
     <dimen name="movie_detail_card_width">400dp</dimen>
     <dimen name="movie_detail_poster_width">120dp</dimen>
+
+    <!-- Movie Compact Item -->
+    <dimen name="movie_compact_image_size">80dp</dimen>
+    <dimen name="movie_compact_rating_icon_size">14dp</dimen>
+    <dimen name="movie_compact_text_margin">12dp</dimen>
+    <dimen name="movie_compact_rating_margin">6dp</dimen>
 
     <!-- Detail Activity -->
     <dimen name="detail_backdrop_width">444dp</dimen>
@@ -80,10 +86,6 @@
     <!-- Credit Item -->
     <dimen name="credit_item_padding">12dp</dimen>
     <dimen name="credit_image_size">55dp</dimen>
-
-    <!-- Search Item -->
-    <dimen name="search_image_size">80dp</dimen>
-    <dimen name="search_rating_icon_size">14dp</dimen>
 
     <!-- About Page -->
     <dimen name="about_icon_size">120dp</dimen>
