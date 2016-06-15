@@ -1,0 +1,82 @@
+<resources>
+    <!-- App Title -->
+    <string name="app_name">Watchlist</string>
+
+    <!-- List For Navigation Drawer -->
+    <string name="drawer_popular">Più Popolari</string>
+    <string name="drawer_rated">Migliori</string>
+    <string name="drawer_upcoming">Prossimamente</string>
+    <string name="drawer_playing">Nelle sale</string>
+    <string name="drawer_watched">Visti</string>
+    <string name="drawer_to_see">Da Vedere</string>
+
+    <!-- Toolbar actions -->
+    <string name="action_grid">Grid View</string>
+    <string name="action_list">List View</string>
+    <string name="action_compact">Compact View</string>
+    <string name="action_search">Cerca</string>
+    <string name="action_share">Condividi</string>
+    <string name="action_share_text">Check out %1$s - %2$s</string>
+    <string name="action_share_using">Condividi con&#8230;</string>
+    <string name="action_rate">Valuta su Google Play</string>
+    <string name="action_twitter">Segui su Twitter</string>
+    <string name="action_email">Invia Feedback</string>
+    <string name="action_about">Informazioni</string>
+    <string name="action_email_using">Invia email&#8230;</string>
+    <string name="action_email_error">Non ci sono client email installati!</string>
+
+    <!-- Loading and Error Message -->
+    <string name="server_unreachable">Oops! Qualcosa è andato stroto.\nPer piacere controlla la tua connesione ad internet.</string>
+    <string name="try_again">Riprovare?</string>
+    <string name="loading">Caricamento&#8230;</string>
+    <string name="saved_empty">You haven\'t added any movies\nto this list</string>
+
+    <!-- Search Activity -->
+    <string name="search_hint">Cerca tra tutti i film&#8230;</string>
+    <string name="search_no_results">La tua ricerca non ha prodotto alcun risultato</string>
+
+    <!-- Movie Detail Activity -->
+    <string name="detail_header_overview">PANORAMICA</string>
+    <string name="detail_button_photos">FOTO</string>
+    <string name="detail_button_videos">VIDEO</string>
+    <string name="detail_button_reviews">RECENSIONI</string>
+    <string name="detail_header_crew">CREW</string>
+    <string name="detail_header_cast">CAST</string>
+    <string name="detail_button_see_all">CEDI TUTTO</string>
+    <string name="detail_vote_count">%1$s voti</string>
+    <string name="detail_crew_format">%1$s : %2$s</string>
+    <string name="detail_fab_watched_add">Segna come visto</string>
+    <string name="detail_fab_watched_remove">Rimuovi dalle visioni</string>
+    <string name="detail_fab_to_watch_add">Aggiungi a da vedere</string>
+    <string name="detail_fab_to_watch_remove">Rimuovi \"Da Vedere\"</string>
+    <string name="detail_watched_added">Film segnato come visto</string>
+    <string name="detail_watched_removed">Film rimosso dalle visioni</string>
+    <string name="detail_to_watch_added">Film aggiunto a \"Da Vedere\"</string>
+    <string name="detail_to_watch_removed">Film rimosso a \"Da vedere\"</string>
+
+    <!-- Reviews Activity -->
+    <string name="reviews_title">Recensione</string>
+    <string name="reviews_alert">ATTENZIONE SPOILER!</string>
+    <string name="reviews_no_results">Non ci sono recensioni per\nquesto film!</string>
+
+    <!-- Videos Activity -->
+    <string name="videos_title">Video</string>
+    <string name="videos_youtube">YouTube</string>
+    <string name="videos_no_results">Non ci sono video per\nquesto film!</string>
+
+    <!-- Photos Activity -->
+    <string name="photos_title">Foto</string>
+    <string name="photos_no_results">non ci sono foto per\nquesto film!</string>
+
+    <!-- Credit Activity -->
+    <string name="crew_title">Crew</string>
+    <string name="cast_title">Cast</string>
+
+    <!-- About Dialog -->
+    <string name="about_version">Versione 1.1</string>
+    <string name="about_made_by">Fatta Da</string>
+    <string name="about_name">Ronak Manglani</string>
+    <string name="about_powered_by">Offerta Da</string>
+    <string name="about_tmdb">http://themoviedb.org</string>
+
+</resources>
