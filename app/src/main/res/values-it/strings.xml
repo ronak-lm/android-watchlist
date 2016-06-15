@@ -5,7 +5,7 @@
     <!-- List For Navigation Drawer -->
     <string name="drawer_popular">Più Popolari</string>
     <string name="drawer_rated">Migliori</string>
-    <string name="drawer_upcoming">In Arrivo</string>
+    <string name="drawer_upcoming">Prossimamente</string>
     <string name="drawer_playing">Nelle sale</string>
     <string name="drawer_watched">Visti</string>
     <string name="drawer_to_see">Da Vedere</string>
