@@ -1,6 +1,6 @@
 <resources>
     <!-- App Title -->
-    <string name="app_name">Watchlist</string>
+    <string name="app_name" translatable="false">Watchlist</string>
 
     <!-- List For Navigation Drawer -->
     <string name="drawer_popular">Most Popular</string>
@@ -71,6 +71,16 @@
     <!-- Credit Activity -->
     <string name="crew_title">Crew</string>
     <string name="cast_title">Cast</string>
+
+    <!-- Backup Activity -->
+    <string name="pref_title">Backup and Restore</string>
+    <string name="pref_category_data">App Data</string>
+    <string name="pref_key_backup" translatable="false">backup_data</string>
+    <string name="pref_key_restore" translatable="false">restore_data</string>
+    <string name="pref_title_backup">Backup Data</string>
+    <string name="pref_title_restore">Restore Data</string>
+    <string name="pref_summary_backup">Export data to storage</string>
+    <string name="pref_summary_restore">Import data from storage</string>
 
     <!-- About Dialog -->
     <string name="about_version">Version 1.1</string>
