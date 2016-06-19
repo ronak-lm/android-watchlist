@@ -82,6 +82,13 @@
     <string name="pref_title_restore">Restore Data</string>
     <string name="pref_summary_backup">Export data to storage</string>
     <string name="pref_summary_restore">Import data from storage</string>
+    <string name="backup_select">Select location&#8230;</string>
+    <string name="backup_complete">Backup completed successfully</string>
+    <string name="backup_failed">Error! Unable to save backup</string>
+    <string name="restore_select">Select backup file&#8230;</string>
+    <string name="restore_complete">Restore completed successfully</string>
+    <string name="restore_failed">Error! Unable to restore backup</string>
+    <string name="restore_invalid">The file you selected is invalid</string>
 
     <!-- About Dialog -->
     <string name="about_version">Version 1.1</string>
