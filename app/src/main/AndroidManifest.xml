@@ -61,6 +61,10 @@
             android:name=".activity.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activity.BackupActivity"
+            android:label="@string/pref_title"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <!-- Content Provider -->
         <provider
