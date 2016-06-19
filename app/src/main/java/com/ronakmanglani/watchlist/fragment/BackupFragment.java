@@ -65,7 +65,7 @@ public class BackupFragment extends PreferenceFragment {
             try {
                 File srcFile = getActivity().getDatabasePath(DATABASE_NAME);
                 File dstFile = new File(data.getData().getPath() + File.separator
-                        + "Watchlist-" + (System.currentTimeMillis()/1000) + ".wbk");
+                        + "Watchlist-" + (System.currentTimeMillis()/1000) + ".bak");
                 FileUtils.copyFile(srcFile, dstFile);
                 Toast.makeText(getActivity(), R.string.backup_complete, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
