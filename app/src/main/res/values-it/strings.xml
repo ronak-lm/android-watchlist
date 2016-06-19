@@ -16,8 +16,9 @@
     <string name="action_compact">Compact View</string>
     <string name="action_search">Cerca</string>
     <string name="action_share">Condividi</string>
-    <string name="action_share_text">Check out %1$s - %2$s</string>
+    <string name="action_share_text">Controlla %1$s - %2$s</string>
     <string name="action_share_using">Condividi con&#8230;</string>
+    <string name="action_backup">Backup/Ripristino Dati</string>
     <string name="action_rate">Valuta su Google Play</string>
     <string name="action_twitter">Segui su Twitter</string>
     <string name="action_email">Invia Feedback</string>
@@ -26,10 +27,10 @@
     <string name="action_email_error">Non ci sono client email installati!</string>
 
     <!-- Loading and Error Message -->
-    <string name="server_unreachable">Oops! Qualcosa è andato stroto.\nPer piacere controlla la tua connesione ad internet.</string>
+    <string name="server_unreachable">Oops! Qualcosa è andato storto.\nPer piacere controlla la tua connesione ad internet.</string>
     <string name="try_again">Riprovare?</string>
     <string name="loading">Caricamento&#8230;</string>
-    <string name="saved_empty">You haven\'t added any movies\nto this list</string>
+    <string name="saved_empty">Non hai aggiunto nessun film\nin questa lista</string>
 
     <!-- Search Activity -->
     <string name="search_hint">Cerca tra tutti i film&#8230;</string>
@@ -42,7 +43,7 @@
     <string name="detail_button_reviews">RECENSIONI</string>
     <string name="detail_header_crew">CREW</string>
     <string name="detail_header_cast">CAST</string>
-    <string name="detail_button_see_all">CEDI TUTTO</string>
+    <string name="detail_button_see_all">VEDI TUTTO</string>
     <string name="detail_vote_count">%1$s voti</string>
     <string name="detail_crew_format">%1$s : %2$s</string>
     <string name="detail_fab_watched_add">Segna come visto</string>
@@ -71,6 +72,23 @@
     <!-- Credit Activity -->
     <string name="crew_title">Crew</string>
     <string name="cast_title">Cast</string>
+
+    <!-- Backup Activity -->
+    <string name="pref_title">Backup e Ripristino</string>
+    <string name="pref_category_data">Dati dell\'app</string>
+    <string name="pref_key_backup" translatable="false">backup_data</string>
+    <string name="pref_key_restore" translatable="false">restore_data</string>
+    <string name="pref_title_backup">Dati dei Backup</string>
+    <string name="pref_title_restore">Dati dei Ripristini</string>
+    <string name="pref_summary_backup">Esporta dati sulla memoria</string>
+    <string name="pref_summary_restore">Importa dati dalla memoria</string>
+    <string name="backup_select">Seleziona posizione&#8230;</string>
+    <string name="backup_complete">Backup completato con successo</string>
+    <string name="backup_failed">Errore! Impossibile eseguire il Backup</string>
+    <string name="restore_select">Seleziona il file di backup&#8230;</string>
+    <string name="restore_complete">Ripristino completato con successo</string>
+    <string name="restore_failed">Errore! Impossibile ripristinare il backup</string>
+    <string name="restore_invalid">Il file selezionato non è valido</string>
 
     <!-- About Dialog -->
     <string name="about_version">Versione 1.1</string>
