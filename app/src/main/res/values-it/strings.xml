@@ -1,6 +1,4 @@
 <resources>
-    <!-- App Title -->
-    <string name="app_name" translatable="false">Watchlist</string>
 
     <!-- List For Navigation Drawer -->
     <string name="drawer_popular">Più Popolari</string>
@@ -76,8 +74,6 @@
     <!-- Backup Activity -->
     <string name="pref_title">Backup e Ripristino</string>
     <string name="pref_category_data">Dati dell\'app</string>
-    <string name="pref_key_backup" translatable="false">backup_data</string>
-    <string name="pref_key_restore" translatable="false">restore_data</string>
     <string name="pref_title_backup">Dati dei Backup</string>
     <string name="pref_title_restore">Dati dei Ripristini</string>
     <string name="pref_summary_backup">Esporta dati sulla memoria</string>
@@ -93,8 +89,6 @@
     <!-- About Dialog -->
     <string name="about_version">Versione 1.2</string>
     <string name="about_made_by">Fatta Da</string>
-    <string name="about_name" translatable="false">Ronak Manglani</string>
     <string name="about_powered_by">Offerta Da</string>
-    <string name="about_tmdb" translatable="false">http://themoviedb.org</string>
 
 </resources>
