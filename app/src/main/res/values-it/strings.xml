@@ -30,7 +30,7 @@
     <string name="server_unreachable">Oops! Qualcosa è andato storto.\nPer piacere controlla la tua connesione ad internet.</string>
     <string name="try_again">Riprovare?</string>
     <string name="loading">Caricamento&#8230;</string>
-    <string name="saved_empty">Non hai aggiunto nessuln film\nin questa lista</string>
+    <string name="saved_empty">Non hai aggiunto nessun film\nin questa lista</string>
 
     <!-- Search Activity -->
     <string name="search_hint">Cerca tra tutti i film&#8230;</string>
