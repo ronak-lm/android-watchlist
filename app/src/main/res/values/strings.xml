@@ -18,6 +18,7 @@
     <string name="action_share">Share</string>
     <string name="action_share_text">Check out %1$s - %2$s</string>
     <string name="action_share_using">Share using&#8230;</string>
+    <string name="action_backup">Backup/Restore Data</string>
     <string name="action_rate">Rate on Google Play</string>
     <string name="action_twitter">Follow on Twitter</string>
     <string name="action_email">Send Feedback</string>

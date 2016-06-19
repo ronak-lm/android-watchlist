@@ -27,6 +27,10 @@
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
 
+    <item android:id="@+id/action_backup"
+        android:title="@string/action_backup"
+        app:showAsAction="never" />
+
     <item android:id="@+id/action_rate"
         android:title="@string/action_rate"
         app:showAsAction="never" />

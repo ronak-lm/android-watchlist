@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.activity.BackupActivity;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
 
 import butterknife.BindView;
@@ -125,6 +126,11 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
                 editor3.apply();
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
+                return true;
+
+            case R.id.action_backup:
+                Intent backupIntent = new Intent(getContext(), BackupActivity.class);
+                startActivity(backupIntent);
                 return true;
 
             case R.id.action_rate:
