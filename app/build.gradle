@@ -32,6 +32,7 @@ dependencies {
     compile 'com.github.clans:fab:1.6.3'
     compile 'com.jakewharton:butterknife:8.0.1'
     compile 'com.lsjwzh:materialloadingprogressbar:0.5.6-RELEASE'
+    compile 'com.nononsenseapps:filepicker:2.5.3'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'net.simonvt.schematic:schematic:0.6.3'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
