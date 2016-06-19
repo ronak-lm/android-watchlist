@@ -91,10 +91,10 @@
     <string name="restore_invalid">The file you selected is invalid</string>
 
     <!-- About Dialog -->
-    <string name="about_version">Version 1.1</string>
+    <string name="about_version">Version 1.2</string>
     <string name="about_made_by">Made By</string>
-    <string name="about_name">Ronak Manglani</string>
+    <string name="about_name" translatable="false">Ronak Manglani</string>
     <string name="about_powered_by">Powered By</string>
-    <string name="about_tmdb">http://themoviedb.org</string>
+    <string name="about_tmdb" translatable="false">http://themoviedb.org</string>
 
 </resources>

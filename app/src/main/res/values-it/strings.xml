@@ -1,6 +1,6 @@
 <resources>
     <!-- App Title -->
-    <string name="app_name">Watchlist</string>
+    <string name="app_name" translatable="false">Watchlist</string>
 
     <!-- List For Navigation Drawer -->
     <string name="drawer_popular">Più Popolari</string>
@@ -91,10 +91,10 @@
     <string name="restore_invalid">Il file selezionato non è valido</string>
 
     <!-- About Dialog -->
-    <string name="about_version">Versione 1.1</string>
+    <string name="about_version">Versione 1.2</string>
     <string name="about_made_by">Fatta Da</string>
-    <string name="about_name">Ronak Manglani</string>
+    <string name="about_name" translatable="false">Ronak Manglani</string>
     <string name="about_powered_by">Offerta Da</string>
-    <string name="about_tmdb">http://themoviedb.org</string>
+    <string name="about_tmdb" translatable="false">http://themoviedb.org</string>
 
 </resources>
