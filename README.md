@@ -1,6 +1,6 @@
-# Watch List
+# Watchlist
 
-This repository hosts the source code for the Android app Watch List that helps you keep track of watched movies, view trailers, reviews, photos, etc
+This repository hosts the source code for the Android app Watchlist that helps you keep track of watched movies, view trailers, reviews, photos, etc
 
 [![Download][1]][2]
 
