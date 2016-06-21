@@ -13,6 +13,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.ApiHelper;
+import com.ronakmanglani.watchlist.util.TextUtils;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Movie movie = movieList.get(position);
         final SearchViewHolder holder = (SearchViewHolder) viewHolder;
         // Load image
-        if (movie.backdropImage == null || movie.backdropImage.equals("null") || movie.backdropImage.length() == 0) {
+        if (TextUtils.isNullOrEmpty(movie.backdropImage)) {
             holder.movieImage.setImageResource(R.drawable.default_backdrop_circle);
         } else {
             int imageSize = (int) context.getResources().getDimension(R.dimen.movie_compact_image_size);
@@ -67,7 +68,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         // Set text
         holder.movieName.setText(movie.title);
         holder.movieYear.setText(movie.year);
-        if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
+        if (TextUtils.isNullOrEmpty(movie.rating) || movie.rating.equals("0")) {
             holder.movieRatingHolder.setVisibility(View.GONE);
         } else {
             holder.movieRating.setText(movie.rating);

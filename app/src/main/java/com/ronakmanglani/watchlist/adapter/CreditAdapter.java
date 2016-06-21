@@ -12,6 +12,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.util.ApiHelper;
+import com.ronakmanglani.watchlist.util.TextUtils;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         final CreditViewHolder holder = (CreditViewHolder) viewHolder;
         int imageSize = (int) context.getResources().getDimension(R.dimen.detail_cast_image_width);
 
-        if (credit.imagePath == null || credit.imagePath.equals("null")) {
+        if (TextUtils.isNullOrEmpty(credit.imagePath)) {
             holder.creditImage.setImageResource(R.drawable.default_cast_square);
         } else {
             VolleySingleton.getInstance(context).imageLoader.get(ApiHelper.getImageURL(credit.imagePath, imageSize),
@@ -66,7 +67,7 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         holder.creditName.setText(credit.name);
-        if (credit.role == null || credit.role.equals("null") || credit.role.length() == 0) {
+        if (TextUtils.isNullOrEmpty(credit.role)) {
             holder.creditRole.setVisibility(View.GONE);
         } else {
             holder.creditRole.setText(credit.role);

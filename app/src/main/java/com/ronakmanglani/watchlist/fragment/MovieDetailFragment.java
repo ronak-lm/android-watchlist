@@ -43,6 +43,7 @@ import com.ronakmanglani.watchlist.database.MovieProvider;
 import com.ronakmanglani.watchlist.model.Credit;
 import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.util.ApiHelper;
+import com.ronakmanglani.watchlist.util.TextUtils;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.util.YoutubeHelper;
 
@@ -140,7 +141,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         if (savedInstanceState == null || !(savedInstanceState.containsKey(Watchlist.MOVIE_ID)
                 && savedInstanceState.containsKey(Watchlist.MOVIE_OBJECT))) {
             id = getArguments().getString(Watchlist.MOVIE_ID);
-            if (id == null || id.equals("null")) {
+            if (TextUtils.isNullOrEmpty(id)) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
                 toolbar.setTitle("");
@@ -295,7 +296,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         floatingActionsMenu.setVisibility(View.VISIBLE);
 
         // Set title and tagline
-        if (movie.tagline == null || movie.tagline.equals("null") || movie.tagline.equals("")) {
+        if (TextUtils.isNullOrEmpty(movie.tagline)) {
             toolbar.setTitle(movie.title);
             toolbarTextHolder.setVisibility(View.GONE);
         } else {
@@ -309,7 +310,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         toolbar.inflateMenu(R.menu.menu_share);
 
         // Backdrop image
-        if (movie.backdropImage != null && !movie.backdropImage.equals("null") && !movie.backdropImage.equals("")) {
+        if (!TextUtils.isNullOrEmpty(movie.backdropImage)) {
             int headerImageWidth = (int) getResources().getDimension(R.dimen.detail_backdrop_width);
             backdropImage.setImageUrl(ApiHelper.getImageURL(movie.backdropImage, headerImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
@@ -333,7 +334,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         }
 
         // Basic info
-        if (movie.posterImage != null && !movie.posterImage.equals("null")) {
+        if (!TextUtils.isNullOrEmpty(movie.posterImage)) {
             int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_list_poster_width);
             posterImage.setImageUrl(ApiHelper.getImageURL(movie.posterImage, posterImageWidth),
                     VolleySingleton.getInstance(getActivity()).imageLoader);
@@ -343,7 +344,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         }
         movieTitle.setText(movie.title);
         movieSubtitle.setText(movie.getSubtitle());
-        if (movie.voteAverage == null || movie.voteAverage.equals("null") || movie.voteAverage.equals("0.0")) {
+        if (TextUtils.isNullOrEmpty(movie.voteAverage) || movie.voteAverage.equals("0.0")) {
             movieRatingHolder.setVisibility(View.GONE);
         } else {
             movieRating.setText(movie.voteAverage);
@@ -351,10 +352,10 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         }
 
         // Overview
-        if (movie.overview != null && !movie.overview.equals("null")) {
-            movieOverviewValue.setText(movie.overview);
-        } else {
+        if (TextUtils.isNullOrEmpty(movie.overview)) {
             movieOverviewHolder.setVisibility(View.GONE);
+        } else {
+            movieOverviewValue.setText(movie.overview);
         }
 
         // Crew

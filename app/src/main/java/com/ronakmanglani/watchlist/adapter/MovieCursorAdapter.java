@@ -22,6 +22,7 @@ import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.database.MovieColumns;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.ApiHelper;
+import com.ronakmanglani.watchlist.util.TextUtils;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.widget.AutoResizeTextView;
 
@@ -111,12 +112,12 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
             movieViewHolder.movieName.setText(movie.title);
             movieViewHolder.releaseYear.setText(movie.year);
             // Load image
-            if (movie.backdropImage != null && !movie.backdropImage.equals("null")) {
+            if (!TextUtils.isNullOrEmpty(movie.backdropImage)) {
                 String imageUrl = ApiHelper.getImageURL(movie.backdropImage, imageWidth);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
-            } else if (movie.posterImage != null && !movie.posterImage.equals("null")) {
+            } else if (!TextUtils.isNullOrEmpty(movie.posterImage)) {
                 String imageUrl = ApiHelper.getImageURL(movie.posterImage, imageWidth);
                 movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
@@ -126,7 +127,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
                 movieViewHolder.imageView.setVisibility(View.GONE);
             }
             // Display movie rating
-            if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
+            if (TextUtils.isNullOrEmpty(movie.rating) || movie.rating.equals("0")) {
                 movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
                 movieViewHolder.movieRating.setVisibility(View.GONE);
             } else {
@@ -143,7 +144,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
             movieViewHolder.releaseYear.setText(movie.year);
             movieViewHolder.overview.setText(movie.overview);
             // Load image
-            if (movie.posterImage == null || movie.posterImage.equals("null")) {
+            if (TextUtils.isNullOrEmpty(movie.posterImage)) {
                 movieViewHolder.imageView.setVisibility(View.GONE);
                 movieViewHolder.defaultImageView.setVisibility(View.VISIBLE);
             } else {
@@ -154,7 +155,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
             }
             // Display movie rating
-            if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
+            if (TextUtils.isNullOrEmpty(movie.rating) || movie.rating.equals("0")) {
                 movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
                 movieViewHolder.movieRating.setVisibility(View.GONE);
             } else {
@@ -170,7 +171,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
             movieViewHolder.movieName.setText(movie.title);
             movieViewHolder.movieYear.setText(movie.year);
             // Load image
-            if (movie.backdropImage == null || movie.backdropImage.equals("null") || movie.backdropImage.length() == 0) {
+            if (TextUtils.isNullOrEmpty(movie.backdropImage)) {
                 movieViewHolder.movieImage.setImageResource(R.drawable.default_backdrop_circle);
             } else {
                 int imageSize = (int) context.getResources().getDimension(R.dimen.movie_compact_image_size);
@@ -187,7 +188,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
                 });
             }
             // Display movie rating
-            if (movie.rating == null || movie.rating.equals("null") || movie.rating.equals("0")) {
+            if (TextUtils.isNullOrEmpty(movie.rating) || movie.rating.equals("0")) {
                 movieViewHolder.movieRatingIcon.setVisibility(View.GONE);
                 movieViewHolder.movieRating.setVisibility(View.GONE);
             } else {

@@ -30,6 +30,7 @@ import com.ronakmanglani.watchlist.activity.SearchActivity;
 import com.ronakmanglani.watchlist.adapter.SearchAdapter;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.ApiHelper;
+import com.ronakmanglani.watchlist.util.TextUtils;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
@@ -223,7 +224,7 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
                                 String poster = movie.getString("poster_path");
                                 String overview = movie.getString("overview");
                                 String year = movie.getString("release_date");
-                                if (year != null && !year.equals("null") && year.length() > 0) {
+                                if (!TextUtils.isNullOrEmpty(year)) {
                                     year = year.substring(0, 4);
                                 }
                                 String id = movie.getString("id");

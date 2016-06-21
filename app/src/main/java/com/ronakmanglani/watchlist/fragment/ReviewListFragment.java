@@ -28,6 +28,7 @@ import com.ronakmanglani.watchlist.activity.ReviewDetailActivity;
 import com.ronakmanglani.watchlist.adapter.ReviewAdapter;
 import com.ronakmanglani.watchlist.model.Review;
 import com.ronakmanglani.watchlist.util.ApiHelper;
+import com.ronakmanglani.watchlist.util.TextUtils;
 import com.ronakmanglani.watchlist.util.VolleySingleton;
 
 import org.json.JSONArray;
@@ -197,7 +198,7 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
                                 String userName = user.getString("username");
                                 if (!user.getBoolean("private")) {
                                     String name = user.getString("name");
-                                    if (name.length() > 0 && !name.equals("null")) {
+                                    if (!TextUtils.isNullOrEmpty(name)) {
                                         userName = name;
                                     }
                                 }
