@@ -7,6 +7,9 @@ import com.ronakmanglani.watchlist.R;
 
 public class ApiHelper {
 
+    private ApiHelper() {
+    }
+
     // API key for TMDB
     public static String getTMDBKey(Context context) {
         return context.getString(R.string.tmdb_api_key);
