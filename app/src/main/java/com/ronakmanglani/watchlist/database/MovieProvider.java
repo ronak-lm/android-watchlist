@@ -11,6 +11,9 @@ public class MovieProvider {
 
     public static final String AUTHORITY = "com.ronakmanglani.watchlist.database.MovieProvider";
 
+    private MovieProvider() {
+    }
+
     // Table for movies seen
     @TableEndpoint(table = MovieDatabase.WATCHED) public static class Watched {
         @ContentUri(
@@ -18,6 +21,9 @@ public class MovieProvider {
                 type = "vnd.android.cursor.dir/list",
                 defaultSort = MovieColumns.TITLE + " ASC")
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/watched");
+
+        private Watched() {
+        }
     }
 
     // Table for movies to see
@@ -27,5 +33,8 @@ public class MovieProvider {
                 type = "vnd.android.cursor.dir/list",
                 defaultSort = MovieColumns.TITLE + " ASC")
         public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/to_see");
+
+        private ToSee() {
+        }
     }
 }

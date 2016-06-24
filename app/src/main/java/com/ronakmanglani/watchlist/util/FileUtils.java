@@ -14,6 +14,9 @@ import java.nio.channels.FileChannel;
 
 public class FileUtils {
 
+    private FileUtils() {
+    }
+
     public static void copyFile(File source, File destination) throws IOException {
         FileInputStream fromFile = new FileInputStream(source);
         FileOutputStream toFile = new FileOutputStream(destination);

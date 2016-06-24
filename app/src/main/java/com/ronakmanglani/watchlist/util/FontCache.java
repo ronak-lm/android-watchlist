@@ -13,6 +13,9 @@ public class FontCache {
 
     private static Hashtable<String, Typeface> fontCache = new Hashtable<String, Typeface>();
 
+    private FontCache() {
+    }
+
     public static Typeface getTypeface(String name, Context context) {
         Typeface tf = fontCache.get(name);
         if(tf == null) {

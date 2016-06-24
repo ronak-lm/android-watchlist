@@ -10,4 +10,7 @@ public class MovieDatabase {
 
     @Table(MovieColumns.class) public static final String WATCHED = "watched";
     @Table(MovieColumns.class) public static final String TO_SEE = "to_see";
+
+    private MovieDatabase() {
+    }
 }
