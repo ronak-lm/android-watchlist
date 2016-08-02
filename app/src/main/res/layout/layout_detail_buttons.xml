@@ -14,7 +14,7 @@
             <ImageView android:src="@drawable/button_photos"
                 style="@style/MovieButtonIconStyle"
                 tools:ignore="contentDescription"/>
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
                 android:text="@string/detail_button_photos"
                 style="@style/MovieButtonTextStyle" />
         </LinearLayout>
@@ -29,7 +29,7 @@
             <ImageView android:src="@drawable/button_videos"
                 style="@style/MovieButtonIconStyle"
                 tools:ignore="contentDescription"/>
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
                 android:text="@string/detail_button_videos"
                 style="@style/MovieButtonTextStyle" />
         </LinearLayout>
@@ -44,7 +44,7 @@
             <ImageView android:src="@drawable/button_reviews"
                 style="@style/MovieButtonIconStyle"
                 tools:ignore="contentDescription"/>
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
                 android:text="@string/detail_button_reviews"
                 style="@style/MovieButtonTextStyle" />
         </LinearLayout>

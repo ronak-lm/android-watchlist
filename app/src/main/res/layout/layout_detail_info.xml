@@ -41,7 +41,7 @@
         android:orientation="vertical">
 
         <!-- Title -->
-        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
             android:id="@+id/movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             tools:text="My Awesome Movie Title"/>
 
         <!-- Release date and runtime -->
-        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
             android:id="@+id/movie_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:orientation="horizontal">
 
             <!-- Average Rating -->
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
                 android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 tools:text="8.6"/>
 
             <!-- Vote Count -->
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

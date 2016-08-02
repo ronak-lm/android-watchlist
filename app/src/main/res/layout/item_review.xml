@@ -30,7 +30,7 @@
             <ImageView style="@style/ReviewIconStyle"
                 android:src="@drawable/icon_user"
                 tools:ignore="ContentDescription" />
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
                 android:id="@+id/review_author"
                 style="@style/ReviewAuthorStyle"
                 tools:text="User Name"/>
@@ -52,12 +52,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/review_header">
 
-            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
                 android:id="@+id/review_body"
                 style="@style/ReviewBodyStyle"
                 tools:text="The movie's review goes here..."/>
 
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
                 android:id="@+id/review_spoiler"
                 style="@style/ReviewBodyStyle"
                 android:text="@string/reviews_alert"
@@ -66,7 +66,7 @@
 
         </FrameLayout>
 
-        <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
             android:id="@+id/review_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

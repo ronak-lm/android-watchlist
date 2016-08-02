@@ -1,0 +1,17 @@
+package com.ronakmanglani.watchlist.api;
+
+public class YoutubeHelper {
+
+    // Constructor
+    private YoutubeHelper() { }
+
+    // Get video URL
+    public static String getVideoURL(String youtubeID) {
+        return "https://www.youtube.com/watch?v=" + youtubeID;
+    }
+
+    // Get image URL of the video
+    public static String getThumbnailURL(String youtubeID) {
+        return "http://img.youtube.com/vi/" + youtubeID + "/0.jpg";
+    }
+}

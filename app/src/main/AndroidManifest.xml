@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MovieActivity"
+            android:name=".ui.activity.MovieActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MovieDetailActivity"
+            android:name=".ui.activity.MovieDetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -44,26 +44,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ReviewActivity"
+            android:name=".ui.activity.ReviewActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.ReviewDetailActivity"
+            android:name=".ui.activity.ReviewDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.VideoActivity"
+            android:name=".ui.activity.VideoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.PhotoActivity"
+            android:name=".ui.activity.PhotoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.CreditActivity"
+            android:name=".ui.activity.CreditActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.SearchActivity"
+            android:name=".ui.activity.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name=".activity.BackupActivity"
+            android:name=".ui.activity.BackupActivity"
             android:label="@string/pref_title"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
@@ -78,7 +78,7 @@
 
         <!-- Content Provider -->
         <provider
-            android:name=".database.generated.MovieProvider"
+            android:name=".data.generated.MovieProvider"
             android:authorities="com.ronakmanglani.watchlist.database.MovieProvider"
             android:exported="false" />
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/text_secondary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.VideoActivity"
+    tools:context=".ui.activity.VideoActivity"
     tools:showIn="@layout/activity_video">
 
     <!-- Videos List -->

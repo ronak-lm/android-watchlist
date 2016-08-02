@@ -12,14 +12,14 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="@color/primary"
             android:textSize="@dimen/text_xxlarge"/>
 
-        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/about_version"
@@ -31,20 +31,20 @@
             android:layout_margin="@dimen/dist_medium"
             tools:ignore="ContentDescription" />
 
-        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/about_made_by"
             android:textSize="@dimen/text_large"/>
 
-        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/about_name"
             android:textColor="@color/primary"
             android:textSize="@dimen/text_large"/>
 
-        <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dist_large"

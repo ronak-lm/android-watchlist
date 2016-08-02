@@ -9,7 +9,7 @@
     android:gravity="center_vertical"
     android:orientation="vertical">
 
-    <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+    <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:textColor="@android:color/white"
         tools:text="Movie Name"/>
 
-    <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+    <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
         android:id="@+id/toolbar_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

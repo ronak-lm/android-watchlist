@@ -29,7 +29,7 @@
             android:layout_marginStart="@dimen/dist_large"
             android:orientation="vertical">
 
-            <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
                 android:id="@+id/credit_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:ellipsize="end"
                 tools:text="Bruce Wayne"/>
 
-            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
                 android:id="@+id/credit_role"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

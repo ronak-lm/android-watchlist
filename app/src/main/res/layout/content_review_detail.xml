@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
             android:id="@+id/review_body"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

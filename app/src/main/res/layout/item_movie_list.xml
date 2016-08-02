@@ -43,7 +43,7 @@
         </FrameLayout>
 
         <!-- Movie title and rating -->
-        <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
             android:id="@+id/movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,14 +71,14 @@
             android:layout_marginBottom="@dimen/dist_medium"
             android:orientation="vertical">
 
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@id/movie_year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_medium"
                 tools:text="2015"/>
 
-            <com.ronakmanglani.watchlist.widget.AutoResizeTextView
+            <com.ronakmanglani.watchlist.ui.view.AutoResizeTextView
                 android:id="@+id/movie_overview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -102,7 +102,7 @@
             android:layout_marginRight="@dimen/dist_medium"
             android:layout_marginBottom="@dimen/dist_medium">
 
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

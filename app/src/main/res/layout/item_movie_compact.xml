@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/movie_compact_text_margin"
             android:orientation="vertical">
 
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 android:ellipsize="end"
                 tools:text="My Awesome Movie Title"/>
 
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="@dimen/movie_compact_rating_margin"
                 android:orientation="horizontal">
 
-                <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+                <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                     android:id="@+id/movie_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

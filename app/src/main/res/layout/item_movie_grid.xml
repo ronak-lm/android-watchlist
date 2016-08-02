@@ -50,7 +50,7 @@
             android:padding="@dimen/movie_info_padding">
 
             <!-- Movie Title -->
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 tools:text="My Awesome Movie Title"/>
 
             <!-- Movie Year -->
-            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
                 android:id="@+id/movie_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

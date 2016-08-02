@@ -23,7 +23,7 @@
             android:src="@drawable/icon_cast"
             tools:ignore="ContentDescription" />
 
-        <com.ronakmanglani.watchlist.widget.RobotoBoldTextView
+        <com.ronakmanglani.watchlist.ui.view.RobotoBoldTextView
             style="@style/MovieItemHeaderStyle"
             android:text="@string/detail_header_cast" />
 
@@ -39,12 +39,12 @@
         <!-- Text Area -->
         <LinearLayout style="@style/MovieCastTextHolderStyle">
             <!-- Name -->
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_cast_name1"
                 style="@style/MovieCastNameStyle"
                 tools:text="Bruce Wayne"/>
             <!-- Role -->
-            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
                 android:id="@+id/movie_cast_role1"
                 style="@style/MovieCastRoleStyle"
                 tools:text="as Batman"/>
@@ -61,12 +61,12 @@
         <!-- Text Area -->
         <LinearLayout style="@style/MovieCastTextHolderStyle">
             <!-- Name -->
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_cast_name2"
                 style="@style/MovieCastNameStyle"
                 tools:text="Clark Kent"/>
             <!-- Role -->
-            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
                 android:id="@+id/movie_cast_role2"
                 style="@style/MovieCastRoleStyle"
                 tools:text="as Superman"/>
@@ -83,12 +83,12 @@
         <!-- Text Area -->
         <LinearLayout style="@style/MovieCastTextHolderStyle">
             <!-- Name -->
-            <com.ronakmanglani.watchlist.widget.RobotoRegularTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoRegularTextView
                 android:id="@+id/movie_cast_name3"
                 style="@style/MovieCastNameStyle"
                 tools:text="Peter Parker"/>
             <!-- Role -->
-            <com.ronakmanglani.watchlist.widget.RobotoLightTextView
+            <com.ronakmanglani.watchlist.ui.view.RobotoLightTextView
                 android:id="@+id/movie_cast_role3"
                 style="@style/MovieCastRoleStyle"
                 tools:text="as Spider-Man"/>
