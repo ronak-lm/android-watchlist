@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.database.MovieColumns;
 import com.ronakmanglani.watchlist.model.Movie;
 import com.ronakmanglani.watchlist.util.ApiHelper;
@@ -41,8 +41,8 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
         super(context, cursor);
         this.context = context;
         this.onMovieClickListener = onMovieClickListener;
-        sharedPref = context.getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
-        imageWidth = sharedPref.getInt(Watchlist.THUMBNAIL_SIZE, 0);   // Load image width for grid view
+        sharedPref = context.getSharedPreferences(WatchlistApp.TABLE_USER, Context.MODE_PRIVATE);
+        imageWidth = sharedPref.getInt(WatchlistApp.THUMBNAIL_SIZE, 0);   // Load image width for grid view
     }
 
     // RecyclerView methods
@@ -52,11 +52,11 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
     }
     @Override
     public int getItemViewType(int position) {
-        return (sharedPref.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID));
+        return (sharedPref.getInt(WatchlistApp.VIEW_MODE, WatchlistApp.VIEW_MODE_GRID));
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == Watchlist.VIEW_MODE_GRID) {
+        if (viewType == WatchlistApp.VIEW_MODE_GRID) {
             // GRID MODE
             final ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_grid, parent, false);
             ViewTreeObserver viewTreeObserver = v.getViewTreeObserver();
@@ -68,7 +68,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
                         int width = v.findViewById(R.id.movie_poster).getWidth();
                         if (width > imageWidth) {
                             SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putInt(Watchlist.THUMBNAIL_SIZE, width);
+                            editor.putInt(WatchlistApp.THUMBNAIL_SIZE, width);
                             editor.apply();
                         }
                         // Unregister LayoutListener
@@ -81,7 +81,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
                 });
             }
             return new MovieGridViewHolder(v, onMovieClickListener);
-        } else if (viewType == Watchlist.VIEW_MODE_LIST)  {
+        } else if (viewType == WatchlistApp.VIEW_MODE_LIST)  {
             // LIST MODE
             ViewGroup v = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_list, parent, false);
             return new MovieListViewHolder(v, onMovieClickListener);
@@ -104,7 +104,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
         Movie movie = new Movie(id, title, year, overview, rating, posterImage, backdropImage);
         // Bind data to view
         int viewType = getItemViewType(0);
-        if (viewType == Watchlist.VIEW_MODE_GRID) {
+        if (viewType == WatchlistApp.VIEW_MODE_GRID) {
             // GRID MODE
             MovieGridViewHolder movieViewHolder = (MovieGridViewHolder) viewHolder;
 
@@ -135,7 +135,7 @@ public class MovieCursorAdapter extends CursorRecyclerAdapter<ViewHolder> {
                 movieViewHolder.movieRating.setVisibility(View.VISIBLE);
                 movieViewHolder.movieRating.setText(movie.rating);
             }
-        } else if (viewType == Watchlist.VIEW_MODE_LIST) {
+        } else if (viewType == WatchlistApp.VIEW_MODE_LIST) {
             // LIST MODE
             MovieListViewHolder movieViewHolder = (MovieListViewHolder) viewHolder;
 

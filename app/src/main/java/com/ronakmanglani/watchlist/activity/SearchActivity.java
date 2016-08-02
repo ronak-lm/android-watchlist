@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.fragment.MovieDetailFragment;
 
 import butterknife.BindBool;
@@ -29,7 +29,7 @@ public class SearchActivity extends AppCompatActivity {
     public void loadDetailFragmentWith(String movieId) {
         MovieDetailFragment fragment = new MovieDetailFragment();
         Bundle args = new Bundle();
-        args.putString(Watchlist.MOVIE_ID, movieId);
+        args.putString(WatchlistApp.MOVIE_ID, movieId);
         fragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment, fragment).commit();
     }

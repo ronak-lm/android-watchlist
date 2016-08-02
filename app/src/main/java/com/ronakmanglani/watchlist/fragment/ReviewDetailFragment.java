@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.model.Review;
 
 import butterknife.BindBool;
@@ -42,8 +42,8 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
         unbinder = ButterKnife.bind(this, v);
 
         // Get arguments
-        movieName = getArguments().getString(Watchlist.MOVIE_NAME);
-        review = getArguments().getParcelable(Watchlist.REVIEW_OBJECT);
+        movieName = getArguments().getString(WatchlistApp.MOVIE_NAME);
+        review = getArguments().getParcelable(WatchlistApp.REVIEW_OBJECT);
         if (review == null) {
             if (movieName.equals("null")) {
                 toolbar.setTitle("");

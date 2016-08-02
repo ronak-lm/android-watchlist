@@ -20,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
 import com.ronakmanglani.watchlist.activity.ReviewDetailActivity;
 import com.ronakmanglani.watchlist.adapter.ReviewAdapter;
@@ -79,8 +79,8 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
         unbinder = ButterKnife.bind(this, v);
 
         // Initialize variables
-        movieId = getArguments().getString(Watchlist.MOVIE_ID);
-        movieName = getArguments().getString(Watchlist.MOVIE_NAME);
+        movieId = getArguments().getString(WatchlistApp.MOVIE_ID);
+        movieName = getArguments().getString(WatchlistApp.MOVIE_NAME);
 
         // Setup toolbar
         toolbar.setTitle("");
@@ -115,14 +115,14 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
         });
 
         // Download reviews
-        if (savedInstanceState == null || !savedInstanceState.containsKey(Watchlist.REVIEW_LIST)) {
+        if (savedInstanceState == null || !savedInstanceState.containsKey(WatchlistApp.REVIEW_LIST)) {
             downloadMovieReviews();
         } else {
-            adapter.reviewList = savedInstanceState.getParcelableArrayList(Watchlist.REVIEW_LIST);
-            totalPages = savedInstanceState.getInt(Watchlist.TOTAL_PAGES);
-            pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
-            isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
-            isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
+            adapter.reviewList = savedInstanceState.getParcelableArrayList(WatchlistApp.REVIEW_LIST);
+            totalPages = savedInstanceState.getInt(WatchlistApp.TOTAL_PAGES);
+            pageToDownload = savedInstanceState.getInt(WatchlistApp.PAGE_TO_DOWNLOAD);
+            isLoadingLocked = savedInstanceState.getBoolean(WatchlistApp.IS_LOCKED);
+            isLoading = savedInstanceState.getBoolean(WatchlistApp.IS_LOADING);
             // If download stopped, download again, else display list
             if (isLoading) {
                 if (pageToDownload > 1) {
@@ -141,11 +141,11 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (layoutManager != null && adapter != null) {
-            outState.putParcelableArrayList(Watchlist.REVIEW_LIST, adapter.reviewList);
-            outState.putBoolean(Watchlist.IS_LOADING, isLoading);
-            outState.putBoolean(Watchlist.IS_LOCKED, isLoadingLocked);
-            outState.putInt(Watchlist.PAGE_TO_DOWNLOAD, pageToDownload);
-            outState.putInt(Watchlist.TOTAL_PAGES, totalPages);
+            outState.putParcelableArrayList(WatchlistApp.REVIEW_LIST, adapter.reviewList);
+            outState.putBoolean(WatchlistApp.IS_LOADING, isLoading);
+            outState.putBoolean(WatchlistApp.IS_LOCKED, isLoadingLocked);
+            outState.putInt(WatchlistApp.PAGE_TO_DOWNLOAD, pageToDownload);
+            outState.putInt(WatchlistApp.TOTAL_PAGES, totalPages);
         }
         super.onSaveInstanceState(outState);
     }
@@ -294,8 +294,8 @@ public class ReviewListFragment extends Fragment implements ReviewAdapter.OnRevi
             ((ReviewActivity) getActivity()).loadDetailFragmentWith(movieName, review);
         } else {
             Intent intent = new Intent(getContext(), ReviewDetailActivity.class);
-            intent.putExtra(Watchlist.MOVIE_NAME, movieName);
-            intent.putExtra(Watchlist.REVIEW_OBJECT, review);
+            intent.putExtra(WatchlistApp.MOVIE_NAME, movieName);
+            intent.putExtra(WatchlistApp.REVIEW_OBJECT, review);
             startActivity(intent);
         }
     }

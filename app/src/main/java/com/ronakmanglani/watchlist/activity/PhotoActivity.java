@@ -18,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.adapter.PhotoAdapter;
 import com.ronakmanglani.watchlist.adapter.PhotoAdapter.OnPhotoClickListener;
 import com.ronakmanglani.watchlist.util.ApiHelper;
@@ -59,8 +59,8 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
         setContentView(R.layout.activity_photo);
         ButterKnife.bind(this);
 
-        movieId = getIntent().getStringExtra(Watchlist.MOVIE_ID);
-        String movieName = getIntent().getStringExtra(Watchlist.MOVIE_NAME);
+        movieId = getIntent().getStringExtra(WatchlistApp.MOVIE_ID);
+        String movieName = getIntent().getStringExtra(WatchlistApp.MOVIE_NAME);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -94,16 +94,16 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (adapter != null) {
-            outState.putStringArrayList(Watchlist.PHOTO_LIST, adapter.photoList);
-            outState.putBoolean(Watchlist.IS_LOADING, isLoading);
+            outState.putStringArrayList(WatchlistApp.PHOTO_LIST, adapter.photoList);
+            outState.putBoolean(WatchlistApp.IS_LOADING, isLoading);
         }
         super.onSaveInstanceState(outState);
     }
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        adapter.photoList = savedInstanceState.getStringArrayList(Watchlist.PHOTO_LIST);
-        isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
+        adapter.photoList = savedInstanceState.getStringArrayList(WatchlistApp.PHOTO_LIST);
+        isLoading = savedInstanceState.getBoolean(WatchlistApp.IS_LOADING);
         // If activity was previously downloading and it stopped, download again
         if (isLoading) {
             downloadPhotosList();

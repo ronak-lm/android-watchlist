@@ -22,7 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
 import com.ronakmanglani.watchlist.adapter.SearchAdapter;
@@ -132,15 +132,15 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
         });
 
         // Get the movies list
-        if (savedInstanceState != null && savedInstanceState.containsKey(Watchlist.MOVIE_LIST)) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(WatchlistApp.MOVIE_LIST)) {
             adapter = new SearchAdapter(context, this);
-            adapter.movieList = savedInstanceState.getParcelableArrayList(Watchlist.MOVIE_LIST);
+            adapter.movieList = savedInstanceState.getParcelableArrayList(WatchlistApp.MOVIE_LIST);
             recyclerView.setAdapter(adapter);
-            searchQuery = savedInstanceState.getString(Watchlist.SEARCH_QUERY);
-            pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
-            totalPages = savedInstanceState.getInt(Watchlist.TOTAL_PAGES);
-            isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
-            isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
+            searchQuery = savedInstanceState.getString(WatchlistApp.SEARCH_QUERY);
+            pageToDownload = savedInstanceState.getInt(WatchlistApp.PAGE_TO_DOWNLOAD);
+            totalPages = savedInstanceState.getInt(WatchlistApp.TOTAL_PAGES);
+            isLoadingLocked = savedInstanceState.getBoolean(WatchlistApp.IS_LOCKED);
+            isLoading = savedInstanceState.getBoolean(WatchlistApp.IS_LOADING);
             // Download again if stopped, else show list
             if (isLoading) {
                 if (pageToDownload == 1) {
@@ -164,12 +164,12 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (layoutManager != null && adapter != null) {
-            outState.putBoolean(Watchlist.IS_LOADING, isLoading);
-            outState.putBoolean(Watchlist.IS_LOCKED, isLoadingLocked);
-            outState.putInt(Watchlist.PAGE_TO_DOWNLOAD, pageToDownload);
-            outState.putInt(Watchlist.TOTAL_PAGES, totalPages);
-            outState.putString(Watchlist.SEARCH_QUERY, searchQuery);
-            outState.putParcelableArrayList(Watchlist.MOVIE_LIST, adapter.movieList);
+            outState.putBoolean(WatchlistApp.IS_LOADING, isLoading);
+            outState.putBoolean(WatchlistApp.IS_LOCKED, isLoadingLocked);
+            outState.putInt(WatchlistApp.PAGE_TO_DOWNLOAD, pageToDownload);
+            outState.putInt(WatchlistApp.TOTAL_PAGES, totalPages);
+            outState.putString(WatchlistApp.SEARCH_QUERY, searchQuery);
+            outState.putParcelableArrayList(WatchlistApp.MOVIE_LIST, adapter.movieList);
         }
     }
     @Override
@@ -305,7 +305,7 @@ public class SearchListFragment extends Fragment implements OnMovieClickListener
             ((SearchActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(position).id);
         } else {
             Intent intent = new Intent(context, MovieDetailActivity.class);
-            intent.putExtra(Watchlist.MOVIE_ID, adapter.movieList.get(position).id);
+            intent.putExtra(WatchlistApp.MOVIE_ID, adapter.movieList.get(position).id);
             startActivity(intent);
         }
     }

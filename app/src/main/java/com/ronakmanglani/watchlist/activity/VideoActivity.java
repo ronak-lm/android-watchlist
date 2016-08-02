@@ -19,7 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.adapter.VideoAdapter;
 import com.ronakmanglani.watchlist.adapter.VideoAdapter.OnVideoClickListener;
 import com.ronakmanglani.watchlist.model.Video;
@@ -62,8 +62,8 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
 
-        movieId = getIntent().getStringExtra(Watchlist.MOVIE_ID);
-        String movieName = getIntent().getStringExtra(Watchlist.MOVIE_NAME);
+        movieId = getIntent().getStringExtra(WatchlistApp.MOVIE_ID);
+        String movieName = getIntent().getStringExtra(WatchlistApp.MOVIE_NAME);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -108,16 +108,16 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (adapter != null) {
-            outState.putParcelableArrayList(Watchlist.VIDEO_LIST, adapter.videoList);
-            outState.putBoolean(Watchlist.IS_LOADING, isLoading);
+            outState.putParcelableArrayList(WatchlistApp.VIDEO_LIST, adapter.videoList);
+            outState.putBoolean(WatchlistApp.IS_LOADING, isLoading);
         }
         super.onSaveInstanceState(outState);
     }
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        adapter.videoList = savedInstanceState.getParcelableArrayList(Watchlist.VIDEO_LIST);
-        isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
+        adapter.videoList = savedInstanceState.getParcelableArrayList(WatchlistApp.VIDEO_LIST);
+        isLoading = savedInstanceState.getBoolean(WatchlistApp.IS_LOADING);
         // If activity was previously downloading and it stopped, download again
         if (isLoading) {
             downloadVideosList();

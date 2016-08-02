@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.fragment.ReviewDetailFragment;
 import com.ronakmanglani.watchlist.fragment.ReviewListFragment;
 import com.ronakmanglani.watchlist.model.Review;
@@ -27,8 +27,8 @@ public class ReviewActivity extends AppCompatActivity {
             ReviewListFragment fragment = new ReviewListFragment();
 
             Bundle args = new Bundle();
-            args.putString(Watchlist.MOVIE_ID, getIntent().getStringExtra(Watchlist.MOVIE_ID));
-            args.putString(Watchlist.MOVIE_NAME, getIntent().getStringExtra(Watchlist.MOVIE_NAME));
+            args.putString(WatchlistApp.MOVIE_ID, getIntent().getStringExtra(WatchlistApp.MOVIE_ID));
+            args.putString(WatchlistApp.MOVIE_NAME, getIntent().getStringExtra(WatchlistApp.MOVIE_NAME));
             fragment.setArguments(args);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.review_container, fragment).commit();
@@ -43,8 +43,8 @@ public class ReviewActivity extends AppCompatActivity {
     public void loadDetailFragmentWith(String movieName, Review review) {
         ReviewDetailFragment fragment = new ReviewDetailFragment();
         Bundle args = new Bundle();
-        args.putString(Watchlist.MOVIE_NAME, movieName);
-        args.putParcelable(Watchlist.REVIEW_OBJECT, review);
+        args.putString(WatchlistApp.MOVIE_NAME, movieName);
+        args.putParcelable(WatchlistApp.REVIEW_OBJECT, review);
         fragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.review_detail_container, fragment).commit();
     }

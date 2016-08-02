@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.adapter.MovieCursorAdapter;
@@ -63,7 +63,7 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
 
         // Initialize variable
         context = getContext();
-        viewType = getArguments().getInt(Watchlist.VIEW_TYPE);
+        viewType = getArguments().getInt(WatchlistApp.VIEW_TYPE);
 
         // Setup RecyclerView
         adapter = new MovieCursorAdapter(context, this, null);
@@ -91,7 +91,7 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
             case CURSOR_LOADER_ID:
                 // Returns a new CursorLoader
                 Uri contentUri;
-                if (viewType == Watchlist.VIEW_TYPE_WATCHED) {
+                if (viewType == WatchlistApp.VIEW_TYPE_WATCHED) {
                     contentUri = MovieProvider.Watched.CONTENT_URI;
                 } else {
                     contentUri = MovieProvider.ToSee.CONTENT_URI;
@@ -141,8 +141,8 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
             widthPx = widthPx / 3;
         }
         // Calculate desired width
-        SharedPreferences preferences = context.getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
-        if (preferences.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
+        SharedPreferences preferences = context.getSharedPreferences(WatchlistApp.TABLE_USER, Context.MODE_PRIVATE);
+        if (preferences.getInt(WatchlistApp.VIEW_MODE, WatchlistApp.VIEW_MODE_GRID) == WatchlistApp.VIEW_MODE_GRID) {
             float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
             int columns = Math.round(widthPx / desiredPx);
             return columns > 2 ? columns : 2;
@@ -176,7 +176,7 @@ public class MovieSavedFragment extends Fragment implements OnMovieClickListener
             loadDetailFragmentWith(cursor.getString(cursor.getColumnIndex(MovieColumns.TMDB_ID)));
         } else {
             Intent intent = new Intent(context, MovieDetailActivity.class);
-            intent.putExtra(Watchlist.MOVIE_ID, cursor.getString(cursor.getColumnIndex(MovieColumns.TMDB_ID)));
+            intent.putExtra(WatchlistApp.MOVIE_ID, cursor.getString(cursor.getColumnIndex(MovieColumns.TMDB_ID)));
             startActivity(intent);
         }
     }

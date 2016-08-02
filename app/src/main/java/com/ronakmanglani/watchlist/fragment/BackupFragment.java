@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.nononsenseapps.filepicker.FilePickerActivity;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.util.FileUtils;
 
 import java.io.File;
@@ -25,7 +25,7 @@ public class BackupFragment extends PreferenceFragment {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getPreferenceManager().setSharedPreferencesName(Watchlist.TABLE_USER);
+        getPreferenceManager().setSharedPreferencesName(WatchlistApp.TABLE_USER);
         addPreferencesFromResource(R.xml.pref_backup);
 
         Preference backupPreference = findPreference(getString(R.string.pref_key_backup));

@@ -20,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
 import com.ronakmanglani.watchlist.activity.MovieDetailActivity;
 import com.ronakmanglani.watchlist.adapter.MovieAdapter;
@@ -70,7 +70,7 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
 
         // Initialize variables
         pageToDownload = 1;
-        viewType = getArguments().getInt(Watchlist.VIEW_TYPE);
+        viewType = getArguments().getInt(WatchlistApp.VIEW_TYPE);
 
         // Setup RecyclerView
         adapter = new MovieAdapter(context, this);
@@ -112,13 +112,13 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
         });
 
         // Get the movies list
-        if (savedInstanceState == null || !savedInstanceState.containsKey(Watchlist.MOVIE_LIST)) {
+        if (savedInstanceState == null || !savedInstanceState.containsKey(WatchlistApp.MOVIE_LIST)) {
             downloadMoviesList();
         } else {
-            adapter.movieList = savedInstanceState.getParcelableArrayList(Watchlist.MOVIE_LIST);
-            pageToDownload = savedInstanceState.getInt(Watchlist.PAGE_TO_DOWNLOAD);
-            isLoadingLocked = savedInstanceState.getBoolean(Watchlist.IS_LOCKED);
-            isLoading = savedInstanceState.getBoolean(Watchlist.IS_LOADING);
+            adapter.movieList = savedInstanceState.getParcelableArrayList(WatchlistApp.MOVIE_LIST);
+            pageToDownload = savedInstanceState.getInt(WatchlistApp.PAGE_TO_DOWNLOAD);
+            isLoadingLocked = savedInstanceState.getBoolean(WatchlistApp.IS_LOCKED);
+            isLoading = savedInstanceState.getBoolean(WatchlistApp.IS_LOADING);
             // Download again if stopped, else show list
             if (isLoading) {
                 if (pageToDownload == 1) {
@@ -144,10 +144,10 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (layoutManager != null && adapter != null) {
-            outState.putBoolean(Watchlist.IS_LOADING, isLoading);
-            outState.putBoolean(Watchlist.IS_LOCKED, isLoadingLocked);
-            outState.putInt(Watchlist.PAGE_TO_DOWNLOAD, pageToDownload);
-            outState.putParcelableArrayList(Watchlist.MOVIE_LIST, adapter.movieList);
+            outState.putBoolean(WatchlistApp.IS_LOADING, isLoading);
+            outState.putBoolean(WatchlistApp.IS_LOCKED, isLoadingLocked);
+            outState.putInt(WatchlistApp.PAGE_TO_DOWNLOAD, pageToDownload);
+            outState.putParcelableArrayList(WatchlistApp.MOVIE_LIST, adapter.movieList);
         }
     }
     @Override
@@ -159,13 +159,13 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
 
     // JSON parsing and display
     public String getUrlToDownload(int page) {
-        if (viewType == Watchlist.VIEW_TYPE_POPULAR) {
+        if (viewType == WatchlistApp.VIEW_TYPE_POPULAR) {
             return ApiHelper.getMostPopularMoviesLink(getActivity(), page);
-        } else if (viewType == Watchlist.VIEW_TYPE_RATED) {
+        } else if (viewType == WatchlistApp.VIEW_TYPE_RATED) {
             return ApiHelper.getHighestRatedMoviesLink(getActivity(), page);
-        } else if (viewType == Watchlist.VIEW_TYPE_UPCOMING) {
+        } else if (viewType == WatchlistApp.VIEW_TYPE_UPCOMING) {
             return ApiHelper.getUpcomingMoviesLink(getActivity(), page);
-        } else if (viewType == Watchlist.VIEW_TYPE_PLAYING) {
+        } else if (viewType == WatchlistApp.VIEW_TYPE_PLAYING) {
             return ApiHelper.getNowPlayingMoviesLink(getActivity(), page);
         }
         return null;
@@ -272,8 +272,8 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
             widthPx = widthPx / 3;
         }
         // Calculate desired width
-        SharedPreferences preferences = context.getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
-        if (preferences.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID) == Watchlist.VIEW_MODE_GRID) {
+        SharedPreferences preferences = context.getSharedPreferences(WatchlistApp.TABLE_USER, Context.MODE_PRIVATE);
+        if (preferences.getInt(WatchlistApp.VIEW_MODE, WatchlistApp.VIEW_MODE_GRID) == WatchlistApp.VIEW_MODE_GRID) {
             float desiredPx = getResources().getDimensionPixelSize(R.dimen.movie_card_width);
             int columns = Math.round(widthPx / desiredPx);
             return columns > 2 ? columns : 2;
@@ -305,7 +305,7 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
             ((MovieActivity)getActivity()).loadDetailFragmentWith(adapter.movieList.get(position).id);
         } else {
             Intent intent = new Intent(context, MovieDetailActivity.class);
-            intent.putExtra(Watchlist.MOVIE_ID, adapter.movieList.get(position).id);
+            intent.putExtra(WatchlistApp.MOVIE_ID, adapter.movieList.get(position).id);
             startActivity(intent);
         }
     }

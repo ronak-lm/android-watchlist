@@ -1,8 +1,12 @@
 package com.ronakmanglani.watchlist;
 
 import android.app.Application;
+import android.content.Context;
 
-public class Watchlist extends Application {
+public class WatchlistApp extends Application {
+
+    // Tag for fragment manager
+    public static final String TAG_GRID_FRAGMENT = "movie_grid_fragment";
 
     // SharedPreference Keys
     public static final String TABLE_USER = "user_settings";
@@ -40,6 +44,16 @@ public class Watchlist extends Application {
     public static final int CREDIT_TYPE_CAST = 1;
     public static final int CREDIT_TYPE_CREW = 2;
 
-    // Tag for fragment manager
-    public static final String TAG_GRID_FRAGMENT = "movie_grid_fragment";
+    // Initialize context
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mAppContext = getApplicationContext();
+    }
+
+    // To access context from any class
+    private static Context mAppContext;
+    public static Context getAppContext() {
+        return mAppContext;
+    }
 }

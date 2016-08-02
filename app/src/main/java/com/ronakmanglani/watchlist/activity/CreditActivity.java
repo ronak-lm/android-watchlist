@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.fragment.CreditFragment;
 
 import butterknife.BindBool;
@@ -25,9 +25,9 @@ public class CreditActivity extends AppCompatActivity {
             CreditFragment fragment = new CreditFragment();
 
             Bundle args = new Bundle();
-            args.putInt(Watchlist.CREDIT_TYPE, getIntent().getIntExtra(Watchlist.CREDIT_TYPE, 0));
-            args.putString(Watchlist.MOVIE_NAME, getIntent().getStringExtra(Watchlist.MOVIE_NAME));
-            args.putParcelableArrayList(Watchlist.CREDIT_LIST, getIntent().getParcelableArrayListExtra(Watchlist.CREDIT_LIST));
+            args.putInt(WatchlistApp.CREDIT_TYPE, getIntent().getIntExtra(WatchlistApp.CREDIT_TYPE, 0));
+            args.putString(WatchlistApp.MOVIE_NAME, getIntent().getStringExtra(WatchlistApp.MOVIE_NAME));
+            args.putParcelableArrayList(WatchlistApp.CREDIT_LIST, getIntent().getParcelableArrayListExtra(WatchlistApp.CREDIT_LIST));
             fragment.setArguments(args);
 
             getSupportFragmentManager().beginTransaction().replace(R.id.credit_container, fragment).commit();

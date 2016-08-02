@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.activity.BackupActivity;
 import com.ronakmanglani.watchlist.activity.SearchActivity;
 
@@ -47,7 +47,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie_drawer, container, false);
         unbinder = ButterKnife.bind(this, v);
-        preferences = getContext().getSharedPreferences(Watchlist.TABLE_USER, Context.MODE_PRIVATE);
+        preferences = getContext().getSharedPreferences(WatchlistApp.TABLE_USER, Context.MODE_PRIVATE);
 
         // Setup toolbar
         toolbar.inflateMenu(R.menu.menu_movie);
@@ -70,13 +70,13 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         actionBarDrawerToggle.syncState();
 
         // Load previously selected drawer item
-        int lastPosition = preferences.getInt(Watchlist.LAST_SELECTED, 0);
+        int lastPosition = preferences.getInt(WatchlistApp.LAST_SELECTED, 0);
         if (savedInstanceState == null) {
             setSelectedDrawerItem(lastPosition);
         } else {
-            fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Watchlist.TAG_GRID_FRAGMENT);
-            if (savedInstanceState.containsKey(Watchlist.TOOLBAR_TITLE)) {
-                toolbar.setTitle(savedInstanceState.getString(Watchlist.TOOLBAR_TITLE));
+            fragment = getActivity().getSupportFragmentManager().findFragmentByTag(WatchlistApp.TAG_GRID_FRAGMENT);
+            if (savedInstanceState.containsKey(WatchlistApp.TOOLBAR_TITLE)) {
+                toolbar.setTitle(savedInstanceState.getString(WatchlistApp.TOOLBAR_TITLE));
             } else {
                 toolbar.setTitle(navigationView.getMenu().getItem(lastPosition).getTitle());
             }
@@ -86,7 +86,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(Watchlist.TOOLBAR_TITLE, toolbar.getTitle().toString());
+        outState.putString(WatchlistApp.TOOLBAR_TITLE, toolbar.getTitle().toString());
     }
     @Override
     public void onDestroyView() {
@@ -106,7 +106,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
 
             case R.id.action_grid:
                 SharedPreferences.Editor editor1 = preferences.edit();
-                editor1.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID);
+                editor1.putInt(WatchlistApp.VIEW_MODE, WatchlistApp.VIEW_MODE_GRID);
                 editor1.apply();
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
@@ -114,7 +114,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
 
             case R.id.action_list:
                 SharedPreferences.Editor editor2 = preferences.edit();
-                editor2.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_LIST);
+                editor2.putInt(WatchlistApp.VIEW_MODE, WatchlistApp.VIEW_MODE_LIST);
                 editor2.apply();
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
@@ -122,7 +122,7 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
 
             case R.id.action_compact:
                 SharedPreferences.Editor editor3 = preferences.edit();
-                editor3.putInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_COMPACT);
+                editor3.putInt(WatchlistApp.VIEW_MODE, WatchlistApp.VIEW_MODE_COMPACT);
                 editor3.apply();
                 onRefreshToolbarMenu();
                 onRefreshFragmentLayout();
@@ -171,14 +171,14 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         }
     }
     private void onRefreshToolbarMenu() {
-        int viewMode = preferences.getInt(Watchlist.VIEW_MODE, Watchlist.VIEW_MODE_GRID);
-        if (viewMode == Watchlist.VIEW_MODE_GRID) {
+        int viewMode = preferences.getInt(WatchlistApp.VIEW_MODE, WatchlistApp.VIEW_MODE_GRID);
+        if (viewMode == WatchlistApp.VIEW_MODE_GRID) {
             // Change from grid to list
             Menu menu = toolbar.getMenu();
             menu.findItem(R.id.action_grid).setVisible(false);
             menu.findItem(R.id.action_list).setVisible(true);
             menu.findItem(R.id.action_compact).setVisible(false);
-        } else if (viewMode == Watchlist.VIEW_MODE_LIST) {
+        } else if (viewMode == WatchlistApp.VIEW_MODE_LIST) {
             // Change from list to compact
             Menu menu = toolbar.getMenu();
             menu.findItem(R.id.action_grid).setVisible(false);
@@ -235,17 +235,17 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         // Create and setup bundle args
         Bundle args = new Bundle();
         if (position == 0) {
-            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_POPULAR);
+            args.putInt(WatchlistApp.VIEW_TYPE, WatchlistApp.VIEW_TYPE_POPULAR);
         } else if (position == 1) {
-            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_RATED);
+            args.putInt(WatchlistApp.VIEW_TYPE, WatchlistApp.VIEW_TYPE_RATED);
         } else if (position == 2) {
-            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_UPCOMING);
+            args.putInt(WatchlistApp.VIEW_TYPE, WatchlistApp.VIEW_TYPE_UPCOMING);
         } else if (position == 3) {
-            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_PLAYING);
+            args.putInt(WatchlistApp.VIEW_TYPE, WatchlistApp.VIEW_TYPE_PLAYING);
         } else if (position == 4) {
-            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_WATCHED);
+            args.putInt(WatchlistApp.VIEW_TYPE, WatchlistApp.VIEW_TYPE_WATCHED);
         } else if (position == 5) {
-            args.putInt(Watchlist.VIEW_TYPE, Watchlist.VIEW_TYPE_TO_SEE);
+            args.putInt(WatchlistApp.VIEW_TYPE, WatchlistApp.VIEW_TYPE_TO_SEE);
         }
         // Initialize fragment type
         if (position <= 3) {
@@ -255,11 +255,11 @@ public class MovieDrawerFragment extends Fragment implements OnMenuItemClickList
         }
         fragment.setArguments(args);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.content_frame, fragment, Watchlist.TAG_GRID_FRAGMENT);
+        transaction.replace(R.id.content_frame, fragment, WatchlistApp.TAG_GRID_FRAGMENT);
         transaction.commit();
         // Save selected position to preference
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(Watchlist.LAST_SELECTED, position);
+        editor.putInt(WatchlistApp.LAST_SELECTED, position);
         editor.apply();
     }
 }

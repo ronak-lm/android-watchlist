@@ -31,7 +31,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.activity.CreditActivity;
 import com.ronakmanglani.watchlist.activity.PhotoActivity;
 import com.ronakmanglani.watchlist.activity.ReviewActivity;
@@ -135,9 +135,9 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         }
 
         // Download movie details if new instance, else restore from saved instance
-        if (savedInstanceState == null || !(savedInstanceState.containsKey(Watchlist.MOVIE_ID)
-                && savedInstanceState.containsKey(Watchlist.MOVIE_OBJECT))) {
-            id = getArguments().getString(Watchlist.MOVIE_ID);
+        if (savedInstanceState == null || !(savedInstanceState.containsKey(WatchlistApp.MOVIE_ID)
+                && savedInstanceState.containsKey(WatchlistApp.MOVIE_OBJECT))) {
+            id = getArguments().getString(WatchlistApp.MOVIE_ID);
             if (TextUtils.isNullOrEmpty(id)) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
@@ -146,8 +146,8 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                 downloadMovieDetails(id);
             }
         } else {
-            id = savedInstanceState.getString(Watchlist.MOVIE_ID);
-            movie = savedInstanceState.getParcelable(Watchlist.MOVIE_OBJECT);
+            id = savedInstanceState.getString(WatchlistApp.MOVIE_ID);
+            movie = savedInstanceState.getParcelable(WatchlistApp.MOVIE_OBJECT);
             onDownloadSuccessful();
         }
 
@@ -170,8 +170,8 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (movie != null && id != null) {
-            outState.putString(Watchlist.MOVIE_ID, id);
-            outState.putParcelable(Watchlist.MOVIE_OBJECT, movie);
+            outState.putString(WatchlistApp.MOVIE_ID, id);
+            outState.putParcelable(WatchlistApp.MOVIE_OBJECT, movie);
         }
     }
     @Override
@@ -441,22 +441,22 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     @OnClick(R.id.button_photos)
     public void onPhotosButtonClicked() {
         Intent intent = new Intent(getContext(), PhotoActivity.class);
-        intent.putExtra(Watchlist.MOVIE_ID, movie.id);
-        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
+        intent.putExtra(WatchlistApp.MOVIE_ID, movie.id);
+        intent.putExtra(WatchlistApp.MOVIE_NAME, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.button_reviews)
     public void onReviewsButtonClicked() {
         Intent intent = new Intent(getContext(), ReviewActivity.class);
-        intent.putExtra(Watchlist.MOVIE_ID, movie.imdbId);
-        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
+        intent.putExtra(WatchlistApp.MOVIE_ID, movie.imdbId);
+        intent.putExtra(WatchlistApp.MOVIE_NAME, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.button_videos)
     public void onVideosButtonClicked() {
         Intent intent = new Intent(getContext(), VideoActivity.class);
-        intent.putExtra(Watchlist.MOVIE_ID, movie.id);
-        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
+        intent.putExtra(WatchlistApp.MOVIE_ID, movie.id);
+        intent.putExtra(WatchlistApp.MOVIE_NAME, movie.title);
         startActivity(intent);
     }
     @OnClick(R.id.try_again)
@@ -480,17 +480,17 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     @OnClick(R.id.movie_crew_see_all)
     public void onSeeAllCrewClicked() {
         Intent intent = new Intent(getContext(), CreditActivity.class);
-        intent.putExtra(Watchlist.CREDIT_TYPE, Watchlist.CREDIT_TYPE_CREW);
-        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
-        intent.putExtra(Watchlist.CREDIT_LIST, movie.crew);
+        intent.putExtra(WatchlistApp.CREDIT_TYPE, WatchlistApp.CREDIT_TYPE_CREW);
+        intent.putExtra(WatchlistApp.MOVIE_NAME, movie.title);
+        intent.putExtra(WatchlistApp.CREDIT_LIST, movie.crew);
         startActivity(intent);
     }
     @OnClick(R.id.movie_cast_see_all)
     public void onSeeAllCastClicked() {
         Intent intent = new Intent(getContext(), CreditActivity.class);
-        intent.putExtra(Watchlist.CREDIT_TYPE, Watchlist.CREDIT_TYPE_CAST);
-        intent.putExtra(Watchlist.MOVIE_NAME, movie.title);
-        intent.putExtra(Watchlist.CREDIT_LIST, movie.cast);
+        intent.putExtra(WatchlistApp.CREDIT_TYPE, WatchlistApp.CREDIT_TYPE_CAST);
+        intent.putExtra(WatchlistApp.MOVIE_NAME, movie.title);
+        intent.putExtra(WatchlistApp.CREDIT_LIST, movie.cast);
         startActivity(intent);
     }
     @OnClick(R.id.movie_cast_item1)

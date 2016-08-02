@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.fragment.MovieDetailFragment;
 
 public class MovieDetailActivity extends AppCompatActivity {
@@ -24,7 +24,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             Uri data = intent.getData();
             if (data == null) {
                 // Not loading from deep link
-                movieId = getIntent().getStringExtra(Watchlist.MOVIE_ID);
+                movieId = getIntent().getStringExtra(WatchlistApp.MOVIE_ID);
                 loadMovieDetailsOf(movieId);
             } else {
                 // Loading from deep link
@@ -61,7 +61,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         MovieDetailFragment fragment = new MovieDetailFragment();
 
         Bundle args = new Bundle();
-        args.putString(Watchlist.MOVIE_ID, movieId);
+        args.putString(WatchlistApp.MOVIE_ID, movieId);
         fragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_container, fragment).commit();
@@ -69,8 +69,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     @SuppressLint("CommitPrefEdits")
     private void loadMoviesOfType(int viewType) {
-        SharedPreferences.Editor editor = getSharedPreferences(Watchlist.TABLE_USER, MODE_PRIVATE).edit();
-        editor.putInt(Watchlist.LAST_SELECTED, viewType);
+        SharedPreferences.Editor editor = getSharedPreferences(WatchlistApp.TABLE_USER, MODE_PRIVATE).edit();
+        editor.putInt(WatchlistApp.LAST_SELECTED, viewType);
         editor.commit();
         startActivity(new Intent(this, MovieActivity.class));
         finish();

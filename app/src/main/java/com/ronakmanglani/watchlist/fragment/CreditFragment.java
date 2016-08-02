@@ -10,16 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ronakmanglani.watchlist.R;
-import com.ronakmanglani.watchlist.Watchlist;
+import com.ronakmanglani.watchlist.WatchlistApp;
 import com.ronakmanglani.watchlist.adapter.CreditAdapter;
 import com.ronakmanglani.watchlist.adapter.CreditAdapter.OnCreditClickListener;
 import com.ronakmanglani.watchlist.model.Credit;
-import com.ronakmanglani.watchlist.widget.ItemPaddingDecoration;
 
 import java.util.ArrayList;
 
@@ -42,14 +39,14 @@ public class CreditFragment extends Fragment implements OnCreditClickListener {
         View v = inflater.inflate(R.layout.fragment_credit, container, false);
         unbinder = ButterKnife.bind(this, v);
 
-        int creditType = getArguments().getInt(Watchlist.CREDIT_TYPE);
-        String movieName = getArguments().getString(Watchlist.MOVIE_NAME);
-        ArrayList<Credit> creditList = getArguments().getParcelableArrayList(Watchlist.CREDIT_LIST);
+        int creditType = getArguments().getInt(WatchlistApp.CREDIT_TYPE);
+        String movieName = getArguments().getString(WatchlistApp.MOVIE_NAME);
+        ArrayList<Credit> creditList = getArguments().getParcelableArrayList(WatchlistApp.CREDIT_LIST);
 
         toolbar.setTitle("");
-        if (creditType == Watchlist.CREDIT_TYPE_CAST) {
+        if (creditType == WatchlistApp.CREDIT_TYPE_CAST) {
             toolbarTitle.setText(R.string.cast_title);
-        } else if (creditType == Watchlist.CREDIT_TYPE_CREW) {
+        } else if (creditType == WatchlistApp.CREDIT_TYPE_CREW) {
             toolbarTitle.setText(R.string.crew_title);
         }
         toolbarSubtitle.setText(movieName);
