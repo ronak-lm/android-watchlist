@@ -14,8 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.adapter.CreditAdapter;
@@ -31,8 +29,6 @@ import butterknife.Unbinder;
 
 public class CreditFragment extends Fragment implements OnCreditClickListener {
 
-    private int creditType;
-    private Tracker tracker;
     private Unbinder unbinder;
 
     @BindView(R.id.toolbar)             Toolbar toolbar;
@@ -46,7 +42,7 @@ public class CreditFragment extends Fragment implements OnCreditClickListener {
         View v = inflater.inflate(R.layout.fragment_credit, container, false);
         unbinder = ButterKnife.bind(this, v);
 
-        creditType = getArguments().getInt(Watchlist.CREDIT_TYPE);
+        int creditType = getArguments().getInt(Watchlist.CREDIT_TYPE);
         String movieName = getArguments().getString(Watchlist.MOVIE_NAME);
         ArrayList<Credit> creditList = getArguments().getParcelableArrayList(Watchlist.CREDIT_LIST);
 
@@ -71,32 +67,7 @@ public class CreditFragment extends Fragment implements OnCreditClickListener {
         creditView.setLayoutManager(layoutManager);
         creditView.setAdapter(adapter);
 
-        // Load Analytics Tracker
-        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
-
         return v;
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Determine screen name
-        String screenName;
-        switch (creditType) {
-            case Watchlist.CREDIT_TYPE_CAST:
-                screenName = getString(R.string.screen_cast_list);
-                break;
-
-            case Watchlist.CREDIT_TYPE_CREW:
-                screenName = getString(R.string.screen_crew_list);
-                break;
-
-            default:
-                screenName = getString(R.string.screen_credit_list);
-                break;
-        }
-        // Send screen name to analytics
-        tracker.setScreenName(screenName);
-        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onDestroyView() {

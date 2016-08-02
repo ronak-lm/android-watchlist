@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.model.Review;
@@ -26,7 +24,6 @@ import butterknife.Unbinder;
 
 public class ReviewDetailFragment extends Fragment implements OnMenuItemClickListener  {
 
-    private Tracker tracker;
     private Unbinder unbinder;
 
     private String movieName;
@@ -72,17 +69,7 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
             reviewBody.setText(review.comment);
         }
 
-        // Load Analytics Tracker
-        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
-
         return v;
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Send screen name to analytics
-        tracker.setScreenName(getString(R.string.screen_review_detail));
-        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onDestroyView() {
@@ -103,12 +90,6 @@ public class ReviewDetailFragment extends Fragment implements OnMenuItemClickLis
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, movieName + " - Review");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
             startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.action_share_using)));
-            // Send event to Google Analytics
-            tracker.send(new HitBuilders.EventBuilder()
-                    .setCategory(getString(R.string.ga_category_share))
-                    .setAction(getString(R.string.ga_action_review))
-                    .setLabel(url)
-                    .build());
             return true;
         } else {
             return false;

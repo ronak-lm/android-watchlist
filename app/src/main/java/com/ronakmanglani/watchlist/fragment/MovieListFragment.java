@@ -19,8 +19,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.ronakmanglani.watchlist.R;
 import com.ronakmanglani.watchlist.Watchlist;
 import com.ronakmanglani.watchlist.activity.MovieActivity;
@@ -44,7 +42,6 @@ import butterknife.Unbinder;
 public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieClickListener {
 
     private Context context;
-    private Tracker tracker;
     private Unbinder unbinder;
 
     private MovieAdapter adapter;
@@ -74,7 +71,6 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
         // Initialize variables
         pageToDownload = 1;
         viewType = getArguments().getInt(Watchlist.VIEW_TYPE);
-        tracker = ((Watchlist) getActivity().getApplication()).getTracker();
 
         // Setup RecyclerView
         adapter = new MovieAdapter(context, this);
@@ -143,36 +139,6 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
         }
 
         return v;
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        // Determine screen name
-        String screenName;
-        switch (viewType) {
-            case Watchlist.VIEW_TYPE_POPULAR:
-                screenName = getString(R.string.screen_popular);
-                break;
-
-            case Watchlist.VIEW_TYPE_RATED:
-                screenName = getString(R.string.screen_rated);
-                break;
-
-            case Watchlist.VIEW_TYPE_UPCOMING:
-                screenName = getString(R.string.screen_upcoming);
-                break;
-
-            case Watchlist.VIEW_TYPE_PLAYING:
-                screenName = getString(R.string.screen_playing);
-                break;
-
-            default:
-                screenName = getString(R.string.screen_movie_list);
-                break;
-        }
-        // Send screen name to analytics
-        tracker.setScreenName(screenName);
-        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {

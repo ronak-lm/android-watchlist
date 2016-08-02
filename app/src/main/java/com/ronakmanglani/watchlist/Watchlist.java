@@ -2,9 +2,6 @@ package com.ronakmanglani.watchlist;
 
 import android.app.Application;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
-
 public class Watchlist extends Application {
 
     // SharedPreference Keys
@@ -45,19 +42,4 @@ public class Watchlist extends Application {
 
     // Tag for fragment manager
     public static final String TAG_GRID_FRAGMENT = "movie_grid_fragment";
-
-    // Google Analytics Tracker
-    private Tracker mTracker;
-    synchronized public Tracker getTracker() {
-        if (mTracker == null) {
-            // Initialize tracker
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            mTracker = analytics.newTracker(R.xml.global_tracker);
-            // Prevent data from being sent when debugging
-            if (BuildConfig.DEBUG) {
-                analytics.setDryRun(true);
-            }
-        }
-        return mTracker;
-    }
 }
