@@ -43,7 +43,6 @@ import com.ronakmanglani.watchlist.model.MovieDetail;
 import com.ronakmanglani.watchlist.api.ApiHelper;
 import com.ronakmanglani.watchlist.util.TextUtil;
 import com.ronakmanglani.watchlist.api.VolleySingleton;
-import com.ronakmanglani.watchlist.api.YoutubeHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -307,7 +306,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                 backdropImageDefault.setVisibility(View.VISIBLE);
                 isVideoAvailable = false;
             } else {
-                backdropImage.setImageUrl(YoutubeHelper.getThumbnailURL(movie.video),
+                backdropImage.setImageUrl(ApiHelper.getVideoThumbnailURL(movie.video),
                         VolleySingleton.getInstance(getActivity()).imageLoader);
                 backdropPlayButton.setVisibility(View.VISIBLE);
                 isVideoAvailable = true;

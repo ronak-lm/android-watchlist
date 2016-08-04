@@ -54,7 +54,7 @@ public class ApiHelper {
         return "http://api.themoviedb.org/3/movie/" + id + "/images?api_key=" + getTMDBKey(context);
     }
 
-    // Get image of the given pixel size
+    // URLs for getting images
     public static String getImageURL(String baseURL, int widthPx) {
         if (widthPx > 500) {
             return "http://image.tmdb.org/t/p/w780/" + baseURL;
@@ -75,9 +75,15 @@ public class ApiHelper {
     public static String getOriginalImageURL(String baseURL) {
         return "http://image.tmdb.org/t/p/original/" + baseURL;
     }
+    public static String getVideoThumbnailURL(String youtubeID) {
+        return "http://img.youtube.com/vi/" + youtubeID + "/0.jpg";
+    }
 
-    // URL to share the movie
+    // URLs for Sharing
     public static String getMovieShareURL(String id) {
         return "https://www.themoviedb.org/movie/" + id;
+    }
+    public static String getVideoURL(String youtubeID) {
+        return "https://www.youtube.com/watch?v=" + youtubeID;
     }
 }

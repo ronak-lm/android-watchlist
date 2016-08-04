@@ -25,7 +25,6 @@ import com.ronakmanglani.watchlist.ui.adapter.VideoAdapter.OnVideoClickListener;
 import com.ronakmanglani.watchlist.model.Video;
 import com.ronakmanglani.watchlist.api.ApiHelper;
 import com.ronakmanglani.watchlist.api.VolleySingleton;
-import com.ronakmanglani.watchlist.api.YoutubeHelper;
 import com.ronakmanglani.watchlist.ui.view.PaddingDecorationView;
 
 import org.json.JSONArray;
@@ -170,7 +169,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
                                     String title = vid.getString("name");
                                     String key = vid.getString("key");
                                     String subtitle = vid.getString("size") + "p";
-                                    Video video = new Video(title, subtitle, key, YoutubeHelper.getThumbnailURL(key), YoutubeHelper.getVideoURL(key));
+                                    Video video = new Video(title, subtitle, key, ApiHelper.getVideoThumbnailURL(key), ApiHelper.getVideoURL(key));
                                     adapter.videoList.add(video);
                                 }
                             }
