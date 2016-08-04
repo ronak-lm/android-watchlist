@@ -16,6 +16,7 @@ This repository hosts the source code for the Android app Watchlist that helps y
 * [CircleImageView](https://github.com/hdodenhof/CircleImageView)
 * [FloatingActionButton](https://github.com/Clans/FloatingActionButton)
 * [MaterialLoadingProgressBar](https://github.com/lsjwzh/MaterialLoadingProgressBar)
+* [NoNonsense-FilePicker](https://github.com/spacecowboy/NoNonsense-FilePicker)
 * [Schematic](https://github.com/SimonVT/schematic)
 * [Volley](http://developer.android.com/training/volley/index.html)
 
