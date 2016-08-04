@@ -103,7 +103,7 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
                 progressCircle.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
                 // Remove cache
-                VolleySingleton.getInstance(context).requestQueue.getCache().remove(getUrlToDownload(1));
+                VolleySingleton.getInstance().requestQueue.getCache().remove(getUrlToDownload(1));
                 // Download again
                 pageToDownload = 1;
                 adapter = null;
@@ -153,7 +153,7 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        VolleySingleton.getInstance(context).requestQueue.cancelAll(this.getClass().getName());
+        VolleySingleton.getInstance().requestQueue.cancelAll(this.getClass().getName());
         unbinder.unbind();
     }
 
@@ -223,7 +223,7 @@ public class MovieListFragment extends Fragment implements MovieAdapter.OnMovieC
                 });
         isLoading = true;
         request.setTag(this.getClass().getName());
-        VolleySingleton.getInstance(context).requestQueue.add(request);
+        VolleySingleton.getInstance().requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
         isLoading = false;

@@ -87,7 +87,7 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
     @Override
     protected void onStop() {
         super.onStop();
-        VolleySingleton.getInstance(this).requestQueue.cancelAll(this.getClass().getName());
+        VolleySingleton.getInstance().requestQueue.cancelAll(this.getClass().getName());
     }
 
     // Save/restore state
@@ -166,7 +166,7 @@ public class PhotoActivity extends AppCompatActivity implements OnPhotoClickList
                     }
                 });
         request.setTag(getClass().getName());
-        VolleySingleton.getInstance(this).requestQueue.add(request);
+        VolleySingleton.getInstance().requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
         isLoading = false;

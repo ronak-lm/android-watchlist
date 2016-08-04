@@ -54,7 +54,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else {
             int imageSize = (int) context.getResources().getDimension(R.dimen.movie_compact_image_size);
             String imageUrl = ApiHelper.getImageURL(movie.backdropImage, imageSize);
-            VolleySingleton.getInstance(context).imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
+            VolleySingleton.getInstance().imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                     holder.movieImage.setImageBitmap(imageContainer.getBitmap());

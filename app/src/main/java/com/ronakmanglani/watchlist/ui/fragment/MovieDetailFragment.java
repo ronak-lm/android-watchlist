@@ -176,7 +176,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        VolleySingleton.getInstance(getActivity()).requestQueue.cancelAll(this.getClass().getName());
+        VolleySingleton.getInstance().requestQueue.cancelAll(this.getClass().getName());
         unbinder.unbind();
     }
 
@@ -265,7 +265,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                     }
                 });
         request.setTag(this.getClass().getName());
-        VolleySingleton.getInstance(getActivity()).requestQueue.add(request);
+        VolleySingleton.getInstance().requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
 
@@ -293,7 +293,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         if (!TextUtil.isNullOrEmpty(movie.backdropImage)) {
             int headerImageWidth = (int) getResources().getDimension(R.dimen.detail_backdrop_width);
             backdropImage.setImageUrl(ApiHelper.getImageURL(movie.backdropImage, headerImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
             if (movie.video.length() == 0) {
                 isVideoAvailable = false;
             } else {
@@ -307,7 +307,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
                 isVideoAvailable = false;
             } else {
                 backdropImage.setImageUrl(ApiHelper.getVideoThumbnailURL(movie.video),
-                        VolleySingleton.getInstance(getActivity()).imageLoader);
+                        VolleySingleton.getInstance().imageLoader);
                 backdropPlayButton.setVisibility(View.VISIBLE);
                 isVideoAvailable = true;
             }
@@ -317,7 +317,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
         if (!TextUtil.isNullOrEmpty(movie.posterImage)) {
             int posterImageWidth = (int) getResources().getDimension(R.dimen.movie_list_poster_width);
             posterImage.setImageUrl(ApiHelper.getImageURL(movie.posterImage, posterImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
         } else {
             posterImageDefault.setVisibility(View.VISIBLE);
             posterImage.setVisibility(View.GONE);
@@ -370,7 +370,7 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(ApiHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide views
@@ -385,13 +385,13 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             // 1
             movieCastImages.get(1).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(1).setImageUrl(ApiHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
             movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(ApiHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide views
@@ -405,19 +405,19 @@ public class MovieDetailFragment extends Fragment implements OnMenuItemClickList
             // 2
             movieCastImages.get(2).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(2).setImageUrl(ApiHelper.getImageURL(movie.cast.get(2).imagePath, castImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
             movieCastNames.get(2).setText(movie.cast.get(2).name);
             movieCastRoles.get(2).setText(movie.cast.get(2).role);
             // 1
             movieCastImages.get(1).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(1).setImageUrl(ApiHelper.getImageURL(movie.cast.get(1).imagePath, castImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
             movieCastNames.get(1).setText(movie.cast.get(1).name);
             movieCastRoles.get(1).setText(movie.cast.get(1).role);
             // 0
             movieCastImages.get(0).setDefaultImageResId(R.drawable.default_cast);
             movieCastImages.get(0).setImageUrl(ApiHelper.getImageURL(movie.cast.get(0).imagePath, castImageWidth),
-                    VolleySingleton.getInstance(getActivity()).imageLoader);
+                    VolleySingleton.getInstance().imageLoader);
             movieCastNames.get(0).setText(movie.cast.get(0).name);
             movieCastRoles.get(0).setText(movie.cast.get(0).role);
             // Hide show all button

@@ -43,7 +43,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         PhotoViewHolder holder = (PhotoViewHolder) viewHolder;
         int imageSize = (int) context.getResources().getDimension(R.dimen.photo_item_width);
-        holder.photoImage.setImageUrl(ApiHelper.getImageURL(photoList.get(position), imageSize), VolleySingleton.getInstance(context).imageLoader);
+        holder.photoImage.setImageUrl(ApiHelper.getImageURL(photoList.get(position), imageSize), VolleySingleton.getInstance().imageLoader);
     }
 
     // ViewHolder

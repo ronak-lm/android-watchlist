@@ -53,7 +53,7 @@ public class CreditAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (TextUtil.isNullOrEmpty(credit.imagePath)) {
             holder.creditImage.setImageResource(R.drawable.default_cast_square);
         } else {
-            VolleySingleton.getInstance(context).imageLoader.get(ApiHelper.getImageURL(credit.imagePath, imageSize),
+            VolleySingleton.getInstance().imageLoader.get(ApiHelper.getImageURL(credit.imagePath, imageSize),
                     new ImageLoader.ImageListener() {
                         @Override
                         public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {

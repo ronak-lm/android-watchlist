@@ -11,24 +11,21 @@ public class RobotoRegularTextView extends TextView {
 
     public RobotoRegularTextView(Context context) {
         super(context);
-
-        applyCustomFont(context);
+        applyCustomFont();
     }
 
     public RobotoRegularTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        applyCustomFont(context);
+        applyCustomFont();
     }
 
     public RobotoRegularTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        applyCustomFont(context);
+        applyCustomFont();
     }
 
-    private void applyCustomFont(Context context) {
-        Typeface customFont = FontUtil.getTypeface(FontUtil.ROBOTO_REGULAR, context);
+    private void applyCustomFont() {
+        Typeface customFont = FontUtil.getTypeface(FontUtil.ROBOTO_REGULAR);
         setTypeface(customFont);
     }
 }

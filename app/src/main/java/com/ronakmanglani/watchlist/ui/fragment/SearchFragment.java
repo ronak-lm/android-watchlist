@@ -175,7 +175,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        VolleySingleton.getInstance(context).requestQueue.cancelAll(getClass().getName());
+        VolleySingleton.getInstance().requestQueue.cancelAll(getClass().getName());
         unbinder.unbind();
     }
 
@@ -250,7 +250,7 @@ public class SearchFragment extends Fragment implements OnMovieClickListener {
                 });
         isLoading = true;
         request.setTag(this.getClass().getName());
-        VolleySingleton.getInstance(context).requestQueue.add(request);
+        VolleySingleton.getInstance().requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
         isLoading = false;

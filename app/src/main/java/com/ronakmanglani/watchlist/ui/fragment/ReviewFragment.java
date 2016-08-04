@@ -152,7 +152,7 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        VolleySingleton.getInstance(getContext()).requestQueue.cancelAll(this.getClass().getName());
+        VolleySingleton.getInstance().requestQueue.cancelAll(this.getClass().getName());
         unbinder.unbind();
     }
 
@@ -234,7 +234,7 @@ public class ReviewFragment extends Fragment implements ReviewAdapter.OnReviewCl
                 };
         isLoading = true;
         request.setTag(getClass().getName());
-        VolleySingleton.getInstance(getContext()).requestQueue.add(request);
+        VolleySingleton.getInstance().requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
         isLoading = false;

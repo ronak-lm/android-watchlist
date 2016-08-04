@@ -100,7 +100,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
     @Override
     protected void onStop() {
         super.onStop();
-        VolleySingleton.getInstance(this).requestQueue.cancelAll(this.getClass().getName());
+        VolleySingleton.getInstance().requestQueue.cancelAll(this.getClass().getName());
     }
 
     // Save/restore state
@@ -186,7 +186,7 @@ public class VideoActivity extends AppCompatActivity implements OnVideoClickList
                     }
                 });
         request.setTag(getClass().getName());
-        VolleySingleton.getInstance(this).requestQueue.add(request);
+        VolleySingleton.getInstance().requestQueue.add(request);
     }
     private void onDownloadSuccessful() {
         isLoading = false;

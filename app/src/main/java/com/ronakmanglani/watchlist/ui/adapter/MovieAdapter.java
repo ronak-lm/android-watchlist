@@ -106,12 +106,12 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             // Load image
             if (!TextUtil.isNullOrEmpty(movie.backdropImage)) {
                 String imageUrl = ApiHelper.getImageURL(movie.backdropImage, imageWidth);
-                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance().imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
             } else if (!TextUtil.isNullOrEmpty(movie.posterImage)) {
                 String imageUrl = ApiHelper.getImageURL(movie.posterImage, imageWidth);
-                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance().imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
             } else {
@@ -142,7 +142,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             } else {
                 int imageSize = (int) context.getResources().getDimension(R.dimen.movie_list_poster_width);
                 String imageUrl = ApiHelper.getImageURL(movie.posterImage, imageSize);
-                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance(context).imageLoader);
+                movieViewHolder.imageView.setImageUrl(imageUrl, VolleySingleton.getInstance().imageLoader);
                 movieViewHolder.imageView.setVisibility(View.VISIBLE);
                 movieViewHolder.defaultImageView.setVisibility(View.GONE);
             }
@@ -168,7 +168,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             } else {
                 int imageSize = (int) context.getResources().getDimension(R.dimen.movie_compact_image_size);
                 String imageUrl = ApiHelper.getImageURL(movie.backdropImage, imageSize);
-                VolleySingleton.getInstance(context).imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
+                VolleySingleton.getInstance().imageLoader.get(imageUrl, new ImageLoader.ImageListener() {
                     @Override
                     public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                         movieViewHolder.movieImage.setImageBitmap(response.getBitmap());

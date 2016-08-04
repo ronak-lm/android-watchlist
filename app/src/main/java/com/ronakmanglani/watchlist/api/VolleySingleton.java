@@ -7,14 +7,15 @@ import android.support.v4.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.ronakmanglani.watchlist.WatchlistApp;
 
 public class VolleySingleton {
 
     // Singleton Instance
     private static VolleySingleton instance;
-    public static VolleySingleton getInstance(Context context) {
+    public static VolleySingleton getInstance() {
         if (instance == null) {
-            instance = new VolleySingleton(context);
+            instance = new VolleySingleton();
         }
         return instance;
     }
@@ -24,8 +25,8 @@ public class VolleySingleton {
     public ImageLoader imageLoader;
 
     // Constructor
-    private VolleySingleton(Context context) {
-        requestQueue = Volley.newRequestQueue(context);
+    private VolleySingleton() {
+        requestQueue = Volley.newRequestQueue(WatchlistApp.getAppContext());
         imageLoader = new ImageLoader(requestQueue, new ImageLoader.ImageCache() {
             private final LruCache<String, Bitmap> cache = new LruCache<String, Bitmap>(20);
             @Override
@@ -38,6 +39,5 @@ public class VolleySingleton {
             }
         });
     }
-
 
 }

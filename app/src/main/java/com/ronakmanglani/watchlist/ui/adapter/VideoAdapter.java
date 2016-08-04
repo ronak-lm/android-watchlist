@@ -44,7 +44,7 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         Video video = videoList.get(position);
         VideoViewHolder holder = (VideoViewHolder) viewHolder;
-        holder.videoImage.setImageUrl(video.imageURL, VolleySingleton.getInstance(context).imageLoader);
+        holder.videoImage.setImageUrl(video.imageURL, VolleySingleton.getInstance().imageLoader);
         holder.videoName.setText(video.title);
         holder.videoSize.setText(video.size);
     }
