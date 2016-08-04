@@ -1,10 +1,23 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
+// Load keystore.properties
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
 
+    signingConfigs {
+        release {
+            storeFile file(keystoreProperties['storeFile'])
+            keyAlias keystoreProperties['keyAlias']
+            storePassword keystoreProperties['storePassword']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
     defaultConfig {
         applicationId "com.ronakmanglani.watchlist"
         minSdkVersion 15
@@ -15,6 +28,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
