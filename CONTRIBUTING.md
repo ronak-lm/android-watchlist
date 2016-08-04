@@ -11,7 +11,7 @@ To work, the project will need API keys from [TMDb][3] and [trakt.tv][4]. Create
 	<string name="trakt_api_key">YOUR_TRAKT_KEY_HERE</string>
 
 
-## Siging Release Builds
+## Signing Release Builds
 
 To create release builds, you will have to add your keystore file with the name "keystore.jks" in the app folder. Create a "keystore.properties" file in the the project's root folder with these values:-
 
