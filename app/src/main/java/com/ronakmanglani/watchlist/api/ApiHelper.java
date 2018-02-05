@@ -1,6 +1,7 @@
 package com.ronakmanglani.watchlist.api;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
@@ -18,19 +19,22 @@ public class ApiHelper {
     public static String getTraktKey(Context context) {
         return context.getString(R.string.trakt_api_key);
     }
+    public static String getLanguage() {
+        return Resources.getSystem().getConfiguration().locale.getLanguage();
+    }
 
     // API Endpoints
     public static String getMostPopularMoviesLink(Context context, int page) {
-        return "http://api.themoviedb.org/3/movie/popular?&page=" + page + "&api_key=" + getTMDBKey(context);
+        return "http://api.themoviedb.org/3/movie/popular?&page=" + page + "&api_key=" + getTMDBKey(context) + "&language=" + getLanguage();
     }
     public static String getHighestRatedMoviesLink(Context context, int page) {
-        return "http://api.themoviedb.org/3/movie/top_rated?&page=" + page + "&api_key=" + getTMDBKey(context);
+        return "http://api.themoviedb.org/3/movie/top_rated?&page=" + page + "&api_key=" + getTMDBKey(context) + "&language=" + getLanguage();
     }
     public static String getUpcomingMoviesLink(Context context, int page) {
-        return "http://api.themoviedb.org/3/movie/upcoming?&page=" + page + "&api_key=" + getTMDBKey(context);
+        return "http://api.themoviedb.org/3/movie/upcoming?&page=" + page + "&api_key=" + getTMDBKey(context) + "&language=" + getLanguage();
     }
     public static String getNowPlayingMoviesLink(Context context, int page) {
-        return "http://api.themoviedb.org/3/movie/now_playing?&page=" + page + "&api_key=" + getTMDBKey(context);
+        return "http://api.themoviedb.org/3/movie/now_playing?&page=" + page + "&api_key=" + getTMDBKey(context) + "&language=" + getLanguage();
     }
     public static String getSearchMoviesLink(Context context, String query, int page) {
         return Uri.parse("http://api.themoviedb.org/3/search/movie")
@@ -38,20 +42,21 @@ public class ApiHelper {
                 .appendQueryParameter("api_key", getTMDBKey(context))
                 .appendQueryParameter("query", query)
                 .appendQueryParameter("page", page + "")
+                .appendQueryParameter("language", getLanguage())
                 .build().toString();
     }
     public static String getMovieDetailLink(Context context, String id) {
-        return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getTMDBKey(context) + "&append_to_response=credits,trailers";
+        return "http://api.themoviedb.org/3/movie/" + id + "?api_key=" + getTMDBKey(context) + "&append_to_response=credits,trailers" + "&language=" + getLanguage();
     }
     public static String getMovieReviewsLink(String imdbId, int page) {
         return "https://api-v2launch.trakt.tv/movies/" + imdbId + "/comments/newest?page=" + page;
 
     }
     public static String getVideosLink(Context context, String id) {
-        return "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + getTMDBKey(context);
+        return "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=" + getTMDBKey(context) + "&language=" + getLanguage();
     }
     public static String getPhotosLink(Context context, String id) {
-        return "http://api.themoviedb.org/3/movie/" + id + "/images?api_key=" + getTMDBKey(context);
+        return "http://api.themoviedb.org/3/movie/" + id + "/images?api_key=" + getTMDBKey(context) + "&language=" + getLanguage();
     }
 
     // URLs for getting images
